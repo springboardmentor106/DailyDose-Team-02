@@ -6,6 +6,6 @@ JWT_SECRET_KEY  = "dgjsdhhjhdj11256jh88566dj"
 
 EMAIL_HOST = 'smtp.ethereal.email'
 EMAIL_PORT = 587
-EMAIL_USER = 'sudh29219@gmail.com'
-EMAIL_PASS = '1234'
-EMAIL_FROM = 'sudhtri902@gmail.com'   
+EMAIL_USER = ' '
+EMAIL_PASS = ' '
+EMAIL_FROM = ' '   
