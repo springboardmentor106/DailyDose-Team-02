@@ -23,7 +23,11 @@ class UserController {
                                 email: email,
                                 gender: gender,
                                 age: age,
-                                password: hashPassword
+                                password: hashPassword,
+                                phoneNumber: phoneNumber,
+                                address: address,
+                                country: country,
+                                pincode: pincode
                             });
                             await userDoc.save();
 
@@ -116,7 +120,7 @@ class UserController {
                     from: process.env.EMAIL_FROM,
                     to: user.email,
                     subject: "DailyDose - Password Reset Link",
-                    html: `<a href=${link}>Click Here</a> to Reset Your Password. Link will expire in 10 minutes.`
+                    html: `<a href=${link}>Click Here</a> to Reset Your Password. Password reset link will expire in 30 minutes.`
                 })
                 res.send({ "status": "success", "message": "Password Reset Email Sent..  Check Your Email", "info": info })
             } else {
@@ -130,6 +134,7 @@ class UserController {
     static userPasswordReset = async (req, res) => {
         const { password, password_confirm } = req.body
         const { id, token } = req.params
+        // console.log(`id: ${id}, token: ${token}`);
         const user = await User.findById(id)
         // console.log(user);
         const new_secret = user._id + process.env.JWT_SECRET_KEY

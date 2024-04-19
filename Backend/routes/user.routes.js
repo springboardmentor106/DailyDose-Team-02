@@ -13,8 +13,7 @@ router.use('/loggeduser', checkUserAuth)
 router.post('/register', UserController.userRegistration)
 router.post('/login', UserController.userLogin)
 router.post('/reset-password-email', UserController.UserPasswordResetEmail)
-router.post('/reset-password', UserController.userPasswordReset)
-// /:id/:token
+router.post('/reset-password/:id/:token', UserController.userPasswordReset)
 
 // Protected Routes e.g ---> Dashboard
 router.post('/changepassword', UserController.changeUserPassword)
