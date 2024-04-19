@@ -1,0 +1,11 @@
+PORT = 8000
+
+DATABASE_URL = "mongodb://localhost:27017DailyDose"
+
+JWT_SECRET_KEY  = "dgjsdhhjhdj11256jh88566dj"
+
+EMAIL_HOST = 'smtp.ethereal.email'
+EMAIL_PORT = 587
+EMAIL_USER = 'sudh29219@gmail.com'
+EMAIL_PASS = '1234'
+EMAIL_FROM = 'sudhtri902@gmail.com'   

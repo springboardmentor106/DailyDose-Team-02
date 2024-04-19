@@ -1,6 +1,8 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import transporter from '../config/emailconfig.js';
+
 
 class UserController {
     static userRegistration = async (req, res) => {
@@ -95,8 +97,59 @@ class UserController {
     static loggedUser = async (req, res) => {
         res.send({ "user": req.user })
     }
-    // Fporget Password
-    
+    // Forget Password
+    static UserPasswordResetEmail = async (req, res) => {
+        const { email } = req.body
+        if (email) {
+          const user = await User.findOne({ email: email })
+          if (user) {
+            const secret = user._id + process.env.JWT_SECRET_KEY
+            
+            const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '10m' })
+            //  Frontend Link for Reset Pass
+            const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${token}`
+         //    Route for frontend e.g-> api/user/reset/:id/:token
+            console.log(link);
+
+            // Send Email
+            let info = await transporter.sendMail({
+            from: process.env.EMAIL_FROM,
+            to: user.email,
+            subject: "DailyDose - Password Reset Link",
+            html: `<a href=${link}>Click Here</a> to Reset Your Password`
+        })
+            res.send({ "status": "success", "message": "Password Reset Email Sent..  Check Your Email", "info":info })
+          } else {
+            res.send({ "status": "failed", "message": "Email Doesn't exist" })
+          }
+        } else {
+          res.send({ "status": "failed", "message": "Email Field is Required" })
+        }
+      }
+
+      static userPasswordReset = async(req, res)=>{
+        const {password, password_confirm } = req.body
+        const {id, token} = req.params
+        const user = await User.findById(id)
+        const new_secret = user._id + process.env.JWT_SECRET_KEY
+        try {
+            jwt.verify(token, new_secret)
+            if(password && password_confirm){
+                if(password !== password_confirm){
+                    res.send({ "status": "failed", "message": "New Password and Confirm Password not matched" })
+                }else{
+                    const newHashPassword = await bcrypt.hash(password, salt);
+                    await User.findByIdAndUpdate(user._id, {$set:{ password: newHashPassword}})
+                    res.send({ "status": "success", "message": "Password reset Successfully!" })
+                }
+            }else{
+                res.send({ "status": "failed", "message": "All Fields  Required" })
+            }
+        } catch (error) {
+           console.log(error) 
+           res.send({ "status": "failed", "message": "Token is not Valid" })
+        }
+      }
 }
 
 export default UserController;
