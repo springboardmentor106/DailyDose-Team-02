@@ -19,7 +19,7 @@ const Login = () => {
             </label>
             <i className="bx bc-lock-alt icon"></i>
           </div>
-
+{/* this is a sample comment */}
           <div className="input_box">
             <input type="password" id="pass" className="input-field" required />
             <label for="pass" className="label">
