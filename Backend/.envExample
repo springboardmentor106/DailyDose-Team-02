@@ -9,4 +9,4 @@ EMAIL_HOST = 'smtp.ethereal.email'
 EMAIL_PORT = 587
 EMAIL_USER = 
 EMAIL_PASS = 
-EMAIL_FROM =   
+EMAIL_FROM = 
