@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import CaretakerController from '../controllers/caretaker.controller.js';
+import CaretakerController from '../controllers/caretakerController.js';
 
 
 // Public Routes  e.g --> Register

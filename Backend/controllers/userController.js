@@ -7,7 +7,7 @@ import transporter from '../config/emailConfig.js';
 class UserController {
     static userRegistration = async (req, res) => {
         try {
-            const { firstname, lastname, email, gender, age, password, password_confirm } = req.body;
+            const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
             const user = await User.findOne({ email: email });
             if (user) {
                 res.send({ "status": "failed", "message": "Email already present" });
