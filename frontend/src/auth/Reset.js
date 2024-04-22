@@ -1,9 +1,56 @@
-import React from 'react'
+import React from "react";
+import "../App.css";
+import bg_img from ".././assets/images/login-bg.png";
+import login_img from ".././assets/images/forget.png";
+import { Link } from "react-router-dom";
 
 const Reset = () => {
   return (
-    <div>Reset</div>
-  )
-}
+    <div className="wrapper">
+      <div id="main-bg">
+        <img src={bg_img} alt="Main Bg" />
+      </div>
+      <div className="inner">
+        <form>
+          <h3 style={{ textAlign: "left" }}>Reset Password 👼</h3>
 
-export default Reset
+          <div className="form-wrapper">
+            <input
+              type="text"
+              placeholder="Email Address"
+              className="form-control"
+            />
+            <i className="zmdi zmdi-email"></i>
+          </div>
+
+          <button>
+            Send OTP
+            <i className="zmdi zmdi-arrow-right"></i>
+          </button>
+
+          
+
+          
+
+          <div id="sign-in"  style={{marginTop:"5vh"}}>
+            <span>
+              Remember you password?
+              <Link to="/"> Login</Link>
+            </span>
+          </div>
+        </form>
+        <div className="image-holder">
+          <div id="mini-box">
+            <p style={{ padding: "1vw" }}>
+              Forget <br />
+              Password? <br />
+            </p>
+            <img src={login_img} alt="illustration" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Reset;

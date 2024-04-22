@@ -46,6 +46,7 @@ a:hover {
   background: transparent;
   position: relative;
   overflow: hidden;
+  justify-content: start;
 }
 
 .inner {
@@ -55,6 +56,7 @@ a:hover {
   margin: auto;
   display: flex;
   width: 80%;
+  min-height: 50vh;
 }
 .image-holder {
   width: 50%;
@@ -229,13 +231,13 @@ button:active i {
 #hr {
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px auto;
 }
 
 #hr::before {
   content: "";
   display: inline-block;
-  width: 42%;
+  width: 45%;
   height: 1px;
   background: gray;
   margin-right: 10px;
@@ -333,6 +335,14 @@ button:active i {
 a {
   text-decoration: none;
   color: #1669f2;
+}
+
+#login-btns{
+  display: flex;
+  justify-content: center;
+ width: 50%;
+ gap: 1vw;
+ margin: 20px auto;
 }
 
 /* Google Button */
@@ -529,5 +539,20 @@ a {
     font-size: 15px;
     text-align: left;
     padding-bottom: 3vh;
+  }
+
+  .inner{
+    width: 100%;
+    height: 100vh;
+    border: 1px solid red;      
+  }
+
+  .image-holder{
+    width: 100%;
+    height: 100%;
+  }
+  #mini-box{
+    width: 80%;
+    height: 80%
   }
 }

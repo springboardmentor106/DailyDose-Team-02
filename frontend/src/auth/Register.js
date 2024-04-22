@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import bg_img from '.././assets/images/login-bg.png';
-import login_img from '.././assets/images/login.png';
+import register_img from '.././assets/images/register.png';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
@@ -51,30 +51,31 @@ const Register = () => {
 
           <div id="hr">OR</div>
 
-          <div>
+          <div id="login-btns">
             <a href="">
-              <div className="google-btn">
-                <div className="google-icon-wrapper">
-                  <img
-                    className="google-icon"
-                    src="https://i.ibb.co/ydLySMx/google.png" />
-                </div>
-                <p className="btn-text">Sign up with Google</p>
+              <div
+                style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
+                <img
+                  className="google-icon"
+                  src="https://i.ibb.co/ydLySMx/google.png"
+                  width={"100%"}
+                  height={"100%"}
+                />
               </div>
             </a>
 
             <br />
 
-            <a className="btn-fb" href="">
-              <div className="fb-content">
-                <div className="logo">
-                  <img
-                    src="https://i.ibb.co/pnpDRC6/facebook.png"
-                    alt=""
-                    width="32px"
-                    height="32px" />
-                </div>
-                <p>Sign in with Facebook</p>
+            <a href="">
+              <div
+                className="logo"
+                style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
+                <img
+                  src="https://i.ibb.co/pnpDRC6/facebook.png"
+                  alt=""
+                  width={"100%"}
+                  height={"100%"}
+                />
               </div>
             </a>
           </div>
@@ -93,7 +94,7 @@ Just one step<br />
 away from your<br />
 caretaker
             </p>
-            <img src={login_img} alt="illustration" />
+            <img src={register_img} alt="illustration" />
           </div>
         </div>
       </div>

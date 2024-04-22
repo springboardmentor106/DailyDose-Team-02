@@ -56,32 +56,31 @@ const Login = () => {
 
           <div id="hr">OR</div>
 
-          <div>
+          <div id="login-btns">
             <a href="">
-              <div className="google-btn">
-                <div className="google-icon-wrapper">
-                  <img
-                    className="google-icon"
-                    src="https://i.ibb.co/ydLySMx/google.png"
-                  />
-                </div>
-                <p className="btn-text">Sign up with Google</p>
+              <div
+                style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
+                <img
+                  className="google-icon"
+                  src="https://i.ibb.co/ydLySMx/google.png"
+                  width={"100%"}
+                  height={"100%"}
+                />
               </div>
             </a>
 
             <br />
 
-            <a className="btn-fb" href="">
-              <div className="fb-content">
-                <div className="logo">
-                  <img
-                    src="https://i.ibb.co/pnpDRC6/facebook.png"
-                    alt=""
-                    width="32px"
-                    height="32px"
-                  />
-                </div>
-                <p>Sign up with Facebook</p>
+            <a href="">
+              <div
+                className="logo"
+                style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
+                <img
+                  src="https://i.ibb.co/pnpDRC6/facebook.png"
+                  alt=""
+                  width={"100%"}
+                  height={"100%"}
+                />
               </div>
             </a>
           </div>
