@@ -324,6 +324,17 @@ button:active i {
     margin-top: 1vh;
 }
 
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #1669f2;
+}
+
 /* Google Button */
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic);
 
@@ -501,5 +512,22 @@ button:active i {
   #mini-box p{
     font-size: 2.5vw;
     padding: 0;
+  }
+  .remember-forgot {
+    display: flex;
+    flex-direction: column-reverse;
+    /* justify-content: space-between; */
+    font-size: 12px;
+  }
+  .remember-me{
+    display: none;
+  }
+  h3 ~ p{
+    display: none;
+  }
+  .inner h3{
+    font-size: 15px;
+    text-align: left;
+    padding-bottom: 3vh;
   }
 }
