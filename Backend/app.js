@@ -3,9 +3,9 @@ dotenv.config()
 
 import express from 'express'
 import cors from 'cors'
-import connectToMongoDB from './config/connectdb.js'
-import userRoutes from './routes/user.routes.js'
-import caretakerRoutes from './routes/caretaker.routes.js'
+import connectToMongoDB from './config/connectDb.js'
+import userRoutes from './routes/userRoutes.js'
+import caretakerRoutes from './routes/caretakerRoutes.js'
 
 
 const app = express()
