@@ -3,7 +3,7 @@ dotenv.config()
 
 import express from 'express'
 import cors from 'cors'
-import connectToMongoDB from './config/connectDb.js'
+import connectToMongoDB from './config/connectDB.js'
 import userRoutes from './routes/userRoutes.js'
 import caretakerRoutes from './routes/caretakerRoutes.js'
 
