@@ -40,6 +40,13 @@ const Register = () => {
               className="form-control" />
             <i className="zmdi zmdi-lock"></i>
           </div>
+          <div className="form-wrapper">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="form-control" />
+            <i className="zmdi zmdi-lock"></i>
+          </div>
 
           <button>
             Sign Up
