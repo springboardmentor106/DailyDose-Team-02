@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
-import UserController from '../controllers/userController.js';
-import CaretakerController from '../controllers/caretakerController.js';
+import userController from '../controllers/userController.js';
+import caretakerController from '../controllers/caretakerController.js';
 import checkUserAuth from '../middlewares/auth-middleware.js';
 
 
@@ -10,13 +10,13 @@ router.use('/changepassword', checkUserAuth)
 router.use('/loggeduser', checkUserAuth)
 
 // Public Routes  e.g --> Register
-router.post('/register', UserController.userRegistration)
-router.post('/login', UserController.userLogin)
-router.post('/reset-password-email', UserController.UserPasswordResetEmail)
-router.post('/reset-password/:id/:token', UserController.userPasswordReset)
+router.post('/register', userController.userRegistration)
+router.post('/login', userController.userLogin)
+router.post('/reset-password-email', userController.userPasswordResetEmail)
+router.post('/reset-password/:id/:token', userController.userPasswordReset)
 
 // Protected Routes e.g ---> Dashboard
-router.post('/changepassword', UserController.changeUserPassword)
-router.get('/loggeduser', UserController.loggedUser)
+router.post('/changepassword', userController.changeUserPassword)
+router.get('/loggeduser', userController.loggedUser)
 
 export default router

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const caretakerSchema = new mongoose.Schema(
+const careTakerSchema = new mongoose.Schema(
     {
       firstname: {
         type: String,
@@ -39,7 +39,7 @@ const caretakerSchema = new mongoose.Schema(
 
 
 
-const Caretaker = mongoose.model("caretaker", caretakerSchema);
+const Caretaker = mongoose.model("caretaker", careTakerSchema);
 
  
 export default Caretaker

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
 
 
-class UserController {
+class userController {
     static userRegistration = async (req, res) => {
         try {
             const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
@@ -102,7 +102,7 @@ class UserController {
         res.send({ "user": req.user })
     }
     // Forget Password
-    static UserPasswordResetEmail = async (req, res) => {
+    static userPasswordResetEmail = async (req, res) => {
         const { email } = req.body
         if (email) {
             const user = await User.findOne({ email: email })
@@ -159,4 +159,4 @@ class UserController {
     }
 }
 
-export default UserController;
+export default userController;
