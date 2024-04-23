@@ -1,13 +1,11 @@
 import React from "react";
 import "../App.css";
-import bg_img from ".././assets/images/login-bg.png";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
     <div className="wrapper">
-      
       <div className="inner">
         <form>
           <h3 style={{ marginBottom: "0px", textAlign: "left" }}>
@@ -92,14 +90,15 @@ const Login = () => {
         </form>
         <div className="image-holder">
           <div id="mini-box">
-            <p style={{padding: "1vw"}}>
+            <img src={login_img} alt="illustration" />
+            <p style={{ padding: "1vw" }}>
               Log in now to discover <br />
               personalized features <br />
-              tailored to your<br />
+              tailored to your
+              <br />
               loved one's <br />
               needs!
             </p>
-            <img src={login_img} alt="illustration" />
           </div>
         </div>
       </div>

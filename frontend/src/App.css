@@ -58,7 +58,7 @@ a:hover {
   width: 80%;
   max-width: 1300px;
   min-height: 50vh;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 .image-holder {
@@ -179,9 +179,7 @@ button:active i {
   animation-iteration-count: 1;
 }
 
-
 /* modified */
-
 
 .image-holder {
   background: #614ed7;
@@ -192,6 +190,7 @@ button:active i {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-blend-mode: exclusion;
 }
 
 #mini-box {
@@ -213,6 +212,7 @@ button:active i {
   position: absolute;
   bottom: 0;
   right: -15%;
+  z-index: 0;
 }
 
 #mini-box p {
@@ -220,7 +220,11 @@ button:active i {
   font-weight: 700;
   font-size: 1.5rem;
   color: #fff;
-  padding: 4vw;
+  padding: 2vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 #hr {
@@ -252,12 +256,10 @@ button:active i {
   margin: auto;
   width: 50%;
 }
-/* Facebook Button */
 
-
-#sign-in{
-    text-align: center;
-    margin-top: 1vh;
+#sign-in {
+  text-align: center;
+  margin-top: 1vh;
 }
 
 .remember-forgot {
@@ -271,14 +273,13 @@ a {
   color: #1669f2;
 }
 
-#login-btns{
+#login-btns {
   display: flex;
   justify-content: center;
- width: 50%;
- gap: 1vw;
- margin: 20px auto;
+  width: 50%;
+  gap: 1vw;
+  margin: 20px auto;
 }
-
 
 @-webkit-keyframes hvr-icon-wobble-horizontal {
   16.65% {
@@ -331,32 +332,34 @@ a {
   .inner form {
     width: 100%;
   }
-  .image-holder{
+  .image-holder {
     width: 100%;
     height: 30vw;
     align-items: end;
   }
-  #mini-box{
+  #mini-box {
     height: 90%;
     padding: 5px;
+    overflow: visible;
   }
-  #mini-box img{
-    width: 100%;
-    height: 100%;
-    right: -20%;
-  }  
+  #mini-box img {
+    width: 50%;
+    /* height: 100%; */
+    height: auto;
+    right: 5%;
+  }
 
-  #mini-box p{
-    font-size: 2.5vw;
+  #mini-box p {
+    font-size: 3.2vw;
     padding: 0;
   }
- 
+
   button {
     margin-top: 60px;
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 430px) {
   .inner form {
     padding-top: 10px;
     padding-left: 20px;
@@ -377,12 +380,12 @@ a {
   button {
     width: 100%;
   }
-  #mini-box{
+  #mini-box {
     height: 100%;
     padding-top: -5px;
   }
-  #mini-box p{
-    font-size: 2.5vw;
+  #mini-box p {
+    font-size: 4.5vw;
     padding: 0;
   }
   .remember-forgot {
@@ -391,29 +394,38 @@ a {
     /* justify-content: space-between; */
     font-size: 12px;
   }
-  .remember-me{
+  .remember-me {
     display: none;
   }
-  h3 ~ p{
+  h3 ~ p {
     display: none;
   }
-  .inner h3{
+  .inner h3 {
     font-size: 15px;
     text-align: left;
-    padding-bottom: 3vh;
+    padding-top: 1vh;
   }
 
-  .inner{
+  .inner {
     width: 100%;
     height: 100vh;
+    justify-content: start;
   }
 
-  .image-holder{
+  .image-holder {
     width: 100%;
-    height: 100%;
+    height: 50vw;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
   }
-  #mini-box{
+  #mini-box {
     width: 80%;
-    height: 80%
+    height: 80%;
+  }
+
+  #mini-box img {
+    width: 60%;
+    height: auto;
+    right: 0;
   }
 }

@@ -1,13 +1,11 @@
 import React from "react";
 import "../App.css";
-import bg_img from ".././assets/images/login-bg.png";
-import login_img from ".././assets/images/forget.png";
+import login_img from ".././assets/images/forget-m3.png";
 import { Link } from "react-router-dom";
 
 const Reset = () => {
   return (
     <div className="wrapper">
-      
       <div className="inner">
         <form>
           <h3 style={{ textAlign: "left" }}>Reset Password 👼</h3>
@@ -26,11 +24,7 @@ const Reset = () => {
             <i className="zmdi zmdi-arrow-right"></i>
           </button>
 
-          
-
-          
-
-          <div id="sign-in"  style={{marginTop:"5vh"}}>
+          <div id="sign-in" style={{ marginTop: "5vh" }}>
             <span>
               Remember you password?
               <Link to="/"> Login</Link>
@@ -39,7 +33,7 @@ const Reset = () => {
         </form>
         <div className="image-holder">
           <div id="mini-box">
-            <p style={{ padding: "1vw" }}>
+            <p style={{ padding: "20px" }}>
               Forget <br />
               Password? <br />
             </p>

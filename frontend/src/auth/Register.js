@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
-import bg_img from '.././assets/images/login-bg.png';
-import register_img from '.././assets/images/register.png';
+import register_img from '.././assets/images/register-m2.png';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
@@ -87,7 +86,7 @@ const Register = () => {
         </form>
         <div className="image-holder">
           <div id="mini-box">
-            <p>
+            <p style={{padding: "1vw"}}>
 Just one step<br />
 away from your<br />
 caretaker
