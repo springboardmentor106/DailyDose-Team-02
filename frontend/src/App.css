@@ -190,7 +190,7 @@ button:active i {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-blend-mode: exclusion;
+  /* background-blend-mode: exclusion; */
 }
 
 #mini-box {
