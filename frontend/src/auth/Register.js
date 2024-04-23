@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 const Register = () => {
   return (
     <div className="wrapper">
-      <div id="main-bg">
-        <img src={bg_img} alt="Main Bg" />
-      </div>
+      
       <div className="inner">
         <form >
           <h3>Register Now!</h3>

@@ -7,9 +7,7 @@ import { Link } from "react-router-dom";
 const Reset = () => {
   return (
     <div className="wrapper">
-      <div id="main-bg">
-        <img src={bg_img} alt="Main Bg" />
-      </div>
+      
       <div className="inner">
         <form>
           <h3 style={{ textAlign: "left" }}>Reset Password 👼</h3>
