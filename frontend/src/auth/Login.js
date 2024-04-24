@@ -8,27 +8,28 @@ const Login = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
  
-   function signIn(){
+   const signIn=async(e)=>{
+    e.preventDefault();
     let item={email,password}
     console.log(item)
 
-    // let result= await fetch("http://localhost:3000/api/user/login",{
-    //   method:'GET',
-    //   body:JSON.stringify(item),
-    //   headers:{
-    //         "Contact-Type":'application/json',
-    //         "Accept":'application/json'
-    //     }
-    // })
+    let result= await fetch("http://localhost:3000/api/user/login",{
+      method:'POST',
+      body:JSON.stringify(item),
+      headers:{
+            "Contact-Type":'application/json',
+            "Accept":'application/json'
+        }
+    })
 
-    // result=await result.json()
+    result=await result.json()
     // localStorage.setItem("user-info",JSON.stringify(result))
   
   }
   return (
     <div className="wrapper">
       <div className="inner">
-        <form>
+        <form onSubmit={e=>signIn(e)}>
           <h3 style={{ marginBottom: "0px", textAlign: "left" }}>Welcome Back 🖐</h3>
           <p style={{ marginTop: "0px", marginBottom: "2vw" }}>
             Experience the power of seamless caregiving at your fingertips! Log
@@ -68,7 +69,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button onClick={signIn}>
+          <button type='submit'>
             Sign in
             <i className="zmdi zmdi-arrow-right"></i>
           </button>
