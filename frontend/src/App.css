@@ -190,7 +190,7 @@ button:active i {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-blend-mode: exclusion;
+  /* background-blend-mode: exclusion; */
 }
 
 #mini-box {
@@ -280,6 +280,51 @@ a {
   gap: 1vw;
   margin: 20px auto;
 }
+
+.otp-field {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.otp-field input {
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: 2px solid #55525c;
+  background: #333;
+  font-weight: bold;
+  color: #fff;
+  outline: none;
+  transition: all 0.1s;
+}
+
+.otp-field input:focus {
+  border: 2px solid #7e6fe0;
+  box-shadow: 0 0 2px 2px #614ed7;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.space {
+  margin-right: 1rem !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 
 @-webkit-keyframes hvr-icon-wobble-horizontal {
   16.65% {
