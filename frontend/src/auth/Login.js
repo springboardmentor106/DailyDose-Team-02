@@ -13,7 +13,7 @@ const Login = () => {
     let item={email,password}
     console.log(item)
 
-    let result= await fetch("http://localhost:3000/api/user/login",{
+    let result= await fetch("http://localhost:5000/api/user/login",{
       method:'POST',
       body:JSON.stringify(item),
       headers:{
