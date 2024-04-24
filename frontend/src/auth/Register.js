@@ -3,56 +3,72 @@ import '../App.css';
 import register_img from '.././assets/images/register-m2.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
 
 const Register = () => {
-  const [firstName,setFirstName]=useState("")
-  const [lastName,setLastName]=useState("")
+  
+  const [firstname,setfirstname]=useState("")
+  const [lastname,setlastname]=useState("")
   const [email, setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [age,setAge]=useState("")
-  const [confirmPassword,setConfirmPassword]=useState("")
-  const navigate=useNavigate();
-
-  async function signUp(){
-    let item={firstName,lastName,email,password,confirmPassword,age}
+  const [gender,setGender]=useState("")
+  const [password_confirm,setpassword_confirm]=useState("")
+  
+  const signUp=async(e)=>{
+  //   {
+  //     "address":"abc",
+  //     "firstname":"rahul",
+  //     "lastname":"kumar",
+  //     "email":"rk@gmail.com",
+  //     "gender":"male",
+  //     "age":25,
+  //     "password":"rk@123",
+  //     "phoneNumber":987654321,
+  //     "country":"country",
+  //     "pincode":254163
+  // }
+    e.preventDefault();
+    const phoneNumber=987654321
+    const address="abc"
+    const country="country"
+    const pincode=254163
+    let item={firstname,lastname,email,gender,age,password,phoneNumber,address,country,pincode}
     console.log(item)
 
-    let result= await fetch("http://localhost:3000/api/users/register",{
-      method:'GET',
+    let result= await fetch("http://localhost:5000/api/user/register",{
+      method:'POST',
       body:JSON.stringify(item),
       headers:{
-            "Contact-Type":'application/json',
-            "Accept":'application/json'
-        }
-    })
+            "Contact-Type":'application/json'
+        },
+    });
 
     result=await result.json()
-    localStorage.setTime("user-info",JSON.stringify(result))
-    navigate.push("/add")
+    console.log(result)
+    //localStorage.setItem("user-info",JSON.stringify(item))
+    
   }
   return (
     <div className="wrapper">
       
       <div className="inner">
-        <form >
+        <form onSubmit={e=>signUp(e)}>
           <h3>Register Now!</h3>
           <div className="form-group">
-            <input type="text" value={firstName} onChange={(e)=> setFirstName(e.target.value)} placeholder="First Name" className="form-control" />
-            <input type="text" value={lastName} onChange={(e)=> setLastName(e.target.value)} placeholder="Last Name" className="form-control" />
+            <input type="text" value={firstname} onChange={(e)=> setfirstname(e.target.value)}  placeholder="First Name" className="form-control" />
+            <input type="text" value={lastname} onChange={(e)=> setlastname(e.target.value)}  placeholder="Last Name" className="form-control" />
           </div>
           <div className="form-wrapper">
             <input
               type="email"
-              value={email}
-              onChange={(e)=> setEmail(e.target.value)}
+              value={email} onChange={(e)=> setEmail(e.target.value)} 
               placeholder="Email Address"
               className="form-control" />
             <i className="zmdi zmdi-email"></i>
           </div>
           <div className="form-wrapper">
-            <select name="" id=""  className="form-control">
-              <option disabled selected>Gender</option>
+            <select name="" onChange={(e) => setGender(e.target.value)} defaultValue={gender} className="form-control">
+              <option value="" disabled >Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -60,13 +76,12 @@ const Register = () => {
             <i className="zmdi zmdi-caret-down" style={{fontSize: "17px"}}></i>
           </div>
           <div className="form-wrapper">
-            <input type="number" placeholder="Age" value={age} onChange={(e)=> setAge(e.target.value)} className="form-control" />
+            <input type="number" value={age} onChange={(e)=> setAge(e.target.value)}  placeholder="Age" className="form-control" />
           </div>
           <div className="form-wrapper">
             <input
               type="password"
-              value={password}
-              onChange={(e)=> setPassword(e.target.value)}
+              value={password} onChange={(e)=> setPassword(e.target.value)} 
               placeholder="Password"
               className="form-control" />
             <i className="zmdi zmdi-lock"></i>
@@ -74,14 +89,13 @@ const Register = () => {
           <div className="form-wrapper">
             <input
               type="password"
-              value={confirmPassword}
-              onChange={(e)=> setConfirmPassword(e.target.value)}
+              value={password_confirm} onChange={(e)=> setpassword_confirm(e.target.value)} 
               placeholder="Confirm Password"
               className="form-control" />
             <i className="zmdi zmdi-lock"></i>
           </div>
 
-          <button onClick={signUp}>
+          <button type='submit'>
             Sign Up
             <i className="zmdi zmdi-arrow-right"></i>
           </button>
