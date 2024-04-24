@@ -3,12 +3,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-      firstname: {
-        type: String,
-        required: true,
-        trim: true
-      },
-      lastname: {
+      name: {
         type: String,
         required: true,
         trim: true
@@ -23,17 +18,6 @@ const userSchema = new mongoose.Schema(
         required: true,
         trim: true
       },
-      gender: {
-        type: String,
-        lowercase: true,
-        enum: ['male', 'female', 'other']
-    },
-    age: {
-      type: Number,
-      required: true,
-      
-  },
-
     },
     { timestamps: true }
   );
