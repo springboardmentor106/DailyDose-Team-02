@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 
 const userSchema = new mongoose.Schema(
@@ -45,7 +45,15 @@ const userSchema = new mongoose.Schema(
     },
     pincode: {
       type: Number
-    }
+    },
+    reminders: [{
+      type: Schema.Types.ObjectId,
+      ref: 'REMINDER'
+    }],
+    goals: [{
+      type: Schema.Types.ObjectId,
+      ref: 'GOAL'
+    }]
 
   },
   { timestamps: true }
