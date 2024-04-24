@@ -51,7 +51,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
-            <i className="zmdi zmdi-email"></i>
           </div>
 
           <div className="form-wrapper">
@@ -63,7 +62,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password && <div className="error-message">{errors.password}</div>}
-            <i className="zmdi zmdi-lock"></i>
           </div>
 
           <div className="remember-forgot">
@@ -78,7 +76,6 @@ const Login = () => {
 
           <button type="submit">
             Sign in
-            <i className="zmdi zmdi-arrow-right"></i>
           </button>
 
           <div id="hr">OR</div>

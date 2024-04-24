@@ -16,15 +16,20 @@ const Reset = () => {
     setEmail(e.target.value);
     setEmailValid(/^\S+@\S+\.\S+$/.test(e.target.value));
   };
-
+  
   // Event handler to update OTP on input change
   const handleOtpChange = (e, index) => {
     if (isNaN(e.target.value)) return false; // Only numbers are allowed
-    const newOtp = [...otp];
+    let newOtp = [...otp];
     newOtp[index] = e.target.value;
     setOtp(newOtp);
+    console.log(e);
   };
-
+  
+  
+  
+  
+  
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
