@@ -18,7 +18,7 @@ app.use(cors())
 
 
 // Database Connection
-connectToMongoDB(process.env.MONGODB ?? "mongodb://localhost:27017/DailyDose").then(() =>
+connectToMongoDB(process.env.MONGODB ?? "mongodb://0.0.0.0:27017/DailyDose").then(() =>
   console.log("Mongodb connected")
 );
 

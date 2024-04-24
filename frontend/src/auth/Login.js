@@ -19,10 +19,11 @@ const Login = () => {
       headers:{
             "Contact-Type":'application/json',
             "Accept":'application/json'
-        }
-    })
+        },
+    });
 
     result=await result.json()
+    console.log(result)
     // localStorage.setItem("user-info",JSON.stringify(result))
   
   }
@@ -62,7 +63,7 @@ const Login = () => {
           <div className="remember-forgot">
             <div className="remember-me">
               <input type="checkbox" id="remember" />
-              <label for="remember"> Remember me</label>
+              <label htmlFor="remember"> Remember me</label>
             </div>
             <div className="forgot">
               <Link to="/reset">Forgot password?</Link>
@@ -118,7 +119,7 @@ const Login = () => {
             <p style={{ padding: "1vw" }}>
               Log in now to discover <br />
               personalized features <br />
-              tailored to your
+              tailored to your 
               <br />
               loved one's <br />
               needs!
