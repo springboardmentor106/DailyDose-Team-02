@@ -10,6 +10,10 @@ const goalSchema = new mongoose.Schema({
     completed: {
         type: Boolean,
         default: false
+    },
+    remiders: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'REMINDER'
     }
 });
 

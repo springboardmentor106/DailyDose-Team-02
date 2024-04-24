@@ -9,10 +9,11 @@ const reminderSchema = new mongoose.Schema({
         type: String
     },
     date: {
-        type: Date,
+        type: [Date],
     },
     timeFrequency: {
-        type: [Date]
+        type: Number,
+        default: 1
     },
     dayFrequency: {
         type: [String],
