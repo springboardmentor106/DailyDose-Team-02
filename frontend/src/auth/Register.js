@@ -32,10 +32,10 @@ const Register = () => {
     const address="abc"
     const country="country"
     const pincode=254163
-    let item={firstname,lastname,email,gender,age,password,phoneNumber,address,country,pincode}
+    const item={firstname,lastname,email,gender,age,password,phoneNumber,address,country,pincode}
     console.log(item)
 
-    let result= await fetch("http://localhost:5000/api/user/register",{
+    const result= await fetch("http://localhost:5000/api/user/register",{
       method:'POST',
       body:JSON.stringify(item),
       headers:{
@@ -43,8 +43,8 @@ const Register = () => {
         },
     });
 
-    result=await result.json()
-    console.log(result)
+    const data=await result.json()
+    console.log(data)
     //localStorage.setItem("user-info",JSON.stringify(item))
     
   }
