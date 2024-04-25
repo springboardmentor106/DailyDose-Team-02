@@ -8,7 +8,7 @@ const Reset = () => {
   
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(true);
-  const [emailExist, setEmailExist] = useState(false);
+  const [emailExist, setEmailExist] = useState(true);
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
   
@@ -58,15 +58,8 @@ const Reset = () => {
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    // Handling form submission based on email validity
-    if (emailValid) {
-      // Proceed to OTP form
-      alert("Sending OTP...");
-    } else {
-      // Display error message for invalid email
-      alert("Please enter a valid email address");
-    }
+    console.log("Submitting...");
+    
   };
 
   // Function to handle OTP paste event
@@ -76,6 +69,16 @@ const Reset = () => {
     if (data.length === 6 && data.every((num) => !isNaN(num))) {
       setOtp(data);
       e.target.blur();
+    }
+  };
+
+  // Function to switch focus between OTP input fields
+  const switchFocus = (e) => {
+    const input = e.target;
+    if (e.key === "Backspace" && input.previousElementSibling) {
+      input.previousElementSibling.focus();
+    } else if (e.key !== "Backspace" && input.nextElementSibling) {
+      input.nextElementSibling.focus();
     }
   };
 
@@ -98,6 +101,7 @@ const Reset = () => {
                       value={data}
                       onChange={(e) => handleOtpChange(e, index)}
                       onPaste={handleOtpPaste}
+                      onKeyUp={switchFocus}
                     />
                   );
                 })}
