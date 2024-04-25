@@ -1,41 +1,37 @@
-import React, { useState } from "react";
+import React, { useState }, { useEffect } from "react";
 import "../App.css";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
 
-  const validate = () => {
-    const newErrors = {};
-    if (!email.trim()) {
-      newErrors.email = "Please enter your email address";
-    }
-    if (!password.trim()) {
-      newErrors.password = "Please enter your password";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+ 
+   const signIn=async(e)=>{
     e.preventDefault();
-    if (validate()) {
-      // Add your login logic here
-      console.log("Email:", email);
-      console.log("Password:", password);
-    }
-  };
+    let item={email,password}
+    console.log(item)
 
+    let result= await fetch("http://localhost:5000/api/user/login",{
+      method:'POST',
+      body:JSON.stringify(item),
+      headers:{
+            "Content-Type":'application/json',
+            "Accept":'application/json'
+        },
+    });
+
+    result=await result.json()
+    console.log(result)
+    // localStorage.setItem("user-info",JSON.stringify(result))
+  
+  }
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={handleSubmit}>
-          <h3 style={{ marginBottom: "0px", textAlign: "left" }}>
-            Welcome Back 🖐
-          </h3>
+        <form onSubmit={e=>signIn(e)}>
+          <h3 style={{ marginBottom: "0px", textAlign: "left" }}>Welcome Back 🖐</h3>
           <p style={{ marginTop: "0px", marginBottom: "2vw" }}>
             Experience the power of seamless caregiving at your fingertips! Log
             in today and discover how our platform can revolutionize your
@@ -44,7 +40,9 @@ const Login = () => {
 
           <div className="form-wrapper">
             <input
-              type="text"
+              type="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               placeholder="Email Address"
               className="form-control"
               value={email}
@@ -56,6 +54,8 @@ const Login = () => {
           <div className="form-wrapper">
             <input
               type="password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               placeholder="Password"
               className="form-control"
               value={password}
@@ -74,7 +74,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button type="submit">
+          <button type='submit'>
             Sign in
           </button>
 
@@ -123,7 +123,7 @@ const Login = () => {
             <p style={{ padding: "1vw" }}>
               Log in now to discover <br />
               personalized features <br />
-              tailored to your
+              tailored to your 
               <br />
               loved one's <br />
               needs!

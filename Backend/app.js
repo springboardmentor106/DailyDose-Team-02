@@ -1,11 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
+
 import express from 'express'
 import cors from 'cors'
 import connectToMongoDB from './config/connectdb.js'
 import userRoutes from './routes/user.routes.js'
 import caretakerRoutes from './routes/caretaker.routes.js'
+import mongoose from 'mongoose'
 
 
 const app = express()
@@ -17,19 +19,28 @@ const DATABASE_URL = process.env.DATABASE_URL
 app.use(cors())
 
 
-// Database Connection
-connectToMongoDB(process.env.MONGODB ?? "mongodb://localhost:27017/DailyDose").then(() =>
-  console.log("Mongodb connected")
-);
-
 // JSON
 app.use(express.json())
 
-// Routes Load
-app.use("/api/user", userRoutes);
 
-app.use('/api/caretaker', caretakerRoutes);
+// Database Connection
+const connectDatabase = () => {
+  mongoose.connect(process.env.MongoDBURL)
+    .then(() => {
+      console.log(" Connected to Database Successfully ");
+      // Routes Load
+      app.use("/api/user", userRoutes);
 
+
+      app.use('/api/caretaker', caretakerRoutes);
+    })
+    .catch(error => {
+      console.error("Error connecting to database:", error);
+    });
+}
+
+
+connectDatabase()
 
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));

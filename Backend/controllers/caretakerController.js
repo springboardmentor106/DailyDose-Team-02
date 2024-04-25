@@ -1,4 +1,4 @@
-import Caretaker from '../models/caretaker.model.js';
+import Caretaker from '../models/caretakerModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
