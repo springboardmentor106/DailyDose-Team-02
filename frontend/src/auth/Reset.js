@@ -8,13 +8,41 @@ const Reset = () => {
   
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(true);
-  const [emailExist, setEmailExist] = useState(true);
+  const [emailExist, setEmailExist] = useState(false);
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
-  // Event handler to update form data on input change
-  const handleEmailChange = (e) => {
+  
+  
+  
+  
+  // Function to check if email exists in the database
+  const checkEmailExistence = async (email) => {
+    try {
+      const response = await fetch("/api/checkEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error("Error checking email existence:", error);
+      return false;
+    }
+  };
+  
+  // Event handler to handle email validation and existence check
+  const handleEmailChange = async (e) => {
     setEmail(e.target.value);
     setEmailValid(/^\S+@\S+\.\S+$/.test(e.target.value));
+    if (emailValid) {
+      const exists = await checkEmailExistence(e.target.value);
+      setEmailExist(exists);
+    } else {
+      setEmailExist(false);
+    }
   };
   
   // Event handler to update OTP on input change
@@ -24,11 +52,8 @@ const Reset = () => {
     newOtp[index] = e.target.value;
     setOtp(newOtp);
     console.log(e);
+    
   };
-  
-  
-  
-  
   
   // Function to handle form submission
   const handleSubmit = (e) => {
