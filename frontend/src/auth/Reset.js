@@ -59,14 +59,7 @@ const Reset = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email);
-    // Handling form submission based on email validity
-    if (emailValid) {
-      // Proceed to OTP form
-      alert("Sending OTP...");
-    } else {
-      // Display error message for invalid email
-      alert("Please enter a valid email address");
-    }
+    
   };
 
   // Function to handle OTP paste event
