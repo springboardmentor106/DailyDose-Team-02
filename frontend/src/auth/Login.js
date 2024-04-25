@@ -17,7 +17,7 @@ const Login = () => {
       method:'POST',
       body:JSON.stringify(item),
       headers:{
-            "Contact-Type":'application/json',
+            "Content-Type":'application/json',
             "Accept":'application/json'
         },
     });

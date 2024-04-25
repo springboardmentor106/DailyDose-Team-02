@@ -14,19 +14,8 @@ const Register = () => {
   const [gender,setGender]=useState("")
   const [password_confirm,setpassword_confirm]=useState("")
   
+  
   const signUp=async(e)=>{
-  //   {
-  //     "address":"abc",
-  //     "firstname":"rahul",
-  //     "lastname":"kumar",
-  //     "email":"rk@gmail.com",
-  //     "gender":"male",
-  //     "age":25,
-  //     "password":"rk@123",
-  //     "phoneNumber":987654321,
-  //     "country":"country",
-  //     "pincode":254163
-  // }
     e.preventDefault();
     const phoneNumber=987654321
     const address="abc"
@@ -39,7 +28,7 @@ const Register = () => {
       method:'POST',
       body:JSON.stringify(item),
       headers:{
-            "Contact-Type":'application/json'
+            "Content-Type":'application/json'
         },
     });
 
