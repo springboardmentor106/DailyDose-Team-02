@@ -18,7 +18,7 @@ const Reset = () => {
   // Function to check if email exists in the database
   const checkEmailExistence = async (email) => {
     try {
-      const response = await fetch("/api/checkEmail", {
+      const response = await fetch("http://localhost:5000/api/checkEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
