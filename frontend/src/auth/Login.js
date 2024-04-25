@@ -1,4 +1,4 @@
-import React, { useState }, { useEffect } from "react";
+import React,  { useEffect } from "react";
 import "../App.css";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
@@ -45,10 +45,7 @@ const Login = () => {
               onChange={(e)=>setEmail(e.target.value)}
               placeholder="Email Address"
               className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
-            {errors.email && <div className="error-message">{errors.email}</div>}
           </div>
 
           <div className="form-wrapper">
@@ -58,10 +55,7 @@ const Login = () => {
               onChange={(e)=>setPassword(e.target.value)}
               placeholder="Password"
               className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
 
           <div className="remember-forgot">

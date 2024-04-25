@@ -8,7 +8,7 @@ const Reset = () => {
   
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(true);
-  const [emailExist, setEmailExist] = useState(true);
+  const [emailExist, setEmailExist] = useState(false);
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
   
@@ -45,6 +45,18 @@ const Reset = () => {
     }
   };
   
+  
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting...");   
+    // if (emailExist) {
+    //   handleOtpVerification();
+    // } else {
+    //   sendOtp();
+    // }
+  };
+
   // Event handler to update OTP on input change
   const handleOtpChange = (e, index) => {
     if (isNaN(e.target.value)) return false; // Only numbers are allowed
@@ -55,13 +67,6 @@ const Reset = () => {
     
   };
   
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting...");
-    
-  };
-
   // Function to handle OTP paste event
   const handleOtpPaste = (e) => {
     e.preventDefault();
@@ -81,6 +86,37 @@ const Reset = () => {
       input.nextElementSibling.focus();
     }
   };
+
+  // Function to check if OTP is correct or not
+  const checkOtp = async (otp) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/checkOtp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ otp }),
+      });
+      const data = await response.json();
+      return data.success;
+    } catch (error) {
+      console.error("Error checking OTP:", error);
+      return false;
+    }
+  };
+
+  // Event handler to handle OTP verification
+  const handleOtpVerification = async () => {
+    const correctOtp = await checkOtp(otp.join(""));
+    if (correctOtp) {
+      console.log("OTP is correct!");
+    } else {
+      console.log("Incorrect OTP!");
+    }
+  };
+
+
+
 
   return (
     <div className="wrapper">
