@@ -3,6 +3,7 @@ import "../App.css";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {base_url} from "./API"
 const Login = () => {
 
   const [email,setEmail]=useState("")
@@ -13,7 +14,7 @@ const Login = () => {
     let item={email,password}
     console.log(item)
 
-    let result= await fetch("http://localhost:5000/api/user/login",{
+    let result= await fetch(base_url+"/api/user/login",{
       method:'POST',
       body:JSON.stringify(item),
       headers:{
@@ -24,6 +25,13 @@ const Login = () => {
 
     result=await result.json()
     console.log(result)
+
+    if(result.status==="success"){
+      alert(result.message);
+    }
+    else{
+      alert(result.message)
+    }
     // localStorage.setItem("user-info",JSON.stringify(result))
   
   }

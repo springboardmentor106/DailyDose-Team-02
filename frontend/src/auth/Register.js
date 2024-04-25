@@ -3,7 +3,7 @@ import '../App.css';
 import register_img from '.././assets/images/register-m2.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
+import {base_url} from './API.js'
 const Register = () => {
   
   const [firstname,setfirstname]=useState("")
@@ -15,16 +15,18 @@ const Register = () => {
   const [password_confirm,setpassword_confirm]=useState("")
   
   
+
+  
   const signUp=async(e)=>{
     e.preventDefault();
-    const phoneNumber=987654321
+      const phoneNumber=987654321
     const address="abc"
     const country="country"
     const pincode=254163
-    const item={firstname,lastname,email,gender,age,password,phoneNumber,address,country,pincode}
+    const item={firstname,lastname,email,gender,age,password,password_confirm,phoneNumber,address,country,pincode}
     console.log(item)
 
-    const result= await fetch("http://localhost:5000/api/user/register",{
+    const result= await fetch(base_url+"/api/user/register",{
       method:'POST',
       body:JSON.stringify(item),
       headers:{
@@ -34,9 +36,19 @@ const Register = () => {
 
     const data=await result.json()
     console.log(data)
+
+    if(data.status==="success"){
+      alert("your account is successfully created")
+    }
+    else{
+      alert(data.message)
+    }
     //localStorage.setItem("user-info",JSON.stringify(item))
     
-  }
+    }
+    
+    
+  
   return (
     <div className="wrapper">
       
