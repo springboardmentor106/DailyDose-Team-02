@@ -101,6 +101,7 @@ class UserController {
     static loggedUser = async (req, res) => {
         res.send({ "user": req.user })
     }
+
     // Forget Password
     static UserPasswordResetEmail = async (req, res) => {
         const { email } = req.body
@@ -157,6 +158,8 @@ class UserController {
             res.send({ "status": "failed", "message": "Token is not Valid" })
         }
     }
+
+    
 }
 
 export default UserController;

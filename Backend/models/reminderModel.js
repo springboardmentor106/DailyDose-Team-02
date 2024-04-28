@@ -11,10 +11,6 @@ const reminderSchema = new mongoose.Schema({
     date: {
         type: [Date],
     },
-    timeFrequency: {
-        type: Number,
-        default: 1
-    },
     dayFrequency: {
         type: [String],
         enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
@@ -22,6 +18,14 @@ const reminderSchema = new mongoose.Schema({
     compleated: {
         type: Boolean,
         default: false
+    },
+    timeFrequency: {
+        type: Number,
+        default: 1
+    },
+    createdBy: {
+        type: String,
+        enum: ['user', 'caretaker']
     },
     smsNotification: {
         type: Boolean,
