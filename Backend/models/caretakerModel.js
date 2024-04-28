@@ -33,14 +33,7 @@ const caretakerSchema = new mongoose.Schema(
     },
     assignedSeniors: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ],
-    goals: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'GOAL'
+        type: String
       }
     ]
 

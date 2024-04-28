@@ -27,14 +27,6 @@ const reminderSchema = new mongoose.Schema({
         type: String,
         enum: ['user', 'caretaker']
     },
-    smsNotification: {
-        type: Boolean,
-        default: false
-    },
-    emailNotification: {
-        type: Boolean,
-        default: false
-    },
     pushNotification: {
         type: Boolean,
         default: false

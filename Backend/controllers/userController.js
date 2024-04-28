@@ -6,6 +6,7 @@ import transporter from '../config/emailConfig.js';
 
 class UserController {
     static userRegistration = async (req, res) => {
+        // add Email validation for registration(otp type)
         try {
             const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
             const user = await User.findOne({ email: email });

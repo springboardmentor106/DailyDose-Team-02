@@ -5,7 +5,10 @@ const goalSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: String,
+    description:{
+        type: String,
+        required: true
+    },
     targetDate: Date,
     completed: {
         type: Boolean,
@@ -14,6 +17,10 @@ const goalSchema = new mongoose.Schema({
     remiders: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'REMINDER'
+    },
+    dayFrequency: {
+        type: [String],
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
     }
 });
 
