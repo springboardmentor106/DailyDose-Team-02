@@ -2,7 +2,7 @@ import Caretaker from '../models/caretakerModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-class CaretakerController {
+class caretakerController {
     static caretakerRegistration = async (req, res) => {
         const { firstname, lastname, email, gender, age, password, password_confirm } = req.body;
         const caretaker = await Caretaker.findOne({ email: email });
@@ -62,4 +62,4 @@ class CaretakerController {
     };
 }
 
-export default CaretakerController;
+export default caretakerController;
