@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
 
 
-class UserController {
+class userController {
     static userRegistration = async (req, res) => {
         try {
             const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
@@ -159,4 +159,4 @@ class UserController {
     }
 }
 
-export default UserController;
+export default userController;
