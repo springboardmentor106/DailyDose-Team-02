@@ -1,9 +1,9 @@
-import express from 'express'
-const router = express.Router();
 import UserController from '../controllers/userController.js';
 import CaretakerController from '../controllers/caretakerController.js';
 import checkUserAuth from '../middlewares/auth-middleware.js';
+import express from 'express'
 
+const router = express.Router();
 
 // Middleware - To protect
 router.use('/changepassword', checkUserAuth)
@@ -14,6 +14,10 @@ router.post('/register', UserController.userRegistration)
 router.post('/login', UserController.userLogin)
 router.post('/reset-password-email', UserController.UserPasswordResetEmail)
 router.post('/reset-password/:id/:token', UserController.userPasswordReset)
+
+router.post('/new-user', UserController.newUserEmailOtp)
+router.post('/validate-new-user', UserController.validateNewUser)
+
 
 // Protected Routes e.g ---> Dashboard
 router.post('/changepassword', UserController.changeUserPassword)

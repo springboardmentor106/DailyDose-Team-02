@@ -2,56 +2,117 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
+import OTP from '../models/otpModel.js';
 
+function generateOtp(len) {
+    const otpLength = len + 1
+    const range = Math.pow(10, otpLength - 1)
+    return String(Math.floor(Math.random() * range))
+}
 
 class UserController {
-    static userRegistration = async (req, res) => {
-        // add Email validation for registration(otp type)
+
+    static newUserEmailOtp = async (req, res) => {
         try {
-            const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
+            const { email } = req.body;
+
             const user = await User.findOne({ email: email });
             if (user) {
-                res.send({ "status": "failed", "message": "Email already present" });
-            } else {
-                if (firstname && lastname && email && gender && age && password && password_confirm) {
-                    if (password === password_confirm) {
-                        try {
-                            const salt = await bcrypt.genSalt(10);
-                            const hashPassword = await bcrypt.hash(password, salt);
-                            const userDoc = new User({
-                                firstname: firstname,
-                                lastname: lastname,
-                                email: email,
-                                gender: gender,
-                                age: age,
-                                password: hashPassword,
-                                phoneNumber: phoneNumber,
-                                address: address,
-                                country: country,
-                                pincode: pincode
-                            });
-                            await userDoc.save();
-
-                            // JWT Token Generate
-                            const token = jwt.sign({ userID: userDoc._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-
-                            res.status(201).send({ "status": "success", "message": "Registered Successfully", "token": token });
-                        } catch (error) {
-                            console.log(error);
-                            res.send({ "status": "failed", "message": "Unable to Register" });
-                        }
-                    } else {
-                        res.send({ "status": "failed", "message": "Password and Confirm password not matched" });
-                    }
-                } else {
-                    res.send({ "status": "failed", "message": "All fields required" });
-                }
+                return res.status(400).json({ status: "failed", message: "Email already registered" });
             }
+
+            const otp = generateOtp(6);
+
+            await transporter.sendMail({
+                from: process.env.EMAIL_FROM,
+                to: email,
+                subject: "DailyDose - Validate Email to register",
+                html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
+            });
+
+            await OTP.create({ email, otp });
+
+            res.status(200).json({ status: "success", message: "OTP sent to your Email" });
+
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: 'Internal server error' });
+            console.error("Error in sending OTP:", error);
+            return res.status(500).json({ status: "error", message: "Failed to send OTP. Please try again." });
         }
     };
+
+    static validateNewUser = async (req, res) => {
+        try {
+            const { enteredOtp, email } = req.body;
+
+            const savedOtp = await OTP.findOne({ email });
+
+            if (!savedOtp) {
+                return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
+            }
+
+            if (String(enteredOtp) === savedOtp.otp) {
+                await OTP.findOneAndUpdate({ email }, { $set: { verified: true } });
+
+                res.status(200).json({ status: "success", message: "OTP verified, proceed to registration" })
+            } else {
+                return res.status(400).json({ status: "failed", message: "Incorrect OTP, please try again" });
+            }
+        } catch (error) {
+            console.error("Error in OTP verification:", error);
+            return res.status(500).json({ status: "error", message: "An error occurred while verifying OTP" });
+        }
+    };
+
+    static userRegistration = async (req, res) => {
+        try {
+            const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
+
+            const newUser = await OTP.findOne({ email });
+            if (!newUser || !newUser.verified) {
+                return res.status(400).json({ status: "failed", message: "Email not verified" });
+            }
+
+            if (!(firstname && lastname && email && gender && age && password && password_confirm)) {
+                return res.status(400).json({ status: "failed", message: "All fields are required" });
+            }
+
+            const existingUser = await User.findOne({ email })
+            if (existingUser) {
+                return res.status(400).json({ status: "failed", message: "User already registered" });
+            }
+
+            if (password !== password_confirm) {
+                return res.status(400).json({ status: "failed", message: "Password and Confirm password do not match" });
+            }
+
+            const salt = await bcrypt.genSalt(10);
+            const hashPassword = await bcrypt.hash(password, salt);
+
+            const userDoc = new User({
+                firstname,
+                lastname,
+                email,
+                gender,
+                age,
+                password: hashPassword,
+                phoneNumber,
+                address,
+                country,
+                pincode
+            });
+
+            await userDoc.save();
+
+            // JWT Token Generation
+            const token = jwt.sign({ userID: userDoc._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+
+            res.status(201).json({ status: "success", message: "Registered Successfully", token });
+        } catch (error) {
+            console.error("Error in user registration:", error);
+            res.status(500).json({ status: "failed", message: "Internal server error" });
+        }
+    };
+
 
     // Login
     static userLogin = async (req, res) => {
@@ -160,7 +221,7 @@ class UserController {
         }
     }
 
-    
+
 }
 
 export default UserController;
