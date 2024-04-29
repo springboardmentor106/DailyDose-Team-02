@@ -5,8 +5,7 @@ import transporter from '../config/emailConfig.js';
 import OTP from '../models/otpModel.js';
 
 function generateOtp(len) {
-    const otpLength = len + 1
-    const range = Math.pow(10, otpLength - 1)
+    const range = Math.pow(10, len) - 1
     return String(Math.floor(Math.random() * range))
 }
 
@@ -30,7 +29,11 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-            await OTP.create({ email, otp });
+            const savedOtp = await OTP.create({ email, otp });
+            if (!savedOtp) {
+                return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+            }
+            console.log(savedOtp);
 
             res.status(200).json({ status: "success", message: "OTP sent to your Email" });
 
@@ -40,20 +43,60 @@ class UserController {
         }
     };
 
-    static validateNewUser = async (req, res) => {
+    static userRegistration = async (req, res) => {
         try {
-            const { enteredOtp, email } = req.body;
+            const { enteredOtp, firstname, lastname, email, gender, age, password, phoneNumber, address, country, pincode } = req.body;
 
+            console.log(req.body)
             const savedOtp = await OTP.findOne({ email });
 
             if (!savedOtp) {
                 return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
             }
 
-            if (String(enteredOtp) === savedOtp.otp) {
-                await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
+            console.log(String(enteredOtp), savedOtp.otp);
 
-                res.status(200).json({ status: "success", message: "OTP verified, proceed to registration" })
+            if (String(enteredOtp) === savedOtp.otp) {
+                const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
+                if (!otpUpdateResponse) {
+                    res.status(500).json({ status: "failed", message: "status update failed for OTP" });
+                }
+                console.log(otpUpdateResponse);
+
+                if (!(firstname && lastname && email && gender && age && password)) {
+                    return res.status(400).json({ status: "failed", message: "All fields are required" });
+                }
+
+                // Checking for existing user
+                const existingUser = await User.findOne({ email })
+                if (existingUser) {
+                    return res.status(400).json({ status: "failed", message: "User already registered" });
+                }
+
+                const salt = await bcrypt.genSalt(10);
+                const hashPassword = await bcrypt.hash(password, salt);
+
+                const userDoc = new User({
+                    firstname,
+                    lastname,
+                    email,
+                    gender,
+                    age,
+                    password: hashPassword,
+                    phoneNumber,
+                    address,
+                    country,
+                    pincode
+                });
+
+                await userDoc.save();
+
+                // JWT Token Generation
+                const token = jwt.sign({ userID: userDoc._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+
+                res.status(201).json({ status: "success", message: "Registered Successfully", token });
+
+
             } else {
                 return res.status(400).json({ status: "failed", message: "Incorrect OTP, please try again" });
             }
@@ -62,57 +105,6 @@ class UserController {
             return res.status(500).json({ status: "error", message: "An error occurred while verifying OTP" });
         }
     };
-
-    static userRegistration = async (req, res) => {
-        try {
-            const { firstname, lastname, email, gender, age, password, password_confirm, phoneNumber, address, country, pincode } = req.body;
-
-            const newUser = await OTP.findOne({ email });
-            if (!newUser || !newUser.verified) {
-                return res.status(400).json({ status: "failed", message: "Email not verified" });
-            }
-
-            if (!(firstname && lastname && email && gender && age && password && password_confirm)) {
-                return res.status(400).json({ status: "failed", message: "All fields are required" });
-            }
-
-            const existingUser = await User.findOne({ email })
-            if (existingUser) {
-                return res.status(400).json({ status: "failed", message: "User already registered" });
-            }
-
-            if (password !== password_confirm) {
-                return res.status(400).json({ status: "failed", message: "Password and Confirm password do not match" });
-            }
-
-            const salt = await bcrypt.genSalt(10);
-            const hashPassword = await bcrypt.hash(password, salt);
-
-            const userDoc = new User({
-                firstname,
-                lastname,
-                email,
-                gender,
-                age,
-                password: hashPassword,
-                phoneNumber,
-                address,
-                country,
-                pincode
-            });
-
-            await userDoc.save();
-
-            // JWT Token Generation
-            const token = jwt.sign({ userID: userDoc._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-
-            res.status(201).json({ status: "success", message: "Registered Successfully", token });
-        } catch (error) {
-            console.error("Error in user registration:", error);
-            res.status(500).json({ status: "failed", message: "Internal server error" });
-        }
-    };
-
 
     // Login
     static userLogin = async (req, res) => {
@@ -185,7 +177,8 @@ class UserController {
                     subject: "DailyDose - Password Reset Link",
                     html: `<a href=${link}>Click Here</a> to Reset Your Password. Password reset link will expire in 30 minutes.`
                 })
-                res.send({ "status": "success", "message": "Password Reset Email Sent..  Check Your Email", "info": info })
+                // console.log(info);
+                res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/reset-password/${user._id}/${token}`)
             } else {
                 res.send({ "status": "failed", "message": "Email Doesn't exist" })
             }
@@ -195,31 +188,44 @@ class UserController {
     }
 
     static userPasswordReset = async (req, res) => {
-        const { password, password_confirm } = req.body
-        const { id, token } = req.params
-        // console.log(`id: ${id}, token: ${token}`);
-        const user = await User.findById(id)
-        // console.log(user);
-        const new_secret = user._id + process.env.JWT_SECRET_KEY
+        const { password, password_confirm } = req.body;
+        const { id, token } = req.params;
+    
         try {
-            jwt.verify(token, new_secret)
-            if (password && password_confirm) {
-                if (password !== password_confirm) {
-                    res.send({ "status": "failed", "message": "New Password and Confirm Password not matched" })
-                } else {
-                    const salt = await bcrypt.genSalt(10);
-                    const newHashPassword = await bcrypt.hash(password, salt);
-                    await User.findByIdAndUpdate(user._id, { $set: { password: newHashPassword } })
-                    res.send({ "status": "success", "message": "Password reset Successfully!" })
-                }
-            } else {
-                res.send({ "status": "failed", "message": "All Fields  Required" })
+            if (!password || !password_confirm) {
+                return res.status(400).json({ status: "failed", message: "Both New Password and Confirm Password are required" });
             }
+    
+            if (password !== password_confirm) {
+                return res.status(400).json({ status: "failed", message: "New Password and Confirm Password do not match" });
+            }
+    
+            const user = await User.findById(id);
+            if (!user) {
+                return res.status(404).json({ status: "failed", message: "User not found" });
+            }
+    
+            const secret = `${user._id}${process.env.JWT_SECRET_KEY}`;
+    
+            jwt.verify(token, secret, async (err, decoded) => {
+                if (err) {
+                    return res.status(401).json({ status: "failed", message: "Token is not valid" });
+                }
+    
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(password, salt);
+    
+                // Update hashed user's password in database
+                await User.findByIdAndUpdate(user._id, { $set: { password: hashedPassword } });
+    
+                return res.status(200).json({ status: "success", message: "Password reset successfully" });
+            });
+    
         } catch (error) {
-            console.log(error)
-            res.send({ "status": "failed", "message": "Token is not Valid" })
+            console.error("Error:", error);
+            return res.status(500).json({ status: "failed", message: "Internal Server Error" });
         }
-    }
+    };
 
 
 }

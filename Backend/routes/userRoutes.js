@@ -10,13 +10,12 @@ router.use('/changepassword', checkUserAuth)
 router.use('/loggeduser', checkUserAuth)
 
 // Public Routes  e.g --> Register
+router.post('/new-user', UserController.newUserEmailOtp)
 router.post('/register', UserController.userRegistration)
 router.post('/login', UserController.userLogin)
 router.post('/reset-password-email', UserController.UserPasswordResetEmail)
+router.get('/reset-password/:id/:token')
 router.post('/reset-password/:id/:token', UserController.userPasswordReset)
-
-router.post('/new-user', UserController.newUserEmailOtp)
-router.post('/validate-new-user', UserController.validateNewUser)
 
 
 // Protected Routes e.g ---> Dashboard
