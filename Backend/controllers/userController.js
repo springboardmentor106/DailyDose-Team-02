@@ -51,7 +51,7 @@ class UserController {
             }
 
             if (String(enteredOtp) === savedOtp.otp) {
-                await OTP.findOneAndUpdate({ email }, { $set: { verified: true } });
+                await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
 
                 res.status(200).json({ status: "success", message: "OTP verified, proceed to registration" })
             } else {
