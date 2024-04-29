@@ -5,18 +5,26 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Reset = () => {
-  
   const [email, setEmail] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
-  const [emailExist, setEmailExist] = useState(false);
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  
-  
-  
-  
-  // Function to check if email exists in the database
-  const checkEmailExistence = async (email) => {
+  const validateEmail = (email) => {
+    // Simple regex for email validation
+    const re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailInput = e.target.value;
+    setEmail(emailInput);
+    setIsEmailValid(validateEmail(emailInput));
+  };
+
+  const sendResetEmail = async () => {
+    setIsSubmitted(true); // Set the submitted state to true
     try {
       const response = await fetch("http://localhost:5000/api/checkEmail", {
         method: "POST",
@@ -26,129 +34,39 @@ const Reset = () => {
         body: JSON.stringify({ email }),
       });
       const data = await response.json();
-      return data.exists;
+      if (data.exists) {
+        setMessage("Check your email for resetting your password.");
+      } else {
+        setMessage(
+          "Sorry, your email address does not exist. Please create a new account."
+        );
+      }
     } catch (error) {
-      console.error("Error checking email existence:", error);
-      return false;
-    }
-  };
-  
-  // Event handler to handle email validation and existence check
-  const handleEmailChange = async (e) => {
-    setEmail(e.target.value);
-    setEmailValid(/^\S+@\S+\.\S+$/.test(e.target.value));
-    if (emailValid) {
-      const exists = await checkEmailExistence(e.target.value);
-      setEmailExist(exists);
-    } else {
-      setEmailExist(false);
-    }
-  };
-  
-  
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting...");   
-    // if (emailExist) {
-    //   handleOtpVerification();
-    // } else {
-    //   sendOtp();
-    // }
-  };
-
-  // Event handler to update OTP on input change
-  const handleOtpChange = (e, index) => {
-    if (isNaN(e.target.value)) return false; // Only numbers are allowed
-    let newOtp = [...otp];
-    newOtp[index] = e.target.value;
-    setOtp(newOtp);
-    console.log(e);
-    
-  };
-  
-  // Function to handle OTP paste event
-  const handleOtpPaste = (e) => {
-    e.preventDefault();
-    const data = e.clipboardData.getData("text").slice(0, 6).split("");
-    if (data.length === 6 && data.every((num) => !isNaN(num))) {
-      setOtp(data);
-      e.target.blur();
+      console.error("Error sending reset email:", error);
+      setMessage("An error occurred while trying to send the reset email.");
     }
   };
 
-  // Function to switch focus between OTP input fields
-  const switchFocus = (e) => {
-    const input = e.target;
-    if (e.key === "Backspace" && input.previousElementSibling) {
-      input.previousElementSibling.focus();
-    } else if (e.key !== "Backspace" && input.nextElementSibling) {
-      input.nextElementSibling.focus();
+  const handleReset = () => {
+    if (isEmailValid) {
+      sendResetEmail();
+    }
+    else{
+      console.warn("invalid email address!");
     }
   };
-
-  // Function to check if OTP is correct or not
-  const checkOtp = async (otp) => {
-    try {
-      const response = await fetch("http://localhost:5000/api/checkOtp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ otp }),
-      });
-      const data = await response.json();
-      return data.success;
-    } catch (error) {
-      console.error("Error checking OTP:", error);
-      return false;
-    }
-  };
-
-  // Event handler to handle OTP verification
-  const handleOtpVerification = async () => {
-    const correctOtp = await checkOtp(otp.join(""));
-    if (correctOtp) {
-      console.log("OTP is correct!");
-    } else {
-      console.log("Incorrect OTP!");
-    }
-  };
-
-
-
 
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleReset}>
           <h3 style={{ textAlign: "left" }}>Reset Password 👼</h3>
 
-          {emailExist ? (
-            <>
-              <div class="otp-field">
-                {otp.map((data, index) => {
-                  return (
-                    <input
-                      type="text"
-                      name="otp"
-                      maxLength="1"
-                      key={index}
-                      value={data}
-                      onChange={(e) => handleOtpChange(e, index)}
-                      onPaste={handleOtpPaste}
-                      onKeyUp={switchFocus}
-                    />
-                  );
-                })}
-              </div>
-              <button type="submit">Verify</button>
-            </>
-          ) : (
+          {!isSubmitted ? (
             <>
               <div className="form-wrapper">
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email Address"
                   className="form-control"
                   value={email}
@@ -156,13 +74,10 @@ const Reset = () => {
                   required
                 />
               </div>
-
-              {emailValid ? (
-                <button type="submit">Send OTP</button>
-              ) : (
-                <p style={{ color: "red" }}>Invalid email address</p>
-              )}
+              <button type="submit" disabled={!isEmailValid}>Send OTP</button>
             </>
+          ) : (
+            <div>{message}</div>
           )}
 
           <div id="sign-in" style={{ marginTop: "5vh" }}>
