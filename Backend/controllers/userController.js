@@ -218,7 +218,8 @@ class UserController {
                 // Update hashed user's password in database
                 await User.findByIdAndUpdate(user._id, { $set: { password: hashedPassword } });
     
-                res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/login`)
+                // res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/login`)
+                return res.status(200).json({ status: "success", message: "Password reset successfully" });
             });
     
         } catch (error) {
