@@ -74,8 +74,6 @@ const Register = () => {
               placeholder="Email Address"
               className="form-control"
               name="email"
-              // value={formData.email}
-              // onChange={handleChange}
             />
           </div>
           <div className="form-wrapper">
@@ -109,8 +107,6 @@ const Register = () => {
               placeholder="Password"
               className="form-control"
               name="password"
-              // value={formData.password}
-              // onChange={handleChange}
             />
           </div>
           <div className="form-wrapper">
@@ -130,7 +126,6 @@ const Register = () => {
               placeholder="Confirm Password"
               className="form-control"
             />
-            <i className="zmdi zmdi-lock"></i>
           </div>
 
           <button type="submit">Sign Up</button>
