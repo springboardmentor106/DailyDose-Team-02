@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
+import register_img from ".././assets/images/register-m2.png";
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
+  
 
   const handlePasswordChange = async () => {
     if (password !== confirmPassword) {
@@ -30,7 +33,7 @@ const UpdatePassword = () => {
 
       if (data.success) {
         // Redirect to the login page
-        history.push("/login");
+        navigate.push("/login");
       } else {
         setError("Something went wrong, please try again.");
       }
@@ -47,7 +50,7 @@ const UpdatePassword = () => {
 
           <div className="form-wrapper">
             <input
-              type="password"
+              type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="New Password"
@@ -64,19 +67,9 @@ const UpdatePassword = () => {
               className="form-control"
             />
           </div>
-          <div className="form-wrapper">
-            <input
-              type="password"
-              value={password_confirm}
-              onChange={(e) => setpassword_confirm(e.target.value)}
-              placeholder="Confirm Password"
-              className="form-control"
-            />
-          </div>
 
           <button type="submit">Change Password</button>
           {error && <p>{error}</p>}
-
         </form>
         <div className="image-holder">
           <div id="mini-box">
