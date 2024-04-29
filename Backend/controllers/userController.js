@@ -178,7 +178,7 @@ class UserController {
                     html: `<a href=${link}>Click Here</a> to Reset Your Password. Password reset link will expire in 30 minutes.`
                 })
                 // console.log(info);
-                res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/reset-password/${user._id}/${token}`)
+                res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/update-password`)
             } else {
                 res.send({ "status": "failed", "message": "Email Doesn't exist" })
             }
