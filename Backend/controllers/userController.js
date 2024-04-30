@@ -3,10 +3,18 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
 import OTP from '../models/otpModel.js';
+import path from 'path';
 
 function generateOtp(len) {
     const range = Math.pow(10, len) - 1
     return String(Math.floor(Math.random() * range))
+}
+
+let userID;
+let userToken;
+function saveResetCredential(id, token){
+    userID = id
+    userToken = token
 }
 
 class UserController {
@@ -165,7 +173,9 @@ class UserController {
                 const secret = user._id + process.env.JWT_SECRET_KEY
 
                 const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '30m' })
-                //  Frontend Link for Reset Pass
+                
+                saveResetCredential(user._id, token)
+
                 const link = `http://127.0.0.1:${process.env.PORT}/api/user/reset-password/${user._id}/${token}`
                 //   Route for frontend e.g-> api/user/reset/:id/:token
                 console.log(link);
@@ -178,8 +188,6 @@ class UserController {
                     html: `<a href=${link}>Click Here</a> to Reset Your Password. Password reset link will expire in 30 minutes.`
                 })
                 // console.log(info);
-
-                // res.redirect(`http://127.0.0.1:${process.env.PORT}/update-password`)
                 return res.status(200).json({ status: "success", message: "Password reset link sent to your email" });
             } else {
                 res.send({ "status": "failed", "message": "Email Doesn't exist" })
@@ -189,47 +197,63 @@ class UserController {
         }
     }
 
+    static resetPasswordPage = async (req, res) => {
+        try {
+            const id = userID;
+            const token = userToken;
+            const port = process.env.PORT;
+
+            if (!userID || !userToken) {
+                throw new Error('User or token not provided');
+            }
+            const filePath = path.join(process.env.DIR_PATH, 'pages', 'resetPassword')
+            console.log(filePath)
+            res.render(filePath, { id, token, port });
+        } catch (error) {
+            console.error('Error rendering resetPassword:', error);
+            res.status(500).send('Internal Server Error');
+        }        
+    }    
+
     static userPasswordReset = async (req, res) => {
-        const { password, password_confirm } = req.body;
-        const { id, token } = req.params;
-    
+        const { password, password_confirm, id, token } = req.body;
+        // const { id, token } = req.params;
+
         try {
             if (!password || !password_confirm) {
-                return res.status(400).json({ status: "failed", message: "Both New Password and Confirm Password are required" });
+                return res.status(400).json({ status: "failed", message: "Both Password and Confirm Password are required" });
             }
-    
+
             if (password !== password_confirm) {
-                return res.status(400).json({ status: "failed", message: "New Password and Confirm Password do not match" });
+                return res.status(400).json({ status: "failed", message: "Password and Confirm Password do not match" });
             }
-    
+
             const user = await User.findById(id);
             if (!user) {
                 return res.status(404).json({ status: "failed", message: "User not found" });
             }
-    
+
             const secret = `${user._id}${process.env.JWT_SECRET_KEY}`;
-    
+
             jwt.verify(token, secret, async (err, decoded) => {
                 if (err) {
                     return res.status(401).json({ status: "failed", message: "Token is not valid" });
                 }
-    
+
                 const salt = await bcrypt.genSalt(10);
                 const hashedPassword = await bcrypt.hash(password, salt);
-    
+
                 // Update hashed user's password in database
                 await User.findByIdAndUpdate(user._id, { $set: { password: hashedPassword } });
-    
-                // res.redirect(`http://127.0.0.1:${process.env.PORT}/api/user/login`)
+
                 return res.status(200).json({ status: "success", message: "Password reset successfully" });
             });
-    
+
         } catch (error) {
             console.error("Error:", error);
             return res.status(500).json({ status: "failed", message: "Internal Server Error" });
         }
     };
-
 
 }
 

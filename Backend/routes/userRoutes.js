@@ -14,8 +14,9 @@ router.post('/new-user', UserController.newUserEmailOtp)
 router.post('/register', UserController.userRegistration)
 router.post('/login', UserController.userLogin)
 router.post('/reset-password-email', UserController.UserPasswordResetEmail)
-router.post('/reset-password/:id/:token', UserController.userPasswordReset)
-router.get('/reset-password/:id/:token')
+// router.post('/reset-password/:id/:token', UserController.userPasswordReset)
+router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
+router.post('/reset-password', UserController.userPasswordReset)
 
 
 // Protected Routes e.g ---> Dashboard
