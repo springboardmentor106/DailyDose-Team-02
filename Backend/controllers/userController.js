@@ -215,33 +215,49 @@ class UserController {
     }
 
     // Forget Password
-    static UserPasswordResetEmail = async (req, res) => {
-        const { email } = req.body
+     // Forget Password
+     static UserPasswordResetEmail = async (req, res) => {
+        const { email, role } = req.body
         if (email) {
-            const user = await User.findOne({ email: email })
-            if (user) {
-                const secret = user._id + process.env.JWT_SECRET_KEY
-
-                const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '30m' })
-                
-                saveResetCredential(user._id, token)
-
-                const link = `http://127.0.0.1:${process.env.PORT}/api/user/reset-password/${user._id}/${token}`
-                //   Route for frontend e.g-> api/user/reset/:id/:token
-                console.log(link);
-
-                // Send Email
-                let info = await transporter.sendMail({
-                    from: process.env.EMAIL_FROM,
-                    to: user.email,
-                    subject: "DailyDose - Password Reset Link",
-                    html: `<a href=${link}>Click Here</a> to Reset Your Password. Password reset link will expire in 30 minutes.`
-                })
-                // console.log(info);
-                return res.status(200).json({ status: "success", message: "Password reset link sent to your email" });
+            // const user = await User.findOne({ email: email })
+            if (role !== "caretaker") {
+                const user = await User.findOne({ email: email });
+                if (!user) {
+                    return res.status(400).json({ status: "failed", message: "User not found." });
+                }
             } else {
-                res.send({ "status": "failed", "message": "Email Doesn't exist" })
+                const caretaker = await Caretaker.findOne({ email: email });
+                if (!caretaker) {
+                    return res.status(400).json({ status: "failed", message: "Caretaker not found" });
+                }
             }
+
+
+            const otp = generateOtp(6);
+            await transporter.sendMail({
+                from: process.env.EMAIL_FROM,
+                to: email,
+                subject: "DailyDose - Validate Email to register",
+                html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
+            });
+
+
+            const UserOtp = await OTP.findOne({ email: email });
+
+
+            if (UserOtp) {
+                const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
+                if (!updatedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
+            } else {
+                const savedOtp = await OTP.create({ email, otp });
+                if (!savedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
+            }
+            console.log(otp);
+            res.status(200).json({ status: "success", message: "OTP sent to your Email" });
         } else {
             res.send({ "status": "failed", "message": "Email Field is Required" })
         }
