@@ -160,15 +160,22 @@ class UserController {
     // Login
     static userLogin = async (req, res) => {
         try {
-            const { email, password } = req.body;
+            const { email, password , role} = req.body;
             if (email && password) {
-                const user = await User.findOne({ email: email });
+                let user;
+                if(role!="caretaker"){
+                     user = await User.findOne({ email: email });
+                }else{
+                    user = await Caretaker.findOne({ email: email });
+                }
                 if (user != null) {
                     const isMatch = await bcrypt.compare(password, user.password);
                     if ((user.email === email) && isMatch) {
 
+
                         // JWT Token Generate
-                        const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                        const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+
 
                         res.send({ "status": "success", "message": "Login Successfully", "token": token });
                     } else {
