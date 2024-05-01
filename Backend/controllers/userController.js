@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
 import OTP from '../models/otpModel.js';
 import path from 'path';
-
+import Caretaker from '../models/caretakerModel.js';
 function generateOtp(len) {
     const range = Math.pow(10, len) - 1
     return String(Math.floor(Math.random() * range))
@@ -21,15 +21,23 @@ class UserController {
 
     static newUserEmailOtp = async (req, res) => {
         try {
-            const { email } = req.body;
+            const { email, role } = req.body;
 
-            const user = await User.findOne({ email: email });
-            if (user) {
-                return res.status(400).json({ status: "failed", message: "Email already registered" });
+
+            if (role !== "caretaker") {
+                const user = await User.findOne({ email: email });
+                if (user) {
+                    return res.status(400).json({ status: "failed", message: "Email already registered" });
+                }
+            }else{
+                const caretaker = await Caretaker.findOne({ email: email });
+                if (caretaker) {
+                    return res.status(400).json({ status: "failed", message: "Email already registered" });
+                }
             }
 
-            const otp = generateOtp(6);
 
+            const otp = generateOtp(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
                 to: email,
@@ -37,13 +45,28 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-            const savedOtp = await OTP.create({ email, otp });
-            if (!savedOtp) {
-                return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+
+            const UserOtp = await OTP.findOne({ email: email });
+
+
+            if (UserOtp) {
+                const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
+                if (!updatedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
+            } else {
+                const savedOtp = await OTP.create({ email, otp });
+                if (!savedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
             }
-            console.log(savedOtp);
+
+
+            console.log(otp);
+
 
             res.status(200).json({ status: "success", message: "OTP sent to your Email" });
+
 
         } catch (error) {
             console.error("Error in sending OTP:", error);
@@ -53,17 +76,34 @@ class UserController {
 
     static userRegistration = async (req, res) => {
         try {
-            const { enteredOtp, firstname, lastname, email, gender, age, password, phoneNumber, address, country, pincode } = req.body;
-
+            const { enteredOtp, firstname, lastname, email, gender, age, password, role } = req.body;
             console.log(req.body)
             const savedOtp = await OTP.findOne({ email });
+            console.log("saved otp", savedOtp)
+
 
             if (!savedOtp) {
                 return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
             }
 
-            console.log(String(enteredOtp), savedOtp.otp);
 
+            if (role !== "caretaker") {
+                const user = await User.findOne({ email: email });
+                if (user) {
+                    return res.status(400).json({ status: "failed", message: "Email already registered" });
+                }
+            } else {
+                const caretaker = await Caretaker.findOne({ email: email });
+                if (caretaker) {
+                    return res.status(400).json({ status: "failed", message: "Email already registered" });
+                }
+            }
+
+
+            console.log(String(enteredOtp), savedOtp.otp);
+            if (savedOtp.otp === '') {
+                return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
+            }
             if (String(enteredOtp) === savedOtp.otp) {
                 const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
                 if (!otpUpdateResponse) {
@@ -71,36 +111,39 @@ class UserController {
                 }
                 console.log(otpUpdateResponse);
 
-                if (!(firstname && lastname && email && gender && age && password)) {
-                    return res.status(400).json({ status: "failed", message: "All fields are required" });
-                }
-
-                // Checking for existing user
-                const existingUser = await User.findOne({ email })
-                if (existingUser) {
-                    return res.status(400).json({ status: "failed", message: "User already registered" });
-                }
 
                 const salt = await bcrypt.genSalt(10);
                 const hashPassword = await bcrypt.hash(password, salt);
 
-                const userDoc = new User({
+
+                const body = {
                     firstname,
                     lastname,
                     email,
                     gender,
                     age,
                     password: hashPassword,
-                    phoneNumber,
-                    address,
-                    country,
-                    pincode
-                });
+                }
+               
+                let token;
+                if (role !== "caretaker") {
+                    const userDoc = new User(body);
+                    const savedUser = await userDoc.save();
+                    if (!savedUser) {
+                        return res.status(500).json({ status: "failed", message: "Internal server error. User not created" })
+                    }
+                    // JWT Token Generation
+                    token = jwt.sign({ userID: savedUser.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                } else {
+                    const caretakerDoc = new Caretaker(body)
+                    const savedCaretaker = await caretakerDoc.save();
+                    if (!savedCaretaker) {
+                        return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" })
+                    }
+                    // JWT Token Generation
+                    token = jwt.sign({ userID: savedCaretaker.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                }
 
-                await userDoc.save();
-
-                // JWT Token Generation
-                const token = jwt.sign({ userID: userDoc._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
                 res.status(201).json({ status: "success", message: "Registered Successfully", token });
 
@@ -214,7 +257,9 @@ class UserController {
             res.status(500).send('Internal Server Error');
         }        
     }    
-
+// after submit make and api of updated password
+// validate email and otpand send an updated password
+   
     static userPasswordReset = async (req, res) => {
         const { password, password_confirm, id, token } = req.body;
         // const { id, token } = req.params;
