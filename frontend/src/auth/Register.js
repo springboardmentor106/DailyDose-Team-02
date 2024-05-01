@@ -1,86 +1,103 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+const validateEmail = (email) => {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email.toLowerCase());
+};
+const validatePassword = (password) => {
+  // at least one number, one lowercase and one uppercase letter
+  // and at least 8 or more characters
+  const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return re.test(password);
+};
 
 const Register = () => {
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [password_confirm, setpassword_confirm] = useState("");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    gender: "",
+    role: "",
+    age: "",
+    password: "",
+  });
 
-  const signUp = async (e) => {
-    e.preventDefault();
-    const phoneNumber = 987654321;
-    const address = "abc";
-    const country = "country";
-    const pincode = 254163;
-    const item = {
-      firstname,
-      lastname,
-      email,
-      gender,
-      age,
-      password,
-      phoneNumber,
-      address,
-      country,
-      pincode,
-    };
-    console.log(item);
+  const [errors, setErrors] = useState({});
 
-    const result = await fetch("http://localhost:5000/api/user/register", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await result.json();
-    console.log(data);
-    //localStorage.setItem("user-info",JSON.stringify(item))
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Basic validation checks
+    let tempErrors = {};
+    // if (!formData.firstName) tempErrors.firstName = "First name is required";
+    // if (!formData.lastName) tempErrors.lastName = "Last name is required";
+    // if (!validateEmail(formData.email))
+    //   tempErrors.email = "Invalid email address";
+    // if (!formData.gender) tempErrors.gender = "Gender is required";
+    // if (isNaN(formData.age) || formData.age < 18)
+    //   tempErrors.age = "Must be 18 or older";
+    // if (!validatePassword(formData.password))
+    //   tempErrors.password = "Password does not meet criteria";
+    // if (formData.password !== formData.confirmPassword)
+    //   tempErrors.confirmPassword = "Passwords do not match";
+
+    setErrors(tempErrors);
+    if (Object.keys(tempErrors).length === 0) {
+      // Redirect to OTP verification route with state
+      navigate("../verify-otp", { state: formData });
+    }
+  };
+
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={(e) => signUp(e)}>
+        <form onSubmit={handleSubmit}>
           <h3>Register Now!</h3>
           <div className="form-group">
             <input
               type="text"
-              value={firstname}
-              onChange={(e) => setfirstname(e.target.value)}
+              name="firstName"
+              // value={firstname}
+              onChange={handleChange}
               placeholder="First Name"
               className="form-control"
+              required
             />
+            {errors.firstName && <p>{errors.firstName}</p>}
             <input
               type="text"
-              value={lastname}
-              onChange={(e) => setlastname(e.target.value)}
+              name="lastName"
+              // value={lastname}
+              onChange={handleChange}
               placeholder="Last Name"
               className="form-control"
             />
+            {errors.lastName && <p>{errors.lastName}</p>}
           </div>
           <div className="form-wrapper">
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              // value={email}
+              onChange={handleChange}
               placeholder="Email Address"
               className="form-control"
-              name="email"
             />
           </div>
           <div className="form-wrapper">
             <select
-              name=""
-              onChange={(e) => setGender(e.target.value)}
-              defaultValue={gender}
+              name="gender"
+              onChange={handleChange}
+              defaultValue={formData.gender}
               className="form-control">
               <option value="" disabled>
                 Gender
@@ -91,10 +108,24 @@ const Register = () => {
             </select>
           </div>
           <div className="form-wrapper">
+            <select
+              name="role"
+              onChange={handleChange}
+              defaultValue={formData.role}
+              className="form-control">
+              <option value="" disabled>
+                Register as
+              </option>
+              <option value="user">User</option>
+              <option value="caretaker">Caretaker</option>
+            </select>
+          </div>
+          <div className="form-wrapper">
             <input
               type="number"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
+              name="age"
+              // value={age}
+              onChange={handleChange}
               placeholder="Age"
               className="form-control"
             />
@@ -102,27 +133,19 @@ const Register = () => {
           <div className="form-wrapper">
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              // value={password}
+              onChange={handleChange}
               placeholder="Password"
               className="form-control"
-              name="password"
             />
           </div>
           <div className="form-wrapper">
             <input
               type="password"
-              value={password_confirm}
-              onChange={(e) => setpassword_confirm(e.target.value)}
-              placeholder="Confirm Password"
-              className="form-control"
-            />
-          </div>
-          <div className="form-wrapper">
-            <input
-              type="password"
-              value={password_confirm}
-              onChange={(e) => setpassword_confirm(e.target.value)}
+              name="confirmPassword"
+              // value={password_confirm}
+              onChange={handleChange}
               placeholder="Confirm Password"
               className="form-control"
             />

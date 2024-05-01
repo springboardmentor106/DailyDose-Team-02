@@ -34,6 +34,7 @@ const Reset = () => {
         body: JSON.stringify({ email }),
       });
       const data = await response.json();
+      console.log(data);
       if (data.exists) {
         setMessage("Check your email for resetting your password.");
       } else {
