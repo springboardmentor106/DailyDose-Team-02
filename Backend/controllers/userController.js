@@ -280,42 +280,68 @@ class UserController {
             res.status(500).send('Internal Server Error');
         }        
     }    
-// after submit make and api of updated password
-// validate email and otpand send an updated password
+
+    // validate the otp
+    static validateOtp = async (req, res) => {
+        try {
+            const { email, otp } = req.body
+            const savedOtp = await OTP.findOne({ email });
+            if (savedOtp.otp === '') {
+                return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
+            }
+            if (String(otp) === savedOtp.otp) {
+                const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
+                if (!otpUpdateResponse) {
+                    return res.status(500).json({ status: "failed", message: "status update failed for OTP" });
+                } else {
+                    return res.status(200).json({ status: "success", message: "Otp validated.Reset your password now" });
+                }
+            } else {
+                return res.status(200).json({ status: "success", message: "Incorrect otp" });
+            }
+
+
+        } catch (error) {
+            console.error('Error rendering resetPassword:', error);
+            return res.status(500).send('Internal Server Error');
+        }
+    }
    
+    // update password
     static userPasswordReset = async (req, res) => {
-        const { password, password_confirm, id, token } = req.body;
-        // const { id, token } = req.params;
+        const { password, email, role } = req.body;
+
 
         try {
-            if (!password || !password_confirm) {
-                return res.status(400).json({ status: "failed", message: "Both Password and Confirm Password are required" });
+            let user;
+            if (role != "caretaker") {
+                user = await User.findOne({ email });
+            } else {
+                user = await Caretaker.findOne({ email });
             }
 
-            if (password !== password_confirm) {
-                return res.status(400).json({ status: "failed", message: "Password and Confirm Password do not match" });
-            }
 
-            const user = await User.findById(id);
             if (!user) {
                 return res.status(404).json({ status: "failed", message: "User not found" });
             }
 
-            const secret = `${user._id}${process.env.JWT_SECRET_KEY}`;
 
-            jwt.verify(token, secret, async (err, decoded) => {
-                if (err) {
-                    return res.status(401).json({ status: "failed", message: "Token is not valid" });
-                }
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
 
-                const salt = await bcrypt.genSalt(10);
-                const hashedPassword = await bcrypt.hash(password, salt);
 
-                // Update hashed user's password in database
-                await User.findByIdAndUpdate(user._id, { $set: { password: hashedPassword } });
+            let savedUser
+            // Update hashed user's password in database
+            if (role != "caretaker") {
+                savedUser = await User.findOneAndUpdate({ uuid: user.uuid }, { $set: { password: hashedPassword } });
+            } else {
+                savedUser = await Caretaker.findOneAndUpdate({ uuid: user.uuid }, { $set: { password: hashedPassword } });
+            }
+            if (!savedUser) {
+                return res.status(500).json({ status: "failed", message: "Error occurred. Password not updated. Please try again" })
+            }
+            return res.status(200).json({ status: "success", message: "Password reset successfully" });
 
-                return res.status(200).json({ status: "success", message: "Password reset successfully" });
-            });
 
         } catch (error) {
             console.error("Error:", error);
