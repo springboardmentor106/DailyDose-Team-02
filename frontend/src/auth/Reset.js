@@ -1,86 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 import login_img from ".././assets/images/forget-m3.png";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [accountType, setAccountType] = useState("");
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    // Simple regex for email validation
     const re =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+    return re.test(String(email).toLowerCase());
   };
 
-  const handleEmailChange = (e) => {
-    const emailInput = e.target.value;
-    setEmail(emailInput);
-    setIsEmailValid(validateEmail(emailInput));
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear any existing errors
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
-  const sendResetEmail = async () => {
-    setIsSubmitted(true); // Set the submitted state to true
     try {
-      const response = await fetch("http://localhost:5000/api/checkEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-      const data = await response.json();
-      console.log(data);
-      if (data.exists) {
-        setMessage("Check your email for resetting your password.");
+      const response = await fetch(
+        "http://localhost:5000/api/user/reset-password-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, accountType }),
+        }
+      );
+
+      if (response.ok) {
+        navigate("/verify-otp", { state: { email } });
       } else {
-        setMessage(
-          "Sorry, your email address does not exist. Please create a new account."
-        );
+        setError("Failed to send reset password request.");
       }
     } catch (error) {
-      console.error("Error sending reset email:", error);
-      setMessage("An error occurred while trying to send the reset email.");
-    }
-  };
-
-  const handleReset = () => {
-    if (isEmailValid) {
-      sendResetEmail();
-    }
-    else{
-      console.warn("invalid email address!");
+      setError("There was an error sending the reset password request.");
+      console.error(
+        "There was an error sending the reset password request:",
+        error
+      );
     }
   };
 
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={handleReset}>
+        <form onSubmit={handleSubmit}>
           <h3 style={{ textAlign: "left" }}>Reset Password 👼</h3>
 
-          {!isSubmitted ? (
-            <>
-              <div className="form-wrapper">
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="form-control"
-                  value={email}
-                  onChange={handleEmailChange}
-                  required
-                />
-              </div>
-              <button type="submit" disabled={!isEmailValid}>Send OTP</button>
-            </>
-          ) : (
-            <div>{message}</div>
-          )}
-
+          <div className="form-wrapper">
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="form-wrapper">
+            <select
+              required
+              name="role"
+              onChange={(e) => setAccountType(e.target.value)}
+              defaultValue={accountType}
+              className="form-control">
+              <option value="" disabled>
+                Register as
+              </option>
+              <option value="user">User</option>
+              <option value="caretaker">Caretaker</option>
+            </select>
+          </div>
+          <button type="submit">Send OTP</button>
+          
+          {error && <div style={{ color: "red", textAlign:"center" , marginTop:"1vh"}}>{error}</div>}
+          
           <div id="sign-in" style={{ marginTop: "5vh" }}>
             <span>
               Remember you password?
