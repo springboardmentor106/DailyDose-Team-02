@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 start --> for production
 dev --> for development
 
@@ -6,13 +5,4 @@ dev --> for development
 cors --> error handlind during connection with frontend
 bcrypt --> password hashing
 jws --> implement jws tocken
-=======
-start --> for production
-dev --> for development
-
-
-cors --> error handlind during connection with frontend
-bcrypt --> password hashing
-jws --> implement jws tocken
->>>>>>> auth
 nodemailer --> mail sending

@@ -1,11 +1,11 @@
 import express from 'express'
 const router = express.Router();
-import caretakerController from '../controllers/caretakerController.js';
+import CaretakerController from '../controllers/caretakerController.js';
 
 
 // Public Routes  e.g --> Register
-router.post('/register', caretakerController.caretakerRegistration)
-router.post('/login', caretakerController.caretakerLogin)
+router.post('/register', CaretakerController.caretakerRegistration)
+router.post('/login', CaretakerController.caretakerLogin)
 
 // Protected Routes e.g ---> Dashboard
 

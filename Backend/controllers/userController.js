@@ -351,4 +351,4 @@ class UserController {
 
 }
 
-export default userController;
+export default UserController;
