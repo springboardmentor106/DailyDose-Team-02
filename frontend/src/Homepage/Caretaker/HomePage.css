@@ -1,0 +1,128 @@
+*{
+    margin: 3px;
+}
+.wrapper{
+    display: flex;
+}
+
+.card{
+    width:100%;
+    background-color: #c1e2f9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.card .card-body{
+    flex: 80;
+}
+.card .img{
+    flex:20;
+}
+.img img{
+    width: 80%;
+}
+.box{
+    display: flex;
+}
+.box .box-right{
+    flex: 40;
+}
+.box .box-left{
+    flex: 60;
+}
+.sidebar {
+    background-color: #6a58dc;
+    width: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    border-radius: 10px;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  .icon {
+    margin-right: 5px;
+    
+  }
+  .box{
+    display: flex;
+  }
+  .box-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .box-left-top{
+    display: flex;
+    justify-content: space-around;
+    background-color: #cdc8f5;
+    border-radius: 10px;
+    
+  }
+  .box-left-down{
+    display: flex;
+  }
+  .box-left-down .box-left-down-left{
+    flex: 60;
+    background-color:white;
+    border-radius: 10px;
+    margin: 5px;
+  }
+  .box-left-down .box-left-down-right{
+    flex: 40;
+  }
+  .box-left-down-right{
+    background-color: white;
+    border-radius: 10px;
+  }
+  .accordion-body{
+    background-color: #e0dcf8;
+  }
+  .box-left-top .div{
+    background-color: #cec9f5;
+    border-radius: 10px;
+  }
+  .accordion-item {
+    margin-bottom: 20px;
+  }
+  .box-right{
+    background-color: white;
+    border-radius:10px ;
+    margin: 2px;
+  }
+  
+  
+  .progress-bars {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    width: 10%;
+  }
+  
+  .progress-bar span {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .progress-label {
+    margin-bottom: 5px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
