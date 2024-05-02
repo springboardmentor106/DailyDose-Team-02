@@ -7,10 +7,11 @@ const Login = () => {
 
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const [role,setRole]=useState("")
  
    const signIn=async(e)=>{
     e.preventDefault();
-    let item={email,password}
+    let item={email,password,role}
     console.log(item)
 
     let result= await fetch("http://localhost:5000/api/user/login",{
@@ -56,6 +57,20 @@ const Login = () => {
               placeholder="Password"
               className="form-control"
             />
+          </div>
+
+          <div className="form-wrapper">
+            <select
+              name="role"
+              onChange={(e)=>setRole(e.target.value)}
+              defaultValue={role}
+              className="form-control">
+              <option value="" disabled>
+                Login as
+              </option>
+              <option value="user">User</option>
+              <option value="caretaker">Caretaker</option>
+            </select>
           </div>
 
           <div className="remember-forgot">

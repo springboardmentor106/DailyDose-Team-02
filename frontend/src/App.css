@@ -184,9 +184,9 @@ button i {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
-button:hover i,
-button:focus i,
-button:active i {
+button:hover ,
+button:focus ,
+button:active  {
   -webkit-animation-name: hvr-icon-wobble-horizontal;
   animation-name: hvr-icon-wobble-horizontal;
   -webkit-animation-duration: 1s;
@@ -284,6 +284,7 @@ button:active i {
   display: flex;
   justify-content: space-between;
   font-size: 15px;
+  margin-top: 10px;
 }
 
 a {
