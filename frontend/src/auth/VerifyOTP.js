@@ -11,11 +11,13 @@ const VerifyOTP = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const otpValue = otp.join(""); // Join the OTP array into a single string
+    console.log(otpValue);
     // Combine user data and OTP into a single object
     const payload = {
       ...userData,
       enteredOTP: otpValue,
     };
+    console.log(payload);
 
     // Call the API to verify OTP and register the user
     fetch("http://localhost:5000/api/user/register", {
@@ -27,7 +29,7 @@ const VerifyOTP = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
+        if (data.status === "success") {
           // OTP is correct and user is registered
           // Redirect to a success page or perform other actions
           console.log("Registration successful");

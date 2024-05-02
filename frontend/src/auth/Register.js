@@ -52,8 +52,28 @@ const Register = () => {
 
     setErrors(tempErrors);
     if (Object.keys(tempErrors).length === 0) {
-      // Redirect to OTP verification route with state
-      navigate("../verify-otp", { state: formData });
+      // making API call to send the OTP
+      fetch("http://localhost:5000/api/user/new-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: formData.email }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.status === "success") {
+            // Redirect to OTP verification route with state
+            navigate("../verify-otp", { state: formData });
+          } else {
+            // Handle errors, e.g., display a message to the user
+            console.error("Error sending OTP:", data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   };
 
