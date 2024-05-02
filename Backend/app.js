@@ -22,15 +22,10 @@ app.use(cors())
 // JSON
 app.use(express.json())
 
+app.set('view engine', 'ejs');
 
-// Database Connection
-const connectDatabase = () => {
-  mongoose.connect(process.env.MongoDBURL)
-    .then(() => {
-      console.log(" Connected to Database Successfully ");
-      // Routes Load
-      app.use("/api/user", userRoutes);
-
+// Routes Load
+app.use("/api/user", userRoutes);
 
       app.use('/api/caretaker', caretakerRoutes);
     })

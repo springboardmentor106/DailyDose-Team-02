@@ -45,7 +45,16 @@ const userSchema = new mongoose.Schema(
     },
     pincode: {
       type: Number
-    }
+    },
+    
+    reminders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'REMINDER'
+    }],
+    goals: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'GOAL'
+    }]
 
   },
   { timestamps: true }
