@@ -5,8 +5,11 @@ import login_img from "../assets/images/login.png";
 const VerifyOTP = () => {
   const location = useLocation();
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const userData = location.state; // Retrieve the user data passed via state
-  console.log(userData);
+  const { formData, fetchUrl, email } = location.state; // Retrieve the user data passed via state
+  console.log(location.state);
+  // const { formData, fetchUrl } = userData;
+  console.log(formData);
+  console.log(fetchUrl, typeof(fetchUrl));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,13 +17,13 @@ const VerifyOTP = () => {
     console.log(otpValue);
     // Combine user data and OTP into a single object
     const payload = {
-      ...userData,
-      enteredOTP: otpValue,
+      ...formData,
+      enteredOtp: otpValue, email, fetchUrl
     };
     console.log(payload);
 
     // Call the API to verify OTP and register the user
-    fetch("http://localhost:5000/api/user/register", {
+    fetch(fetchUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

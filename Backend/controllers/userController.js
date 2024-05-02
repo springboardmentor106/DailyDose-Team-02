@@ -286,7 +286,10 @@ class UserController {
         try {
             const { email, otp } = req.body
             const savedOtp = await OTP.findOne({ email });
-            if (savedOtp.otp === '') {
+            if(!savedOtp){
+                return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
+            }
+            if (savedOtp?.otp === '') {
                 return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
             }
             if (String(otp) === savedOtp.otp) {

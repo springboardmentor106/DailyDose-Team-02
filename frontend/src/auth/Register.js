@@ -18,8 +18,8 @@ const validatePassword = (password) => {
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     gender: "",
     role: "",
@@ -50,6 +50,7 @@ const Register = () => {
     // if (formData.password !== formData.confirmPassword)
     //   tempErrors.confirmPassword = "Passwords do not match";
 
+    const fetchUrl = "http://localhost:5000/api/user/register";
     setErrors(tempErrors);
     if (Object.keys(tempErrors).length === 0) {
       // making API call to send the OTP
@@ -65,7 +66,7 @@ const Register = () => {
           console.log(data);
           if (data.status === "success") {
             // Redirect to OTP verification route with state
-            navigate("../verify-otp", { state: formData });
+            navigate("../verify-otp", { state: {formData, fetchUrl} });
           } else {
             // Handle errors, e.g., display a message to the user
             console.error("Error sending OTP:", data.message);
@@ -85,7 +86,7 @@ const Register = () => {
           <div className="form-group">
             <input
               type="text"
-              name="firstName"
+              name="firstname"
               // value={firstname}
               onChange={handleChange}
               placeholder="First Name"
@@ -95,7 +96,7 @@ const Register = () => {
             {errors.firstName && <p>{errors.firstName}</p>}
             <input
               type="text"
-              name="lastName"
+              name="lastname"
               // value={lastname}
               onChange={handleChange}
               placeholder="Last Name"

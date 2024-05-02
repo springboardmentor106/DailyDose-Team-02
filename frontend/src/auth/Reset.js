@@ -8,6 +8,7 @@ const Reset = () => {
   const [accountType, setAccountType] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const fetchUrl = "http://localhost:5000/api/user/validate-otp";
 
   const validateEmail = (email) => {
     const re =
@@ -36,7 +37,7 @@ const Reset = () => {
       );
 
       if (response.ok) {
-        navigate("/verify-otp", { state: { email } });
+        navigate("/verify-otp", { state: { email, fetchUrl } });
       } else {
         setError("Failed to send reset password request.");
       }
@@ -65,7 +66,7 @@ const Reset = () => {
               required
             />
           </div>
-          
+
           <div className="form-wrapper">
             <select
               required
@@ -81,9 +82,14 @@ const Reset = () => {
             </select>
           </div>
           <button type="submit">Send OTP</button>
-          
-          {error && <div style={{ color: "red", textAlign:"center" , marginTop:"1vh"}}>{error}</div>}
-          
+
+          {error && (
+            <div
+              style={{ color: "red", textAlign: "center", marginTop: "1vh" }}>
+              {error}
+            </div>
+          )}
+
           <div id="sign-in" style={{ marginTop: "5vh" }}>
             <span>
               Remember you password?
