@@ -37,7 +37,7 @@ const Reset = () => {
       );
 
       if (response.ok) {
-        navigate("/verify-otp", { state: { email, fetchUrl } });
+        navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: accountType } });
       } else {
         setError("Failed to send reset password request.");
       }

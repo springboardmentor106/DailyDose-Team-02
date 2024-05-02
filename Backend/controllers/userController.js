@@ -23,7 +23,6 @@ class UserController {
         try {
             const { email, role } = req.body;
 
-
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
                 if (user) {
@@ -36,7 +35,6 @@ class UserController {
                 }
             }
 
-
             const otp = generateOtp(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
@@ -45,9 +43,7 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-
             const UserOtp = await OTP.findOne({ email: email });
-
 
             if (UserOtp) {
                 const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
@@ -61,13 +57,8 @@ class UserController {
                 }
             }
 
-
             console.log(otp);
-
-
             res.status(200).json({ status: "success", message: "OTP sent to your Email" });
-
-
         } catch (error) {
             console.error("Error in sending OTP:", error);
             return res.status(500).json({ status: "error", message: "Failed to send OTP. Please try again." });
@@ -86,7 +77,6 @@ class UserController {
                 return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
             }
 
-
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
                 if (user) {
@@ -99,7 +89,6 @@ class UserController {
                 }
             }
 
-
             console.log(String(enteredOtp), savedOtp.otp);
             if (savedOtp.otp === '') {
                 return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
@@ -111,10 +100,8 @@ class UserController {
                 }
                 console.log(otpUpdateResponse);
 
-
                 const salt = await bcrypt.genSalt(10);
                 const hashPassword = await bcrypt.hash(password, salt);
-
 
                 const body = {
                     firstname,
@@ -172,10 +159,8 @@ class UserController {
                     const isMatch = await bcrypt.compare(password, user.password);
                     if ((user.email === email) && isMatch) {
 
-
                         // JWT Token Generate
                         const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-
 
                         res.send({ "status": "success", "message": "Login Successfully", "token": token });
                     } else {
@@ -232,7 +217,6 @@ class UserController {
                 }
             }
 
-
             const otp = generateOtp(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
@@ -241,9 +225,7 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-
             const UserOtp = await OTP.findOne({ email: email });
-
 
             if (UserOtp) {
                 const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
@@ -290,8 +272,9 @@ class UserController {
                 return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
             }
             if (savedOtp?.otp === '') {
-                return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
+                return res.status(500).json({ status: "failed", message: 'Request for otp again.' })
             }
+
             if (String(otp) === savedOtp.otp) {
                 const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
                 if (!otpUpdateResponse) {
@@ -300,10 +283,8 @@ class UserController {
                     return res.status(200).json({ status: "success", message: "Otp validated.Reset your password now" });
                 }
             } else {
-                return res.status(200).json({ status: "success", message: "Incorrect otp" });
+                return res.status(200).json({ status: "failed", message: "Incorrect otp" });
             }
-
-
         } catch (error) {
             console.error('Error rendering resetPassword:', error);
             return res.status(500).send('Internal Server Error');
@@ -313,8 +294,6 @@ class UserController {
     // update password
     static userPasswordReset = async (req, res) => {
         const { password, email, role } = req.body;
-
-
         try {
             let user;
             if (role != "caretaker") {
@@ -323,15 +302,12 @@ class UserController {
                 user = await Caretaker.findOne({ email });
             }
 
-
             if (!user) {
                 return res.status(404).json({ status: "failed", message: "User not found" });
             }
 
-
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-
 
             let savedUser
             // Update hashed user's password in database
@@ -344,7 +320,6 @@ class UserController {
                 return res.status(500).json({ status: "failed", message: "Error occurred. Password not updated. Please try again" })
             }
             return res.status(200).json({ status: "success", message: "Password reset successfully" });
-
 
         } catch (error) {
             console.error("Error:", error);

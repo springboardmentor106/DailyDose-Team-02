@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
 
@@ -8,7 +8,8 @@ const UpdatePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
+  const location = useLocation()
+  const { email, role } = location.state
 
   const handlePasswordChange = async () => {
     if (password !== confirmPassword) {
@@ -17,6 +18,9 @@ const UpdatePassword = () => {
     }
 
     try {
+      const payload = {
+        email, role, password
+      }
       // Replace with your API endpoint
       const response = await fetch(
         "http://localhost:5000/api/update-password",
@@ -25,7 +29,7 @@ const UpdatePassword = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ password }),
+          body: JSON.stringify(payload),
         }
       );
 

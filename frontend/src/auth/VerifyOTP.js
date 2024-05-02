@@ -1,25 +1,35 @@
 import React, { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import login_img from "../assets/images/login.png";
 
 const VerifyOTP = () => {
   const location = useLocation();
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const { formData, fetchUrl, email } = location.state; // Retrieve the user data passed via state
+  const { formData, fetchUrl, email, flow, role } = location.state; // Retrieve the user data passed via state
   console.log(location.state);
+  const navigate = useNavigate()
   // const { formData, fetchUrl } = userData;
   console.log(formData);
-  console.log(fetchUrl, typeof(fetchUrl));
+  console.log(fetchUrl, typeof (fetchUrl));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const otpValue = otp.join(""); // Join the OTP array into a single string
     console.log(otpValue);
     // Combine user data and OTP into a single object
-    const payload = {
-      ...formData,
-      enteredOtp: otpValue, email, fetchUrl
-    };
+
+    let payload;
+    if (flow === "register") {
+      payload = {
+        ...formData,
+        enteredOtp: otpValue
+      };
+    } else {
+      payload = {
+        otp: otpValue, email
+      };
+    }
+
     console.log(payload);
 
     // Call the API to verify OTP and register the user
@@ -33,11 +43,16 @@ const VerifyOTP = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          if (flow === "register") {
+            navigate("/user-home")
+          } else {
+            navigate("/update-password", { state: { email: email, role: role } })
+          }
           // OTP is correct and user is registered
           // Redirect to a success page or perform other actions
-          console.log("Registration successful");
+          console.log("api successful", data);
         } else {
-          alert("Incorrect OTP or registration failed");
+          alert("Error :" + data.message);
         }
       })
       .catch((error) => {

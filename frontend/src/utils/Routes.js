@@ -6,7 +6,6 @@ import Reset from "../auth/Reset";
 import UpdatePassword from "../auth/UpdatePassword"
 import UserHome from "../userDashboard/UserHome";
 import VerifyOTP from "../auth/VerifyOTP";
-
 function Routing() {
   return (
     <Routes>

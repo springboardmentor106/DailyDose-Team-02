@@ -66,7 +66,7 @@ const Register = () => {
           console.log(data);
           if (data.status === "success") {
             // Redirect to OTP verification route with state
-            navigate("../verify-otp", { state: {formData, fetchUrl} });
+            navigate("/verify-otp", { state: { formData, fetchUrl, flow:'register' } });
           } else {
             // Handle errors, e.g., display a message to the user
             console.error("Error sending OTP:", data.message);
