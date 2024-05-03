@@ -45,7 +45,7 @@ const VerifyOTP = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          toast.success("OTP verified successfully");
+          toast.info("OTP verified successfully.  Update your password.");
           setTimeout(() => {
             if (flow === "register") {
               navigate("/user-home");

@@ -38,7 +38,7 @@ const Reset = () => {
       );
 
       if (response.ok) {
-        toast.success("Reset password request sent successfully.");
+        toast.info("Reset password request sent successfully. Please verify OTP.");
         // Redirect to the OTP verification page
         setTimeout(() => {
           navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: role } });
