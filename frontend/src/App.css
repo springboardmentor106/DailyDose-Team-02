@@ -1,4 +1,4 @@
-.validation-message {
+/* .validation-message {
   color: red;
   font-size: 8px;
   margin: 0;
@@ -11,11 +11,11 @@
   margin-top: 0;
   margin-bottom: 12px; 
   margin-left: 1px; 
-}
+} */
 
 
 
-input,
+form input,
 textarea,
 select,
 button {
@@ -159,7 +159,7 @@ select option[value=""][disabled] {
   display: none;
 }
 
-button {
+form button {
   border: none;
   width: 164px;
   height: 51px;
@@ -416,7 +416,7 @@ input::-webkit-inner-spin-button {
     padding: 0;
   }
 
-  button {
+  form button {
     margin-top: 60px;
   }
 }
@@ -439,7 +439,7 @@ input::-webkit-inner-spin-button {
   .form-control {
     margin-bottom: 15px;
   }
-  button {
+  form button {
     width: 100%;
   }
   #mini-box {

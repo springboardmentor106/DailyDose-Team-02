@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import login_img from "../assets/images/login.png";
+import { toast } from "react-toastify";
 
 const VerifyOTP = () => {
   const location = useLocation();
@@ -44,16 +45,19 @@ const VerifyOTP = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          if (flow === "register") {
-            navigate("/user-home")
-          } else {
-            navigate("/update-password", { state: { email: email, role: role } })
-          }
+          toast.success("OTP verified successfully");
+          setTimeout(() => {
+            if (flow === "register") {
+              navigate("/user-home");
+            } else {
+              navigate("/update-password", { state: { email: email, role: role } });
+            }
+          }, 1500);
           // OTP is correct and user is registered
           // Redirect to a success page or perform other actions
           console.log("api successful", data);
         } else {
-          alert("Error :" + data.message);
+          toast.error(data.message);
         }
       })
       .catch((error) => {

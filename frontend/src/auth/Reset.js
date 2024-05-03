@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 import login_img from ".././assets/images/forget-m3.png";
+import { toast } from "react-toastify";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
@@ -37,9 +38,13 @@ const Reset = () => {
       );
 
       if (response.ok) {
-        navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: role } });
+        toast.success("Reset password request sent successfully.");
+        // Redirect to the OTP verification page
+        setTimeout(() => {
+          navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: role } });
+        }, 1500);
       } else {
-        setError("Failed to send reset password request.");
+        toast.error("Failed to send reset password request.");
       }
     } catch (error) {
       setError("There was an error sending the reset password request.");
@@ -47,6 +52,7 @@ const Reset = () => {
         "There was an error sending the reset password request:",
         error
       );
+      toast.error("Something went wrong. Please try again later.");
     }
   };
 

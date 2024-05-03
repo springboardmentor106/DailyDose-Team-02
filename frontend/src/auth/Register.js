@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const validateEmail = (email) => {
   const re =
@@ -43,13 +44,14 @@ const Register = () => {
     // if (!validateEmail(formData.email))
     //   tempErrors.email = "Invalid email address";
     // if (!formData.gender) tempErrors.gender = "Gender is required";
-    // if (isNaN(formData.age) || formData.age < 18)
-    //   tempErrors.age = "Must be 18 or older";
+    // if (isNaN(formData.age) || formData.age < 18 || formData.age > 100)
+    //   tempErrors.age = "Must lie between 18 and 100";
     // if (!validatePassword(formData.password))
     //   tempErrors.password = "Password does not meet criteria";
-    // if (formData.password !== formData.confirmPassword)
-    //   tempErrors.confirmPassword = "Passwords do not match";
-
+    if (formData.password !== formData.confirmPassword) {
+      tempErrors.confirmPassword = "Passwords do not match";
+      toast.error("Passwords do not match");
+    }
     const fetchUrl = "http://localhost:5000/api/user/register";
     setErrors(tempErrors);
     if (Object.keys(tempErrors).length === 0) {
@@ -65,11 +67,16 @@ const Register = () => {
         .then((data) => {
           console.log(data);
           if (data.status === "success") {
+            toast.info("Please Verify your account");
             // Redirect to OTP verification route with state
-            navigate("/verify-otp", { state: { formData, fetchUrl, flow:'register' } });
+            setTimeout(() => {
+              navigate("/verify-otp", {
+                state: { formData, fetchUrl, flow: "register" },
+              });
+            }, 1500);
           } else {
             // Handle errors, e.g., display a message to the user
-            console.error("Error sending OTP:", data.message);
+            toast.error(data.message);
           }
         })
         .catch((error) => {
@@ -101,6 +108,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Last Name"
               className="form-control"
+              required
             />
             {errors.lastName && <p>{errors.lastName}</p>}
           </div>
@@ -112,10 +120,12 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Email Address"
               className="form-control"
+              required
             />
           </div>
           <div className="form-wrapper">
             <select
+              required
               name="gender"
               onChange={handleChange}
               defaultValue={formData.gender}
@@ -130,6 +140,7 @@ const Register = () => {
           </div>
           <div className="form-wrapper">
             <select
+              required
               name="role"
               onChange={handleChange}
               defaultValue={formData.role}
@@ -143,12 +154,15 @@ const Register = () => {
           </div>
           <div className="form-wrapper">
             <input
+              required
               type="number"
               name="age"
               // value={age}
               onChange={handleChange}
               placeholder="Age"
               className="form-control"
+              min={18}
+              max={100}
             />
           </div>
           <div className="form-wrapper">
@@ -159,6 +173,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Password"
               className="form-control"
+              required
             />
           </div>
           <div className="form-wrapper">
@@ -169,6 +184,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Confirm Password"
               className="form-control"
+              required
             />
           </div>
 

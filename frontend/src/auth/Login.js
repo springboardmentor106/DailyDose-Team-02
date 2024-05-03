@@ -3,6 +3,8 @@ import "../App.css";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,13 +27,21 @@ const Login = () => {
     result = await result.json();
     console.log(result);
     // localStorage.setItem("user-info",JSON.stringify(result))
-    if (result.status === 'success') {
+    if (result.status === "success") {
+      toast.success("Login Successful");
       localStorage.setItem("user-info", JSON.stringify(result));
-      if (role === "user") {
-        window.location.href = "/user-home";
-      } else {
-        window.location.href = "/caretaker/dashboard";
-      }
+      setTimeout(() => {
+        if (role === "user") {
+          window.location.href = "/user-home";
+        } else {
+          window.location.href = "/caretaker/dashboard";
+        }
+      }, 1500);
+    } else {
+      toast.error("Invalid Credentials");
+      setEmail("");
+      setPassword("");
+      setRole("");
     }
   };
   return (
@@ -54,6 +64,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               className="form-control"
+              required
             />
           </div>
 
@@ -64,11 +75,13 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="form-control"
+              required
             />
           </div>
 
           <div className="form-wrapper">
             <select
+              required
               name="role"
               onChange={(e) => setRole(e.target.value)}
               defaultValue={role}

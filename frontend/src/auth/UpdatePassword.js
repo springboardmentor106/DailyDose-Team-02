@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
+import { toast } from "react-toastify";
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const location = useLocation()
-  const { email, role } = location.state
+  const location = useLocation();
+  const { email, role } = location.state;
 
   const handlePasswordChange = async () => {
     if (password !== confirmPassword) {
@@ -19,8 +20,10 @@ const UpdatePassword = () => {
 
     try {
       const payload = {
-        email, role, password
-      }
+        email,
+        role,
+        password,
+      };
       const response = await fetch(
         "http://localhost:5000/api/update-password",
         {
@@ -35,10 +38,13 @@ const UpdatePassword = () => {
       const data = await response.json();
 
       if (data.success) {
+        toast.success("Password updated successfully.");
         // Redirect to the login page
-        navigate.push("/login");
+        setTimeout(() => {
+          navigate.push("/login");
+        }, 1500);
       } else {
-        setError("Something went wrong, please try again.");
+        toast.error("Something went wrong, please try again.");
       }
     } catch (error) {
       setError("Something went wrong, please try again.");
@@ -74,6 +80,7 @@ const UpdatePassword = () => {
           <button type="submit">Change Password</button>
           {error && <p>{error}</p>}
         </form>
+
         <div className="image-holder">
           <div id="mini-box">
             <p style={{ padding: "1vw" }}>
