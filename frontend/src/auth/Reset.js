@@ -5,7 +5,7 @@ import login_img from ".././assets/images/forget-m3.png";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
-  const [accountType, setAccountType] = useState("");
+  const [role, setRole] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const fetchUrl = "http://localhost:5000/api/user/validate-otp";
@@ -32,12 +32,12 @@ const Reset = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, accountType }),
+          body: JSON.stringify({ email, role }),
         }
       );
 
       if (response.ok) {
-        navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: accountType } });
+        navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: role } });
       } else {
         setError("Failed to send reset password request.");
       }
@@ -71,11 +71,11 @@ const Reset = () => {
             <select
               required
               name="role"
-              onChange={(e) => setAccountType(e.target.value)}
-              defaultValue={accountType}
+              onChange={(e) => setRole(e.target.value)}
+              defaultValue={role}
               className="form-control">
               <option value="" disabled>
-                Register as
+                Role?
               </option>
               <option value="user">User</option>
               <option value="caretaker">Caretaker</option>

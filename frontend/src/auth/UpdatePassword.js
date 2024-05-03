@@ -21,7 +21,6 @@ const UpdatePassword = () => {
       const payload = {
         email, role, password
       }
-      // Replace with your API endpoint
       const response = await fetch(
         "http://localhost:5000/api/update-password",
         {

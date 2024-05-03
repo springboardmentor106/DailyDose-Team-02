@@ -5,7 +5,8 @@ import login_img from "../assets/images/login.png";
 const VerifyOTP = () => {
   const location = useLocation();
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const { formData, fetchUrl, email, flow, role } = location.state; // Retrieve the user data passed via state
+  // Retrieve the user data passed via state
+  const { formData, fetchUrl, email, flow, role } = location.state; 
   console.log(location.state);
   const navigate = useNavigate()
   // const { formData, fetchUrl } = userData;
