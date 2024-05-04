@@ -10,8 +10,7 @@ const UpdatePassword = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
-  const { email, role } = location.state;
+  const { email, role } = location.state ? location.state : { email: null, role: null };
 
   const handlePasswordChange = async () => {
     if (password !== confirmPassword) {
@@ -26,7 +25,7 @@ const UpdatePassword = () => {
         password,
       };
       const response = await fetch(
-        "http://localhost:5000/api/reset-password",
+        "http://localhost:5000/api/user/reset-password",
         {
           method: "POST",
           headers: {
@@ -37,12 +36,12 @@ const UpdatePassword = () => {
       );
 
       const data = await response.json();
-
-      if (data.success) {
+      console.log(data)
+      if (data.status === "success") {
         toast.success("Password updated successfully.");
         // Redirect to the login page
         setTimeout(() => {
-          navigate.push("/login");
+          navigate("/login");
         }, 1500);
       } else {
         toast.error("Something went wrong, please try again.");
@@ -55,7 +54,7 @@ const UpdatePassword = () => {
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={handlePasswordChange}>
+        <div >
           <h3>Update Password 🤯</h3>
 
           <div className="form-wrapper">
@@ -78,9 +77,9 @@ const UpdatePassword = () => {
             />
           </div>
 
-          <button type="submit">Change Password</button>
+          <button type="submit" onClick={() => handlePasswordChange()}>Change Password</button>
           {error && <p>{error}</p>}
-        </form>
+        </div>
 
         <div className="image-holder">
           <div id="mini-box">

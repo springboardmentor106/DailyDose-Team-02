@@ -12,7 +12,7 @@ function generateOtp(len) {
 
 let userID;
 let userToken;
-function saveResetCredential(id, token){
+function saveResetCredential(id, token) {
     userID = id
     userToken = token
 }
@@ -28,7 +28,7 @@ class UserController {
                 if (user) {
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
                 }
-            }else{
+            } else {
                 const caretaker = await Caretaker.findOne({ email: email });
                 if (caretaker) {
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
@@ -111,7 +111,7 @@ class UserController {
                     age,
                     password: hashPassword,
                 }
-               
+
                 let token;
                 if (role !== "caretaker") {
                     const userDoc = new User(body);
@@ -147,12 +147,12 @@ class UserController {
     // Login
     static userLogin = async (req, res) => {
         try {
-            const { email, password , role} = req.body;
+            const { email, password, role } = req.body;
             if (email && password) {
                 let user;
-                if(role!="caretaker"){
-                     user = await User.findOne({ email: email });
-                }else{
+                if (role != "caretaker") {
+                    user = await User.findOne({ email: email });
+                } else {
                     user = await Caretaker.findOne({ email: email });
                 }
                 if (user != null) {
@@ -177,7 +177,56 @@ class UserController {
             res.send({ "status": "failed", "message": "Unable to login" });
         }
     }
-    // // Change User Password If Know and want to Change
+
+    // Forget Password
+    static UserPasswordResetEmail = async (req, res) => {
+        const { email, role } = req.body
+        if (email) {
+            // const user = await User.findOne({ email: email })
+            if (role !== "caretaker") {
+                const user = await User.findOne({ email: email });
+                if (!user) {
+                    return res.status(400).json({ status: "failed", message: "User not found." });
+                }
+            } else {
+                const caretaker = await Caretaker.findOne({ email: email });
+                if (!caretaker) {
+                    return res.status(400).json({ status: "failed", message: "Caretaker not found" });
+                }
+            }
+
+
+            const otp = generateOtp(6);
+            await transporter.sendMail({
+                from: process.env.EMAIL_FROM,
+                to: email,
+                subject: "DailyDose - Validate Email to register",
+                html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
+            });
+
+
+            const UserOtp = await OTP.findOne({ email: email });
+
+
+            if (UserOtp) {
+                const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
+                if (!updatedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
+            } else {
+                const savedOtp = await OTP.create({ email, otp });
+                if (!savedOtp) {
+                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+                }
+            }
+            console.log(otp);
+            res.status(200).json({ status: "success", message: "OTP sent to your Email" });
+        } else {
+            res.send({ "status": "failed", "message": "Email Field is Required" })
+        }
+    }
+
+    // Change User Password If Know and want to Change
     // static changeUserPassword = async (req, res) => {
     //     const { password, password_confirm } = req.body
     //     if (password && password_confirm) {
@@ -271,7 +320,7 @@ class UserController {
         try {
             const { email, otp } = req.body
             const savedOtp = await OTP.findOne({ email });
-            if(!savedOtp){
+            if (!savedOtp) {
                 return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
             }
             if (savedOtp?.otp === '') {
@@ -293,7 +342,7 @@ class UserController {
             return res.status(500).send('Internal Server Error');
         }
     }
-   
+
     // update password
     static userPasswordReset = async (req, res) => {
         const { password, email, role } = req.body;

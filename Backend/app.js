@@ -16,7 +16,7 @@ app.use(cors())
 // JSON
 app.use(express.json())
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 // Routes Load
 app.use("/api/user", userRoutes);
