@@ -22,7 +22,7 @@ router.post('/reset-password', UserController.userPasswordReset)
 
 
 // router.post('/reset-password/:id/:token', UserController.userPasswordReset)
-router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
+// router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
 
 
 // Protected Routes e.g ---> Dashboard
