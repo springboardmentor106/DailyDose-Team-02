@@ -192,94 +192,94 @@ class UserController {
             res.send({ "status": "failed", "message": "Unable to login" });
         }
     }
-    // Change User Password If Know and want to Change
-    static changeUserPassword = async (req, res) => {
-        const { password, password_confirm } = req.body
-        if (password && password_confirm) {
-            if (password !== password_confirm) {
-                res.send({ "status": "failed", "message": "New Password and Confirm New Password not match" })
-            } else {
-                const salt = await bcrypt.genSalt(10)
-                const newHashPassword = await bcrypt.hash(password, salt);
-                await User.findByIdAndUpdate(req.user._id, { $set: { password: newHashPassword } })
-                res.send({ "status": "Success", "message": "Password Changed Successfully" })
-            }
+    // // Change User Password If Know and want to Change
+    // static changeUserPassword = async (req, res) => {
+    //     const { password, password_confirm } = req.body
+    //     if (password && password_confirm) {
+    //         if (password !== password_confirm) {
+    //             res.send({ "status": "failed", "message": "New Password and Confirm New Password not match" })
+    //         } else {
+    //             const salt = await bcrypt.genSalt(10)
+    //             const newHashPassword = await bcrypt.hash(password, salt);
+    //             await User.findByIdAndUpdate(req.user._id, { $set: { password: newHashPassword } })
+    //             res.send({ "status": "Success", "message": "Password Changed Successfully" })
+    //         }
 
-        } else {
-            res.send({ "status": "failed", "message": "All fields are Required" })
+    //     } else {
+    //         res.send({ "status": "failed", "message": "All fields are Required" })
 
-        }
-    }
-    static loggedUser = async (req, res) => {
-        res.send({ "user": req.user })
-    }
+    //     }
+    // }
+    // static loggedUser = async (req, res) => {
+    //     res.send({ "user": req.user })
+    // }
 
-    // Forget Password
-     // Forget Password
-     static UserPasswordResetEmail = async (req, res) => {
-        const { email, role } = req.body
-        if (email) {
-            // const user = await User.findOne({ email: email })
-            if (role !== "caretaker") {
-                const user = await User.findOne({ email: email });
-                if (!user) {
-                    return res.status(400).json({ status: "failed", message: "User not found." });
-                }
-            } else {
-                const caretaker = await Caretaker.findOne({ email: email });
-                if (!caretaker) {
-                    return res.status(400).json({ status: "failed", message: "Caretaker not found" });
-                }
-            }
-
-
-            const otp = generateOtp(6);
-            await transporter.sendMail({
-                from: process.env.EMAIL_FROM,
-                to: email,
-                subject: "DailyDose - Validate Email to register",
-                html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
-            });
+    // // Forget Password
+    //  // Forget Password
+    //  static UserPasswordResetEmail = async (req, res) => {
+    //     const { email, role } = req.body
+    //     if (email) {
+    //         // const user = await User.findOne({ email: email })
+    //         if (role !== "caretaker") {
+    //             const user = await User.findOne({ email: email });
+    //             if (!user) {
+    //                 return res.status(400).json({ status: "failed", message: "User not found." });
+    //             }
+    //         } else {
+    //             const caretaker = await Caretaker.findOne({ email: email });
+    //             if (!caretaker) {
+    //                 return res.status(400).json({ status: "failed", message: "Caretaker not found" });
+    //             }
+    //         }
 
 
-            const UserOtp = await OTP.findOne({ email: email });
+    //         const otp = generateOtp(6);
+    //         await transporter.sendMail({
+    //             from: process.env.EMAIL_FROM,
+    //             to: email,
+    //             subject: "DailyDose - Validate Email to register",
+    //             html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
+    //         });
 
 
-            if (UserOtp) {
-                const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
-                if (!updatedOtp) {
-                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
-                }
-            } else {
-                const savedOtp = await OTP.create({ email, otp });
-                if (!savedOtp) {
-                    return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
-                }
-            }
-            console.log(otp);
-            res.status(200).json({ status: "success", message: "OTP sent to your Email" });
-        } else {
-            res.send({ "status": "failed", "message": "Email Field is Required" })
-        }
-    }
+    //         const UserOtp = await OTP.findOne({ email: email });
 
-    static resetPasswordPage = async (req, res) => {
-        try {
-            const id = userID;
-            const token = userToken;
-            const port = process.env.PORT;
 
-            if (!userID || !userToken) {
-                throw new Error('User or token not provided');
-            }
-            const filePath = path.join(process.env.DIR_PATH, 'pages', 'resetPassword')
-            console.log(filePath)
-            res.render(filePath, { id, token, port });
-        } catch (error) {
-            console.error('Error rendering resetPassword:', error);
-            res.status(500).send('Internal Server Error');
-        }        
-    }    
+    //         if (UserOtp) {
+    //             const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
+    //             if (!updatedOtp) {
+    //                 return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+    //             }
+    //         } else {
+    //             const savedOtp = await OTP.create({ email, otp });
+    //             if (!savedOtp) {
+    //                 return res.status(500).json({ status: "failed", message: "Error occured in capturing OTP" })
+    //             }
+    //         }
+    //         console.log(otp);
+    //         res.status(200).json({ status: "success", message: "OTP sent to your Email" });
+    //     } else {
+    //         res.send({ "status": "failed", "message": "Email Field is Required" })
+    //     }
+    // }
+
+    // static resetPasswordPage = async (req, res) => {
+    //     try {
+    //         const id = userID;
+    //         const token = userToken;
+    //         const port = process.env.PORT;
+
+    //         if (!userID || !userToken) {
+    //             throw new Error('User or token not provided');
+    //         }
+    //         const filePath = path.join(process.env.DIR_PATH, 'pages', 'resetPassword')
+    //         console.log(filePath)
+    //         res.render(filePath, { id, token, port });
+    //     } catch (error) {
+    //         console.error('Error rendering resetPassword:', error);
+    //         res.status(500).send('Internal Server Error');
+    //     }        
+    // }    
 
     // validate the otp
     static validateOtp = async (req, res) => {

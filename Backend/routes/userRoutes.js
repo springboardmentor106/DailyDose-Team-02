@@ -26,8 +26,8 @@ router.post('/reset-password', UserController.userPasswordReset)
 
 
 // Protected Routes e.g ---> Dashboard
-router.post('/changepassword', UserController.changeUserPassword)
-router.get('/loggeduser', UserController.loggedUser)
+// router.post('/changepassword', UserController.changeUserPassword)
+// router.get('/loggeduser', UserController.loggedUser)
 
 
 export default router
