@@ -10,6 +10,7 @@ const UpdatePassword = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location.state);
   const { email, role } = location.state;
 
   const handlePasswordChange = async () => {
@@ -25,7 +26,7 @@ const UpdatePassword = () => {
         password,
       };
       const response = await fetch(
-        "http://localhost:5000/api/update-password",
+        "http://localhost:5000/api/reset-password",
         {
           method: "POST",
           headers: {
