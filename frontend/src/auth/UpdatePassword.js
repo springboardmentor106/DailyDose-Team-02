@@ -54,7 +54,7 @@ const UpdatePassword = () => {
   return (
     <div className="wrapper">
       <div className="inner">
-        <div >
+        <div className="form">
           <h3>Update Password 🤯</h3>
 
           <div className="form-wrapper">
