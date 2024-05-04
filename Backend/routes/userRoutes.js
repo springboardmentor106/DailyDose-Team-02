@@ -7,9 +7,9 @@ import express from 'express'
 const router = express.Router();
 
 
-// Middleware - To protect
-router.use('/changepassword', checkUserAuth)
-router.use('/loggeduser', checkUserAuth)
+// // Middleware - To protect
+// router.use('/changepassword', checkUserAuth)
+// router.use('/loggeduser', checkUserAuth)
 
 
 // Public Routes  e.g --> Register
