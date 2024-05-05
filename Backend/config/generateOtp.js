@@ -5,8 +5,8 @@ function generateNumberOTP(len) {
         let randomIndex = Math.floor(Math.random() * digits.length)
         OTP += digits[randomIndex]
     }
-
     return OTP
 }
 
+// console.log(generateNumberOTP(8));
 export { generateNumberOTP }
