@@ -1,0 +1,50 @@
+.reminder-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: -28px;
+  }
+  
+  .reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 39px;
+  }
+  
+  .reminder-item div {
+    flex: 1;
+  }
+  .reminder-item button {
+    background-color: transparent;
+    border-color: transparent;
+    margin-left: 39px;
+  }
+  .Reminder-box{
+    margin-top: 10px;
+  }
+  #check{
+    margin-left: 48px;
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+  .check-boc-heading{
+    height: 44px;
+    width: 336px;
+    margin-left: -22px;
+    background-color: #8A79F5;
+    margin-top: -21px;
+    border-radius: 20px;
+  }
+  .check-boc-heading h2{
+    color: white;
+    font-weight: 300;
+    margin-left: 20px;
+  }
+.type-container{
+    margin-left: 10px;
+}
