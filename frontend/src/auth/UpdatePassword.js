@@ -10,11 +10,35 @@ const UpdatePassword = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { email, role } = location.state ? location.state : { email: null, role: null };
+  const { email, role } = location.state
+    ? location.state
+    : { email: null, role: null };
 
   const handlePasswordChange = async () => {
+    setError("");
+
     if (password !== confirmPassword) {
       setError("Passwords do not match. Please try again.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (!/\d/.test(password)) {
+      setError("Password must contain at least one digit.");
+      return;
+    }
+
+    if (!/[a-zA-Z]/.test(password)) {
+      setError("Password must contain at least one letter.");
+      return;
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
       return;
     }
 
@@ -36,7 +60,7 @@ const UpdatePassword = () => {
       );
 
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       if (data.status === "success") {
         toast.success("Password updated successfully.");
         // Redirect to the login page
@@ -77,8 +101,14 @@ const UpdatePassword = () => {
             />
           </div>
 
-          <button type="submit" onClick={() => handlePasswordChange()}>Change Password</button>
-          {error && <p>{error}</p>}
+          <button type="submit" onClick={() => handlePasswordChange()}>
+            Change Password
+          </button>
+          {error && (
+            <p className="error">
+              {error}
+            </p>
+          )}
         </div>
 
         <div className="image-holder">

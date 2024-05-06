@@ -26,7 +26,6 @@ const Login = () => {
 
     result = await result.json();
     console.log(result);
-    // localStorage.setItem("user-info",JSON.stringify(result))
     if (result.status === "success") {
       toast.success("Login Successful");
       localStorage.setItem("user-info", JSON.stringify(result));
@@ -44,6 +43,15 @@ const Login = () => {
       setRole("");
     }
   };
+// reset the state values when the component is unmounted
+  useEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setRole("");
+    };
+  }, []);
+
   return (
     <div className="wrapper">
       <div className="inner">
@@ -84,7 +92,7 @@ const Login = () => {
               required
               name="role"
               onChange={(e) => setRole(e.target.value)}
-              defaultValue={role}
+              value={role}
               className="form-control">
               <option value="" disabled>
                 Login as

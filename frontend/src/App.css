@@ -1,3 +1,24 @@
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.5rem;
+  }
+  75% {
+    margin-left: -0.5rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
+.error {
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  animation: shake 0.2s ease-in-out 0s 2;
+}
 
 form input,
 .form input,
@@ -68,7 +89,8 @@ a:hover {
   border-radius: 10px;
 }
 
-.inner form, .form {
+.inner form,
+.form {
   width: 50%;
   padding-top: 36px;
   padding-left: 45px;
@@ -144,7 +166,8 @@ select option[value=""][disabled] {
   display: none;
 }
 
-form button, .form button{
+form button,
+.form button {
   border: none;
   width: 164px;
   height: 51px;
@@ -165,17 +188,17 @@ form button, .form button{
   transition-duration: 0.3s;
 }
 
-form button:hover, .form button:hover {
+form button:hover,
+.form button:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
-form button:active, .form button:active {
+form button:active,
+.form button:active {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
 }
-
-
 
 /* modified */
 
@@ -312,16 +335,12 @@ a {
   opacity: 0.5;
 }
 
-
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-
 
 @-webkit-keyframes hvr-icon-wobble-horizontal {
   16.65% {
@@ -356,7 +375,8 @@ input::-webkit-inner-spin-button {
   }
 }
 @media (max-width: 991px) {
-  .inner form, .form {
+  .inner form,
+  .form {
     padding-top: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -371,7 +391,8 @@ input::-webkit-inner-spin-button {
   .inner .image-holder {
     width: 100%;
   }
-  .inner form, .form {
+  .inner form,
+  .form {
     width: 100%;
   }
   .image-holder {
@@ -396,13 +417,15 @@ input::-webkit-inner-spin-button {
     padding: 0;
   }
 
-  form button, .form button {
+  form button,
+  .form button {
     margin-top: 60px;
   }
 }
 
 @media (max-width: 430px) {
-  .inner form, .form {
+  .inner form,
+  .form {
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -419,7 +442,8 @@ input::-webkit-inner-spin-button {
   .form-control {
     margin-bottom: 15px;
   }
-  form button, .form button {
+  form button,
+  .form button {
     width: 100%;
   }
   #mini-box {
