@@ -5,17 +5,15 @@ import transporter from '../config/emailConfig.js';
 import OTP from '../models/otpModel.js';
 import path from 'path';
 import Caretaker from '../models/caretakerModel.js';
-function generateOtp(len) {
-    const range = Math.pow(10, len) - 1
-    return String(Math.floor(Math.random() * range))
-}
+import { generateNumberOTP } from '../config/generateOtp.js';
 
-let userID;
-let userToken;
-function saveResetCredential(id, token) {
-    userID = id
-    userToken = token
-}
+
+// let userID;
+// let userToken;
+// function saveResetCredential(id, token) {
+//     userID = id
+//     userToken = token
+// }
 
 class UserController {
 
@@ -35,7 +33,7 @@ class UserController {
                 }
             }
 
-            const otp = generateOtp(6);
+            const otp = generateNumberOTP(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
                 to: email,
@@ -196,7 +194,7 @@ class UserController {
             }
 
 
-            const otp = generateOtp(6);
+            const otp = generateNumberOTP(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
                 to: email,
@@ -267,7 +265,7 @@ class UserController {
     //         }
 
 
-    //         const otp = generateOtp(6);
+    //         const otp = generateNumberOTP6);
     //         await transporter.sendMail({
     //             from: process.env.EMAIL_FROM,
     //             to: email,
