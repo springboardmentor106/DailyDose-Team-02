@@ -1,6 +1,5 @@
 import React from "react";
-
-import "react-circular-progressbar/dist/styles.css";
+import CareRoutes from "../utils/CareRoutes";
 import "./Pages.css"; // Import your CSS file for styling
 import pic from "../assets/images/picture.png";
 import Progress from "../Component/Progress";
@@ -16,6 +15,10 @@ const HomePage = () => {
 
   return (
     <div className="main1">
+      <div className="nav-bar">
+        <CareRoutes/>
+      </div>
+      <div className="pages">
       <div className="card">
         <div className="card-body">
           <h1>Welcome Back !!!</h1>
@@ -171,6 +174,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

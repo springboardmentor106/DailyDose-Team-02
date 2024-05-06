@@ -36,10 +36,10 @@ const SideBar = ({ children }) => {
   
   return (
     <div className="wrapper">
-           <div style={{width: isOpen ? "220px" : "50px"}} className="sidebar">
+           <div style={{width: isOpen ? "230px" : "60px"}} className="sidebar">
                <div className="top_section">
                    <h1 style={{display: isOpen ? "block" : "none"}} className="logo">DailyDose</h1>
-                   <div style={{marginLeft: isOpen ? "30px" : "0px"}} className="bars">
+                   <div style={{marginLeft: isOpen ? "20px" : "0px"}} className="bars">
                        <FaBars onClick={toggle}/>
                    </div>
                </div>

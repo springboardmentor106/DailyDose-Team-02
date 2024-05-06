@@ -1,12 +1,14 @@
 import React from 'react'
-import Chart from '../Component/Chart'
-import Progressbar from '../Component/Progressbar'
+import CareRoutes from '../utils/CareRoutes'
 const Add = () => {
   return (
     
       <div className="wrapper" >
-        <div className='main'>
-          this is ADD
+        <div className="nav-bar">
+          <CareRoutes/>
+        </div>
+        <div className="pages">
+          This is ADD
         </div>
     </div>
   )

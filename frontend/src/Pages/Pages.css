@@ -9,7 +9,10 @@
 }
 .main{
     display: flex;
-    justify-content: space-around;
+    
+}
+.Analytics-pages{
+  display: flex;
 }
 .left-side{
     margin: 4px;
@@ -51,10 +54,10 @@
 }
 
 /* --------------css of Home page------------------- */
-*{
-    margin: 3px;
-}
 
+.main1{
+  display: flex;
+}
 
 .main1 .card{
     width:100%;

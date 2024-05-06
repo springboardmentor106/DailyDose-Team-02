@@ -3,9 +3,14 @@ import Chart from '../Component/Chart'
 import CircularProgressBar from '../Component/Progress'
 import './Pages.css'
 import Caldender from '../Component/Caldender'
+import CareRoutes from '../utils/CareRoutes'
 const Analytics = () => {
   return (
       <div className="main" >
+        <div className="nav-bar">
+          <CareRoutes/>
+        </div>
+        <div className="Analytics-pages">
         <div className="left-side">
           <div className="user">
             <div className="card"><div className="card-body"><h6>UserProfile</h6></div></div>
@@ -34,6 +39,7 @@ const Analytics = () => {
         </div>
         <div className="right-side">
           <Caldender/>
+        </div>
         </div>
       </div>
     
