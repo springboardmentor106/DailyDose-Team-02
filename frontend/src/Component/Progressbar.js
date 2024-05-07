@@ -11,9 +11,9 @@ const CircularProgressBar = ({ value }) => {
         styles={buildStyles({
           textSize: '16px',
           textFont: 'bold',
-          pathColor: `rgb(138, 121, 245, ${value / 100})`,
+          pathColor: `rgb(100,85,198, ${value / 100})`,
           textColor: '#1f165c',
-          trailColor: '#e9e9e9',
+          trailColor: 'white',
         })}
       />
     </div>

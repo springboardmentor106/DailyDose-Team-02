@@ -8,7 +8,7 @@ const Add = () => {
           <CareRoutes/>
         </div>
         <div className="pages">
-          This is ADD
+          this is ADD
         </div>
     </div>
   )
