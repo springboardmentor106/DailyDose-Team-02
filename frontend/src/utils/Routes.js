@@ -7,6 +7,10 @@ import UpdatePassword from "../auth/UpdatePassword"
 import UserHome from "../userDashboard/UserHome";
 import VerifyOTP from "../auth/VerifyOTP";
 import { toast } from "react-toastify";
+import HomePage from "../Pages/HomePage"
+import Add from "../Pages/Add"
+import Target from "../Pages/Target"
+import Analytics from "../Pages/Analytics";
 
 function ProtectedRoute({Component}) {
   const token = localStorage.getItem("user-info");
@@ -33,7 +37,13 @@ function Routing() {
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/update-password" element={<UpdatePassword/>} />
       <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
+      <Route path="/dashboard" element={<HomePage />} />
+      <Route path="/Add/*" element={<Add />} />
+      <Route path="/Target/*" element={<Target />} />
+      <Route path="/Analytics/*" element={<Analytics />} />
     </Routes>
+
+    
   );
 }
 

@@ -1,0 +1,256 @@
+*{
+    color:black;
+    margin: 2px;
+}
+/* --------------------Design for Analytics----------------  */
+
+.main{
+    display: flex;
+    
+}
+.Analytics-pages{
+  display: flex;
+}
+.left-side{
+    margin: 4px;
+    flex:60;
+}
+.right-side{
+    margin: 4px;
+    flex: 40;
+}
+.user{
+    display: flex;
+    justify-content: space-around;
+}
+.user .card{
+    margin: 4px;
+    border-radius: 30px;
+    width: 150px; height: 150px;
+    background-image: linear-gradient(#d3cbf7,white);
+    
+}
+.chart{
+    margin-top:5px ;
+    
+}
+.aboutuser{
+    display: flex;
+    justify-content: space-around;
+}
+.aboutuser  .card {
+  background-image: linear-gradient(#d3cbf7,white);
+    margin: 3px;
+    border-radius:10px ;
+    width: 300px; height: 180px;
+}
+.aboutuser .about .card{
+  background-image: linear-gradient(#d3cbf7,white);
+    margin: 3px;
+    border-radius:10px ;
+    width: 300px; height: 180px;
+}
+.left-side .chart .card{
+  background: white;
+  border-radius: 10px;
+  align-items: center;
+}
+/* --------------css of Home page------------------- */
+
+.main1{
+  display: flex;
+}
+
+.main1 .card{
+    width:100%;
+    background-color: #c1e2f9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2px;
+}
+.main1 .card .card-body{
+    flex: 80;
+}
+.main1 .card .img{
+    flex:20;
+}
+.main1 .img img{
+    width: 80%;
+}
+.main1 .box{
+    display: flex;
+}
+.main1 .box .box-right{
+    flex: 40;
+}
+.main1 .box .box-left{
+    flex: 60;
+}
+.sidebar {
+    background-color: #6a58dc;
+    width: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    border-radius: 10px;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  .icon {
+    margin-right: 5px;
+    
+  }
+  .main1   .box{
+    display: flex;
+  }
+  .main1   .box-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .main1   .box-left-top{
+    display: flex;
+    justify-content: space-around;
+    background-color: #cdc8f5;
+    border-radius: 10px;
+    margin: 3px;
+    
+  }
+  .main1   .box-left-down{
+    display: flex;
+  }
+  .main1   .box-left-down .box-left-down-left{
+    flex: 60;
+    background-color:white;
+    border-radius: 10px;
+    margin: 5px;
+  }
+  .main1 .box-left-down .box-left-down-right{
+    flex: 40;
+  }
+  .main1 .box-left-down-right{
+    background-color: white;
+    border-radius: 10px;
+  }
+  .main1 .accordion-body{
+    background-color: #e0dcf8;
+  }
+  .main1 .box-left-top .div{
+    background-color: #cec9f5;
+    border-radius: 10px;
+  }
+  .main1 .accordion-item {
+    margin-bottom: 10px;
+  }
+  .main1 .box-right{
+    background-color: white;
+    border-radius:10px ;
+    margin: 2px;
+  }
+  
+  
+  .progress-bars {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    width: 10%;
+  }
+  
+  .progress-bar span {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .progress-label {
+    margin-bottom: 5px;
+  }
+  /* -----ADD------------- */
+  .add-page-container {
+    width: 1100px;
+    height: 710px;
+    margin-top: 13px;
+    margin-left: 35px;
+  }
+  .dropdown-container-left{
+    margin-left: 10px;
+}
+  .dropdown {
+    margin-bottom: 15px;
+  }
+  
+  .dropdown-button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #6A58DC;
+    cursor: pointer;
+  }
+  .dropdown-content {
+    padding: 20px;
+    display: flex;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 10px;
+    background-color: #E0DCF8;
+  }
+   #heading{
+    color: white;
+    text-align: left;
+    margin-left: 10px;
+}
+#right-input{
+    width: 450px;
+    height: 91px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.dropdown-container-right{
+    margin-left: 45px;
+}
+  label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  input {
+    width: 450px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #down-row-feild{
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #End-date-input input{
+    margin-top: 10px;
+  }
+#catogry-inputs {
+  margin-top: 10px;
+}
+.catogry-feilds-right{
+  margin-top: 53px;
+}
+  
+  
+  
+  
+  
+  
+  

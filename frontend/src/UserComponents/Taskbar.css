@@ -1,0 +1,32 @@
+.task-header{
+    background-color: white;
+    width: 1063px;
+    height: 40px;
+    border-radius: 10px;
+}
+.task-deatils-container{
+    margin-top: 20px;
+    gap: 20px;
+}
+.task-details{
+    background-color: white;
+    width: 1063px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+#checkbox{
+    margin-left: -205px;
+    margin-top: 14px;
+}
+#status{
+    position: relative;
+    top: -19px;
+    left: 36px;
+    font-size: 13px;
+}
+.date-time{
+    width: 20px;
+    height: 20px;
+    color: aqua;
+}
