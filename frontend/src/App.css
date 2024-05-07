@@ -1,4 +1,27 @@
-input,
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.5rem;
+  }
+  75% {
+    margin-left: -0.5rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
+.error {
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+form input,
+.form input,
 textarea,
 select,
 button {
@@ -66,7 +89,8 @@ a:hover {
   border-radius: 10px;
 }
 
-.inner form {
+.inner form,
+.form {
   width: 50%;
   padding-top: 36px;
   padding-left: 45px;
@@ -108,7 +132,8 @@ a:hover {
   width: 100%;
   height: 30px;
   padding: 0;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
+  margin-top: 25px;
 }
 .form-control::-webkit-input-placeholder {
   font-size: 13px;
@@ -141,7 +166,8 @@ select option[value=""][disabled] {
   display: none;
 }
 
-button {
+form button,
+.form button {
   border: none;
   width: 164px;
   height: 51px;
@@ -161,22 +187,17 @@ button {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-button i {
-  margin-left: 10px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+
+form button:hover,
+.form button:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
-button:hover i,
-button:focus i,
-button:active i {
-  -webkit-animation-name: hvr-icon-wobble-horizontal;
-  animation-name: hvr-icon-wobble-horizontal;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
+
+form button:active,
+.form button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 /* modified */
@@ -190,7 +211,7 @@ button:active i {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-blend-mode: exclusion;
+  /* background-blend-mode: exclusion; */
 }
 
 #mini-box {
@@ -266,6 +287,7 @@ button:active i {
   display: flex;
   justify-content: space-between;
   font-size: 15px;
+  margin-top: 10px;
 }
 
 a {
@@ -279,6 +301,45 @@ a {
   width: 50%;
   gap: 1vw;
   margin: 20px auto;
+}
+
+.otp-field {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.otp-field input {
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: 2px solid #55525c;
+  background: #fff;
+  font-weight: bold;
+  color: #333;
+  outline: none;
+  transition: all 0.1s;
+}
+
+.otp-field input:focus {
+  border: 2px solid #7e6fe0;
+  box-shadow: 0 0 2px 2px #614ed7;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @-webkit-keyframes hvr-icon-wobble-horizontal {
@@ -314,7 +375,8 @@ a {
   }
 }
 @media (max-width: 991px) {
-  .inner form {
+  .inner form,
+  .form {
     padding-top: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -329,7 +391,8 @@ a {
   .inner .image-holder {
     width: 100%;
   }
-  .inner form {
+  .inner form,
+  .form {
     width: 100%;
   }
   .image-holder {
@@ -354,13 +417,15 @@ a {
     padding: 0;
   }
 
-  button {
+  form button,
+  .form button {
     margin-top: 60px;
   }
 }
 
 @media (max-width: 430px) {
-  .inner form {
+  .inner form,
+  .form {
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -377,7 +442,8 @@ a {
   .form-control {
     margin-bottom: 15px;
   }
-  button {
+  form button,
+  .form button {
     width: 100%;
   }
   #mini-box {

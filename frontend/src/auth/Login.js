@@ -1,13 +1,61 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import login_img from ".././assets/images/login.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+
+  const signIn = async (e) => {
+    e.preventDefault();
+    let item = { email, password, role };
+    console.log(item);
+
+    let result = await fetch("http://localhost:5000/api/user/login", {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    result = await result.json();
+    console.log(result);
+    if (result.status === "success") {
+      toast.success("Login Successful");
+      localStorage.setItem("user-info", JSON.stringify(result));
+      setTimeout(() => {
+        if (role === "user") {
+          window.location.href = "/user-home";
+        } else {
+          window.location.href = "/caretaker/dashboard";
+        }
+      }, 1500);
+    } else {
+      toast.error("Invalid Credentials");
+      setEmail("");
+      setPassword("");
+      setRole("");
+    }
+  };
+// reset the state values when the component is unmounted
+  useEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setRole("");
+    };
+  }, []);
+
   return (
     <div className="wrapper">
       <div className="inner">
-        <form>
+        <form onSubmit={(e) => signIn(e)}>
           <h3 style={{ marginBottom: "0px", textAlign: "left" }}>
             Welcome Back 🖐
           </h3>
@@ -19,46 +67,63 @@ const Login = () => {
 
           <div className="form-wrapper">
             <input
-              type="text"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               className="form-control"
+              required
             />
-            <i className="zmdi zmdi-email"></i>
           </div>
 
           <div className="form-wrapper">
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="form-control"
+              required
             />
-            <i className="zmdi zmdi-lock"></i>
+          </div>
+
+          <div className="form-wrapper">
+            <select
+              required
+              name="role"
+              onChange={(e) => setRole(e.target.value)}
+              value={role}
+              className="form-control">
+              <option value="" disabled>
+                Login as
+              </option>
+              <option value="user">User</option>
+              <option value="caretaker">Caretaker</option>
+            </select>
           </div>
 
           <div className="remember-forgot">
             <div className="remember-me">
               <input type="checkbox" id="remember" />
-              <label for="remember"> Remember me</label>
+              <label htmlFor="remember"> Remember me</label>
             </div>
             <div className="forgot">
               <Link to="/reset">Forgot password?</Link>
             </div>
           </div>
 
-          <button>
-            Sign in
-            <i className="zmdi zmdi-arrow-right"></i>
-          </button>
+          <button type="submit">Sign in</button>
 
           <div id="hr">OR</div>
 
           <div id="login-btns">
-            <a href="">
+            <a href="g">
               <div
                 style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
                 <img
                   className="google-icon"
                   src="https://i.ibb.co/ydLySMx/google.png"
+                  alt="Google"
                   width={"100%"}
                   height={"100%"}
                 />
@@ -67,13 +132,13 @@ const Login = () => {
 
             <br />
 
-            <a href="">
+            <a href="f">
               <div
                 className="logo"
                 style={{ width: "32px", height: "32px", borderRadius: "50%" }}>
                 <img
                   src="https://i.ibb.co/pnpDRC6/facebook.png"
-                  alt=""
+                  alt="Facebook"
                   width={"100%"}
                   height={"100%"}
                 />
