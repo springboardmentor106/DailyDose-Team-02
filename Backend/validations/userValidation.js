@@ -15,7 +15,7 @@ export const userRegistrationSchema = Joi.object({
     password: Joi.string().required(),
     age: Joi.number().integer().min(18).required(),
 
-    gender: Joi.string().valid('male', 'female', 'other'),
+    gender: Joi.string().valid('male', 'female', 'other').lowercase(),
     phoneNumber: Joi.number(),
     address: Joi.string(),
     country: Joi.string(),

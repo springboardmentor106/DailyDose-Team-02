@@ -13,7 +13,8 @@ import {
     changeUserPasswordSchema,
     validateOtpSchema,
     userPasswordResetEmailSchema,
-} from '../validations/userValidationSchema.js';
+    userPasswordResetSchema,
+} from '../validations/userValidation.js';
 
 
 class UserController {
@@ -330,7 +331,7 @@ class UserController {
     // update password
     static userPasswordReset = async (req, res) => {
         // validation
-        const { error, value } = userPasswordResetEmailSchema.validate(req.body)
+        const { error, value } = userPasswordResetSchema.validate(req.body)
         if (error) {
             return res.status(400).json({ status: "failed", message: error.message })
         }

@@ -1,8 +1,14 @@
 import HABIT from '../models/habitModel.js';
+import { createHabitSchema } from '../validations/userHabitSchema.js';
 
 export const createHabit = async (req, res) => {
     try {
-        const habit = new HABIT(req.body);
+        // validation
+        const { error, value } = createHabitSchema.validate(req.body)
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
+        const habit = new HABIT(value);
         await habit.save();
         res.status(201).json(habit);
     } catch (error) {
@@ -21,7 +27,16 @@ export const getHabits = async (req, res) => {
 
 export const updateHabit = async (req, res) => {
     try {
-        const updatedHabit = await HABIT.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        // validation
+        const { error, value } = createHabitSchema.validate({
+            id: req.params.id,
+            bodyData: req.body
+        })
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
+
+        const updatedHabit = await HABIT.findByIdAndUpdate(value.id, value.bodyData , { new: true });
         if (!updatedHabit) {
             return res.status(404).json({ message: 'Habit not found' });
         }
