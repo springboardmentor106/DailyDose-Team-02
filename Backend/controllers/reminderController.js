@@ -1,5 +1,5 @@
 import REMINDER from '../models/reminderModel.js';
-import { createReminderSchema, updateReminderSchema } from '../validations/userReminder.js';
+import { createReminderSchema, updateReminderSchema } from '../validations/userReminderValidation.js';
 
 export const createReminder = async (req, res) => {
     try {
