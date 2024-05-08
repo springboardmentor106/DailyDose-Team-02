@@ -7,11 +7,12 @@ import path from 'path';
 import Caretaker from '../models/caretakerModel.js';
 import { generateNumberOTP } from '../config/generateOtp.js';
 import {
-    changeUserPasswordSchema,
     newUserEmailOtpSchema,
-    userPasswordResetEmailSchema,
     userRegistrationSchema,
-    validateOtpSchema
+    userLoginSchema,
+    changeUserPasswordSchema,
+    validateOtpSchema,
+    userPasswordResetEmailSchema,
 } from '../validations/userValidationSchema.js';
 
 
@@ -39,7 +40,6 @@ class UserController {
                 }
             }
 
-
             const otp = generateNumberOTP(6);
             await transporter.sendMail({
                 from: process.env.EMAIL_FROM,
@@ -48,9 +48,7 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-
             const UserOtp = await OTP.findOne({ email: email });
-
 
             if (UserOtp) {
                 const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
@@ -64,12 +62,9 @@ class UserController {
                 }
             }
 
-
             console.log(otp);
 
-
             res.status(200).json({ status: "success", message: "OTP sent to your Email" });
-
 
         } catch (error) {
             console.error("Error in sending OTP:", error);
@@ -80,7 +75,7 @@ class UserController {
     // Registration
     static userRegistration = async (req, res) => {
         try {
-
+            // Validation
             const { error, value } = userRegistrationSchema.validate(req.body);
 
             if (error) {
@@ -262,9 +257,7 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-
             const UserOtp = await OTP.findOne({ email: email });
-
 
             if (UserOtp) {
                 const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
@@ -357,10 +350,8 @@ class UserController {
                 return res.status(404).json({ status: "failed", message: "User not found" });
             }
 
-
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-
 
             let savedUser
             // Update hashed user's password in database
@@ -373,7 +364,6 @@ class UserController {
                 return res.status(500).json({ status: "failed", message: "Error occurred. Password not updated. Please try again" })
             }
             return res.status(200).json({ status: "success", message: "Password reset successfully" });
-
 
         } catch (error) {
             console.error("Error:", error);
