@@ -1,5 +1,5 @@
 import HABIT from '../models/habitModel.js';
-import { createHabitSchema } from '../validations/userHabitSchema.js';
+import { createHabitSchema, updateHabitSchema } from '../validations/userHabitValidation.js';
 
 export const createHabit = async (req, res) => {
     try {
@@ -28,7 +28,7 @@ export const getHabits = async (req, res) => {
 export const updateHabit = async (req, res) => {
     try {
         // validation
-        const { error, value } = createHabitSchema.validate({
+        const { error, value } = updateHabitSchema.validate({
             id: req.params.id,
             bodyData: req.body
         })
