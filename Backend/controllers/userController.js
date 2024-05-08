@@ -6,28 +6,33 @@ import OTP from '../models/otpModel.js';
 import path from 'path';
 import Caretaker from '../models/caretakerModel.js';
 import { generateNumberOTP } from '../config/generateOtp.js';
+import {
+    changeUserPasswordSchema,
+    newUserEmailOtpSchema,
+    userPasswordResetEmailSchema,
+    userRegistrationSchema,
+    validateOtpSchema
+} from '../validations/userValidationSchema.js';
 
-
-// let userID;
-// let userToken;
-// function saveResetCredential(id, token){
-//     userID = id
-//     userToken = token
-// }
 
 class UserController {
 
     static newUserEmailOtp = async (req, res) => {
         try {
-            const { email, role } = req.body;
+            // validation
+            const { error, value } = newUserEmailOtpSchema.validate(req.body)
+            if (error) {
+                return res.status(400).json({ status: "failed", message: error.message })
+            }
 
+            const { email, role } = value;
 
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
                 if (user) {
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
                 }
-            }else{
+            } else {
                 const caretaker = await Caretaker.findOne({ email: email });
                 if (caretaker) {
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
@@ -72,18 +77,25 @@ class UserController {
         }
     };
 
+    // Registration
     static userRegistration = async (req, res) => {
         try {
-            const { enteredOtp, firstname, lastname, email, gender, age, password, role } = req.body;
-            console.log(req.body)
+
+            const { error, value } = userRegistrationSchema.validate(req.body);
+
+            if (error) {
+                return res.status(400).json({ status: "failed", message: error.message });
+            }
+
+            const { enteredOtp, firstname, lastname, email, gender, age, password, role } = value;
+            // console.log(req.body)
+            // console.log(value)
             const savedOtp = await OTP.findOne({ email });
             console.log("saved otp", savedOtp)
-
 
             if (!savedOtp) {
                 return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
             }
-
 
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
@@ -97,7 +109,6 @@ class UserController {
                 }
             }
 
-
             console.log(String(enteredOtp), savedOtp.otp);
             if (savedOtp.otp === '') {
                 return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
@@ -109,10 +120,8 @@ class UserController {
                 }
                 console.log(otpUpdateResponse);
 
-
                 const salt = await bcrypt.genSalt(10);
                 const hashPassword = await bcrypt.hash(password, salt);
-
 
                 const body = {
                     firstname,
@@ -122,7 +131,7 @@ class UserController {
                     age,
                     password: hashPassword,
                 }
-               
+
                 let token;
                 if (role !== "caretaker") {
                     const userDoc = new User(body);
@@ -142,9 +151,7 @@ class UserController {
                     token = jwt.sign({ userID: savedCaretaker.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
                 }
 
-
                 res.status(201).json({ status: "success", message: "Registered Successfully", token });
-
 
             } else {
                 return res.status(400).json({ status: "failed", message: "Incorrect OTP, please try again" });
@@ -158,22 +165,26 @@ class UserController {
     // Login
     static userLogin = async (req, res) => {
         try {
-            const { email, password , role} = req.body;
+            // validation
+            const { error, value } = userLoginSchema.validate(req.body)
+            if (error) {
+                return res.status(400).json({ status: "failed", message: error.message })
+            }
+
+            const { email, password, role } = value;
             if (email && password) {
                 let user;
-                if(role!="caretaker"){
-                     user = await User.findOne({ email: email });
-                }else{
+                if (role != "caretaker") {
+                    user = await User.findOne({ email: email });
+                } else {
                     user = await Caretaker.findOne({ email: email });
                 }
                 if (user != null) {
                     const isMatch = await bcrypt.compare(password, user.password);
                     if ((user.email === email) && isMatch) {
 
-
                         // JWT Token Generate
                         const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-
 
                         res.send({ "status": "success", "message": "Login Successfully", "token": token });
                     } else {
@@ -190,9 +201,16 @@ class UserController {
             res.send({ "status": "failed", "message": "Unable to login" });
         }
     }
+
     // Change User Password If Know and want to Change
     static changeUserPassword = async (req, res) => {
-        const { password, password_confirm } = req.body
+        // Validation
+        const { error, value } = changeUserPasswordSchema.validate(req.body)
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
+
+        const { password, password_confirm } = value
         if (password && password_confirm) {
             if (password !== password_confirm) {
                 res.send({ "status": "failed", "message": "New Password and Confirm New Password not match" })
@@ -212,10 +230,15 @@ class UserController {
         res.send({ "user": req.user })
     }
 
-    // Forget Password
-     // Forget Password
-     static UserPasswordResetEmail = async (req, res) => {
-        const { email, role } = req.body
+    // Forget Password - Reset through email
+    static userPasswordResetEmail = async (req, res) => {
+        // validation
+        const { error, value } = userPasswordResetEmailSchema.validate(req.body)
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
+
+        const { email, role } = value
         if (email) {
             // const user = await User.findOne({ email: email })
             if (role !== "caretaker") {
@@ -276,13 +299,19 @@ class UserController {
         } catch (error) {
             console.error('Error rendering resetPassword:', error);
             res.status(500).send('Internal Server Error');
-        }        
-    }    
+        }
+    }
 
     // validate the otp
     static validateOtp = async (req, res) => {
         try {
-            const { email, otp } = req.body
+            // validation
+            const { error, value } = validateOtpSchema.validate(req.body)
+            if (error) {
+                return res.status(400).json({ status: "failed", message: error.message })
+            }
+
+            const { email, otp } = value
             const savedOtp = await OTP.findOne({ email });
             if (savedOtp.otp === '') {
                 return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
@@ -304,11 +333,16 @@ class UserController {
             return res.status(500).send('Internal Server Error');
         }
     }
-   
+
     // update password
     static userPasswordReset = async (req, res) => {
-        const { password, email, role } = req.body;
+        // validation
+        const { error, value } = userPasswordResetEmailSchema.validate(req.body)
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
 
+        const { password, email, role } = value;
 
         try {
             let user;
