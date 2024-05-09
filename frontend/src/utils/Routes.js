@@ -11,6 +11,7 @@ import HomePage from "../Pages/HomePage"
 import Add from "../Pages/Add"
 import Target from "../Pages/Target"
 import Analytics from "../Pages/Analytics";
+import Error404 from "../Error/Error404";
 
 function ProtectedRoute({Component}) {
   const token = localStorage.getItem("user-info");
@@ -41,6 +42,7 @@ function Routing() {
       <Route path="/Add/*" element={<Add />} />
       <Route path="/Target/*" element={<Target />} />
       <Route path="/Analytics/*" element={<Analytics />} />
+      <Route path="*" element={<Error404 />} />
     </Routes>
 
     
