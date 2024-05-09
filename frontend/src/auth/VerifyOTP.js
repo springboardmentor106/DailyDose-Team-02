@@ -7,19 +7,13 @@ const VerifyOTP = () => {
   const location = useLocation();
   const [otp, setOtp] = useState(new Array(6).fill(""));
   // Retrieve the user data passed via state
-  const { formData, fetchUrl, email, flow, role } = location.state; 
-  console.log(location.state);
+  const { formData, fetchUrl, email, flow, role } = location.state;
   const navigate = useNavigate()
-  // const { formData, fetchUrl } = userData;
-  console.log(formData);
-  console.log(fetchUrl, typeof (fetchUrl));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const otpValue = otp.join(""); // Join the OTP array into a single string
-    console.log(otpValue);
     // Combine user data and OTP into a single object
-
     let payload;
     if (flow === "register") {
       payload = {
@@ -32,8 +26,6 @@ const VerifyOTP = () => {
       };
     }
 
-    console.log(payload);
-
     // Call the API to verify OTP and register the user
     fetch(fetchUrl, {
       method: "POST",
@@ -45,17 +37,23 @@ const VerifyOTP = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          toast.info("OTP verified successfully.  Update your password.");
+          if (flow === "register") {
+            toast.success("Registered successfully!!");
+            console.log("api successful", data);
+            localStorage.setItem("token", data.token)
+            localStorage.setItem("role", role)
+          } else {
+            toast.info("OTP verified successfully.  Update your password.");
+          }
           setTimeout(() => {
             if (flow === "register") {
-              navigate("/user-home");
+              navigate("/user-home", { replace: true });
             } else {
               navigate("/update-password", { state: { email: email, role: role } });
             }
           }, 1500);
           // OTP is correct and user is registered
           // Redirect to a success page or perform other actions
-          console.log("api successful", data);
         } else {
           toast.error(data.message);
         }

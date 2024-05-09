@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
 import "../App.css";
 import login_img from ".././assets/images/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import Constants from "../constants"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
+  const navigate = useNavigate()
   const signIn = async (e) => {
     e.preventDefault();
     let item = { email, password, role };
-    console.log(item);
 
-    let result = await fetch("http://localhost:5000/api/user/login", {
+    let result = await fetch(Constants.BASE_URL + "/api/user/login", {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
@@ -29,11 +28,13 @@ const Login = () => {
     if (result.status === "success") {
       toast.success("Login Successful");
       localStorage.setItem("user-info", JSON.stringify(result));
+      localStorage.setItem("token", result.token)
+      localStorage.setItem("role", role)
       setTimeout(() => {
         if (role === "user") {
-          window.location.href = "/user-home";
+          navigate("/user-home", { replace: true })
         } else {
-          window.location.href = "/caretaker/dashboard";
+          navigate("/caretaker/dashboard", { replace: true })
         }
       }, 1500);
     } else {
@@ -43,7 +44,7 @@ const Login = () => {
       setRole("");
     }
   };
-// reset the state values when the component is unmounted
+  // reset the state values when the component is unmounted
   useEffect(() => {
     return () => {
       setEmail("");
@@ -113,7 +114,7 @@ const Login = () => {
           </div>
 
           <button type="submit">Sign in</button>
-
+          {/* 
           <div id="hr">OR</div>
 
           <div id="login-btns">
@@ -144,7 +145,7 @@ const Login = () => {
                 />
               </div>
             </a>
-          </div>
+          </div> */}
 
           <div id="sign-in">
             <span>

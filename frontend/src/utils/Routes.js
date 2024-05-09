@@ -8,9 +8,11 @@ import UserHome from "../userDashboard/UserHome";
 import VerifyOTP from "../auth/VerifyOTP";
 import { toast } from "react-toastify";
 
-function ProtectedRoute({Component}) {
-  const token = localStorage.getItem("user-info");
-  console.log(token);
+function ProtectedRoute({ Component }) {
+  const userInfo = localStorage.getItem("user-info");
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  console.log("token:", token, "role:", role);
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
@@ -31,7 +33,7 @@ function Routing() {
       <Route path="/register" element={<Register />} />
       <Route path="/reset" element={<Reset />} />
       <Route path="/verify-otp" element={<VerifyOTP />} />
-      <Route path="/update-password" element={<UpdatePassword/>} />
+      <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
     </Routes>
   );

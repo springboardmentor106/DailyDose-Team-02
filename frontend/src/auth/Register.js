@@ -3,7 +3,7 @@ import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Constants from "../constants";
 const validateEmail = (email) => {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,11 +52,11 @@ const Register = () => {
       tempErrors.confirmPassword = "Passwords do not match";
       toast.error("Passwords do not match");
     }
-    const fetchUrl = "http://localhost:5000/api/user/register";
+    const fetchUrl = Constants.BASE_URL + "/api/user/register";
     setErrors(tempErrors);
     if (Object.keys(tempErrors).length === 0) {
       // making API call to send the OTP
-      fetch("http://localhost:5000/api/user/new-user", {
+      fetch(Constants.BASE_URL + "/api/user/new-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +190,7 @@ const Register = () => {
 
           <button type="submit">Sign Up</button>
 
-          <div id="hr">OR</div>
+          {/* <div id="hr">OR</div>
 
           <div id="login-btns">
             <a href="g">
@@ -220,7 +220,7 @@ const Register = () => {
                 />
               </div>
             </a>
-          </div>
+          </div> */}
 
           <div id="sign-in">
             <span>

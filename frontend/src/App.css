@@ -2,16 +2,20 @@
   0% {
     margin-left: 0rem;
   }
+
   25% {
     margin-left: 0.5rem;
   }
+
   75% {
     margin-left: -0.5rem;
   }
+
   100% {
     margin-left: 0rem;
   }
 }
+
 .error {
   text-align: center;
   color: red;
@@ -80,10 +84,11 @@ a:hover {
   display: flex;
   width: 80%;
   max-width: 1300px;
-  min-height: 50vh;
+  min-height: 30vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
+
 .image-holder {
   width: 50%;
   border-radius: 10px;
@@ -92,24 +97,27 @@ a:hover {
 .inner form,
 .form {
   width: 50%;
-  padding-top: 36px;
+  /* padding-top: 36px; */
   padding-left: 45px;
   padding-right: 45px;
 }
+
 .inner h3 {
   text-transform: uppercase;
   font-size: 25px;
   font-family: "Poppins-SemiBold";
   text-align: center;
-  margin-bottom: 28px;
+  /* margin-bottom: 20px; */
 }
 
 .form-group {
   display: flex;
 }
+
 .form-group input {
   width: 50%;
 }
+
 .form-group input:first-child {
   margin-right: 25px;
 }
@@ -117,6 +125,7 @@ a:hover {
 .form-wrapper {
   position: relative;
 }
+
 .form-wrapper i {
   position: absolute;
   bottom: 9px;
@@ -135,21 +144,25 @@ a:hover {
   /* margin-bottom: 25px; */
   margin-top: 25px;
 }
+
 .form-control::-webkit-input-placeholder {
   font-size: 13px;
   color: #333;
   font-family: "Poppins-Regular";
 }
+
 .form-control::-moz-placeholder {
   font-size: 13px;
   color: #333;
   font-family: "Poppins-Regular";
 }
+
 .form-control:-ms-input-placeholder {
   font-size: 13px;
   color: #333;
   font-family: "Poppins-Regular";
 }
+
 .form-control:-moz-placeholder {
   font-size: 13px;
   color: #333;
@@ -162,6 +175,7 @@ select {
   cursor: pointer;
   padding-left: 20px;
 }
+
 select option[value=""][disabled] {
   display: none;
 }
@@ -172,7 +186,7 @@ form button,
   width: 164px;
   height: 51px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -347,22 +361,27 @@ input::-webkit-inner-spin-button {
     -webkit-transform: translateX(6px);
     transform: translateX(6px);
   }
+
   33.3% {
     -webkit-transform: translateX(-5px);
     transform: translateX(-5px);
   }
+
   49.95% {
     -webkit-transform: translateX(4px);
     transform: translateX(4px);
   }
+
   66.6% {
     -webkit-transform: translateX(-2px);
     transform: translateX(-2px);
   }
+
   83.25% {
     -webkit-transform: translateX(1px);
     transform: translateX(1px);
   }
+
   100% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -374,37 +393,45 @@ input::-webkit-inner-spin-button {
     background-position: right center;
   }
 }
+
 @media (max-width: 991px) {
+
   .inner form,
   .form {
-    padding-top: 10px;
+    /* padding-top: 10px; */
     padding-left: 30px;
     padding-right: 30px;
   }
 }
+
 @media (max-width: 767px) {
   .inner {
     display: flex;
     flex-direction: column-reverse;
     padding-top: 0;
   }
+
   .inner .image-holder {
     width: 100%;
   }
+
   .inner form,
   .form {
     width: 100%;
   }
+
   .image-holder {
     width: 100%;
     height: 30vw;
     align-items: end;
   }
+
   #mini-box {
     height: 90%;
     padding: 5px;
     overflow: visible;
   }
+
   #mini-box img {
     width: 50%;
     /* height: 100%; */
@@ -424,48 +451,60 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-width: 430px) {
+
   .inner form,
   .form {
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
   }
+
   .form-group {
     display: block;
   }
+
   .form-group input {
     width: 100%;
   }
+
   .form-group input:first-child {
     margin-right: 0;
   }
+
   .form-control {
     margin-bottom: 15px;
   }
+
   form button,
   .form button {
     width: 100%;
   }
+
   #mini-box {
     height: 100%;
     padding-top: -5px;
   }
+
   #mini-box p {
     font-size: 4.5vw;
     padding: 0;
   }
+
   .remember-forgot {
     display: flex;
     flex-direction: column-reverse;
     /* justify-content: space-between; */
     font-size: 12px;
   }
+
   .remember-me {
     display: none;
   }
-  h3 ~ p {
+
+  h3~p {
     display: none;
   }
+
   .inner h3 {
     font-size: 15px;
     text-align: left;
@@ -484,6 +523,7 @@ input::-webkit-inner-spin-button {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
+
   #mini-box {
     width: 80%;
     height: 80%;

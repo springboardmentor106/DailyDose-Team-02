@@ -3,13 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 import login_img from ".././assets/images/forget-m3.png";
 import { toast } from "react-toastify";
+import Constants from "../constants"
 
 const Reset = () => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const fetchUrl = "http://localhost:5000/api/user/validate-otp";
+  const fetchUrl = Constants.BASE_URL + "/api/user/validate-otp";
 
   const validateEmail = (email) => {
     const re =
@@ -27,7 +28,7 @@ const Reset = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/user/reset-password-email",
+        Constants.BASE_URL + "/api/user/reset-password-email",
         {
           method: "POST",
           headers: {
@@ -36,7 +37,7 @@ const Reset = () => {
           body: JSON.stringify({ email, role }),
         }
       );
-
+      const result = await response.json()
       if (response.ok) {
         toast.info("Reset password request sent successfully. Please verify OTP.");
         // Redirect to the OTP verification page
@@ -44,7 +45,7 @@ const Reset = () => {
           navigate("/verify-otp", { state: { email, fetchUrl, flow: 'reset', role: role } });
         }, 1500);
       } else {
-        toast.error("Failed to send reset password request.");
+        toast.error(result.message || "Failed to send reset password request.",);
       }
     } catch (error) {
       setError("There was an error sending the reset password request.");

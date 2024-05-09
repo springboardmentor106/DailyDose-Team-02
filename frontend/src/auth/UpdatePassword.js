@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../App.css";
 import register_img from ".././assets/images/register-m2.png";
 import { toast } from "react-toastify";
+import Constants from "../constants"
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
@@ -49,7 +50,7 @@ const UpdatePassword = () => {
         password,
       };
       const response = await fetch(
-        "http://localhost:5000/api/user/reset-password",
+        Constants.BASE_URL + "/api/user/reset-password",
         {
           method: "POST",
           headers: {
@@ -65,7 +66,7 @@ const UpdatePassword = () => {
         toast.success("Password updated successfully.");
         // Redirect to the login page
         setTimeout(() => {
-          navigate("/login");
+          navigate("/login", { replace: true });
         }, 1500);
       } else {
         toast.error("Something went wrong, please try again.");
