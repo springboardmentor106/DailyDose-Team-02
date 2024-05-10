@@ -1,0 +1,238 @@
+*{
+    color:black;
+    margin: 2px;
+    
+}
+.nav-bar{
+  
+  position:relative;
+  z-index: 999;
+}
+/* --------------------Design for Analytics----------------  */
+
+.main{
+    display: flex;
+    
+}
+.Analytics-pages{
+  
+  display: flex;
+}
+.ana-left-side{
+    margin: 4px;
+    flex:60;
+}
+.ana-right-side{
+    margin: 4px;
+    flex: 40;
+}
+.user{
+    display: flex;
+    justify-content: space-around;
+}
+.user .card{
+    margin: 4px;
+    border-radius: 30px;
+    width: 200px; height: 180px;
+    background-image: linear-gradient(#d3cbf7,white);
+}
+.user .card img{
+  width: 60px; height: 60px;
+  border-radius: 100%;
+}
+.user .card p{
+  font-size: 12px;
+}
+.chart{
+    margin-top:5px ;
+    
+}
+.aboutuser{
+    display: flex;
+    justify-content: space-around;
+}
+
+.aboutuser  .card {
+  background-image: linear-gradient(#d3cbf7,white);
+    margin: 3px;
+    border-radius:10px ;
+    width: 400px;height: 200px;
+}
+
+.aboutuser .about .card{
+  background-image: linear-gradient(#d3cbf7,white);
+    margin: 3px;
+    border-radius:10px ;
+    width: 400px; height: 200px;
+}
+.circle-progress{
+  display: flex;
+  justify-content: center;
+}
+.ana-left-side .chart .card{
+  background: white;
+  border-radius: 10px;
+  align-items: center;
+}
+/* --------------css of Home page------------------- */
+
+.main1{
+  display: flex;
+}
+/* .main1 .pages{
+  padding-left: 70px;
+} */
+.header {
+  display: flex;
+}
+#card1{
+  flex: 50; background-color:#c1e2f9 ; border-radius: 20px;
+  margin: 0;
+}
+#card2{
+  flex: 30; background-color: #cdc8f5; border-radius: 20px;
+}
+#card3{
+  flex: 20; background-color: #cdc8f5; border-radius: 20px;
+}
+#heading{
+  display: flex;
+  margin: 0;
+}
+#heading img{
+  height: 150px;
+  width: 250px;
+}
+.card-title{
+  background-color: #6a58dc;
+  font: bolder;
+  color: white;
+  padding: 3px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.card-title h6{
+  padding: 2px;
+}
+#profile{
+  display: flex;
+}
+#profile img{
+  width: 100px; height:100px;
+  border-radius: 100%;
+}
+.accordion-body{
+  display: flex;
+}
+.imgconatiner{
+  
+  width: 300px;
+}
+#progress .card-body{
+  width: 200px;
+ }
+.accordion-button{
+  display: flex;
+  justify-content:space-evenly;
+  margin-right: 50px;
+  font-size: 15px;
+}
+.acc-img img{
+  width: 40px; height: 40px;
+  border-radius: 100%;
+}
+#getAssign{
+  align-content: flex-end;
+}
+#toAssign{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.sidebar {
+    background-color: #6a58dc;
+    width: 50px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    border-radius: 20px;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  .icon {
+    margin-right: 5px;
+    
+  }
+  .line{
+    margin: 20px;
+    
+  }
+  .line h2{
+    font-weight:700 ;
+  }
+
+
+  
+  /* -----------design of sidebar----------- */
+  .wrapper{
+    
+    margin: 2px;
+}
+
+.sidebar{
+    background: #6a58dc;
+    color: #fff;
+    height: 600px;
+    width: 0px;
+    transition: all 0.5s;
+}
+.top_section{
+    display: flex;
+    align-items:center;
+    padding:20px 15px;
+}
+.logo{
+    font-size: 30px;
+}
+.bars{
+    display: flex;
+    font-size: 25px;
+    margin-left: 30px;
+}
+.link{
+    display: flex;
+    color: #fff;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s ease ;
+}
+.link:hover{
+    background:white;
+    border-radius: 5px;
+    color: #000;
+    transition: all 0.5s ease;
+}
+.active{
+    background: white;
+    border-left-color: #6a58dc;
+    border-left-width: 1px;
+    border-radius: 5px;
+    color: #000;
+}
+.icon, .link_text{
+    font-size: 20px;
+}
+  
+  
+  
+  
+  
+  
+  
+  

@@ -11,6 +11,9 @@ import Error404 from "../Components/pageNotFound/Error404";
 import Add from "../Components/Dashboard/User/Add"
 import Dashboard from "../Components/Dashboard/User/Dashboard"
 import Target from "../Components/Dashboard/User/Target"
+import CareAdd from "../Components/Dashboard/Caretaker/CareAdd";
+import HomePage from "../Components/Dashboard/Caretaker/HomePage";
+import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
   const token = localStorage.getItem("token");
@@ -42,6 +45,9 @@ function Routing() {
       <Route path="/Add" element={<Add/>} />
       <Route path="/Dashboard" element={<Dashboard/>}/>
       <Route path="/Target" element={<Target/>} />
+      <Route path="/Care-dashboard" element={<HomePage/>} />
+      <Route path="/Care-add" element={<CareAdd/>} />
+      <Route path="/Care-analytics" element={<Analytics/>} />
     </Routes>
   );
 }
