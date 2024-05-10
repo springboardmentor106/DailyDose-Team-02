@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../App.css";
-import login_img from ".././assets/images/forget-m3.png";
+import "./Auth.css";
+import login_img from "../../assets/images/forget-m3.png";
 import { toast } from "react-toastify";
-import Constants from "../constants"
+import Constants from "../../constants"
 
 const Reset = () => {
   const [email, setEmail] = useState("");

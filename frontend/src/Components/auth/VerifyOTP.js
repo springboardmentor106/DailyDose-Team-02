@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import login_img from "../assets/images/login.png";
+import login_img from "../../assets/images/login.png";
 import { toast } from "react-toastify";
 
 const VerifyOTP = () => {

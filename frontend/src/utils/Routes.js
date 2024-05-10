@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "../auth/Login";
-import Register from "../auth/Register";
-import Reset from "../auth/Reset";
-import UpdatePassword from "../auth/UpdatePassword"
-import UserHome from "../userDashboard/UserHome";
-import VerifyOTP from "../auth/VerifyOTP";
+import Login from "../Components/auth/Login";
+import Register from "../Components/auth/Register";
+import Reset from "../Components/auth/Reset";
+import UpdatePassword from "../Components/auth/UpdatePassword"
+import UserHome from "../Components/userDashboard/UserHome";
+import VerifyOTP from "../Components/auth/VerifyOTP";
 import { toast } from "react-toastify";
 
 function ProtectedRoute({ Component }) {

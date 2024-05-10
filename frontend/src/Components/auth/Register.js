@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../App.css";
-import register_img from ".././assets/images/register-m2.png";
+import "./Auth.css";
+import register_img from "../../assets/images/register-m2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Constants from "../constants";
+import Constants from "../../constants";
 const validateEmail = (email) => {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

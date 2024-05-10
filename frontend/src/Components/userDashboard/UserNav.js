@@ -1,6 +1,6 @@
 import React from "react";
 import "./userNav.css";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 const UserNav = () => {
   return (

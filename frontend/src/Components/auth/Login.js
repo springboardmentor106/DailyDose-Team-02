@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import "../App.css";
-import login_img from ".././assets/images/login.png";
+import "./Auth.css";
+import login_img from "../../assets/images/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Constants from "../constants"
+import Constants from "../../constants"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

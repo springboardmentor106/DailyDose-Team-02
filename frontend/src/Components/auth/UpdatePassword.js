@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "../App.css";
-import register_img from ".././assets/images/register-m2.png";
+import "./Auth.css";
+import register_img from "../../assets/images/register-m2.png";
 import { toast } from "react-toastify";
-import Constants from "../constants"
+import Constants from "../../constants"
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
