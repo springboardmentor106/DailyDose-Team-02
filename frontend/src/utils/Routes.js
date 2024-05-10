@@ -8,7 +8,9 @@ import UserHome from "../Components/userDashboard/UserHome";
 import VerifyOTP from "../Components/auth/VerifyOTP";
 import { toast } from "react-toastify";
 import Error404 from "../Components/pageNotFound/Error404";
-
+import Add from "../Components/Dashboard/User/Add"
+import Dashboard from "../Components/Dashboard/User/Dashboard"
+import Target from "../Components/Dashboard/User/Target"
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
   const token = localStorage.getItem("token");
@@ -37,6 +39,9 @@ function Routing() {
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
       <Route path="*" element={<Error404 />} />
+      <Route path="/Add" element={<Add/>} />
+      <Route path="/Dashboard" element={<Dashboard/>}/>
+      <Route path="/Target" element={<Target/>} />
     </Routes>
   );
 }
