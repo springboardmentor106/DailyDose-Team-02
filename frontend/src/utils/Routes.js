@@ -7,6 +7,7 @@ import UpdatePassword from "../Components/auth/UpdatePassword"
 import UserHome from "../Components/userDashboard/UserHome";
 import VerifyOTP from "../Components/auth/VerifyOTP";
 import { toast } from "react-toastify";
+import Error404 from "../Components/pageNotFound/Error404";
 
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
@@ -35,6 +36,7 @@ function Routing() {
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 }
