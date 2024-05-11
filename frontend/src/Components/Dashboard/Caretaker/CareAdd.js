@@ -6,6 +6,7 @@ import Table from "../dashComponents/Table";
 import CircularProgressBar from "../dashComponents/ProgressBar";
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
+import UserNav from "../../userDashboard/UserNav";
 const CareAdd = () => {
   const reminders = [
     { time: "08:00 AM", activity: "Morning walk" },
@@ -16,7 +17,7 @@ const CareAdd = () => {
   return (
     <div className="main1">
       <div className="nav-bar">
-        <SideBar/>
+        <UserNav/>
       </div>
       <div className="pages">
         <div className="header">

@@ -4,7 +4,6 @@ import Login from "../Components/auth/Login";
 import Register from "../Components/auth/Register";
 import Reset from "../Components/auth/Reset";
 import UpdatePassword from "../Components/auth/UpdatePassword"
-import UserHome from "../Components/userDashboard/UserHome";
 import VerifyOTP from "../Components/auth/VerifyOTP";
 import { toast } from "react-toastify";
 import Error404 from "../Components/pageNotFound/Error404";
@@ -40,12 +39,12 @@ function Routing() {
       <Route path="/reset" element={<Reset />} />
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/update-password" element={<UpdatePassword />} />
-      <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
+      {/* <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} /> */}
       <Route path="*" element={<Error404 />} />
       <Route path="/add" element={<Add/>} />
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/target" element={<Target/>} />
-      <Route path="/care-dashboard" element={<HomePage/>} />
+      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
       <Route path="/care-add" element={<CareAdd/>} />
       <Route path="/care-analytics" element={<Analytics/>} />
     </Routes>

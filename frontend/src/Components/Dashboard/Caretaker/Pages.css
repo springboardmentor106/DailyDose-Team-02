@@ -1,8 +1,8 @@
-/* *{
-    color:black;
+*{
+    
     margin: 2px;
     
-} */
+}
 
 .nav-bar{
   
@@ -13,10 +13,11 @@
 
 .main{
     display: flex;
-    
+    color:black;
+    margin: 2px;
 }
 .Analytics-pages{
-  
+  padding-left: 110px;
   display: flex;
 }
 .ana-left-side{
@@ -79,10 +80,11 @@
 
 .main1{
   display: flex;
+  color:black; margin: 2px;
 }
-/* .main1 .pages{
-  padding-left: 70px;
-} */
+.main1 .pages{
+  padding-left: 110px;
+}
 .header {
   display: flex;
 }
@@ -99,6 +101,7 @@
 #heading{
   display: flex;
   margin: 0;
+  color: black;
 }
 #heading img{
   height: 150px;
@@ -124,9 +127,10 @@
 }
 .accordion-body{
   display: flex;
+  justify-content: space-around;
+  
 }
 .imgconatiner{
-  
   width: 300px;
 }
 #progress .card-body{

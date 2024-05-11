@@ -6,6 +6,7 @@ import Caldender from '../dashComponents/Calendar'
 import SideBar from "./SideBar";
 import Table from "../dashComponents/Table"
 import profilepic from "../../../assets/images/profilepic.png"
+import UserNav from '../../userDashboard/UserNav'
 const Analytics = () => {
   const profileinfo=[
     {name:"Chris Evan" , email:"chris@gmail.com", age:30},
@@ -23,7 +24,7 @@ const Analytics = () => {
   return (
       <div className="main" >
         <div className="nav-bar">
-          <SideBar/>
+          <UserNav/>
         </div>
         <div className="Analytics-pages">
         <div className="ana-left-side">
