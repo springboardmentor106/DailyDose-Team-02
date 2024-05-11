@@ -1,0 +1,141 @@
+
+.error-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.error-pic{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-pic img{
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.error-msg{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.error-msg h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.error-msg p{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+
+.error-msg button{
+    margin-top: 1rem;
+    padding: 0.625rem 2.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(to bottom right, #7C3AED, #3B82F6);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.error-msg button:hover{
+    /* box-shadow: 0 0 0 0.25rem #60A5FA; */
+    background: linear-gradient(to bottom left, #7C3AED, #3B82F6);
+}
+
+.error-msg button:active{
+    transform: scale(0.95);
+}
+
+@media screen and (max-width: 820px) {
+    .error-main{
+        flex-direction: column;
+    }
+
+    .error-pic{
+        width: 100%;
+        height:45%;
+    }
+
+    .error-pic img{
+        width: 60%;
+    }
+
+    .error-msg{
+        width: 100%;
+        height:45%;
+    }
+
+    .error-msg h1{
+        font-size: 9vw;
+    }
+
+    .error-msg p{
+        font-size: 3.6vw;
+    }
+    
+}
+
+@media screen and (max-width: 435px) {
+    /* Your CSS rules for screens with height 2 times their width */
+    .error-main{
+        flex-direction: column;
+    }
+
+    .error-pic{
+        width: 100%;
+        height:40%;
+    }
+
+    .error-pic img{
+        width: 90%;
+    }
+
+    .error-msg{
+        width: 100%;
+        height:45%;
+    }
+
+    .error-msg h1{
+        font-size: 9vw;
+    }
+
+    .error-msg p{
+        font-size: 4.6vw;
+    }
+}
+    

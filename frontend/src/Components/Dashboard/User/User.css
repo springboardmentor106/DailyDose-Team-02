@@ -1,0 +1,619 @@
+/*     Target.css      */
+.main-contaoner{
+  display: flex;
+}
+.main-container-target{
+display: flex;
+}
+.header-container{
+    width: 1053px;
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+}
+.details{
+    width: 1053px;
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#chaeck-icon{
+    position: relative;
+    height: 10px;
+    width: 17px;
+    top: 11px;
+    left: 28px;
+}
+.header-details-Task{
+    width: 55px;
+    position: relative;
+    left: 107px;
+    top: -8px;
+}
+.header-details-EndDate{
+    width: 112px;
+    position: relative;
+    left: 458px;
+    top: -41px;
+}
+.header-details-Status{
+    width: 112px;
+    position: relative;
+    left: 735px;
+    top: -73px;
+}
+.Progress-bar{
+    position: relative;
+    left: 397px;
+    top: 5px;
+}
+.end-date{
+    position: relative;
+    top: -23px;
+    left: -16px;
+}
+.dot{
+    position: relative;
+    left: 483px;
+    top: -40px;
+}
+
+ /*--------------------------------------------------------------------------------------*/
+
+/*     dashboard.css      */
+
+.dashboard{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.left-side{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 40px;
+  }
+  .row-one{
+    display: flex;
+    gap: 20px;
+  }
+  .row-one-card-one {
+    padding: 20px;
+    height: 172px;
+    width: 348px;
+    gap: 20px;
+    background-color: #AAD7F7;
+    border-radius: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .lower-side{
+    display: flex;
+  }
+  .img-container{
+    width: 130px;
+    margin-left: 26px;
+    height: 108px;
+    margin-top: 1.5px;
+  }
+.img-container > img{
+  width: 176px;
+  margin-top: -31px;
+  margin-left: -36px;
+}
+  .row-one-card-one > h2{
+    font-weight: 600;
+  }
+  .lower-side > p{
+    margin-top: 12px;
+    font-size: 20px;
+    width: 179px;
+  }
+   .row-one-card-two {
+    display: flex;
+    padding: 20px;
+    height: 172px;
+    width: 348px;
+    background-color: #BDB1FF;
+    border-radius: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .right-side{
+    background-color: #ebe8fd;
+    width: 100%;
+    padding: 26px;
+    box-sizing: border-box;
+    margin-left: 18px;
+    border-radius: 51px 0px 0px 51px;
+  }
+  .right-card-one{
+    padding: 20px;
+    height: 302px;
+    width: 332px;
+    border-radius: 15px;
+    margin-top: -15px;
+}
+  .row-one-card-one-dashboard {
+    padding: 20px;
+    width: 639px;
+    border-radius: 22px;
+    height: 240px;
+    margin-left: 14px;
+  }
+  .right-card-two{
+    flex: 1;
+    padding: 20px;
+    height: 307px;
+    width: 332px;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 88px;
+    box-shadow: 
+    1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), /* Shadow offset (right and down) */
+    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15); 
+  }
+.bars{
+  margin-left: 11px;
+}
+.left-down{
+  display: flex;
+}
+.collection{
+  margin-top: -10px;
+}
+#progress-bars{
+  margin-top: 25px;
+}
+.collection span {
+  margin-bottom: 10px;
+}
+.circle-das{
+  background: white;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+.details-das{
+  margin-top: 23px;
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Additional-row-one-das{
+  display: flex;
+  flex-direction: column;
+  font-weight: lighter;
+  margin-left: -24px;
+}
+.Additional-row-one-das > h3{
+  font-weight: lighter;
+}
+.image-container-silder{
+  width: 10px;
+  height: 20px;
+  background-color: #BDB1FF;
+}
+.row-three-card{
+  flex: 1 1;
+  padding: 20px;
+  height: 227px;
+  width: 200px;
+  background-color: #D8D3F8;
+  border-radius: 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.row-three{
+  display: flex;
+  gap: 20px;
+  margin-top: 22px;
+}
+.row-one-card {
+  padding: 20px;
+  width: 639px;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 240px;
+}
+.box-left-top{
+  margin-top: 6px;
+  margin-left: 85px;
+}
+.row-one-chart{
+  margin-top: 22px;
+  border-radius: 22px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+#progres{
+  margin-left: 95px;
+}
+#about{
+  margin-left: 94px;
+}
+#celender{
+  width: 10px;
+}
+
+ /*--------------------------------------------------------------------------------------*/
+
+/*   Add.css   */
+
+.add-page-container {
+    width: 1100px;
+    height: 710px;
+    margin-top: 13px;
+    margin-left: 35px;
+  }
+  .dropdown-container-left{
+    margin-left: 10px;
+}
+  .dropdown {
+    margin-bottom: 15px;
+  }
+  
+  .dropdown-button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #6A58DC;
+    cursor: pointer;
+  }
+  .dropdown-content {
+    padding: 8px;
+    display: flex;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 10px;
+    background-color: #E0DCF8;
+  }
+   #heading{
+    color: white;
+    text-align: left;
+    margin-left: 10px;
+}
+#right-input{
+    width: 450px;
+    height: 91px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+#right-input-two{
+  width: 450px;
+  height: 240px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.dropdown-container-right{
+  margin-left: 140px;
+}
+  label {
+    display: block;
+    font-weight: 400;
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 10px;
+  }
+  input {
+    width: 450px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #down-row-feild{
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #End-date-input input{
+    margin-top: 10px;
+  }
+#catogry-inputs {
+  margin-top: 10px;
+}
+.catogry-feilds-right{
+  margin-top: 67px;
+}
+
+#Schedule-lable{
+  margin-top: 10px;
+  margin-top: 21px;
+  font-size: 26px;
+  margin-left: 10px;
+  font-weight: 400;
+  margin-bottom: -22px;
+}
+
+ /*--------------------------------------------------------------------------------------*/
+
+/*       Slider.css          */
+
+
+  
+  .main-container {
+    display: flex;
+  }
+  main {
+    padding: 10px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    display: grid;
+    place-items: center;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    border-radius: 25px;
+    position: relative;
+    left: 23px;
+    background: #6A58DC;
+    color: white;
+    height: 95vh;
+    top: 18px;
+    overflow-y: auto;
+  }
+  
+  .top_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+  }
+  .logo {
+    font-size: 18px;
+    line-height: 0;
+  }
+  .bars {
+    width: 30px;
+  }
+  .hide {
+    display: none;
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    height: 30px;
+    padding: 10px;
+  }
+  .search input {
+    border: none;
+    margin-left: 10px;
+    border-radius: 5px;
+    background: rgb(238, 238, 238);
+    color: white;
+  }
+  
+  .routes {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .link {
+    display: flex;
+    color: white;
+    gap: 10px;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-right: 4px solid transparent;
+    transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+  .link:hover {
+    background: rgb(45, 51, 89);
+    transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+  .active {
+    background: rgb(45, 51, 89);
+  }
+  .link_text {
+    white-space: nowrap;
+    font-size: 15px;
+  }
+  
+  .menu {
+    display: flex;
+    color: white;
+    padding: 5px 10px;
+    border-right: 4px solid transparent;
+    transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    justify-content: space-between;
+  }
+  .menu_item {
+    display: flex;
+    gap: 10px;
+  }
+  .menu_container {
+    display: flex;
+    flex-direction: column;
+  }
+  .menu_container .link {
+    padding-left: 20px;
+    border-bottom: #fff 0.5px solid;
+  }
+
+  /*--------------------------------------------------------------------------------------*/
+
+
+/*  Table.css  */
+
+.Heading-box{
+  width: 282px;
+  height: 40px;
+  background-color: #BDB1FF;
+  border-radius: 10px;
+  margin-top: -24px;
+  margin-left: -21px;
+}
+  /*--------------------------------------------------------------------------------------*/
+
+  /*  CheckBox.css  */
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px; /* Increase margin bottom for more spacing */
+  }
+  .checkbox input[type="checkbox"] {
+    margin: 0; /* Reset margin */
+    margin-left: -717px;
+    top: -64px;
+    position: relative;
+  }
+  .checkbox label {
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    left: -164px;
+    top: -65px;
+    z-index: 9;
+    margin-bottom: -4px;
+  }
+  .status{
+    position: relative;
+    left: 631px;
+    top: -25px;
+    margin-bottom: -21px;
+  }
+    /*--------------------------------------------------------------------------------------*/
+
+  /*  Reminder.css  */
+
+  .reminder-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: -28px;
+  }
+  .reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 39px;
+  }
+  
+  .reminder-item div {
+    flex: 1;
+  }
+  .reminder-item button {
+    background-color: transparent;
+    border-color: transparent;
+    margin-left: 39px;
+  }
+  .Reminder-box{
+    margin-top: 10px;
+  }
+  #check{
+    margin-left: 48px;
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+.type-container{
+    margin-left: 10px;
+}
+
+
+
+    /*--------------------------------------------------------------------------------------*/
+
+  /*  Taskbar.css  */
+
+  .task-header{
+    background-color: white;
+    width: 1063px;
+    height: 40px;
+    border-radius: 10px;
+}
+.task-deatils-container{
+    margin-top: 20px;
+    gap: 20px;
+}
+.task-details{
+    background-color: white;
+    width: 1063px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+#checkbox{
+    margin-left: -205px;
+    margin-top: 14px;
+}
+#status{
+    position: relative;
+    top: -19px;
+    left: 36px;
+    font-size: 13px;
+}
+.date-time{
+    width: 20px;
+    height: 20px;
+    color: aqua;
+}
+
+  /*--------------------------------------------------------------------------------------*/
+
+  /*  ReminderCssForAdd.css  */
+  .reminder-list-Add {
+    display: flex;
+    flex-direction: column;
+    margin-top: 47px;
+    border-radius: 24px;
+    background-color: white;
+    height: 272px;
+  }
+  
+  .reminder-item-Add {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 39px;
+  }
+  
+  .reminder-item div {
+    flex: 1;
+  }
+  .reminder-item button {
+    background-color: transparent;
+    border-color: transparent;
+    margin-left: 39px;
+  }
+  .Reminder-box{
+    margin-top: 10px;
+  }
+  #check-One{
+    margin-left: 48px;
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+.type-container-Add{
+    margin-left: 10px;
+}
+
+
+/**/
+
+
+
+
+

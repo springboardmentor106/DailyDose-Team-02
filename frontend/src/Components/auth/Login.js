@@ -1,38 +1,62 @@
-import React, { useState } from "react";
-import "../App.css";
-import login_img from ".././assets/images/login.png";
-import { Link } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import "./Auth.css";
+import login_img from "../../assets/images/login.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import Constants from "../../constants"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const newErrors = {};
-    if (!email.trim()) {
-      newErrors.email = "Please enter your email address";
-    }
-    if (!password.trim()) {
-      newErrors.password = "Please enter your password";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const [role, setRole] = useState("");
+  const navigate = useNavigate()
+  const signIn = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      // Add your login logic here
-      console.log("Email:", email);
-      console.log("Password:", password);
+    let item = { email, password, role };
+
+    let result = await fetch(Constants.BASE_URL + "/api/user/login", {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    result = await result.json();
+    console.log(result);
+    if (result.status === "success") {
+      toast.success("Login Successful");
+      localStorage.setItem("user-info", JSON.stringify(result));
+      localStorage.setItem("token", result.token)
+      localStorage.setItem("role", role)
+      setTimeout(() => {
+        if (role === "user") {
+          navigate("/user-home", { replace: true })
+        } else {
+          navigate("/caretaker/dashboard", { replace: true })
+        }
+      }, 1500);
+    } else {
+      toast.error("Invalid Credentials");
+      setEmail("");
+      setPassword("");
+      setRole("");
     }
   };
+  // reset the state values when the component is unmounted
+  useEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setRole("");
+    };
+  }, []);
 
   return (
     <div className="wrapper">
       <div className="inner">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => signIn(e)}>
           <h3 style={{ marginBottom: "0px", textAlign: "left" }}>
             Welcome Back 🖐
           </h3>
@@ -44,24 +68,39 @@ const Login = () => {
 
           <div className="form-wrapper">
             <input
-              type="text"
-              placeholder="Email Address"
-              className="form-control"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email Address"
+              className="form-control"
+              required
             />
-            {errors.email && <div className="error-message">{errors.email}</div>}
           </div>
 
           <div className="form-wrapper">
             <input
               type="password"
-              placeholder="Password"
-              className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="form-control"
+              required
             />
-            {errors.password && <div className="error-message">{errors.password}</div>}
+          </div>
+
+          <div className="form-wrapper">
+            <select
+              required
+              name="role"
+              onChange={(e) => setRole(e.target.value)}
+              value={role}
+              className="form-control">
+              <option value="" disabled>
+                Login as
+              </option>
+              <option value="user">User</option>
+              <option value="caretaker">Caretaker</option>
+            </select>
           </div>
 
           <div className="remember-forgot">
@@ -74,10 +113,8 @@ const Login = () => {
             </div>
           </div>
 
-          <button type="submit">
-            Sign in
-          </button>
-
+          <button type="submit">Sign in</button>
+          {/* 
           <div id="hr">OR</div>
 
           <div id="login-btns">
@@ -108,7 +145,7 @@ const Login = () => {
                 />
               </div>
             </a>
-          </div>
+          </div> */}
 
           <div id="sign-in">
             <span>
@@ -136,4 +173,3 @@ const Login = () => {
 };
 
 export default Login;
-
