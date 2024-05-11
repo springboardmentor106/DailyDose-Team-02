@@ -16,7 +16,7 @@ const router = express.Router();
 router.post('/new-user', UserController.newUserEmailOtp)
 router.post('/register', UserController.userRegistration)
 router.post('/login', UserController.userLogin)
-router.post('/reset-password-email', UserController.UserPasswordResetEmail)
+router.post('/reset-password-email', UserController.userPasswordResetEmail)
 router.post('/validate-otp', UserController.validateOtp)
 router.post('/reset-password', UserController.userPasswordReset)
 
