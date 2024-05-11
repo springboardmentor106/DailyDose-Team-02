@@ -44,4 +44,5 @@ const caretakerSchema = new mongoose.Schema(
 
 const Caretaker = mongoose.model("caretaker", caretakerSchema);
 
+
 export default Caretaker
