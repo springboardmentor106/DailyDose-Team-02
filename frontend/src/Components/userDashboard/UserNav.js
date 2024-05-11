@@ -1,7 +1,7 @@
 import React from "react";
 import "./userNav.css";
 import logo from "../../assets/images/logo.png";
-
+import { Link } from "react-router-dom";
 const UserNav = () => {
   return (
     <nav className="navbar">
@@ -10,7 +10,7 @@ const UserNav = () => {
       </div>
       <ul className="navbar__menu">
         <li className="navbar__item">
-          <a href="#" className="navbar__link">
+          <Link to="/care-dashboard"  className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -26,10 +26,10 @@ const UserNav = () => {
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li className="navbar__item">
-          <a href="#" className="navbar__link">
+          <Link  to="/Care-add" className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -45,29 +45,29 @@ const UserNav = () => {
               <path d="M12 5v14"></path>
             </svg>
             <span>Add</span>
-          </a>
+          </Link>
         </li>
         <li className="navbar__item">
-          <a href="#" className="navbar__link">
+          <Link to="/care-analytics" className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#fff"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-target">
+              class="text-white">
               <circle cx="12" cy="12" r="10" />
               <circle cx="12" cy="12" r="6" />
               <circle cx="12" cy="12" r="2" />
             </svg>
             <span>Target</span>
-          </a>
+          </Link>
         </li>
-        <li className="navbar__item">
+        {/* <li className="navbar__item">
           <a href="#" className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const UserNav = () => {
             </svg>
             <span>Users</span>
           </a>
-        </li>
+        </li> */}
       </ul>
       <div className="user__profile">
         <svg
