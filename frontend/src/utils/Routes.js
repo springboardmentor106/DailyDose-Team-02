@@ -42,12 +42,12 @@ function Routing() {
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} />
       <Route path="*" element={<Error404 />} />
-      <Route path="/Add" element={<Add/>} />
-      <Route path="/Dashboard" element={<Dashboard/>}/>
-      <Route path="/Target" element={<Target/>} />
-      <Route path="/Care-dashboard" element={<HomePage/>} />
-      <Route path="/Care-add" element={<CareAdd/>} />
-      <Route path="/Care-analytics" element={<Analytics/>} />
+      <Route path="/add" element={<Add/>} />
+      <Route path="/dashboard" element={<Dashboard/>}/>
+      <Route path="/target" element={<Target/>} />
+      <Route path="/care-dashboard" element={<HomePage/>} />
+      <Route path="/care-add" element={<CareAdd/>} />
+      <Route path="/care-analytics" element={<Analytics/>} />
     </Routes>
   );
 }

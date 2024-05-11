@@ -11,17 +11,17 @@ const SideBar = ({ children }) => {
   const toggle=()=>setIsOpen(!isOpen);
   const menuItem = [
     {
-      path: "/Care-dashboard",
+      path: "/care-dashboard",
       name: "Dashboard",
       icon: <FaHome />,
     },
     {
-      path: "/Care-add",
+      path: "/care-add",
       name: "Add",
       icon: <FaPlus />,
     },
     {
-      path: "/Care-analytics",
+      path: "/care-analytics",
       name: "Analytics",
       icon: <MdPeopleAlt />,
     },
