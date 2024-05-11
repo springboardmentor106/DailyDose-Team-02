@@ -109,9 +109,9 @@ display: flex;
     font-weight: 600;
   }
   .lower-side > p{
-    margin-top: 21px;
+    margin-top: 12px;
     font-size: 20px;
-    width: 146px;
+    width: 179px;
   }
    .row-one-card-two {
     display: flex;
@@ -483,6 +483,7 @@ display: flex;
     left: -164px;
     top: -65px;
     z-index: 9;
+    margin-bottom: -4px;
   }
   .status{
     position: relative;
