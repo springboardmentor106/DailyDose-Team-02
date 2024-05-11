@@ -25,5 +25,4 @@ const goalSchema = new mongoose.Schema({
 });
 
 const GOAL = mongoose.model('GOAL', goalSchema);
-
 export default GOAL;

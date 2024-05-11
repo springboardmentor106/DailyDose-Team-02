@@ -8,7 +8,7 @@ const habitSchema = mongoose.Schema({
     description:{
         type: String
     }
-})
+});
 
 const HABIT = mongoose.model('HABIT', habitSchema)
 export default HABIT
