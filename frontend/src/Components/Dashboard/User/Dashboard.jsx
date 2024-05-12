@@ -22,7 +22,7 @@ const Dashboard = () => {
        <div className="left-side">
        <div className="row-one">
           <div className="row-one-card-one">
-            <h2>Welcome Back...</h2>
+            <h5>Welcome Back...</h5>
             <div className="lower-side">
             <p>Have a nice day and don't forget take your pills...</p>
               <div className="img-container">
@@ -35,11 +35,11 @@ const Dashboard = () => {
 
          </div>
           <div className="details-das">
-              <h3 id='Details-user-das'>Mrs. User xyz</h3>
+              <h5 id='Details-user-das'>Mrs. User xyz</h5>
               <div className="Additional">
              <div className="Additional-row-one-das">
-              <h3>49</h3>
-              <h3>Delhi, India</h3>
+              <h5>49</h5>
+              <h5>Delhi, India</h5>
              </div>
               </div>  
             </div>
@@ -52,13 +52,13 @@ const Dashboard = () => {
         </div>
            <div className="row-three">
         <div className="row-three-card">
-          <h2 id='progres'>Progress</h2>
+          <h5 id='progres'>Progress</h5>
           <div className="box-left-top">
               <div><CircularProgressBar value={55} /> </div> <br />
             </div>
         </div>
         <div className="row-three-card">
-          <h2 id='about'>About User</h2>
+          <h5 id='about'>About User</h5>
         </div>
         </div>
 
