@@ -76,7 +76,7 @@ display: flex;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    margin-left: 40px;
+    margin-left: 122px;
   }
   .row-one{
     display: flex;
@@ -111,7 +111,7 @@ display: flex;
   .lower-side > p{
     margin-top: 12px;
     font-size: 20px;
-    width: 179px;
+    width: 190px;
   }
    .row-one-card-two {
     display: flex;
@@ -135,7 +135,7 @@ display: flex;
     height: 302px;
     width: 332px;
     border-radius: 15px;
-    margin-top: -15px;
+    margin-top: -64px;
 }
   .row-one-card-one-dashboard {
     padding: 20px;
@@ -147,14 +147,12 @@ display: flex;
   .right-card-two{
     flex: 1;
     padding: 20px;
-    height: 307px;
+    height: 353px;
     width: 332px;
     background-color: white;
     border-radius: 15px;
     margin-top: 88px;
-    box-shadow: 
-    1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), /* Shadow offset (right and down) */
-    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15); 
+    box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
   }
 .bars{
   margin-left: 11px;
@@ -254,6 +252,7 @@ display: flex;
 }
   .dropdown {
     margin-bottom: 15px;
+    margin-left: 103px;
   }
   
   .dropdown-button {
@@ -292,7 +291,7 @@ display: flex;
   border-radius: 10px;
 }
 .dropdown-container-right{
-  margin-left: 140px;
+  margin-left: 36px;
 }
   label {
     display: block;
@@ -499,7 +498,6 @@ display: flex;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
     border-bottom: 1px solid #ccc;
     margin-top: 39px;
   }
