@@ -1,6 +1,7 @@
 import './User.css'
 // import dailyim from '../Images/User.png'
-import SideBar from "../User/SideBar"
+// import SideBar from "../User/SideBar"
+import UserNav from '../../userDashboard/UserNav';
 import Chart from '../dashComponents/Chart'
 import CircularProgressBar from '../dashComponents/ProgressBar';
 import ReminderList from './ReminderList';
@@ -17,7 +18,7 @@ const Dashboard = () => {
   ];
      return (
         <div className="dashboard">
-          <SideBar/>
+          <UserNav/>
        <div className="left-side">
        <div className="row-one">
           <div className="row-one-card-one">
