@@ -38,13 +38,13 @@ display: flex;
     width: 112px;
     position: relative;
     left: 458px;
-    top: -41px;
+    top: -25px;
 }
 .header-details-Status{
     width: 112px;
     position: relative;
     left: 735px;
-    top: -73px;
+    top: -51px;
 }
 .Progress-bar{
     position: relative;
@@ -133,9 +133,9 @@ display: flex;
   .right-card-one{
     padding: 20px;
     height: 302px;
-    width: 332px;
+    width: 369px;
     border-radius: 15px;
-    margin-top: -64px;
+    margin-top: -44px;
 }
   .row-one-card-one-dashboard {
     padding: 20px;
@@ -147,7 +147,7 @@ display: flex;
   .right-card-two{
     flex: 1;
     padding: 20px;
-    height: 353px;
+    height: 296px;
     width: 332px;
     background-color: white;
     border-radius: 15px;
@@ -256,7 +256,7 @@ display: flex;
   }
   
   .dropdown-button {
-    width: 100%;
+    width: 1075px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -270,6 +270,7 @@ display: flex;
     border-top: none;
     border-radius: 10px;
     background-color: #E0DCF8;
+    width: 1075px;
   }
    #heading{
     color: white;
