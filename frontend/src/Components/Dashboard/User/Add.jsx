@@ -18,7 +18,7 @@ const Add = () => {
     <div className="add-page-container">
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('goal')}>
-          <h1 id='heading'>Add Goal</h1>
+          <h4 id='heading'>Add Goal</h4>
         </button>
         {selectedItem === 'goal' && (
           <div className="dropdown-content">
@@ -52,7 +52,7 @@ const Add = () => {
       </div>
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('habit')}>
-          <h1 id='heading'> Add Pill Remainders</h1>
+          <h4 id='heading'> Add Pill Remainders</h4>
         </button>
         {selectedItem === 'habit' && (
             <div className="dropdown-content">
@@ -81,7 +81,7 @@ const Add = () => {
       </div>
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('reminder')}>
-        <h1 id='heading'> Add Habit</h1>
+        <h4 id='heading'> Add Habit</h4>
         </button>
         {selectedItem === 'reminder' && (
             <div className="dropdown-content">

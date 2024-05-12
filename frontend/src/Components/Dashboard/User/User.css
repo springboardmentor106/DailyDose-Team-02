@@ -13,7 +13,7 @@ display: flex;
 }
 .details{
     width: 1053px;
-    height: 40px;
+    height: 44px;
     background-color: white;
     border-radius: 10px;
     margin-top: 10px;
@@ -38,13 +38,13 @@ display: flex;
     width: 112px;
     position: relative;
     left: 458px;
-    top: -41px;
+    top: -30px;
 }
 .header-details-Status{
     width: 112px;
     position: relative;
     left: 735px;
-    top: -73px;
+    top: -56px;
 }
 .Progress-bar{
     position: relative;

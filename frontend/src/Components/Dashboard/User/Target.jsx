@@ -17,7 +17,7 @@ const Target = () => {
        <div className="add-page-container">
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('goal')}>
-          <h1 id='heading'>My Goal</h1>
+          <h3 id='heading'>My Goal</h3>
         </button>
         {selectedItem === 'goal' && (
           <div className="dropdown-content">
@@ -27,13 +27,13 @@ const Target = () => {
                       <RiCheckboxCircleLine />
                       </div>
                       <div className="header-details-Task">
-                        <h2>Task</h2>
+                        <h4>Task</h4>
                       </div>
                       <div className="header-details-EndDate">
-                        <h2>End Date</h2>
+                        <h4>End Date</h4>
                       </div>
                       <div className="header-details-Status">
-                        <h2>Status</h2>
+                        <h4>Status</h4>
                       </div>
                   </div>
                   <div className="details-container">
@@ -145,7 +145,7 @@ const Target = () => {
       {/* My Reminder Dropdown */}
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('habit')}>
-          <h1 id='heading'>My Reminder</h1>
+          <h3 id='heading'>My Reminder</h3>
         </button>
         {selectedItem === 'habit' && (
           <div className="dropdown-content">
@@ -155,13 +155,13 @@ const Target = () => {
                       <RiCheckboxCircleLine />
                       </div>
                       <div className="header-details-Task">
-                        <h2>Task</h2>
+                        <h4>Task</h4>
                       </div>
                       <div className="header-details-EndDate">
-                        <h2>End Date</h2>
+                        <h4>End Date</h4>
                       </div>
                       <div className="header-details-Status">
-                        <h2>Status</h2>
+                        <h4>Status</h4>
                       </div>
                   </div>
                   <div className="details-container">
@@ -274,7 +274,7 @@ const Target = () => {
       {/* My Habit Dropdown */}
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('reminder')}>
-          <h1 id='heading'>My Habit</h1>
+          <h3 id='heading'>My Habit</h3>
         </button>
         {selectedItem === 'reminder' && (
           <div className="dropdown-content">
@@ -284,13 +284,13 @@ const Target = () => {
                       <RiCheckboxCircleLine />
                       </div>
                       <div className="header-details-Task">
-                        <h2>Task</h2>
+                        <h4>Task</h4>
                       </div>
                       <div className="header-details-EndDate">
-                        <h2>End Date</h2>
+                        <h4>End Date</h4>
                       </div>
                       <div className="header-details-Status">
-                        <h2>Status</h2>
+                        <h4>Status</h4>
                       </div>
                   </div>
                   <div className="details-container">
