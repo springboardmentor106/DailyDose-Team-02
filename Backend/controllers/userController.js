@@ -371,7 +371,41 @@ class UserController {
             return res.status(500).json({ status: "failed", message: "Internal Server Error" });
         }
     };
+    // get all userDetails
+    static getAllUserDetails = async (req, res) => {
+        try {
+           const all_users= await User.find();
+           return res.status(200).json(all_users);
 
+        } catch (error) {
+            console.error("Error fetching user details:", error);
+            return res.status(500).json({ status: "error", message: "Internal Server Error" });
+        }
+    };
+
+   static editProfile=async(req,res)=>{
+    try{
+        const {uuid,firstname,lastname,email,phone}=req.body;
+        const user=await User.findOne({uuid:uuid});
+        if(!user){
+            return res.status(400).json({message:"User not found"});
+        }
+        if(!!firstname)
+        user.firstname=firstname;
+        if(!!lastname)
+        user.lastname=lastname;
+        if(!!email)
+        user.email=email;
+        if(!!phone)
+        user.phone=phone;
+        await user.save();
+        return res.status(200).json({message:"Profile edited successfully"});
+    }
+    catch(error){
+        console.log(error);
+        return res.status(400).json({message:"Error editing profile"});
+    }
+   }
 }
 
 export default UserController;

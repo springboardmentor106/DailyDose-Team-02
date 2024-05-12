@@ -29,5 +29,8 @@ router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
 router.post('/changepassword', UserController.changeUserPassword)
 router.get('/loggeduser', UserController.loggedUser)
 
+// routes for getting user details
+router.get('/get-all-users', UserController.getAllUserDetails);
+router.post('/edit-profile', UserController.editProfile);
 
 export default router
