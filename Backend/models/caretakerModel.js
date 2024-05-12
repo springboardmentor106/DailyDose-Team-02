@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const caretakerSchema = new mongoose.Schema(
   {
+    uuid: {
+      type: String,
+      required: true
+
+    },
     firstname: {
       type: String,
       required: true,

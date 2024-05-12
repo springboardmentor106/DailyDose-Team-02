@@ -1,4 +1,5 @@
 import User from '../models/userModel.js';
+import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
@@ -7,33 +8,25 @@ import path from 'path';
 import Caretaker from '../models/caretakerModel.js';
 import { generateNumberOTP } from '../config/generateOtp.js';
 
-
-// let userID;
-// let userToken;
-// function saveResetCredential(id, token){
-//     userID = id
-//     userToken = token
-// }
-
 class UserController {
 
     static newUserEmailOtp = async (req, res) => {
         try {
             const { email, role } = req.body;
 
-
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
                 if (user) {
+                    console.log("User UUID:", user.uuid); // Log user UUID
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
                 }
-            }else{
+            } else {
                 const caretaker = await Caretaker.findOne({ email: email });
                 if (caretaker) {
+                    console.log("Caretaker UUID:", caretaker.uuid); // Log caretaker UUID
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
                 }
             }
-
 
             const otp = generateNumberOTP(6);
             await transporter.sendMail({
@@ -43,9 +36,7 @@ class UserController {
                 html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
             });
 
-
             const UserOtp = await OTP.findOne({ email: email });
-
 
             if (UserOtp) {
                 const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
@@ -59,16 +50,34 @@ class UserController {
                 }
             }
 
-
             console.log(otp);
-
-
             res.status(200).json({ status: "success", message: "OTP sent to your Email" });
-
-
         } catch (error) {
             console.error("Error in sending OTP:", error);
             return res.status(500).json({ status: "error", message: "Failed to send OTP. Please try again." });
+        }
+    };
+
+    static getUserDetailsByUuidAndRole = async (req, res) => {
+        try {
+            const { uuid, role } = req.params;
+
+            let user;
+            if (role !== "caretaker") {
+                user = await User.findOne({ uuid }).select("-password");
+            } else {
+                user = await Caretaker.findOne({ uuid }).select("-password");
+            }
+
+            if (!user) {
+                return res.status(404).json({ status: "failed", message: "User not found" });
+            }
+
+            console.log("Found User/Caretaker UUID:", user.uuid); // Log found user/caretaker UUID
+            res.status(200).json({ status: "success", user });
+        } catch (error) {
+            console.error("Error fetching user details:", error);
+            return res.status(500).json({ status: "error", message: "Failed to fetch user details" });
         }
     };
 
@@ -78,13 +87,11 @@ class UserController {
             console.log(req.body)
             const savedOtp = await OTP.findOne({ email });
             console.log("saved otp", savedOtp)
-
-
+    
             if (!savedOtp) {
                 return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
             }
-
-
+    
             if (role !== "caretaker") {
                 const user = await User.findOne({ email: email });
                 if (user) {
@@ -96,8 +103,7 @@ class UserController {
                     return res.status(400).json({ status: "failed", message: "Email already registered" });
                 }
             }
-
-
+    
             console.log(String(enteredOtp), savedOtp.otp);
             if (savedOtp.otp === '') {
                 return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
@@ -108,21 +114,20 @@ class UserController {
                     res.status(500).json({ status: "failed", message: "status update failed for OTP" });
                 }
                 console.log(otpUpdateResponse);
-
-
+    
                 const salt = await bcrypt.genSalt(10);
                 const hashPassword = await bcrypt.hash(password, salt);
-
-
-                const body = {
+    
+                let body = {
                     firstname,
                     lastname,
                     email,
                     gender,
                     age,
                     password: hashPassword,
+                    uuid: uuidv4(), // Assign a new UUID
                 }
-               
+    
                 let token;
                 if (role !== "caretaker") {
                     const userDoc = new User(body);
@@ -141,11 +146,9 @@ class UserController {
                     // JWT Token Generation
                     token = jwt.sign({ userID: savedCaretaker.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
                 }
-
-
+    
                 res.status(201).json({ status: "success", message: "Registered Successfully", token });
-
-
+    
             } else {
                 return res.status(400).json({ status: "failed", message: "Incorrect OTP, please try again" });
             }
@@ -155,66 +158,69 @@ class UserController {
         }
     };
 
-    // Login
-    static userLogin = async (req, res) => {
-        try {
-            const { email, password , role} = req.body;
-            if (email && password) {
-                let user;
-                if(role!="caretaker"){
-                     user = await User.findOne({ email: email });
-                }else{
-                    user = await Caretaker.findOne({ email: email });
-                }
-                if (user != null) {
-                    const isMatch = await bcrypt.compare(password, user.password);
-                    if ((user.email === email) && isMatch) {
+   // Login
+   static userLogin = async (req, res) => {
+    try {
+        const { email, password, role } = req.body;
+        if (email && password) {
+            let user;
+            if (role != "caretaker") {
+                user = await User.findOne({ email: email });
+            } else {
+                user = await Caretaker.findOne({ email: email });
+            }
+            if (user != null) {
+                const isMatch = await bcrypt.compare(password, user.password);
+                if ((user.email === email) && isMatch) {
 
+                    console.log("Logged in UUID:", user.uuid);
 
-                        // JWT Token Generate
-                        const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                    // JWT Token Generate
+                    const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
-
-                        res.send({ "status": "success", "message": "Login Successfully", "token": token });
-                    } else {
-                        res.send({ "status": "failed", "message": "Email or Password is Invalid" });
-                    }
+                    res.send({ "status": "success", "message": "Login Successfully", "token": token });
                 } else {
-                    res.send({ "status": "failed", "message": "You are not a Registered User" });
+                    res.send({ "status": "failed", "message": "Email or Password is Invalid" });
                 }
             } else {
-                res.send({ "status": "failed", "message": "All Fields are Required" });
+                res.send({ "status": "failed", "message": "You are not a Registered User" });
             }
-        } catch (error) {
-            console.log(error);
-            res.send({ "status": "failed", "message": "Unable to login" });
-        }
-    }
-    // Change User Password If Know and want to Change
-    static changeUserPassword = async (req, res) => {
-        const { password, password_confirm } = req.body
-        if (password && password_confirm) {
-            if (password !== password_confirm) {
-                res.send({ "status": "failed", "message": "New Password and Confirm New Password not match" })
-            } else {
-                const salt = await bcrypt.genSalt(10)
-                const newHashPassword = await bcrypt.hash(password, salt);
-                await User.findByIdAndUpdate(req.user._id, { $set: { password: newHashPassword } })
-                res.send({ "status": "Success", "message": "Password Changed Successfully" })
-            }
-
         } else {
-            res.send({ "status": "failed", "message": "All fields are Required" })
-
+            res.send({ "status": "failed", "message": "All Fields are Required" });
         }
+    } catch (error) {
+        console.log(error);
+        res.send({ "status": "failed", "message": "Unable to login" });
     }
-    static loggedUser = async (req, res) => {
-        res.send({ "user": req.user })
+}
+
+// Assign User to Caretaker
+static assignUserToCaretaker = async (req, res) => {
+    const { userUuid, caretakerId } = req.body;
+
+    try {
+        const user = await User.findOne({ uuid: userUuid });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.caretaker) {
+            return res.status(400).json({ message: 'User is already assigned to a caretaker' });
+        }
+
+        user.caretaker = caretakerId;
+        await user.save();
+
+        res.json({ message: 'User successfully assigned to you' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
     }
+};
+
 
     // Forget Password
-     // Forget Password
-     static UserPasswordResetEmail = async (req, res) => {
+    static UserPasswordResetEmail = async (req, res) => {
         const { email, role } = req.body
         if (email) {
             // const user = await User.findOne({ email: email })
@@ -261,32 +267,20 @@ class UserController {
         }
     }
 
-    static resetPasswordPage = async (req, res) => {
-        try {
-            const id = userID;
-            const token = userToken;
-            const port = process.env.PORT;
-
-            if (!userID || !userToken) {
-                throw new Error('User or token not provided');
-            }
-            const filePath = path.join(process.env.DIR_PATH, 'pages', 'resetPassword')
-            console.log(filePath)
-            res.render(filePath, { id, token, port });
-        } catch (error) {
-            console.error('Error rendering resetPassword:', error);
-            res.status(500).send('Internal Server Error');
-        }        
-    }    
+      
 
     // validate the otp
     static validateOtp = async (req, res) => {
         try {
             const { email, otp } = req.body
             const savedOtp = await OTP.findOne({ email });
-            if (savedOtp.otp === '') {
+            if (!savedOtp) {
                 return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
             }
+            if (savedOtp?.otp === '') {
+                return res.status(500).json({ status: "failed", message: 'Request for otp again.' })
+            }
+
             if (String(otp) === savedOtp.otp) {
                 const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
                 if (!otpUpdateResponse) {
@@ -295,21 +289,17 @@ class UserController {
                     return res.status(200).json({ status: "success", message: "Otp validated.Reset your password now" });
                 }
             } else {
-                return res.status(200).json({ status: "success", message: "Incorrect otp" });
+                return res.status(200).json({ status: "failed", message: "Incorrect otp" });
             }
-
-
         } catch (error) {
             console.error('Error rendering resetPassword:', error);
             return res.status(500).send('Internal Server Error');
         }
     }
-   
+
     // update password
     static userPasswordReset = async (req, res) => {
         const { password, email, role } = req.body;
-
-
         try {
             let user;
             if (role != "caretaker") {
@@ -318,15 +308,12 @@ class UserController {
                 user = await Caretaker.findOne({ email });
             }
 
-
             if (!user) {
                 return res.status(404).json({ status: "failed", message: "User not found" });
             }
 
-
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-
 
             let savedUser
             // Update hashed user's password in database
@@ -340,13 +327,13 @@ class UserController {
             }
             return res.status(200).json({ status: "success", message: "Password reset successfully" });
 
-
         } catch (error) {
             console.error("Error:", error);
             return res.status(500).json({ status: "failed", message: "Internal Server Error" });
         }
     };
 
+   
 }
 
 export default UserController;

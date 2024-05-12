@@ -6,3 +6,4 @@ cors --> error handlind during connection with frontend
 bcrypt --> password hashing
 jws --> implement jws tocken
 nodemailer --> mail sending
+

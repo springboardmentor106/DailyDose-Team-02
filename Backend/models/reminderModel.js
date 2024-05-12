@@ -15,7 +15,7 @@ const reminderSchema = new mongoose.Schema({
         type: [String],
         enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
     },
-    compleated: {
+    completed: {
         type: Boolean,
         default: false
     },
@@ -30,6 +30,15 @@ const reminderSchema = new mongoose.Schema({
     pushNotification: {
         type: Boolean,
         default: false
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 }, { timestamps: true });
 

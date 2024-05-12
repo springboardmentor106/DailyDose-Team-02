@@ -7,11 +7,6 @@ import express from 'express'
 const router = express.Router();
 
 
-// Middleware - To protect
-router.use('/changepassword', checkUserAuth)
-router.use('/loggeduser', checkUserAuth)
-
-
 // Public Routes  e.g --> Register
 router.post('/new-user', UserController.newUserEmailOtp)
 router.post('/register', UserController.userRegistration)
@@ -21,13 +16,10 @@ router.post('/validate-otp', UserController.validateOtp)
 router.post('/reset-password', UserController.userPasswordReset)
 
 
-// router.post('/reset-password/:id/:token', UserController.userPasswordReset)
-router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
+// Private Routes
+router.post('/user/details/:uuid/:role', UserController.getUserDetailsByUuidAndRole);
 
-
-// Protected Routes e.g ---> Dashboard
-router.post('/changepassword', UserController.changeUserPassword)
-router.get('/loggeduser', UserController.loggedUser)
+router.post('/assign-user', checkUserAuth, UserController.assignUserToCaretaker);
 
 
 export default router
