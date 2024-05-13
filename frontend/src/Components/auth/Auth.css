@@ -299,9 +299,22 @@
   
   .remember-forgot {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-size: 15px;
     margin-top: 10px;
+  }
+  .forget{
+    flex: 50;
+  }
+  .remember-me{
+    flex: 50;
+  }
+  .remember-forgot .remember-me label{
+    font-size: 17px; margin-left: 105px;
+    font-size: 15px; margin-top: -24px;
+  }
+  .remember-forgot .remember-me #remember{
+    margin-top: 0px;
   }
   
   a {

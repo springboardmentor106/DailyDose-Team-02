@@ -14,8 +14,8 @@ display: flex;
 }
 .details{
     width: 1053px;
-    height: 40px;
-    background-color: #E0DCF8;
+    height: 44px;
+    background-color: white;
     border-radius: 10px;
     margin-top: 10px;
     display: flex;
