@@ -2,7 +2,7 @@ import express from 'express';
 // import { checkUserAuth, validateUserOrCaretaker } from '../middlewares/auth-middleware.js';
 
 
-import { createGoal, getGoals, updateGoal, deleteGoal } from '../controllers/goalController.js';
+import { createGoal, getGoals, updateGoal, deleteGoal, goalStats } from '../controllers/goalController.js';
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.post('/', createGoal);
 router.get('/', getGoals);
 router.patch('/:id', updateGoal);
 router.delete('/:id', deleteGoal);
+router.get('/stats', goalStats)
 
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);

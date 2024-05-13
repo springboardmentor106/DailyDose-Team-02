@@ -207,9 +207,11 @@ class UserController {
                     if ((user.email === email) && isMatch) {
 
                         // JWT Token Generate
-                        const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                        // const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                        const token = jwt.sign({ userID: user.uuid + 'jyjggdhtrhcfmhgvhgfrt' }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
-                        res.send({ "status": "success", "message": "Login Successfully", "token": token });
+                        // res.send({ "status": "success", "message": "Login Successfully", "token": token });
+                        res.send({ "status": "success", "message": "Login Successfully", "token": token, "userID": user.uuid });
                     } else {
                         res.send({ "status": "failed", "message": "Email or Password is Invalid" });
                     }
