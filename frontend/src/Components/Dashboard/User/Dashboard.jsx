@@ -1,12 +1,15 @@
 import './User.css'
-// import dailyim from '../Images/User.png'
-// import SideBar from "../User/SideBar"
 import UserNav from '../../userDashboard/UserNav';
 import Chart from '../dashComponents/Chart'
 import CircularProgressBar from '../dashComponents/ProgressBar';
 import ReminderList from './ReminderList';
 import ReactCalendar from '../dashComponents/Calendar';
+import dailyimg from "../../../assets/images/User.png"
+import { IoLocationSharp } from "react-icons/io5";
 const Dashboard = () => {
+  const profileinfo=[
+    {name:"Chris Evan" , age:30, Location : "Delhi, india"},
+  ]
   const reminders = [
     { time: '10:05 PM', activity: 'Gardening' },
     { time: '10:05 PM', activity: 'Gardening' },
@@ -22,11 +25,11 @@ const Dashboard = () => {
        <div className="left-side">
        <div className="row-one">
           <div className="row-one-card-one">
-            <h5>Welcome Back...</h5>
+            <h5> <strong>Welcome Back...</strong> </h5>
             <div className="lower-side">
             <p>Have a nice day and don't forget take your pills...</p>
               <div className="img-container">
-                {/* <img src= {dailyim}alt="" /> */}
+                <img src= {dailyimg}alt="" />
               </div>
             </div>
           </div>
@@ -35,13 +38,13 @@ const Dashboard = () => {
 
          </div>
           <div className="details-das">
-              <h5 id='Details-user-das'>Mrs. User xyz</h5>
-              <div className="Additional">
-             <div className="Additional-row-one-das">
-              <h5>49</h5>
-              <h5>Delhi, India</h5>
-             </div>
-              </div>  
+                  {profileinfo.map((profile,index)=>(
+              <div className="card-user" key={index}><div className="card-body">
+                <h6><strong>{profile.name}</strong></h6>
+                <p>Age: {profile.age}</p>
+                <p><IoLocationSharp /> {profile.Location}</p>
+              </div></div>
+            ))}
             </div>
           </div>
         </div>

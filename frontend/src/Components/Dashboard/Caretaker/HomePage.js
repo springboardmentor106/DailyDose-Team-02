@@ -13,7 +13,6 @@ const HomePage = () => {
     { time: "12:00 PM", activity: "Lunch break" },
     { time: "03:00 PM", activity: "Meeting" },
   ];
-
   return (
     <div className="main1">
       <div className="nav-bar">
@@ -47,12 +46,10 @@ const HomePage = () => {
         </div>
         <div><strong>Chris Evan</strong></div>
         <div>,Califonia,USA</div>
-        
       </button>
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
       <div class="accordion-body">
-        
         <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>1 Hour walk</span></div> </div>
         <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>Yoga</span></div> </div>
         <div className="card"><div className="card-body">  <CircularProgressBar value={85}/><span>Exericse</span></div> </div>
@@ -70,8 +67,6 @@ const HomePage = () => {
         <div className="card"><div className="card-body">
           <Table reminders={reminders}/>  
         </div></div>
-        
-
       </div>
     </div>
   </div>
@@ -107,11 +102,9 @@ const HomePage = () => {
       </div>
     </div>
   </div>
-  
 </div>
         </div>
       <br />
-      
       </div>
     </div>
   );

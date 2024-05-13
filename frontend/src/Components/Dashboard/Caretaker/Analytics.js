@@ -37,8 +37,6 @@ const Analytics = () => {
                 <p>Age: {profile.age}</p>
               </div></div>
             ))}
-            
-            
           </div>
           <div className="chart">
             <div className="card"><div className='card-body'><Chart/></div></div>
@@ -52,7 +50,6 @@ const Analytics = () => {
               <div className="card"><div className="card-body">
                 <h6><strong> About User</strong></h6>
                     <p>The user is suffering from Disease: Blood Pressure </p>
-                    
               </div></div> 
             </div>
           </div>

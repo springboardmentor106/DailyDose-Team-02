@@ -52,7 +52,7 @@ const Add = () => {
       </div>
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('habit')}>
-          <h4 id='heading'> Add Pill Remainders</h4>
+          <h4 id='heading'> Add Remainders</h4>
         </button>
         {selectedItem === 'habit' && (
             <div className="dropdown-content">
