@@ -1,4 +1,4 @@
-import './User.css'
+import './Dashboard.css'
 import UserNav from '../../userDashboard/UserNav';
 import Chart from '../dashComponents/Chart'
 import CircularProgressBar from '../dashComponents/ProgressBar';

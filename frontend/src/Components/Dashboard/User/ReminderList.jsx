@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import Reminder from '../User/Reminder';
-import './User.css'
-
 const ReminderList = () => {
   const [reminders, setReminders] = useState([
     { id: 1, date: '10:05 PM', type: 'Gardening', checked: true },
     { id: 2, date: '10:05 PM', type: 'Gardening', checked: true },
     { id: 3, date: '10:05 PM', type: 'Gardening', checked: true },
     { id: 4, date: '10:05 PM', type: 'Gardening', checked: true },
-    // Add more reminders as needed
   ]);
   const handleCheckChange = (changedReminder) => {
     const updatedReminders = reminders.map((reminder) =>
@@ -37,6 +34,6 @@ const ReminderList = () => {
       ))}
     </div>
     </div>
-  );
+  )
 };
 export default ReminderList;

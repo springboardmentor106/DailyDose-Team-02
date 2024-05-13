@@ -5,7 +5,7 @@ import TargetList from '../User/CheckBoxTarget';
 import { RiCheckboxCircleLine } from "react-icons/ri";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import CircularProgressBar from '../User/ProgressBarForTarget';
-import './User.css'
+import './Target.css'
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState('goal'); // Default to 'goal' being selected
   const handleItemClick = (item) => {

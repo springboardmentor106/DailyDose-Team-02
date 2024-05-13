@@ -1,5 +1,4 @@
 import React from 'react';
-import './User.css';
 const TargetCheckbox = ({ target, onToggle }) => {
   const handleCheckboxChange = () => {
     const newCompleted = !target.completed; // Toggle the completed status
