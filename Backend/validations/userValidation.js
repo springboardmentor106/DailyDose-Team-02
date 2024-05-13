@@ -2,7 +2,7 @@ import Joi from "joi";
 
 export const newUserEmailOtpSchema = Joi.object({
     email: Joi.string().required(),
-    role: Joi.string().valid('user', 'caretaker').required(),
+    // role: Joi.string().valid('user', 'caretaker').required(),
 })
 
 export const userRegistrationSchema = Joi.object({
