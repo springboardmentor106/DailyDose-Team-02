@@ -16,8 +16,15 @@ const VerifyOTP = () => {
     // Combine user data and OTP into a single object
     let payload;
     if (flow === "register") {
+      console.log(formData)
       payload = {
-        ...formData,
+        age: formData.age,
+        email: formData.email,
+        firstname: formData.firstname,
+        gender: formData.gender,
+        lastname: formData.lastname,
+        password: formData.password,
+        role: formData.role,
         enteredOtp: otpValue
       };
     } else {

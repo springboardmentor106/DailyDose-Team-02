@@ -1,10 +1,17 @@
 import Caretaker from '../models/caretakerModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { caretakerLoginSchema, caretakerRegistrationSchema } from '../validations/caretakerValidation.js';
 
 class CaretakerController {
     static caretakerRegistration = async (req, res) => {
-        const { firstname, lastname, email, gender, age, password, password_confirm } = req.body;
+        // Validation
+        const { error, value } = caretakerRegistrationSchema.validate(req.body)
+        if (error) {
+            return res.status(400).json({ status: "failed", message: error.message })
+        }
+
+        const { firstname, lastname, email, gender, age, password, password_confirm } = value;
         const caretaker = await Caretaker.findOne({ email: email });
         if (caretaker) {
             res.send({ "status": "failed", "message": "Email already present" });
@@ -39,7 +46,13 @@ class CaretakerController {
 
     static caretakerLogin = async (req, res) => {
         try {
-            const { email, password } = req.body;
+            // Validation
+            const { error, value } = caretakerLoginSchema.validate(req.body)
+            if (error) {
+                return res.status(400).json({ status: "failed", message: error.message })
+            }
+
+            const { email, password } = value;
             if (email && password) {
                 const caretaker = await Caretaker.findOne({ email: email });
                 if (caretaker != null) {
