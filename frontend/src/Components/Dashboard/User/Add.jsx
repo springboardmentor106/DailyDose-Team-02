@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReminderListAdd from '../User/ReminderList';
 import SideBar from "../User/SideBar"
-import './User.css'
+import './Add.css'
 const Add = () => {
   const reminders = [
     { Food: 'After Breakfast', activity: '1.0' },
