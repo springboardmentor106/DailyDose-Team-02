@@ -250,7 +250,7 @@ display: flex;
 .add-page-container {
     width: 1100px;
     height: 710px;
-    margin-top: 36px;
+    /* margin-top: 36px; */
     margin-left: 35px;
   }
   .dropdown-container-left{
@@ -266,12 +266,13 @@ display: flex;
     border: 1px solid #ccc;
     border-radius: 15px;
     background-color: #6A58DC;
+    color: #fff;
     cursor: pointer;
   }
   .dropdown-content {
     padding: 8px;
     display: flex;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-top: none;
     border-radius: 10px;
     width: 1075px;
@@ -324,16 +325,15 @@ display: flex;
   margin-top: 10px;
 }
 .catogry-feilds-right{
-  margin-top: 67px;
+  margin-top: 0px;
+  font-weight: 600;
 }
 
 #Schedule-lable{
-  margin-top: 10px;
-  margin-top: 21px;
+ 
   font-size: 26px;
-  margin-left: 10px;
-  font-weight: 400;
-  margin-bottom: -22px;
+  font-weight: 600;
+  
 }
 
  /*--------------------------------------------------------------------------------------*/
