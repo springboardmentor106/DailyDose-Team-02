@@ -10,9 +10,15 @@ const Nav = () => {
         <div className="main__content">
           <div className="boxes"  id="welcome">Welcome back</div>
           <div className="boxes"  id="profile">Profile </div>
-          <div className="boxes"  id="calender">calender</div>
+          <div   id="right-pane">
+            <div className="boxes" id="calender">Calender</div>
+            <div className="boxes" id="tasks">Tasks</div>
+          </div>
           <div className="boxes"  id="chart">chart</div>
-          <div className="boxes"  id="progress">progress</div>
+          <div   id="bottom-pane">
+            <div className="boxes" id="progress">Progress</div>
+            <div className="boxes" id="about__user">Analytics</div>
+          </div>
         </div>
       </div>
     </>
