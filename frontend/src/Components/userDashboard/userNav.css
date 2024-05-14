@@ -14,11 +14,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 70px;
 }
 .navbar__logo, .user__profile {
   width: 50px;
   height: auto;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,11 +162,11 @@
 
 @media screen and (max-width: 425px) {
   .navbar {
-    top: auto;
+    top: 92%;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 60px;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
@@ -178,7 +181,7 @@
     width: 3.5rem;
   }
   
-  .user__profile {
+  .user__profile, .navbar__logo {
     margin: 0 auto;
   }
   .user__profile img {

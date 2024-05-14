@@ -1,31 +1,108 @@
-.user__body{
+.user__body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #eaeef6;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.main__content {
+  width: 90%;
+  margin-right: 1vw;
+  height: 90%;
+  border-radius: 1rem;
+  display: grid;
+  background-color: #7192d4;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1rem;
+}
+
+.main__content .boxes {
+  background-color: #fff;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #7192d4;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.main__content .boxes:hover {
+  background-color: #7192d4;
+  color: #fff;
+}
+
+#welcome {
+  grid-column: span 3 / auto;
+  grid-row: span 2 / auto;
+}
+#calender {
+  grid-row: span 6 / auto;
+  grid-column: span 2 / auto;
+}
+#chart {
+  grid-row: span 2 / auto;
+  grid-column: span 4 / auto;
+}
+#reminder {
+  grid-row: span 2 / auto;
+}
+
+#progress {
+  grid-column: span 4 / auto;
+  grid-row: span 2 / auto;
+}
+#profile {
+  grid-row: span 2 / auto;
+}
+
+@media (max-width: 425px) {
+  .user__body {
     width: 100vw;
     height: 100vh;
     background-color: #eaeef6;
-    display: flex;   
-    justify-content: end;
-    align-items: center;
-}
-
-.main__content{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    
+  }
+  .main__content {
     width: 90%;
-    margin-right: 1vw;
-    height: 90%;
+    margin-right: 0;
+    margin-top: 1vh;
+    height: 80%;
     border-radius: 1rem;
     display: grid;
     background-color: #7192d4;
+    grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-}
+    gap: 0.5rem;
+  }
 
-.main__content .box{
-    background-color: #fff;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: #7192d4;
-    font-weight: 600;
-    transition: 0.5s;
+  #welcome {
+    grid-column: span 6 / auto;
+    grid-row: span 1 / auto;
+  }
+  #profile {
+    display: none;
+  }
+  #chart {
+    grid-column: span 6 / auto;
+    grid-row: span 1 / auto;
+    order: 2;
+  }
+  #progress {
+    grid-column: span 6 / auto;
+    grid-row: span 1 / auto;
+    order: 3;
+  }
+  #calender {
+    grid-column: span 6 / auto;
+    grid-row: span 1 / auto;
+    order: 4;
+  }
 }
