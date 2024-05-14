@@ -10,11 +10,12 @@ display: flex;
     height: 40px;
     background-color: white;
     border-radius: 10px;
+    background-color: #E0DCF8;
 }
 .details{
     width: 1053px;
     height: 44px;
-    background-color: white;
+    background-color: #E0DCF8;
     border-radius: 10px;
     margin-top: 10px;
     display: flex;
@@ -72,6 +73,9 @@ display: flex;
     flex-direction: row;
     margin-top: 10px;
 }
+.card-user{
+  margin-top: 14px;
+}
 .left-side{
     width: 100%;
     padding: 20px;
@@ -87,7 +91,7 @@ display: flex;
     height: 172px;
     width: 348px;
     gap: 20px;
-    background-color: #AAD7F7;
+    background-color: #E1DEF8;
     border-radius: 35px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -95,30 +99,32 @@ display: flex;
     display: flex;
   }
   .img-container{
-    width: 130px;
-    margin-left: 26px;
+    width: 244px;
+    margin-left: 25px;
     height: 108px;
-    margin-top: 1.5px;
+    margin-top: 6.5px;
+    margin-right: -38px;
   }
 .img-container > img{
-  width: 176px;
+  width: 196px;
   margin-top: -31px;
-  margin-left: -36px;
+  margin-left: -10px;
 }
   .row-one-card-one > h2{
     font-weight: 600;
   }
   .lower-side > p{
-    margin-top: 12px;
-    font-size: 20px;
-    width: 190px;
-  }
+    margin-top: 31px;
+    font-size: 13px;
+    width: 187px;
+}
+
    .row-one-card-two {
     display: flex;
     padding: 20px;
     height: 172px;
     width: 348px;
-    background-color: #BDB1FF;
+    background-color: #E1DEF8;
     border-radius: 35px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -225,7 +231,7 @@ display: flex;
 .row-one-chart{
   margin-top: 22px;
   border-radius: 22px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 #progres{
   margin-left: 95px;
@@ -244,7 +250,7 @@ display: flex;
 .add-page-container {
     width: 1100px;
     height: 710px;
-    margin-top: 13px;
+    /* margin-top: 36px; */
     margin-left: 35px;
   }
   .dropdown-container-left{
@@ -254,22 +260,21 @@ display: flex;
     margin-bottom: 15px;
     margin-left: 103px;
   }
-  
   .dropdown-button {
     width: 1075px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
     background-color: #6A58DC;
+    color: #fff;
     cursor: pointer;
   }
   .dropdown-content {
     padding: 8px;
     display: flex;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-top: none;
     border-radius: 10px;
-    background-color: #E0DCF8;
     width: 1075px;
   }
    #heading{
@@ -320,16 +325,15 @@ display: flex;
   margin-top: 10px;
 }
 .catogry-feilds-right{
-  margin-top: 67px;
+  margin-top: 0px;
+  font-weight: 600;
 }
 
 #Schedule-lable{
-  margin-top: 10px;
-  margin-top: 21px;
+ 
   font-size: 26px;
-  margin-left: 10px;
-  font-weight: 400;
-  margin-bottom: -22px;
+  font-weight: 600;
+  
 }
 
  /*--------------------------------------------------------------------------------------*/

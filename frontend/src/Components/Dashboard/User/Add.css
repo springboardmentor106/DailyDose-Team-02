@@ -1,0 +1,88 @@
+.add-page-container {
+    width: 1100px;
+    height: 710px;
+    margin-top: 36px;
+    margin-left: 35px;
+  }
+  .dropdown-container-left{
+    margin-left: 10px;
+}
+  .dropdown {
+    margin-bottom: 15px;
+    margin-left: 103px;
+  }
+  .dropdown-button {
+    width: 1075px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #6A58DC;
+    cursor: pointer;
+  }
+  .dropdown-content {
+    padding: 8px;
+    display: flex;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 10px;
+    width: 1075px;
+  }
+   #heading{
+    color: white;
+    text-align: left;
+    margin-left: 10px;
+}
+#right-input{
+    width: 450px;
+    height: 91px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+#right-input-two{
+  width: 450px;
+  height: 240px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.dropdown-container-right{
+  margin-left: 36px;
+}
+  label {
+    display: block;
+    font-weight: 400;
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 10px;
+  }
+  input {
+    width: 450px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #down-row-feild{
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  #End-date-input input{
+    margin-top: 10px;
+  }
+#catogry-inputs {
+  margin-top: 10px;
+}
+.catogry-feilds-right{
+  margin-top: 67px;
+}
+
+#Schedule-lable{
+  margin-top: 10px;
+  margin-top: 21px;
+  font-size: 26px;
+  margin-left: 10px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}

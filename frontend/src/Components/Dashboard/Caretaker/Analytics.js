@@ -43,8 +43,6 @@ const Analytics = () => {
                 <p>Blood: {profile.blood}</p>
               </div></div>
             ))}
-            
-            
           </div>
           <div className="chart">
             <div className="card"><div className='card-body'><Chart/></div></div>
