@@ -3,13 +3,14 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-top: 10px;
 }
 .card-user{
   margin-top: 14px;
 }
 .left-side{
-    width: 100%;
+    width: 60%;
     padding: 20px;
     box-sizing: border-box;
     margin-left: 122px;
@@ -62,7 +63,7 @@
   }
   .right-side{
     background-color: #ebe8fd;
-    width: 100%;
+    width: 30%;
     padding: 26px;
     box-sizing: border-box;
     margin-left: 18px;
