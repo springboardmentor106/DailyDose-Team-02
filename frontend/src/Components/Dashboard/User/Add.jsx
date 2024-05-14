@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import ReminderListAdd from '../User/ReminderList';
 import SideBar from "../User/SideBar"
-<<<<<<< HEAD
-import './User.css'
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-=======
 import './Add.css'
->>>>>>> 076fd941728b6d8476124b6b9f0b80bb4b439540
 const Add = () => {
   const reminders = [
     { Food: 'After Breakfast', activity: '1.0' },
