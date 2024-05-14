@@ -18,60 +18,113 @@
   display: flex;
 }
 .ana-left-side{
-    margin: 4px;
-    flex:60;
+    margin: 6px 30px 6px 6px;
+
 }
 .ana-right-side{
-    margin: 4px;
-    flex: 40;
+    background-color: #ebe8fd;
+    width: 100%;
+    padding: 26px 26px 40px 26px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    border-radius: 51px 0px 0px 51px;
+
+}
+.ana-right-card-one{
+  padding: 0px;
+    height: 344px;
+    width: 332px;
+    border-radius: 45px;
+    margin-top: -13px;
+    background-color: white;
+    padding-top: 5px;
+}
+.ana-right-card-two{
+  flex: 1;
+  padding: 20px;
+  height: 296px;
+  width: 332px;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .user{
     display: flex;
-    justify-content: space-around;
+    justify-content:space-between;
 }
 .user .card{
     margin: 4px;
     border-radius: 30px;
-    width: 200px; height: 180px;
+    width: 178px; height: 166px;
     background-image: linear-gradient(#d3cbf7,white);
+    transition: 0.5s;
+}
+.user .card:hover{
+  transform: scale(1.1);
+  z-index: 2;
+  background-image: linear-gradient(#ada0f8,#f0eef9);
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .user .card img{
-  width: 60px; height: 60px;
+  width: 58px; height: 59px;
   border-radius: 100%;
 }
 .user .card p{
   font-size: 12px;
 }
-/* .chart{
-    margin-top:5px ;
+.chart{
+    margin-top:8px ;
     min-width: 100%;
-} */
+}
 .aboutuser{
     display: flex;
-    justify-content: space-around;
+    justify-content:space-between;
+    margin-top: 10px;
 }
 
 .aboutuser  .card {
   background-image: linear-gradient(#d3cbf7,white);
     margin: 3px;
-    border-radius:10px ;
-    width: 400px;height: 200px;
+    border-radius:21px ;
+    width: 390px;height: 260px;
+    box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 
 .aboutuser .about .card{
   background-image: linear-gradient(#d3cbf7,white);
     margin: 3px;
-    border-radius:10px ;
-    width: 400px; height: 200px;
+    border-radius:21px ;
+    width: 390px; height: 260px;
+    box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .circle-progress{
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 .ana-left-side .chart .card{
   background: white;
-  border-radius: 10px;
+  border-radius: 21px;
   align-items: center;
+  width:800px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+}
+.ana-left-side .chart .card .card-body{
+  margin: 5px;
+}
+.select{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.condition{
+  display: flex;
+  justify-content: space-around;
+  margin: 15px;
+}
+#list ul li{
+  list-style-type: none;
 }
 /* --------------css of Home page------------------- */
 
@@ -127,6 +180,15 @@
   display: flex;
   justify-content: space-around;
   
+}
+.accordion-body .card{
+  background-image: linear-gradient(#d3cbf7,white);
+  border-radius: 20px;
+
+}
+.accordion-body .card #circular-chart{
+  display: grid;
+  justify-content: center;
 }
 .imgconatiner{
   width: 300px;
@@ -220,6 +282,7 @@
     border-radius: 5px;
     color: #000;
     transition: all 0.5s ease;
+    cursor: default;
 }
 .active{
     background: white;

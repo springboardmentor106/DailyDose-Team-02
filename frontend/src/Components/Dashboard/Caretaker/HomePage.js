@@ -53,9 +53,9 @@ const HomePage = () => {
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
       <div class="accordion-body">
         
-        <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>1 Hour walk</span></div> </div>
-        <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>Yoga</span></div> </div>
-        <div className="card"><div className="card-body">  <CircularProgressBar value={85}/><span>Exericse</span></div> </div>
+        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
+        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
+        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
         <div className="card" id="progress"><div className="card-body">
         <span>Remainder   50%</span>
           <Progress progress={50}/>
@@ -87,10 +87,11 @@ const HomePage = () => {
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
       <div class="accordion-body">
-        <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>1 Hour walk</span></div> </div>
-        <div className="card"><div className="card-body">  <CircularProgressBar value={75}/><span>Yoga</span></div> </div>
-        <div className="card"><div className="card-body">  <CircularProgressBar value={85}/><span>Exericse</span></div> </div>
-        <div className="card" id="progress"><div className="card-body">
+      <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
+        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
+        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
+        <div className="card" id="progress"><div className="card-body" id="circular-chart">
+          <div ><strong>Result</strong></div>
         <span>Remainder   50%</span>
           <Progress progress={50}/>
           <span>goal      60%</span>
