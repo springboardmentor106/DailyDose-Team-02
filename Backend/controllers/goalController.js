@@ -56,9 +56,9 @@ export const deleteGoal = async (req, res) => {
 
 export const goalStats = async (req, res) => {
     try {
-        // const { userId, role } = req; // Get user ID from decoded token
-        // const totalGoals = await GOAL.countDocuments({ user: userId });
-        const totalGoals = await GOAL.countDocuments();
+        const { userId, role } = req; // Getting userId from decoded token
+        const totalGoals = await GOAL.countDocuments({ user: userId });
+        // const totalGoals = await GOAL.countDocuments();
         if (!totalGoals) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' })
         }

@@ -10,7 +10,7 @@ router.post('/', validation(createGoalSchema), checkUserAuth, createGoal);
 router.get('/', checkUserAuth, getGoals);
 router.patch('/:id', validation(updateGoalSchema), checkUserAuth, updateGoal);
 router.delete('/:id', checkUserAuth, deleteGoal);
-router.get('/goal-stats', checkUserAuth, goalStats)
+router.get('/stats', checkUserAuth, goalStats)
 
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);

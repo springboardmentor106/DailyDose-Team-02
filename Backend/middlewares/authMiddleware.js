@@ -1,29 +1,22 @@
 import jwt from "jsonwebtoken";
 
-var checkUserAuth = async (req, res, next) => {
-  const token = req.headers['authorization']
-  if (token) {
-    try {
-      jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-        console.log(decoded);
-        if (err) {
-          return res.status(401).json({ message: 'Failed to authenticate token.' + err });
-        }
-        req.body.userId = decoded.userID;
-        req.body.role = decoded.role;
-        next();
-      });
+const checkUserAuth = async (req, res, next) => {
+  const token = req.headers['authorization'];
 
-      next()
-    } catch (error) {
-      console.log(error)
-      return res.status(401).send({ "status": "failed", "message": "Unauthorized User" })
-    }
-  }
   if (!token) {
-    return res.status(401).send({ "status": "failed", "message": "Unauthorized User, Don't have Token" })
+    return res.status(401).json({ status: "failed", message: "Unauthorized User, Token is missing" });
   }
+  try {
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-}
+    req.userId = decoded.userId;
+    req.role = decoded.role;
 
-export default checkUserAuth
+    next();
+  } catch (error) {
+    console.error("Error in token verification:", error);
+    return res.status(401).json({ status: "failed", message: "Failed to authenticate token." });
+  }
+};
+
+export default checkUserAuth;
