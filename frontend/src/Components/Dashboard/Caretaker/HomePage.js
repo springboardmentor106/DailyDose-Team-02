@@ -1,5 +1,4 @@
 import React from "react";
-import SideBar from "./SideBar";
 import "./Pages.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
@@ -22,7 +21,7 @@ const HomePage = () => {
         <div className="header">
           <div className="card" id="card1">
             <div className="card-body" id="heading">
-                <div><h5>Welcome back...</h5>
+                <div><strong><h3> Welcome back...</h3></strong>
                 <p>Upgrade your crowd by surrounding yourself with supportive, 
                 and uplifting individuals who encourage positivity.</p></div>
                 <div className="imgconatiner"><img src={Caretacker} alt="" /></div>
@@ -31,9 +30,9 @@ const HomePage = () => {
           <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
             <div className="card-body" id="profile">
               <div><img src={profilepic} alt="" /></div>
-              <div><p>Dr Caretaker</p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
+              <div><p><strong>Dr Caretaker</strong> </p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
-          <div className="card" id="card3"><div className="card-title">User Upadate</div></div>
+          <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
         </div>
         <div className="line"><h2>User's Profile</h2></div>
         <div className="content">
@@ -54,7 +53,8 @@ const HomePage = () => {
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
-        <div className="card" id="progress"><div className="card-body">
+        <div className="card" id="care-progress"><div className="card-body">
+        <div> <strong>Progress </strong></div>
         <span>Remainder   50%</span>
           <Progress progress={50}/>
           <span>goal      60%</span>
@@ -86,8 +86,8 @@ const HomePage = () => {
       <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
-        <div className="card" id="progress"><div className="card-body" id="circular-chart">
-          <div ><strong>Result</strong></div>
+        <div className="card" id="care-progress"><div className="card-body" >
+        <div> <strong>Progress </strong></div>
         <span>Remainder   50%</span>
           <Progress progress={50}/>
           <span>goal      60%</span>
