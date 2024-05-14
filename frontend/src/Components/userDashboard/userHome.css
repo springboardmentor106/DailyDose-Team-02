@@ -2,4 +2,30 @@
     width: 100vw;
     height: 100vh;
     background-color: #eaeef6;
+    display: flex;   
+    justify-content: end;
+    align-items: center;
+}
+
+.main__content{
+    width: 90%;
+    margin-right: 1vw;
+    height: 90%;
+    border-radius: 1rem;
+    display: grid;
+    background-color: #7192d4;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.main__content .box{
+    background-color: #fff;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #7192d4;
+    font-weight: 600;
+    transition: 0.5s;
 }

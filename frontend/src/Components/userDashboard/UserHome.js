@@ -7,6 +7,9 @@ const Nav = () => {
     <>
       <div className="user__body">
         <UserNav />
+        <div className="main__content">
+          
+        </div>
       </div>
     </>
   );

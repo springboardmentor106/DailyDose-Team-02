@@ -13,6 +13,8 @@ import Target from "../Components/Dashboard/User/Target"
 import CareAdd from "../Components/Dashboard/Caretaker/CareAdd";
 import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
+import UserDashboard from "../Components/userDashboard/UserHome";
+
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
   const token = localStorage.getItem("token");
@@ -47,6 +49,7 @@ function Routing() {
       <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
       <Route path="/care-add" element={<CareAdd/>} />
       <Route path="/care-analytics" element={<Analytics/>} />
+      <Route path="/user-dash" element={<UserDashboard/>} />
     </Routes>
   );
 }
