@@ -41,12 +41,12 @@
 }
 .ana-right-card-two{
   flex: 1;
-  padding: 20px;
-  height: 296px;
+  padding: 14px;
+  height: 332px;
   width: 332px;
   background-color: white;
   border-radius: 15px;
-  margin-top: 20px;
+  margin-top: 15px;
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .user{

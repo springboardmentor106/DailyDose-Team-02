@@ -20,10 +20,7 @@ const Analytics = () => {
       { time: '10:05 PM', activity: 'Gardening' },
       { time: '10:05 PM', activity: 'Gardening' },
       { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
+
     ];
  
   return (
