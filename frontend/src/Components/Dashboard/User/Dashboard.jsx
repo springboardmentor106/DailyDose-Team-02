@@ -51,7 +51,7 @@ const Dashboard = () => {
         <div className="row-three-card">
           <h5 id='progres'><strong>Progress</strong></h5>
           <div className="box-left-top">
-              <div><CircularProgressBar value={55} /> </div> <br />
+              <div id='CircularProgressBar'><CircularProgressBar value={55} /> </div> <br />
             </div>
             <div className="Progress-details-container">
               <div className="one-pro-detail">
