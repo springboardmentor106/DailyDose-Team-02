@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import ReminderListAdd from '../User/ReminderList';
 import SideBar from "../User/SideBar"
+import { remindersAddData } from './StaticDataUser';
 import './Add.css'
 const Add = () => {
-  const reminders = [
-    { Food: 'After Breakfast', activity: '1.0' },
-    { Food: 'AAfter Lunch', activity: '1.0' },
-    { Food: 'After Dinner', activity: '1.0' },
-  ];
   const [selectedItem, setSelectedItem] = useState('goal');
   const handleItemClick = (item) => {
     setSelectedItem(item === selectedItem ? null : item);
@@ -76,7 +72,7 @@ const Add = () => {
 
             <div className="bordered-div" style={{ border: '1px solid black',borderRadius: '8px', padding: '5px' }}>
 
-            <ReminderListAdd reminders={reminders} />
+            <ReminderListAdd reminders={remindersAddData} />
             <button className="btn" onClick={() => handleItemClick('goal')} style={{ padding: '5px 8px', fontSize: '10px', backgroundColor: '#6A58DC', color: 'white' , marginLeft: '110px' }}>
             <h4 id='heading' style={{ margin: 0, fontSize: '10px' }}>+ Add </h4>
             </button>

@@ -7,19 +7,9 @@ import ReactCalendar from '../dashComponents/Calendar';
 import dailyimg from "../../../assets/images/User.png"
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
+import { profileinfo } from './StaticDataUser';
+import { reminders } from './StaticDataUser';
 const Dashboard = () => {
-  const profileinfo=[
-    {name:"Chris Evan" , age:30, Location : "Delhi, india"},
-  ]
-  const reminders = [
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-    { time: '10:05 PM', activity: 'Gardening' },
-  ];
      return (
         <div className="dashboard">
           <UserNav/>
@@ -91,6 +81,32 @@ const Dashboard = () => {
         </div>
         <div className="row-three-card">
           <h5 id='about'><strong>About User</strong></h5>
+          <div className="row-three-dtails-container">
+          <div className="row-three-details-container-row-first">
+          <div className="row-three-detail-first">
+             <h7><strong>Disease</strong></h7>
+             <p>Blood pressure</p>
+             <p>Cholestrol</p>
+           </div>
+           <div className="row-three-detail-second">
+           <h7><strong>Allergy</strong></h7>
+           <p>Dairy products</p>
+           <p>Dust mites</p>
+           </div>
+          </div>
+          <div className="row-three-details-container-row-second">
+          <div className="row-three-detail-first">
+             <h7><strong>Disease</strong></h7>
+             <p>Blood pressure</p>
+             <p>Cholestrol</p>
+           </div>
+           <div className="row-three-detail-second">
+           <h7><strong>Allergy</strong></h7>
+           <p>Dairy products</p>
+           <p>Dust mites</p>
+           </div>
+          </div>
+          </div>
         </div>
         </div>
 
@@ -98,7 +114,6 @@ const Dashboard = () => {
        <div className="right-side">
         <div className="right-card-one">
           <ReactCalendar/>
-
         </div>
         <div className="card-center-details">
           <div className="Des-Rem">
