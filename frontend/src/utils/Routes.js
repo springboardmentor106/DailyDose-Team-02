@@ -31,7 +31,6 @@ function ProtectedRoute({ Component }) {
   }, []);
   return <Component />;
 }
-
 function Routing() {
   return (
     <Routes>
@@ -46,12 +45,11 @@ function Routing() {
       <Route path="/add" element={<Add/>} />
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/target" element={<Target/>} />
-      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
+      <Route path="/care-dashboard" element={<HomePage/>} />
       <Route path="/care-add" element={<CareAdd/>} />
       <Route path="/care-analytics" element={<Analytics/>} />
       <Route path="/user-dash" element={<UserDashboard/>} />
     </Routes>
   );
 }
-
 export default Routing;

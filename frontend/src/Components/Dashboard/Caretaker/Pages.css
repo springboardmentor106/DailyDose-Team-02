@@ -3,7 +3,6 @@
     /* margin: 2px; */
     
 }
-
 .nav-bar{
   
   position:relative;
@@ -45,10 +44,10 @@
 .user .card p{
   font-size: 12px;
 }
-.chart{
+/* .chart{
     margin-top:5px ;
-    
-}
+    min-width: 100%;
+} */
 .aboutuser{
     display: flex;
     justify-content: space-around;
@@ -87,16 +86,17 @@
 }
 .header {
   display: flex;
+  justify-content: space-between;
 }
 #card1{
   flex: 50; background-color:#c1e2f9 ; border-radius: 20px;
-  margin: 0;
+  margin: 3px;
 }
 #card2{
-  flex: 30; background-color: #cdc8f5; border-radius: 20px;
+  flex: 30; background-color: #cdc8f5; border-radius: 20px;  margin: 3px;
 }
 #card3{
-  flex: 20; background-color: #cdc8f5; border-radius: 20px;
+  flex: 20; background-color: #cdc8f5; border-radius: 20px;  margin: 3px;
 }
 #heading{
   display: flex;
