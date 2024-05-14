@@ -1,5 +1,11 @@
-import UserController from '../controllers/userController.js';
-import CaretakerController from '../controllers/caretakerController.js';
+import {
+    getUserDetailsByUuidAndRole,
+    newUserEmailOtp,
+    userLogin,
+    userPasswordReset,
+    userPasswordResetEmail,
+    userRegistration
+} from '../controllers/userController.js';
 import checkUserAuth from '../middlewares/auth-middleware.js';
 import express from 'express'
 
@@ -8,18 +14,18 @@ const router = express.Router();
 
 
 // Public Routes  e.g --> Register
-router.post('/new-user', UserController.newUserEmailOtp)
-router.post('/register', UserController.userRegistration)
-router.post('/login', UserController.userLogin)
-router.post('/reset-password-email', UserController.userPasswordResetEmail)
-router.post('/validate-otp', UserController.validateOtp)
-router.post('/reset-password', UserController.userPasswordReset)
+router.post('/new-user', newUserEmailOtp)
+router.post('/register', userRegistration)
+router.post('/login', userLogin)
+router.post('/reset-password-email', userPasswordResetEmail)
+router.post('/validate-otp', userPasswordResetEmail)
+router.post('/reset-password', userPasswordReset)
 
 
 // Private Routes
-router.post('/user/details/:uuid/:role', UserController.getUserDetailsByUuidAndRole);
+router.post('/user/details/:uuid/:role', getUserDetailsByUuidAndRole);
 
-router.post('/assign-user', checkUserAuth, UserController.assignUserToCaretaker);
+router.post('/assign-user', checkUserAuth);
 
 
 export default router
