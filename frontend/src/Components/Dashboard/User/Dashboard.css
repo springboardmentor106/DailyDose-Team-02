@@ -75,6 +75,7 @@
     border-radius: 35px;
     margin-top: -3px;
     background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
   .row-one-card-one-dashboard {
     padding: 20px;
@@ -91,7 +92,7 @@
     background-color: white;
     border-radius: 35px;
     margin-top: 13px;
-    box-shadow:rgb(26 -7 21 / 10%) 6px 18px 21px -10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
   .card-center-details{
     margin-left: 23px;
@@ -132,6 +133,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.des-option-icon{
+  margin-left: 75px;
 }
 .Additional-row-one-das{
   display: flex;
