@@ -4,28 +4,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig.js';
 import OTP from '../models/otpModel.js';
-import path from 'path';
 import Caretaker from '../models/caretakerModel.js';
 import { generateNumberOTP } from '../config/generateOtp.js';
-import {
-    newUserEmailOtpSchema,
-    userRegistrationSchema,
-    userLoginSchema,
-    changeUserPasswordSchema,
-    validateOtpSchema,
-    userPasswordResetEmailSchema,
-    userPasswordResetSchema,
-} from '../validations/userValidation.js';
 
 export const newUserEmailOtp = async (req, res) => {
     try {
-        // validation
-        const { error, value } = newUserEmailOtpSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
-
-        const { email, role } = value;
+        const { email, role } = req.body;
 
         if (role !== "caretaker") {
             const user = await User.findOne({ email: email });
@@ -102,14 +86,7 @@ export const getUserDetailsByUuidAndRole = async (req, res) => {
 
 export const userRegistration = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = userRegistrationSchema.validate(req.body);
-
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message });
-        }
-
-        const { enteredOtp, firstname, lastname, email, gender, age, password, role } = value;
+        const { enteredOtp, firstname, lastname, email, gender, age, password, role } = req.body;
         // console.log(req.body)
         // console.log(value)
         const savedOtp = await OTP.findOne({ email });
@@ -186,13 +163,8 @@ export const userRegistration = async (req, res) => {
 // Login
 export const userLogin = async (req, res) => {
     try {
-        // validation
-        const { error, value } = userLoginSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
+        const { email, password, role } = req.body;
 
-        const { email, password, role } = value;
         if (email && password) {
             let user;
             if (role != "caretaker") {
@@ -228,13 +200,8 @@ export const userLogin = async (req, res) => {
 // Change User Password If Know and want to Change
 export const changeUserPassword = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = changeUserPasswordSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
+        const { password, password_confirm } = req.body;
 
-        const { password, password_confirm } = value
         if (password && password_confirm) {
             if (password !== password_confirm) {
                 res.send({ "status": "failed", "message": "New Password and Confirm New Password not match" })
@@ -279,17 +246,10 @@ export const assignUserToCaretaker = async (req, res) => {
 };
 
 
-
-
 // Forget Password - Reset through email
 export const userPasswordResetEmail = async (req, res) => {
-    // validation
-    const { error, value } = userPasswordResetEmailSchema.validate(req.body)
-    if (error) {
-        return res.status(400).json({ status: "failed", message: error.message })
-    }
+    const { email, role } = req.body
 
-    const { email, role } = value
     if (email) {
         // const user = await User.findOne({ email: email })
         if (role !== "caretaker") {
@@ -337,13 +297,8 @@ export const userPasswordResetEmail = async (req, res) => {
 // validate the otp
 export const validateOtp = async (req, res) => {
     try {
-        // validation
-        const { error, value } = validateOtpSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
+        const { email, otp } = req.body;
 
-        const { email, otp } = value
         const savedOtp = await OTP.findOne({ email });
         if (!savedOtp) {
             return res.status(500).json({ status: "failed", message: 'Some error happened. Request for otp again.' })
@@ -370,13 +325,7 @@ export const validateOtp = async (req, res) => {
 
 // update password
 export const userPasswordReset = async (req, res) => {
-    // validation
-    const { error, value } = userPasswordResetSchema.validate(req.body)
-    if (error) {
-        return res.status(400).json({ status: "failed", message: error.message })
-    }
-
-    const { password, email, role } = value;
+    const { password, email, role } = req.body;
 
     try {
         let user;

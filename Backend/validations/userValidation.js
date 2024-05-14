@@ -1,4 +1,5 @@
-import Joi from "joi";
+// import Joi from "joi";
+import { Joi } from "express-validation";
 
 export const newUserEmailOtpSchema = Joi.object({
     email: Joi.string().required(),
