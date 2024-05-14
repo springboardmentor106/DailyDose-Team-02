@@ -29,16 +29,7 @@ export const getGoals = async (req, res) => {
 
 export const updateGoal = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = updateGoalSchema.validate({
-            id: req.params.id,
-            bodyData: req.bod
-        })
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
-
-        const updatedGoal = await GOAL.findByIdAndUpdate(value.id, value.bodyData, { new: true });
+        const updatedGoal = await GOAL.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedGoal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
         }
@@ -64,9 +55,10 @@ export const deleteGoal = async (req, res) => {
 };
 
 export const goalStats = async (req, res) => {
-    const userId = req.user.userId; // Get user ID from decoded token
     try {
-        const totalGoals = await GOAL.countDocuments({ user: userId });
+        // const { userId, role } = req; // Get user ID from decoded token
+        // const totalGoals = await GOAL.countDocuments({ user: userId });
+        const totalGoals = await GOAL.countDocuments();
         if (!totalGoals) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' })
         }

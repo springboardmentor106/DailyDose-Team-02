@@ -3,13 +3,8 @@ import { createReminderSchema, updateReminderSchema } from '../validations/userR
 
 export const createReminder = async (req, res) => {
     try {
-        // validation
-        const { error, value } = createReminderSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
+        const newReminder = new REMINDER(req.body);
 
-        const newReminder = new REMINDER(value);
         const savedReminder = await newReminder.save();
         return res.status(200).json({ status: "success", message: "Reminders Added Successfully" });
 
@@ -33,16 +28,8 @@ export const getReminders = async (req, res) => {
 
 export const updateReminder = async (req, res) => {
     try {
-        // validation
-        const { error, value } = updateReminderSchema.validate({
-            id: req.params.id,
-            bodyData: req.body
-        })
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
-
-        const updatedReminder = await REMINDER.findByIdAndUpdate(value.id, value.bodyData, { new: true });
+        const updatedReminder = await REMINDER.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        
         if (!updatedReminder) {
             return res.status(404).json({ status: "failed", message: 'Reminder not found' });
         }

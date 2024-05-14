@@ -1,16 +1,16 @@
 import express from 'express';
-// import { checkUserAuth, validateUserOrCaretaker } from '../middlewares/auth-middleware.js';
-
-
 import { createGoal, getGoals, updateGoal, deleteGoal, goalStats } from '../controllers/goalController.js';
+import { validation } from '../middlewares/validationMiddleware.js';
+import { createGoalSchema, updateGoalSchema } from '../validations/userGoalValidation.js';
+import checkUserAuth from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', createGoal);
-router.get('/', getGoals);
-router.patch('/:id', updateGoal);
-router.delete('/:id', deleteGoal);
-router.get('/stats', goalStats)
+router.post('/', validation(createGoalSchema), checkUserAuth, createGoal);
+router.get('/', checkUserAuth, getGoals);
+router.patch('/:id', validation(updateGoalSchema), checkUserAuth, updateGoal);
+router.delete('/:id', checkUserAuth, deleteGoal);
+router.get('/goal-stats', checkUserAuth, goalStats)
 
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);

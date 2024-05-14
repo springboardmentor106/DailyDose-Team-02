@@ -12,7 +12,7 @@ export const createGoalSchema = Joi.object({
 });
 
 export const updateGoalSchema = Joi.object({
-    id: Joi.string().required(),
+    // id: Joi.string().required(),
     title: Joi.string().required(),
     description: Joi.string().required(),
     targetDate: Joi.date().allow(null),

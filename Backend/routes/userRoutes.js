@@ -4,9 +4,10 @@ import {
     userLogin,
     userPasswordReset,
     userPasswordResetEmail,
-    userRegistration
+    userRegistration,
+    validateOtp
 } from '../controllers/userController.js';
-import checkUserAuth from '../middlewares/auth-middleware.js';
+import checkUserAuth from '../middlewares/authMiddleware.js';
 import express from 'express';
 // import { validate } from 'express-validation';
 import {
@@ -25,14 +26,15 @@ router.post('/new-user', validation(newUserEmailOtpSchema), newUserEmailOtp)
 router.post('/register', validation(userRegistrationSchema), userRegistration)
 router.post('/login', validation(userLoginSchema), userLogin)
 router.post('/reset-password-email', validation(userPasswordResetEmailSchema), userPasswordResetEmail)
-router.post('/validate-otp', validation(userPasswordResetEmailSchema), userPasswordResetEmail)
-router.post('/reset-password', validation(userPasswordResetSchema), userPasswordReset)
+router.post('/validate-otp', validation(userPasswordResetEmailSchema), validateOtp)
 
 
-// Private Routes
-router.post('/user/details/:uuid/:role', getUserDetailsByUuidAndRole);
-
-router.post('/assign-user', checkUserAuth);
-
+// Protected Routes
+router.post('/user/details/:uuid/:role', checkUserAuth, getUserDetailsByUuidAndRole);
+router.post('/reset-password', validation(userPasswordResetSchema), checkUserAuth, userPasswordReset)
+// router.post('/assign-user', checkUserAuth);
+// router.get('/dummy', checkUserAuth, (req, res)=>{
+//     res.send('I am dummy')
+// })
 
 export default router

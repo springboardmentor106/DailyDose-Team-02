@@ -138,7 +138,7 @@ export const userRegistration = async (req, res) => {
                     return res.status(500).json({ status: "failed", message: "Internal server error. User not created" })
                 }
                 // JWT Token Generation
-                token = jwt.sign({ userID: savedUser.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                token = jwt.sign({ userID: savedUser.uuid, role: savedUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
             } else {
                 const caretakerDoc = new Caretaker(body)
                 const savedCaretaker = await caretakerDoc.save();
@@ -146,7 +146,7 @@ export const userRegistration = async (req, res) => {
                     return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" })
                 }
                 // JWT Token Generation
-                token = jwt.sign({ userID: savedCaretaker.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                token = jwt.sign({ userID: savedCaretaker.uuid, role: savedCaretaker.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
             }
 
             res.status(201).json({ status: "success", message: "Registered Successfully", token });
@@ -177,11 +177,9 @@ export const userLogin = async (req, res) => {
                 if ((user.email === email) && isMatch) {
 
                     // JWT Token Generate
-                    // const token = jwt.sign({ userID: user.uuid }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-                    const token = jwt.sign({ userID: user.uuid + 'jyjggdhtrhcfmhgvhgfrt' }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                    const token = jwt.sign({ userID: user.uuid, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
-                    // res.send({ "status": "success", "message": "Login Successfully", "token": token });
-                    res.send({ "status": "success", "message": "Login Successfully", "token": token, "userID": user.uuid });
+                    res.send({ "status": "success", "message": "Login Successfully", "token": token });
                 } else {
                     res.send({ "status": "failed", "message": "Email or Password is Invalid" });
                 }

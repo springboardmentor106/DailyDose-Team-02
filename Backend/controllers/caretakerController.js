@@ -4,13 +4,7 @@ import { caretakerLoginSchema, caretakerRegistrationSchema } from '../validation
 
 export const caretakerRegistration = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = caretakerRegistrationSchema.validate(req.body);
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message });
-        }
-
-        const { firstname, lastname, email, gender, age, password, password_confirm } = value;
+        const { firstname, lastname, email, gender, age, password, password_confirm } = req.body;
 
         if (!(firstname && lastname && email && gender && age && password && password_confirm)) {
             return res.status(400).json({ status: "failed", message: "All fields are required" });
@@ -47,13 +41,7 @@ export const caretakerRegistration = async (req, res) => {
 
 export const caretakerLogin = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = caretakerLoginSchema.validate(req.body);
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message });
-        }
-
-        const { email, password } = value;
+        const { email, password } = req.body;
 
         if (!(email && password)) {
             return res.status(400).json({ status: "failed", message: "All fields are required" });
