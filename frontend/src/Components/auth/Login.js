@@ -72,7 +72,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -83,7 +83,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -94,7 +94,7 @@ const Login = () => {
               name="role"
               onChange={(e) => setRole(e.target.value)}
               value={role}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Login as
               </option>

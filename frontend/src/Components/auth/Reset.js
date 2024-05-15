@@ -67,7 +67,7 @@ const Reset = () => {
             <input
               type="email"
               placeholder="Email Address"
-              className="form-control"
+              className="form-control2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -80,7 +80,7 @@ const Reset = () => {
               name="role"
               onChange={(e) => setRole(e.target.value)}
               defaultValue={role}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Role?
               </option>
