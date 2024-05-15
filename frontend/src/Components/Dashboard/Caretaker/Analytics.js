@@ -11,30 +11,17 @@ import { AiFillSliders } from "react-icons/ai";
 import { profileinfo } from './StaticDataCare'
 import { reminders } from './StaticDataCare'
 const Analytics = () => {
-  // const profileinfo=[
-  //   {name:"Chris Evan" , email:"chris@gmail.com", age:30,blood:"O+"},
-  //   {name:"John sinna" , email:"john@gmail.com", age:30,blood:"A+"},
-  //   {name:"harry potter" , email:"harry@gmail.com", age:30,blood:"B+"},
-  //   {name:"Ryan smith" , email:"ryan@gmail.com", age:30,blood:"AB+"},
-  // ]
   
-  //   const reminders = [
-  //     { time: '10:05 PM', activity: 'Gardening' },
-  //     { time: '10:05 PM', activity: 'Gardening' },
-  //     { time: '10:05 PM', activity: 'Gardening' },
-
-  //   ];
- 
   return (
-      <div className="main" >
+      <div className="ana-main" >
         <div className="nav-bar">
           <UserNav/>
         </div>
         <div className="Analytics-pages">
         <div className="ana-left-side">
-          <div className="user">
+          <div className="ana-user">
             {profileinfo.map((profile,index)=>(
-              <div className="card" key={index}><div className="card-body">
+              <div className="card" key={index}><div className="card-body" id="ana-card-body">
                 <img src={profilepic} alt="" />
                 <h6><strong>{profile.name}</strong></h6>
                 <p>{profile.email}</p>
@@ -43,7 +30,7 @@ const Analytics = () => {
               </div></div>
             ))}
           </div>
-          <div className="chart">
+          <div className="ana-chart">
             <div className="card"><div className='card-body'><Chart/></div></div>
           </div>
           <div className="row-three">
@@ -113,7 +100,7 @@ const Analytics = () => {
         <div className="ana-right-card-one">
           <Calendar/>
         </div>
-        <div className="select">
+        <div className="ana-select">
           <div><strong>Reminder</strong></div>
           <div><strong>Goal</strong></div>
           <div><strong>Habit</strong></div>
