@@ -201,7 +201,7 @@
 }
 .box-left-top{
   margin-top: 6px;
-  margin-left: 85px;
+  margin-left: 118px;
 }
 .row-one-chart{
   margin-top: 16px;
@@ -244,22 +244,29 @@
 .Progress-details-container{
   display: flex;
   justify-content: space-around;
+  color: black;
 }
 .cirlce-pro-one{
-  width: 10px;
-  height: 10px;
+  width: 1vw;
+  height: 1vw;
+  max-width: 10px;
+  max-height: 10px;
   border-radius: 50px;
   background-color: #6455C6;
 }
 .cirlce-pro-two{
-  width: 10px;
-  height: 10px;
+  width: 1vw;
+  height: 1vw;
+  max-width: 10px;
+  max-height: 10px;
   border-radius: 50px;
   background-color: #857AC6;
 }
 .cirlce-pro-three{
-  width: 10px;
-  height: 10px;
+  width: 1vw;
+  height: 1vw;
+  max-width: 10px;
+  max-height: 10px;
   border-radius: 50px;
   background-color: #CFCAEE;
 }

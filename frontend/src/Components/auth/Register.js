@@ -97,7 +97,7 @@ const Register = () => {
               // value={firstname}
               onChange={handleChange}
               placeholder="First Name"
-              className="form-control"
+              className="form-control2"
               required
             />
             {errors.firstName && <p>{errors.firstName}</p>}
@@ -107,7 +107,7 @@ const Register = () => {
               // value={lastname}
               onChange={handleChange}
               placeholder="Last Name"
-              className="form-control"
+              className="form-control2"
               required
             />
             {errors.lastName && <p>{errors.lastName}</p>}
@@ -119,7 +119,7 @@ const Register = () => {
               // value={email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -129,7 +129,7 @@ const Register = () => {
               name="gender"
               onChange={handleChange}
               defaultValue={formData.gender}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Gender
               </option>
@@ -144,7 +144,7 @@ const Register = () => {
               name="role"
               onChange={handleChange}
               defaultValue={formData.role}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Register as
               </option>
@@ -160,7 +160,7 @@ const Register = () => {
               // value={age}
               onChange={handleChange}
               placeholder="Age"
-              className="form-control"
+              className="form-control2"
               min={18}
               max={100}
             />
@@ -172,7 +172,7 @@ const Register = () => {
               // value={password}
               onChange={handleChange}
               placeholder="Password"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -183,7 +183,7 @@ const Register = () => {
               // value={password_confirm}
               onChange={handleChange}
               placeholder="Confirm Password"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>

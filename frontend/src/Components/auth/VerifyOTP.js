@@ -47,7 +47,7 @@ const VerifyOTP = () => {
           }
           setTimeout(() => {
             if (flow === "register") {
-              navigate("/user-home", { replace: true });
+              navigate("/dashboard", { replace: true });
             } else {
               navigate("/update-password", { state: { email: email, role: role } });
             }

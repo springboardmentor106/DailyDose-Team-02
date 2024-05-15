@@ -72,7 +72,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -83,7 +83,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -94,7 +94,7 @@ const Login = () => {
               name="role"
               onChange={(e) => setRole(e.target.value)}
               value={role}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Login as
               </option>
@@ -103,10 +103,10 @@ const Login = () => {
             </select>
           </div>
 
-          <div className="remember-forgot">
-            <div className="remember-me">
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember"> Remember me</label>
+          <div className="forgot-remember-container">
+            <div className="remember-me-container">
+              <input type="checkbox" id="remember-me-checkbox" />
+              <div id="remember-me-text">Remember me</div>
             </div>
             <div className="forgot">
               <Link to="/reset">Forgot password?</Link>

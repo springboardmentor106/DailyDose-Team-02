@@ -8,20 +8,22 @@ import ReminderList from '../User/ReminderList';
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from '../../userDashboard/UserNav'
 import { AiFillSliders } from "react-icons/ai";
+import { profileinfo } from './StaticDataCare'
+import { reminders } from './StaticDataCare'
 const Analytics = () => {
-  const profileinfo=[
-    {name:"Chris Evan" , email:"chris@gmail.com", age:30,blood:"O+"},
-    {name:"John sinna" , email:"john@gmail.com", age:30,blood:"A+"},
-    {name:"harry potter" , email:"harry@gmail.com", age:30,blood:"B+"},
-    {name:"Ryan smith" , email:"ryan@gmail.com", age:30,blood:"AB+"},
-  ]
+  // const profileinfo=[
+  //   {name:"Chris Evan" , email:"chris@gmail.com", age:30,blood:"O+"},
+  //   {name:"John sinna" , email:"john@gmail.com", age:30,blood:"A+"},
+  //   {name:"harry potter" , email:"harry@gmail.com", age:30,blood:"B+"},
+  //   {name:"Ryan smith" , email:"ryan@gmail.com", age:30,blood:"AB+"},
+  // ]
   
-    const reminders = [
-      { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
-      { time: '10:05 PM', activity: 'Gardening' },
+  //   const reminders = [
+  //     { time: '10:05 PM', activity: 'Gardening' },
+  //     { time: '10:05 PM', activity: 'Gardening' },
+  //     { time: '10:05 PM', activity: 'Gardening' },
 
-    ];
+  //   ];
  
   return (
       <div className="main" >
@@ -44,28 +46,68 @@ const Analytics = () => {
           <div className="chart">
             <div className="card"><div className='card-body'><Chart/></div></div>
           </div>
-          <div className="aboutuser">
-            <div className="card" id='analysis-circle'>
-              <div className="card-body" ><h4><strong>Progress</strong></h4>
-              <div className='circle-progress'><CircularProgressBar value={55}/></div>
-              <div>55% Completed</div>
-              <div>45% Remaining</div>
-            </div></div>
-            <div className="about">
-              <div className="card"><div className="card-body">
-                <h4><strong> About User</strong></h4>
-                <p>the User's health Condition </p>
-                <div className="condition">
-                  <div id="list"><ul><h6><strong>Disease</strong></h6></ul>
-                  <li>Blood Pressure</li><li>Cholestrol</li><li>knee pain</li></div>
-                  <div id="list"><ul><h6><strong>Allergy</strong></h6></ul>
-                  <li>Dairy Product</li><li>Dust Mines</li><li>Penicilium</li></div>
-                </div>
-                
-                    
-              </div></div> 
+          <div className="row-three">
+        <div className="row-three-card">
+          <h5 id='progres'><strong>Progress</strong></h5>
+          <div className="box-left-top">
+              <div><CircularProgressBar value={55} /> </div> <br />
             </div>
+            <div className="Progress-details-container">
+              <div className="one-pro-detail">
+              <div className="cirlce-pro-one"></div>
+             <div className="pro-text">
+             55%
+            Completed
+             </div>
+              </div>
+              <div className="second-pro-detail">
+              <div className="cirlce-pro-two"></div>
+              <div className="pro-text">
+             25%
+             <br />
+             In process
+             </div>
+              </div>
+              <div className="third-pro-detail">
+              <div className="cirlce-pro-three"></div>
+              <div className="pro-text">
+             10%
+             <br />
+             In process
+             </div>
+              </div>
+            </div>
+        </div>
+        <div className="row-three-card">
+          <h5 id='about'><strong>About User</strong></h5>
+          <div className="row-three-dtails-container">
+          <div className="row-three-details-container-row-first">
+          <div className="row-three-detail-first">
+             <h7><strong>Disease</strong></h7>
+             <p>Blood pressure</p>
+             <p>Cholestrol</p>
+           </div>
+           <div className="row-three-detail-second">
+           <h7><strong>Allergy</strong></h7>
+           <p>Dairy products</p>
+           <p>Dust mites</p>
+           </div>
           </div>
+          <div className="row-three-details-container-row-second">
+          <div className="row-three-detail-first">
+             <h7><strong>Disease</strong></h7>
+             <p>Blood pressure</p>
+             <p>Cholestrol</p>
+           </div>
+           <div className="row-three-detail-second">
+           <h7><strong>Allergy</strong></h7>
+           <p>Dairy products</p>
+           <p>Dust mites</p>
+           </div>
+          </div>
+          </div>
+        </div>
+        </div>
         </div>
         <div className="ana-right-side">
         <div className="ana-right-card-one">
