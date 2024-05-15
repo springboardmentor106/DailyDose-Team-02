@@ -1,15 +1,8 @@
 import GOAL from '../models/goalModel.js';
-import { createGoalSchema, updateGoalSchema } from '../validations/userGoalValidation.js';
 
 export const createGoal = async (req, res) => {
     try {
-        // Validation
-        const { error, value } = createGoalSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({ status: "failed", message: error.message })
-        }
-
-        const goal = new GOAL(value);
+        const goal = new GOAL(req.body);
         await goal.save();
         return res.status(200).json({ status: "success", message: 'Goal Created Successfully' });
         // res.status(201).json(goal);

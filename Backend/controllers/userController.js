@@ -108,6 +108,7 @@ export const userRegistration = async (req, res) => {
             }
         }
         console.log(String(enteredOtp), savedOtp.otp);
+        
         if (savedOtp.otp === '') {
             return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
         }

@@ -7,7 +7,7 @@ const checkUserAuth = async (req, res, next) => {
     return res.status(401).json({ status: "failed", message: "Unauthorized User, Token is missing" });
   }
   try {
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     req.userId = decoded.userId;
     req.role = decoded.role;
