@@ -49,7 +49,6 @@ const HomePage = () => {
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
       <div class="accordion-body">
-        
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
         <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>

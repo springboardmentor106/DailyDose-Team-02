@@ -1,17 +1,12 @@
 /* Please do not give any universal styling */
-
 *{
-    
-    margin: 1px;
-    
+    margin: 1px;    
 }
 .nav-bar{
-  
   position:relative;
   z-index: 999;
 }
 /* --------------------Design for Analytics----------------  */
-
 .main{
     display: flex;
     color:black;
@@ -32,7 +27,6 @@
     box-sizing: border-box;
     margin-left: 5px;
     border-radius: 51px 0px 0px 51px;
-
 }
 .ana-right-card-one{
   padding: 0px;
@@ -189,6 +183,9 @@
 #profile img{
   width: 100px; height:100px;
   border-radius: 100%;
+}
+.progressBar-container{
+  display: flex;
 }
 #profile p{
   font-size: 15px;
