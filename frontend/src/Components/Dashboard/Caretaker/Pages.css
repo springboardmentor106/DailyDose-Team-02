@@ -1,5 +1,9 @@
+/* Please do not give any universal styling */
+
 *{
+    
     margin: 1px;
+    
 }
 .nav-bar{
   position:relative;
@@ -120,7 +124,7 @@
 }
 #card1{
   width:520px; height:200px;
-  background-color:#c1e2f9 ; border-radius: 20px;
+  background-color:#DAD4F7 ; border-radius: 20px;
   margin: 5px;
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
@@ -168,6 +172,11 @@
 #profile p{
   font-size: 15px;
 }
+
+#careTaker-Deatils{
+  margin-top: -100px;
+  margin-left: 305px;
+}
 .accordion-body{
   display: flex;
   justify-content: space-around;
@@ -194,7 +203,8 @@
 }
 .imgconatiner{
   width: 566px;
-  margin-top: -22px;
+  margin-top: -157px;
+  margin-left: 240px;
 }
 #care-progress .card-body{
   width: 200px;

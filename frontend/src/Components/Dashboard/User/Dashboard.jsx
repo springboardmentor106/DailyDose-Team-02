@@ -28,21 +28,17 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-two">
-            <div className="circle-das"></div>
-            <div className="details-das">
-              {profileinfo.map((profile, index) => (
-                <div className="card-user" key={index}>
-                  <div className="card-body">
-                    <h6>
-                      <strong>{profile.name}</strong>
-                    </h6>
-                    <p>Age: {profile.age}</p>
-                    <p>
-                      <IoLocationSharp /> {profile.location}
-                    </p>
-                  </div>
-                </div>
-              ))}
+          <div className="circle-das">
+
+         </div>
+          <div className="details-das">
+                  {profileinfo.map((profile,index)=>(
+              <div className="card-user" key={index}><div className="card-body">
+                <h6><strong>{profile.name}</strong></h6>
+                <p>Age: {profile.age}</p>
+                <p><IoLocationSharp /> {profile.location}</p>
+              </div></div>
+            ))}
             </div>
           </div>
         </div>

@@ -2,10 +2,11 @@ import React from "react";
 import "./Pages.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
-import CircularProgressBar from "../dashComponents/ProgressBar";
+
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
+import CircularProgressBar from "./CircularProgressbar";
 const HomePage = () => {
   const reminders = [
     { time: "08:00 AM", activity: "Morning walk" },
@@ -21,7 +22,7 @@ const HomePage = () => {
         <div className="header">
           <div className="card" id="card1">
             <div className="card-body" id="heading">
-                <div><strong><h3> Welcome back...</h3></strong>
+                <div ><strong><h3> Welcome back...</h3></strong>
                 <p>Upgrade your crowd by surrounding yourself with supportive, 
                 and uplifting individuals who encourage positivity.</p></div>
                 <div className="imgconatiner"><img src={Caretacker} alt="" /></div>
@@ -30,7 +31,7 @@ const HomePage = () => {
           <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
             <div className="card-body" id="profile">
               <div><img src={profilepic} alt="" /></div>
-              <div><p><strong>Dr Caretaker</strong> </p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
+              <div id="careTaker-Deatils"><p><strong>Dr Caretaker</strong> </p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
           <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
         </div>
