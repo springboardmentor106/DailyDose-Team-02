@@ -1,6 +1,7 @@
 import React from "react";
 import "./Error404.css";
 import error404 from "../../assets/images/error404.png";
+import error from "../../assets/images/error.png";
 import { useNavigate } from "react-router-dom";
 const Error404 = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Error404 = () => {
     <div className="error-container">
       <div className="error-main">
         <div className="error-pic">
-          <img src={error404} alt="404" />
+          <img src={error} alt="404" />
         </div>
         <div className="error-msg">
           <h1>We are Sorry...</h1>

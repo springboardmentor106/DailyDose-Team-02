@@ -29,6 +29,7 @@
   color: #7192d4;
   font-weight: 600;
   transition: 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .main__content .boxes:hover {
@@ -36,10 +37,108 @@
   color: #fff;
 }
 
-#welcome {
-  grid-column: span 3 / auto;
+#user__welcome {
+  display: flex;
+  justify-content: space-between;
+  grid-column: span 4 / auto;
   grid-row: span 2 / auto;
 }
+#welcome{
+    width: 63%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    color: #000;
+    overflow: hidden;
+}
+.welcome__text{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem;
+}
+.welcome__text h3{
+    font-size: 2rem;
+    font-weight: 600; 
+}
+.welcome__text p{
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.75;
+}
+.welcome__img__container{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    border-radius: 1rem;
+    overflow: hidden;
+    /* padding: 1rem; */
+    padding-bottom: 0;
+    margin-bottom: -5%;
+}
+.welcome__img__container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+#profile{
+    width: 34%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    color: #000;
+}
+.card-user{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin-top: 0;
+    justify-content: center;
+    align-items: center;    
+    background-color: #fff;
+}
+.card-profile{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#profile .card-profile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.card-body{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: start;
+    padding: 1rem;
+}
+.card-body h6{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.card-body p{
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.75;
+}
+
 #right-pane {
   grid-row: span 6 / auto;
   grid-column: span 2 / auto;
@@ -77,12 +176,81 @@
 #progress {
   width: 45%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.progress-details-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1vw;
+}
+.progress-details-container .progress-detail{
+  display: flex;
+  align-items: center;
+  /* width: 25%; */
+  gap: 0.75vw;
+}
+
+.progress-detail-text{
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000;
+  opacity: 0.75;
+  
 }
 
 #about__user {
   width: 45%;
   height: 100%;
+  position: relative;
+  color: #000;
+  flex-direction: column;
+  
 }
+#about__user h3{
+  position: absolute;
+  top: 2%;
+  font-size: 2rem;
+}
+#about__user .disease__info{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+  align-items: center;
+  /* padding: 1vw; */
+  margin-top: 1vw;
+  /* border: 1px solid red; */
+}
+#about__user .disease__info .user-disease{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* gap: 1vw; */
+  align-items: center;
+}
+.user-disease:nth-last-child(1){
+  border-left: 1px solid gray;
+}
+#about__user .disease__info .user-disease h6{
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+#about__user .disease__info .user-disease p{
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
 #profile {
   grid-row: span 2 / auto;
 }
@@ -109,10 +277,27 @@
     gap: 0.5rem;
   }
 
-  #welcome {
+  #user__welcome {
     grid-column: span 6 / auto;
     grid-row: span 1 / auto;
   }
+
+    #welcome {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .welcome__text h3{
+        font-size: 1.2rem;
+    }
+    .welcome__text p{
+        font-size: 0.75rem;
+        display: initial;
+
+    }
+
   #profile {
     display: none;
   }
@@ -126,14 +311,49 @@
     grid-row: span 1 / auto;
     order: 3;
   }
-    #progress {
-        width: 45%;
-        height: 100%;
-    }
-    #about__user {
-        width: 45%;
-        height: 100%;
-    }
+  #progress {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .progress-details-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .progress-details-container .progress-detail{
+    gap: 0.25rem;
+  }
+  
+  .progress-detail-text{
+    font-size: 0.35rem;    
+  }
+
+  #about__user {
+    width: 45%;
+    height: 100%;
+  }
+
+  #about__user .disease__info .user-disease h6{
+    font-size: 0.75rem;
+    
+  }
+  #about__user .disease__info .user-disease p{
+    font-size: 0.45rem;
+    
+  }
+
+  #about__user h3{
+    position: absolute;
+    top: 2%;
+    font-size: 1rem;
+  }
 
   #right-pane {
     grid-column: span 6 / auto;
@@ -141,12 +361,12 @@
     order: 4;
     flex-direction: row;
   }
-    #calender {
-        width: 45%;
-        height: 100%;
-    }
-    #tasks {
-        width: 45%;
-        height: 100%;
-    }
+  #calender {
+    width: 45%;
+    height: 100%;
+  }
+  #tasks {
+    width: 45%;
+    height: 100%;
+  }
 }

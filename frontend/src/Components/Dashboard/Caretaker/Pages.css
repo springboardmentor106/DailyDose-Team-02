@@ -1,8 +1,10 @@
-*{
+/* Please do not give any universal styling */
+
+/* *{
     
     margin: 1px;
     
-}
+} */
 .nav-bar{
   
   position:relative;
