@@ -2,10 +2,11 @@ import React from "react";
 import "./Pages.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
-import CircularProgressBar from "../dashComponents/ProgressBar";
+
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
+import CircularProgressBar from "./CircularProgressbar";
 const HomePage = () => {
   const reminders = [
     { time: "08:00 AM", activity: "Morning walk" },

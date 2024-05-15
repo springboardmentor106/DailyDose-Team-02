@@ -31,7 +31,7 @@ const CareAdd = () => {
           <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
             <div className="card-body" id="profile">
               <div><img src={profilepic} alt="" /></div>
-              <div><p><strong>Dr Caretaker</strong></p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
+              <div  id="careTaker-Deatils"><p><strong>Dr Caretaker</strong></p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
           <div className="card" id="card3"><div className="card-title"><h6>User Update </h6></div></div>
         </div>
