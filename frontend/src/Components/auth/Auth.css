@@ -298,6 +298,29 @@ form button:active,
   margin-top: 1vh;
 }
 
+.forgot-remember-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  box-sizing: border-box;
+}
+
+#remember-me-checkbox {
+  width: 16px;
+  margin-right: 5px;
+}
+
+.remember-me-container {
+  display: flex;
+  margin-right: 5px;
+}
+
+#remember-me-text {
+  font-size: 0.8rem;
+
+}
+
 .remember-forgot {
   display: flex;
   justify-content: flex-end;

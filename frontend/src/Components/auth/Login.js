@@ -103,10 +103,10 @@ const Login = () => {
             </select>
           </div>
 
-          <div className="remember-forgot">
-            <div className="remember-me">
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember"> Remember me</label>
+          <div className="forgot-remember-container">
+            <div className="remember-me-container">
+              <input type="checkbox" id="remember-me-checkbox" />
+              <div id="remember-me-text">Remember me</div>
             </div>
             <div className="forgot">
               <Link to="/reset">Forgot password?</Link>
