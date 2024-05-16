@@ -258,8 +258,9 @@
     font-weight:700 ;
   }
 
-  /* --------responsivenesss of .Analytics-pages-------- */
-@media screen and (max-width:425px) {
+  /* --------Responsive ness of .Analytics-pages-------- */
+
+  @media screen and (max-width:425px) {
   .ana-main{
     width: 100vh;
     height: 100vh;
@@ -295,6 +296,7 @@
   }
   .ana-user .card{
     height: 190px;
+    height:190px;
   }
   
 }
