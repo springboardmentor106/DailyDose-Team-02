@@ -100,14 +100,18 @@ const Analytics = () => {
         <div className="ana-right-card-one">
           <Calendar/>
         </div>
-        <div className="ana-select">
-          <div><strong>Reminder</strong></div>
-          <div><strong>Goal</strong></div>
-          <div><strong>Habit</strong></div>
-          <div><AiFillSliders /></div>
-        </div>
+        
         <div className="ana-right-card-two">
-        <ReminderList reminders={reminders} />
+          <div className="ana-select">
+            <div><strong>Reminder</strong></div>
+            <div><strong>Goal</strong></div>
+            <div><strong>Habit</strong></div>
+            <div><AiFillSliders /></div>
+          </div>
+          <div className="ana-reminder">
+          <ReminderList reminders={reminders} />
+          </div>
+        
         </div>
           </div>
         </div>

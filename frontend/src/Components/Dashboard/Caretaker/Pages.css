@@ -44,16 +44,20 @@
 .ana-right-card-two{
   flex: 1;
   padding: 14px;
-  height: 332px;
-  width: 332px;
-  background-color: white;
-  border-radius: 15px;
-  margin-top: 15px;
-  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+  display: grid;
 }
 .ana-user{
     display: flex;
     justify-content:space-between;
+}
+.ana-reminder{
+  background-color: white;
+  border-radius: 15px;
+  height: 300px;
+  width: 332px;
+  padding-top: 24px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .ana-user .card{
     margin: 4px;
@@ -106,7 +110,7 @@
 .ana-select{
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin: 10px;
 }
 
 /* --------------css of Home page------------------- */
@@ -256,3 +260,42 @@
   }
 
   /* --------responsivenesss of .Analytics-pages-------- */
+@media screen and (max-width:425px) {
+  .ana-main{
+    width: 100vh;
+    height: 100vh;
+  }
+  .Analytics-pages{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 2px;
+    display: grid;
+  }
+  .ana-right-side{
+    margin-top: 20px;
+    display: flex;
+  }
+  .ana-select{
+    display: flex;
+    justify-content: space-around;
+  }
+  .ana-right-card-two{
+    border-radius: 30px;
+    margin-left: 24px;
+    margin-top: -10px;
+  }
+  .ana-right-card-one{
+    margin-top: 10px;
+  }
+  .ana-chart .card-body{
+    height: 280px;
+  }
+  .ana-chart .card{
+    border: 20px;
+    box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+  }
+  .ana-user .card{
+    height: 190px;
+  }
+  
+}
