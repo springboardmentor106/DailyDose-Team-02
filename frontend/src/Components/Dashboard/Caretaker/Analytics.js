@@ -11,7 +11,20 @@ import { AiFillSliders } from "react-icons/ai";
 import { profileinfo } from './StaticDataCare'
 import { reminders } from './StaticDataCare'
 const Analytics = () => {
+  // const profileinfo=[
+  //   {name:"Chris Evan" , email:"chris@gmail.com", age:30,blood:"O+"},
+  //   {name:"John sinna" , email:"john@gmail.com", age:30,blood:"A+"},
+  //   {name:"harry potter" , email:"harry@gmail.com", age:30,blood:"B+"},
+  //   {name:"Ryan smith" , email:"ryan@gmail.com", age:30,blood:"AB+"},
+  // ]
   
+  //   const reminders = [
+  //     { time: '10:05 PM', activity: 'Gardening' },
+  //     { time: '10:05 PM', activity: 'Gardening' },
+  //     { time: '10:05 PM', activity: 'Gardening' },
+
+  //   ];
+ 
   return (
       <div className="ana-main" >
         <div className="nav-bar">
@@ -116,8 +129,6 @@ const Analytics = () => {
           </div>
         </div>
         </div>
-      
-    
   )
 }
 
