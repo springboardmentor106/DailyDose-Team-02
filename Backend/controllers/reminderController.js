@@ -1,26 +1,52 @@
 import REMINDER from '../models/reminderModel.js';
-import { createReminderSchema, updateReminderSchema } from '../validations/userReminderValidation.js';
+import User from '../models/userModel.js';
 
 // only user can CRUD
 export const createReminder = async (req, res) => {
     try {
+        const { userId, role } = req;
+
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access to create habits" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "User not found" });
+        }
+
         const newReminder = new REMINDER(req.body);
+        await newReminder.save();
 
-        const savedReminder = await newReminder.save();
+        user.reminders.push(newReminder._id)
+        await user.save()
+
         return res.status(200).json({ status: "success", message: "Reminders Added Successfully" });
-
-        // res.status(201).json(savedReminder);
-        // console.log(newReminder); // Check if newReminder is defined
-        // console.log(savedReminder); // Check if savedReminder is defined and has an _id
-
     } catch (error) {
+        console.error(error.message);
         res.status(500).json({ message: error.message });
     }
 };
 
 export const getReminders = async (req, res) => {
     try {
-        const reminders = await REMINDER.find({ createdBy: req.user._id });
+        const { userId, role } = req;
+
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "User not found" });
+        }
+
+        let reminders = []
+        for (let i = 0; i < user.reminders.length; i++) {
+            const reminder = await REMINDER.findById(user.reminders[i])
+
+            reminders.push(reminder)
+        }
         res.json(reminders);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -29,13 +55,28 @@ export const getReminders = async (req, res) => {
 
 export const updateReminder = async (req, res) => {
     try {
-        const updatedReminder = await REMINDER.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        
-        if (!updatedReminder) {
-            return res.status(404).json({ status: "failed", message: 'Reminder not found' });
+        const { userId, role } = req;
+        const { reminderId, ...body } = req.body
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
-        return res.status(200).json({ status: "success", message: "Reminders Updated Successfully" });
-        // res.json(updatedReminder);
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "User not found" });
+        }
+
+        const verifyReminder = user.reminders.includes(reminderId);
+        if (!verifyReminder) {
+            return res.status(403).json({ status: "failed", message: "Unauthorized to update this reminder" });
+        }
+
+        const updateReminder = await REMINDER.findByIdAndUpdate(habitId, body, { new: true });
+        if (!updateReminder) {
+            return res.status(404).json({ status: "failed", message: "Reminder not found" });
+        }
+
+        res.json({ status: "success", message: "Reminder updated" });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -43,12 +84,31 @@ export const updateReminder = async (req, res) => {
 
 export const deleteReminder = async (req, res) => {
     try {
-        const reminder = await REMINDER.findByIdAndDelete(req.params.id);
+        const { userId, role } = req;
+        const { reminderId } = req.body;
+
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "User not found" });
+        }
+
+        const verifyReminder = user.reminders.includes(reminderId);
+        if (!verifyReminder) {
+            return res.status(403).json({ status: "failed", message: "Unauthorized to delete this habit" });
+        }
+
+        const reminder = await HABIT.findByIdAndDelete(reminderId);
         if (!reminder) {
-            return res.status(404).json({ status: "failed", message: 'Reminder not found' });
+            return res.status(404).json({ status: "failed", message: 'reminder not found' });
         }
         res.json({ status: "success", message: 'Reminder deleted successfully' });
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).json({ message: error.message });
     }
+
 };

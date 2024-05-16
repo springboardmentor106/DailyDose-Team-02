@@ -62,7 +62,11 @@ const userSchema = new mongoose.Schema(
     caretaketAssigned: {
       type: Boolean,
       default: false
-    }
+    },
+    habits: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'HABIT'
+    }]
   },
   { timestamps: true }
 )

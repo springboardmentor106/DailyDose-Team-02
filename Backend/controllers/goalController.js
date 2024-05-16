@@ -3,14 +3,17 @@ import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
 
 // All routes - validate uuid from jwt token and match with uuid to create goal
+
 export const createGoal = async (req, res) => {
     try {
-        if (req.role !== 'user') {
+        const { userId, role } = req;
+
+        if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only user have access" });
         }
-        const userId = req.userId;
+
         const user = await User.findById(userId)
-        if (!Boolean(user)) {
+        if (!user) {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
 
@@ -28,15 +31,31 @@ export const createGoal = async (req, res) => {
 
 export const getUserGoals = async (req, res) => {
     try {
-        const userId = req.userId;
-        const user = await User.findById(userId);
+        const { userId, role } = req;
 
-        if (!user) {
-            return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
+        let goals;
+        if (role === 'user') {
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
+            }
+            const goalIds = user.goals;
+            goals = await GOAL.find({ _id: { $in: goalIds } });
+        } else if (role === 'caretaker') {
+            const caretaker = await Caretaker.findById(userId);
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+
+            const seniorId = req.params.seniorId;
+
+            const senior = await User.findById(seniorId);
+            if (!senior) {
+                return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
+            }
+            const goalIds = senior.goals;
+            goals = await GOAL.find({ _id: { $in: goalIds } });
         }
-
-        const goalIds = user.goals;
-        const goals = await GOAL.find({ _id: { $in: goalIds } });
 
         res.json(goals);
     } catch (error) {
@@ -69,6 +88,11 @@ export const updateGoal = async (req, res) => {
             }
         } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
+        }
+
+        const verifyGoal = user.goals.includes(goalId);
+        if (!verifyGoal) {
+            return res.status(403).json({ status: "failed", message: "Unauthorized to update goal" });
         }
 
         const updatedGoal = await GOAL.findByIdAndUpdate(goalId, body, { new: true });
@@ -111,6 +135,11 @@ export const deleteGoal = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
+        const verifyGoal = user.goals.includes(goalId);
+        if (!verifyGoal) {
+            return res.status(403).json({ status: "failed", message: "Unauthorized to delete goal" });
+        }
+
         const goal = await GOAL.findByIdAndDelete(goalId);
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
@@ -122,35 +151,35 @@ export const deleteGoal = async (req, res) => {
 };
 
 
-export const monthlyGoalProgress = async (req, res) => {
-    // get details for all moths Jan-dec
+export const getMonthlyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
 
-        let user
+        let seniorId, senior;
+
         if (role === 'user') {
-            user = await User.findById(userId);
-            if (!user) {
+            senior = await User.findById(userId);
+            if (!senior) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-        }
-        // else if (role === 'caretaker') {
-        //     user = await Caretaker.findById(userId);
-        //     if (!user) {
-        //         return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
-        //     }
-        // } 
-        else {
+            seniorId = userId;
+        } else if (role === 'caretaker') {
+            const caretaker = await Caretaker.findById(userId);
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+            seniorId = req.params.seniorId;
+
+            senior = await User.findById(seniorId);
+            if (!senior) {
+                return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
+            }
+        } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        const totalYearlyGoals = user.goals.length
-        // const totalGoals = await GOAL.countDocuments();
-        if (!totalGoals) {
-            return res.status(404).json({ status: "failed", message: 'Goal not found' })
-        }
+        const totalYearlyGoals = senior.goals.length;
 
-        // calculating goal compleated percentage for all months
         const currentYear = new Date().getFullYear();
         const monthsData = [];
 
@@ -158,21 +187,20 @@ export const monthlyGoalProgress = async (req, res) => {
             const firstDayOfMonth = new Date(currentYear, month, 1);
             const lastDayOfMonth = new Date(currentYear, month + 1, 0);
 
-            const monthName = new Date(currentYear, month).toLocaleString('default', { month: 'long' });
-
-            const completedGoals = await GOAL.countDocuments({
-                user: userId,
-                completed: true,
-                targetDate: { $gte: firstDayOfMonth, $lt: lastDayOfMonth }
-            });
+            const monthName = firstDayOfMonth.toLocaleString('default', { month: 'long' });
 
             const monthlyGoals = await GOAL.countDocuments({
-                user: userId,
-                completed: true,
-                targetDate: { $gte: firstDayOfMonth, $lt: lastDayOfMonth }
+                senior: seniorId,
+                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
             });
 
-            const completePercentage = monthlyGoals > 0 ? (completedGoals / monthlyGoals) * 100 : 0
+            const completedGoals = await GOAL.countDocuments({
+                senior: seniorId,
+                completed: true,
+                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
+            });
+
+            const completePercentage = monthlyGoals > 0 ? (completedGoals / monthlyGoals) * 100 : 0;
 
             monthsData.push({
                 month: monthName,
@@ -186,25 +214,36 @@ export const monthlyGoalProgress = async (req, res) => {
             totalYearlyGoals,
             monthsData
         });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        console.error('Error fetching monthly goal progress:', error);
+        res.status(500).json({ status: "error", message: "Failed to retrieve monthly goal progress" });
     }
+};
 
-}
 
-
-export const dailyGoalProgress = async (req, res) => {
+export const getDailyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
 
-        let user
+        let seniorId, senior;
+
         if (role === 'user') {
-            user = await User.findById(userId);
-            if (!user) {
+            senior = await User.findById(userId);
+            if (!senior) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-        }
-        else {
+            seniorId = userId;
+        } else if (role === 'caretaker') {
+            const caretaker = await Caretaker.findById(userId);
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+            seniorId = req.params.seniorId;
+            senior = await User.findById(seniorId);
+            if (!senior) {
+                return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
+            }
+        } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
@@ -212,12 +251,12 @@ export const dailyGoalProgress = async (req, res) => {
         today.setHours(0, 0, 0, 0);
 
         const totalTodayGoals = await GOAL.countDocuments({
-            user: userId,
+            senior: seniorId,
             targetDate: today
         });
 
         const completedGoals = await GOAL.countDocuments({
-            user: userId,
+            senior: seniorId,
             targetDate: today,
             completed: true
         });
@@ -229,7 +268,8 @@ export const dailyGoalProgress = async (req, res) => {
             completedGoals,
             completePercent: completePercent.toFixed(2)
         });
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('Error fetching daily goal progress:', error);
         res.status(500).json({ status: "error", message: "Failed to fetch daily goal progress" });
     }
