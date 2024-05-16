@@ -1,5 +1,5 @@
 import express from 'express'
-import { assignUser, caretakerLogin, caretakerRegistration, createUserGoal, getAllUser } from '../controllers/caretakerController.js';
+import { assignUser, caretakerLogin, caretakerRegistration, createUserGoal, getAllUnassignedUser } from '../controllers/caretakerController.js';
 import { validation } from '../middlewares/validationMiddleware.js';
 import { caretakerLoginSchema, caretakerRegistrationSchema } from '../validations/caretakerValidation.js';
 import checkUserAuth from '../middlewares/authMiddleware.js';
@@ -12,7 +12,7 @@ router.post('/register', validation(caretakerRegistrationSchema), caretakerRegis
 router.post('/login', validation(caretakerLoginSchema), caretakerLogin)
 
 // Protected Routes e.g ---> Dashboard
-router.get('/all-user', checkUserAuth, getAllUser)
+router.get('/all-unassigned-user', checkUserAuth, getAllUnassignedUser)
 router.post('/assign-user', checkUserAuth, assignUser)
 router.post('/create-user-goal', validation(createGoalSchema), checkUserAuth, createUserGoal)
 

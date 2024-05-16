@@ -1,6 +1,7 @@
 import REMINDER from '../models/reminderModel.js';
 import { createReminderSchema, updateReminderSchema } from '../validations/userReminderValidation.js';
 
+// only user can CRUD
 export const createReminder = async (req, res) => {
     try {
         const newReminder = new REMINDER(req.body);

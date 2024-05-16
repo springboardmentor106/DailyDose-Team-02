@@ -1,6 +1,7 @@
 import HABIT from '../models/habitModel.js';
 import { createHabitSchema, updateHabitSchema } from '../validations/userHabitValidation.js';
 
+// only user can CRUD
 export const createHabit = async (req, res) => {
     try {
         const habit = new HABIT(req.body);

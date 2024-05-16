@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
+// import { boolean } from 'joi';
 
 const userSchema = new mongoose.Schema(
   {
@@ -57,6 +58,10 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Caretaker',
       default: null
+    },
+    caretaketAssigned: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }

@@ -176,9 +176,9 @@ export const userLogin = async (req, res) => {
             if (user != null) {
                 const isMatch = await bcrypt.compare(password, user.password);
                 if ((user.email === email) && isMatch) {
-
+                    console.log(user);
                     // JWT Token Generate
-                    const token = jwt.sign({ userID: user.uuid, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                    const token = jwt.sign({ userID: user.uuid, role: role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
                     res.send({ "status": "success", "message": "Login Successfully", "token": token });
                 } else {

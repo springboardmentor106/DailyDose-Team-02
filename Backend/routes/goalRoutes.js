@@ -1,5 +1,12 @@
 import express from 'express';
-import { createGoal, getGoals, updateGoal, deleteGoal, goalStats } from '../controllers/goalController.js';
+import {
+    createGoal,
+    updateGoal,
+    deleteGoal,
+    monthlyGoalProgress,
+    getUserGoals,
+    dailyGoalProgress
+} from '../controllers/goalController.js';
 import { validation } from '../middlewares/validationMiddleware.js';
 import { createGoalSchema, updateGoalSchema } from '../validations/userGoalValidation.js';
 import checkUserAuth from '../middlewares/authMiddleware.js';
@@ -7,10 +14,11 @@ import checkUserAuth from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 router.post('/', validation(createGoalSchema), checkUserAuth, createGoal);
-router.get('/', checkUserAuth, getGoals);
+router.get('/', checkUserAuth, getUserGoals);
 router.patch('/:id', validation(updateGoalSchema), checkUserAuth, updateGoal);
 router.delete('/:id', checkUserAuth, deleteGoal);
-router.get('/stats', checkUserAuth, goalStats)
+router.get('/stats', checkUserAuth, monthlyGoalProgress)
+router.get('/stats', checkUserAuth, dailyGoalProgress)
 
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);

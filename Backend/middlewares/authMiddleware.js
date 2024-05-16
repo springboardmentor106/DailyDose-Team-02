@@ -7,10 +7,17 @@ const checkUserAuth = async (req, res, next) => {
     return res.status(401).json({ status: "failed", message: "Unauthorized User, Token is missing" });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-    req.userId = decoded.userId;
-    req.role = decoded.role;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+      if (err) {
+        return res.status(400).json({ status: "failed", message: err.message });
+        // console.log(err);
+      }
+      else {
+        // console.log(decoded);
+        req.userId = decoded.userId;
+        req.role = decoded.role;
+      }
+    });
 
     next();
   } catch (error) {
