@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/', validation(createReminderSchema), checkUserAuth, createReminder);
 router.get('/', checkUserAuth, getReminders);
-router.patch('/:id', validation(updateReminderSchema), checkUserAuth, updateReminder);
-router.delete('/:id', checkUserAuth, deleteReminder);
+router.patch('/update/:id', validation(updateReminderSchema), checkUserAuth, updateReminder);
+router.delete('/delete/:id', checkUserAuth, deleteReminder);
 
 
 // router.post('/reminder', checkUserAuth, validateUserOrCaretaker,createReminder );

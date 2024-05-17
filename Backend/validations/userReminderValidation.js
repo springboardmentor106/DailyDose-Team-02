@@ -14,9 +14,6 @@ export const createReminderSchema = Joi.object({
     pushNotification: Joi.boolean().default(false)
 }).options({ abortEarly: false });
 
-// export const getRemindersSchema = Joi.object({
-
-// });
 
 export const updateReminderSchema = Joi.object({
     id: Joi.string().required(),
@@ -32,7 +29,3 @@ export const updateReminderSchema = Joi.object({
     createdBy: Joi.string().valid('user', 'caretaker'),
     pushNotification: Joi.boolean().default(false)
 }).options({ abortEarly: false });
-
-// export const deleteReminderSchema = Joi.object({
-
-// });

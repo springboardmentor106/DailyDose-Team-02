@@ -25,7 +25,7 @@ export const createGoal = async (req, res) => {
 
         return res.status(200).json({ status: "success", message: 'Goal Created Successfully' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: "failed", message: error.message });
     }
 };
 
@@ -47,7 +47,7 @@ export const getUserGoals = async (req, res) => {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
 
-            const seniorId = req.params.seniorId;
+            const seniorId = req.body.seniorId;
 
             const senior = await User.findById(seniorId);
             if (!senior) {
@@ -57,7 +57,7 @@ export const getUserGoals = async (req, res) => {
             goals = await GOAL.find({ _id: { $in: goalIds } });
         }
 
-        res.json(goals);
+        res.json({status: "error", goals});
     } catch (error) {
         console.error('Error fetching user goals:', error);
         res.status(500).json({ status: "error", message: "Failed to retrieve user goals" });
@@ -68,7 +68,8 @@ export const getUserGoals = async (req, res) => {
 export const updateGoal = async (req, res) => {
     try {
         const { role, userId } = req;
-        const { goalId, ...body } = req.body;
+        const goalId = req.params
+        const body = req.body;
 
         let user;
         if (role === 'user') {
@@ -168,7 +169,7 @@ export const getMonthlyGoalProgress = async (req, res) => {
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            seniorId = req.params.seniorId;
+            seniorId = req.body.seniorId;
 
             senior = await User.findById(seniorId);
             if (!senior) {
@@ -238,7 +239,7 @@ export const getDailyGoalProgress = async (req, res) => {
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            seniorId = req.params.seniorId;
+            seniorId = req.body.seniorId;
             senior = await User.findById(seniorId);
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
@@ -271,6 +272,6 @@ export const getDailyGoalProgress = async (req, res) => {
     } 
     catch (error) {
         console.error('Error fetching daily goal progress:', error);
-        res.status(500).json({ status: "error", message: "Failed to fetch daily goal progress" });
+        res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
     }
 };

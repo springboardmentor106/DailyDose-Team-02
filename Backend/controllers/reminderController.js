@@ -24,7 +24,7 @@ export const createReminder = async (req, res) => {
         return res.status(200).json({ status: "success", message: "Reminders Added Successfully" });
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ status: "failed", message: error.message });
     }
 };
 
@@ -47,7 +47,7 @@ export const getReminders = async (req, res) => {
 
             reminders.push(reminder)
         }
-        res.json(reminders);
+        res.json({status: "success", reminders});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -56,7 +56,8 @@ export const getReminders = async (req, res) => {
 export const updateReminder = async (req, res) => {
     try {
         const { userId, role } = req;
-        const { reminderId, ...body } = req.body
+        const reminderId = req.params
+        const body = req.body
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
@@ -85,7 +86,7 @@ export const updateReminder = async (req, res) => {
 export const deleteReminder = async (req, res) => {
     try {
         const { userId, role } = req;
-        const { reminderId } = req.body;
+        const reminderId = req.params;
 
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
