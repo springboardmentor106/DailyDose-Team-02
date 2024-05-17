@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/', validation(createHabitSchema), checkUserAuth, createHabit);
 router.get('/', checkUserAuth, getHabits);
-router.patch('/update/:id', validation(updateHabitSchema), checkUserAuth, updateHabit);
-router.delete('/delete/:id', checkUserAuth, deleteHabit);
+router.patch('/update', validation(updateHabitSchema), checkUserAuth, updateHabit);
+router.delete('/delete', checkUserAuth, deleteHabit);
 
 export default router;

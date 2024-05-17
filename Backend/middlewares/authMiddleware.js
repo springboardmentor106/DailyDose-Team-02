@@ -13,9 +13,10 @@ const checkUserAuth = async (req, res, next) => {
         // console.log(err);
       }
       else {
-        // console.log(decoded);
-        req.userId = decoded.userId;
+        req.userId = decoded.userID;
         req.role = decoded.role;
+
+        console.log(decoded);
       }
     });
 

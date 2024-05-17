@@ -4,7 +4,7 @@ import { Joi } from "express-validation";
 export const newUserEmailOtpSchema = Joi.object({
     email: Joi.string().required(),
     // role: Joi.string().valid('user', 'caretaker').required(),
-})
+}).options({ abortEarly: false })
 
 export const userRegistrationSchema = Joi.object({
     enteredOtp: Joi.string().required(),
@@ -23,31 +23,32 @@ export const userRegistrationSchema = Joi.object({
     pincode: Joi.number(),
     reminders: Joi.array().items(Joi.string()),
     goals: Joi.array().items(Joi.string()),
-});
+}).options({ abortEarly: false });
 
 export const userLoginSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
     role: Joi.string().valid('user', 'caretaker').required(),
-})
+}).options({ abortEarly: false })
 
 export const changeUserPasswordSchema = Joi.object({
     password: Joi.string().required(),
     password_confirm: Joi.string().required(),
-})
+}).options({ abortEarly: false })
 
 export const userPasswordResetEmailSchema = Joi.object({
     email: Joi.string().required(),
-    role: Joi.string().valid('user', 'caretaker').required(),
-})
+    // role: Joi.string().valid('user', 'caretaker').required(),
+    otp: Joi.string().required()
+}).options({ abortEarly: false })
 
 export const validateOtpSchema = Joi.object({
     email: Joi.string().required(),
     otp: Joi.string().length(6).required(),
-})
+}).options({ abortEarly: false })
 
 export const userPasswordResetSchema = Joi.object({
     password: Joi.string().required(),
     email: Joi.string().required(),
     role: Joi.string().valid('user', 'caretaker').required(),
-})
+}).options({ abortEarly: false })

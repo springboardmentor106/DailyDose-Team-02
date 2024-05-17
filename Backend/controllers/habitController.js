@@ -11,7 +11,11 @@ export const createHabit = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Only users have access to create habits" });
         }
 
-        const user = await User.findById(userId);
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        const user = await User.findOne({ uuid: userId })
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
@@ -34,24 +38,33 @@ export const createHabit = async (req, res) => {
 
 export const getHabits = async (req, res) => {
     try {
-        const { userId, role } = req;
+        const userId = req.userId;
+        const role = req.role;
 
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
-        const user = await User.findById(userId);
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        const user = await User.findOne({ uuid: userId })
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        let habits = []
-        for (let i = 0; i < user.habits.length; i++) {
+        let habits = [];
+        let habitLength = user.habits.length
+
+        // console.log(habitLength)
+
+        for (let i = 0; i < habitLength; i++) {
             const habit = await HABIT.findById(user.habits[i])
 
-            habits.push({status: "success", habit})
+            habits.push(habit)
         }
-        res.json(habits);
+        res.json({ status: "success", habits });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -61,14 +74,18 @@ export const getHabits = async (req, res) => {
 export const updateHabit = async (req, res) => {
     try {
         const { userId, role } = req;
-        const habitId = req.params
-        const body = req.body;
+        // const habitId = req.params
+        const { habitId, ...body } = req.body;
 
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
-        const user = await User.findById(userId);
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        const user = await User.findOne({ uuid: userId })
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
@@ -94,23 +111,25 @@ export const updateHabit = async (req, res) => {
 export const deleteHabit = async (req, res) => {
     try {
         const { userId, role } = req;
-        const habitId = req.params;
+        const _id = req.body;
 
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
-        const user = await User.findById(userId);
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        const user = await User.findOne({ uuid: userId })
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        const verifyHabit = user.habits.includes(habitId);
-        if (!verifyHabit) {
-            return res.status(403).json({ status: "failed", message: "Unauthorized to delete this habit" });
-        }
+        // console.log(user);
+        // console.log(_id);
 
-        const habit = await HABIT.findByIdAndDelete(habitId);
+        const habit = await HABIT.findByIdAndDelete(_id);
         if (!habit) {
             return res.status(404).json({ status: "failed", message: 'Habit not found' });
         }

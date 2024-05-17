@@ -15,8 +15,8 @@ const router = express.Router();
 
 router.post('/', validation(createGoalSchema), checkUserAuth, createGoal);
 router.get('/', checkUserAuth, getUserGoals);
-router.patch('/update/:id', validation(updateGoalSchema), checkUserAuth, updateGoal);
-router.delete('delete/:id', checkUserAuth, deleteGoal);
+router.patch('/update', validation(updateGoalSchema), checkUserAuth, updateGoal);
+router.delete('/delete', checkUserAuth, deleteGoal);
 router.get('/monthly-stats', checkUserAuth, getMonthlyGoalProgress)
 router.get('/daily-stats', checkUserAuth, getDailyGoalProgress)
 

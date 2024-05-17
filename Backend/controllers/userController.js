@@ -10,56 +10,85 @@ import { generateNumberOTP } from '../config/generateOtp.js';
 export const newUserEmailOtp = async (req, res) => {
     try {
         const { email, role } = req.body;
-
-        if (role !== "caretaker") {
-            const user = await User.findOne({ email: email });
-            if (user) {
-                console.log("User UUID:", user.uuid); // Log user UUID
-                return res.status(400).json({ status: "failed", message: "Email already registered" });
-            }
-        } else {
-            const caretaker = await Caretaker.findOne({ email: email });
-            if (caretaker) {
-                console.log("Caretaker UUID:", caretaker.uuid); // Log caretaker UUID
-                return res.status(400).json({ status: "failed", message: "Email already registered" });
-            }
+        // Check if the email is already registered
+        if (await isEmailRegistered(email, role)) {
+            return res.status(400).json({ status: "failed", message: "Email already registered" });
         }
 
+        // Generate OTP
         const otp = generateNumberOTP(6);
-        const sentEmail = await transporter.sendMail({
-            from: process.env.EMAIL_FROM,
-            to: email,
-            subject: "DailyDose - Validate Email to register",
-            html: `<p>Use this otp to validate your email.</p></br><h2>${otp}</h2>`
-        });
 
+        // Save or update OTP in the database
+        const otpSaved = await saveOrUpdateOtp(email, otp);
+        if (!otpSaved) {
+            return res.status(500).json({ status: "failed", message: "Error occurred in capturing OTP" });
+        }
+
+        // Send OTP email
+        const sentEmail = await sendOtpEmail(email, otp);
         if (!sentEmail) {
-            return res.status(500).json({ status: "failed", message: "Email not send. Try again!" })
+            return res.status(500).json({ status: "failed", message: "Email not sent. Try again!" });
         }
 
-        const UserOtp = await OTP.findOne({ email: email });
-
-        if (UserOtp) {
-            const updatedOtp = await OTP.updateOne({ email: email }, { $set: { otp: otp, verified: false } });
-            if (!updatedOtp) {
-                return res.status(500).json({ status: "failed", message: "Error occurred in capturing OTP" })
-            }
-        } else {
-            const savedOtp = await OTP.create({ email, otp });
-            if (!savedOtp) {
-                return res.status(500).json({ status: "failed", message: "Error occurred in capturing OTP" })
-            }
-        }
-
-        console.log(otp);
-
+        console.log(`OTP sent. Email: ${email}, OTP: ${otp}`);
         res.status(200).json({ status: "success", message: "OTP sent to your Email" });
 
     } catch (error) {
         console.error("Error in sending OTP:", error);
-        return res.status(500).json({ status: "error", message: "Failed to send OTP. Please try again." });
+        res.status(500).json({ status: "error", message: "Failed to send OTP. Please try again." });
     }
 };
+const isEmailRegistered = async (email, role) => {
+    if (role !== "caretaker") {
+        const user = await User.findOne({ email });
+        if (user) {
+            console.log("User UUID:", user.uuid);
+            return true;
+        }
+    } else {
+        const caretaker = await Caretaker.findOne({ email });
+        if (caretaker) {
+            console.log("Caretaker UUID:", caretaker.uuid);
+            return true;
+        }
+    }
+    return false;
+};
+const sendOtpEmail = async (email, otp) => {
+    try {
+        const info = await transporter.sendMail({
+            from: process.env.EMAIL_FROM,
+            to: email,
+            subject: "DailyDose - Validate Email to register",
+            html: `<p>Use this OTP to validate your email.</p><h2>${otp}</h2>`,
+        });
+        return info;
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return null;
+    }
+};
+const saveOrUpdateOtp = async (email, otp) => {
+    try {
+        const existingOtp = await OTP.findOne({ email });
+        console.log("Existing OTP:", existingOtp);
+
+        if (existingOtp) {
+            const updatedOtp = await OTP.updateOne({ email }, { $set: { otp, verified: false } });
+            console.log("Updated OTP:", updatedOtp);
+            return updatedOtp;
+        } else {
+            const newOtp = new OTP({ email, otp });
+            const savedOtp = await newOtp.save();
+            console.log("Saved OTP:", savedOtp);
+            return savedOtp;
+        }
+    } catch (error) {
+        console.error("Error in saveOrUpdateOtp:", error);
+        throw new Error("Error occurred while saving or updating OTP");
+    }
+};
+
 
 export const getUserDetailsByUuidAndRole = async (req, res) => {
     try {
@@ -84,82 +113,87 @@ export const getUserDetailsByUuidAndRole = async (req, res) => {
     }
 };
 
+
 export const userRegistration = async (req, res) => {
     try {
         const { enteredOtp, firstname, lastname, email, gender, age, password, role } = req.body;
-        // console.log(req.body)
-        // console.log(value)
+        console.log("Request body:", req.body);
+
         const savedOtp = await OTP.findOne({ email });
-        console.log("saved otp", savedOtp)
+        console.log("Saved OTP:", savedOtp);
 
         if (!savedOtp) {
             return res.status(400).json({ status: "failed", message: "OTP not found or has expired" });
         }
 
         if (role !== "caretaker") {
-            const user = await User.findOne({ email: email });
+            const user = await User.findOne({ email });
             if (user) {
                 return res.status(400).json({ status: "failed", message: "Email already registered" });
             }
         } else {
-            const caretaker = await Caretaker.findOne({ email: email });
+            const caretaker = await Caretaker.findOne({ email });
             if (caretaker) {
                 return res.status(400).json({ status: "failed", message: "Email already registered" });
             }
         }
-        console.log(String(enteredOtp), savedOtp.otp);
-        
-        if (savedOtp.otp === '') {
-            return res.status(500).json({ status: "failed", message: 'User already exist or some error happened. Request for otp again.' })
+
+        console.log("Entered OTP:", String(enteredOtp), "Saved OTP:", savedOtp.otp);
+
+        if (!savedOtp.otp) {
+            return res.status(500).json({ status: "failed", message: 'Request for OTP again' });
         }
-        if (String(enteredOtp) === savedOtp.otp) {
-            const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
-            if (!otpUpdateResponse) {
-                res.status(500).json({ status: "failed", message: "status update failed for OTP" });
-            }
-            console.log(otpUpdateResponse);
 
-            const salt = await bcrypt.genSalt(10);
-            const hashPassword = await bcrypt.hash(password, salt);
-
-            const body = {
-                firstname,
-                lastname,
-                email,
-                gender,
-                age,
-                password: hashPassword,
-                uuid: uuidv4(), // Assign a new UUID
-            }
-            let token;
-            if (role !== "caretaker") {
-                const userDoc = new User(body);
-                const savedUser = await userDoc.save();
-                if (!savedUser) {
-                    return res.status(500).json({ status: "failed", message: "Internal server error. User not created" })
-                }
-                // JWT Token Generation
-                token = jwt.sign({ userID: savedUser.uuid, role: savedUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-            } else {
-                const caretakerDoc = new Caretaker(body)
-                const savedCaretaker = await caretakerDoc.save();
-                if (!savedCaretaker) {
-                    return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" })
-                }
-                // JWT Token Generation
-                token = jwt.sign({ userID: savedCaretaker.uuid, role: savedCaretaker.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
-            }
-
-            res.status(201).json({ status: "success", message: "Registered Successfully", token });
-
-        } else {
+        if (String(enteredOtp) !== savedOtp.otp) {
             return res.status(400).json({ status: "failed", message: "Incorrect OTP, please try again" });
         }
+
+        const otpUpdateResponse = await OTP.findOneAndUpdate({ email }, { $set: { verified: true, otp: "" } });
+        if (!otpUpdateResponse) {
+            return res.status(500).json({ status: "failed", message: "Status update failed for OTP" });
+        }
+
+        console.log("OTP update response:", otpUpdateResponse);
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        const userData = {
+            firstname,
+            lastname,
+            email,
+            gender,
+            age,
+            password: hashPassword,
+            uuid: uuidv4(),
+            role
+        };
+
+        let token;
+        if (role !== "caretaker") {
+            const userDoc = new User(userData);
+            const savedUser = await userDoc.save();
+            if (!savedUser) {
+                return res.status(500).json({ status: "failed", message: "Internal server error. User not created" });
+            }
+            token = jwt.sign({ userID: savedUser.uuid, role: savedUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+        } else {
+            const caretakerDoc = new Caretaker(userData);
+            const savedCaretaker = await caretakerDoc.save();
+            if (!savedCaretaker) {
+                return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" });
+            }
+            token = jwt.sign({ userID: savedCaretaker.uuid, role: savedCaretaker.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+        }
+
+        res.status(201).json({ status: "success", message: "Registered Successfully", token });
+
     } catch (error) {
-        console.error("Error in OTP verification:", error);
-        return res.status(500).json({ status: "error", message: "An error occurred while verifying OTP" });
+        console.error("Error in user registration:", error);
+        res.status(500).json({ status: "error", message: "An error occurred during registration" });
     }
 };
+
 
 // Login
 export const userLogin = async (req, res) => {

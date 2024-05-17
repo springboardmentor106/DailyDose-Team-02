@@ -70,7 +70,7 @@ export const caretakerLogin = async (req, res) => {
 export const getAllUnassignedUser = async (req, res) => {
     try {
         if (req.role !== 'caretaker') {
-            return res.status(403).json({ status: "failed", message: "Only caretakers can access this endpoint." });
+            return res.status(403).json({ status: "failed", message: "Only caretakers can access this endpoint" });
         }
 
         // Find all user's uuid in the database - which are not assigned
@@ -90,7 +90,7 @@ export const getAllUnassignedUser = async (req, res) => {
 export const assignUser = async (req, res) => {
     try {
         if (req.role !== 'caretaker') {
-            return res.status(403).json({ status: "failed", message: "Only caretakers can assign users." });
+            return res.status(403).json({ status: "failed", message: "Only caretakers can assign users" });
         }
 
         const caretakerId = req.userId;
@@ -149,7 +149,7 @@ export const assignUser = async (req, res) => {
 export const createUserGoal = async (req, res) => {
     try {
         if (req.role !== 'caretaker') {
-            return res.status(403).json({ status: "failed", message: "Only caretakers can create goals for users." });
+            return res.status(403).json({ status: "failed", message: "Only caretakers can access this endpoint" });
         }
 
         const caretakerId = req.userId;
