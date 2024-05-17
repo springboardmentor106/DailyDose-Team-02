@@ -50,11 +50,52 @@ const HomePage = () => {
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
       <div class="accordion-body">
-        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
-        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
-        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
+
+        <div className="progress-care-taker-container-accordin-body">
+        <div className="accordion-body-row-one">
+        <div className="card-one">
+          <div className="card-body" id="circular-chart">
+            <div className="card_title">
+              <strong>1 hour walk</strong>
+            </div>  
+            <CircularProgressBar value={75}/>
+            </div> 
+          </div>
+
+        <div className="card-one">
+          <div className="card-body" id="circular-chart">
+            <div className="card_title">
+              <strong>1 hour walk</strong>
+            </div>  
+            <CircularProgressBar value={75}/>
+            </div> 
+          </div>
+       
+        </div>
+
+        <div className="accordion-body-row-two">
+          
+        <div className="card-one">
+          <div className="card-body" id="circular-chart">
+            <div className="card_title">
+              <strong>1 hour walk</strong>
+            </div> 
+             <CircularProgressBar value={75}/>
+            </div> 
+          </div>
+
+          <div className="card-one">
+          <div className="card-body" id="circular-chart">
+            <div className="card_title">
+              <strong>1 hour walk</strong>
+            </div>  
+            <CircularProgressBar value={75}/>
+            </div> 
+          </div>
+        </div>
+        
+        </div>
         <div className="card" id="care-progress"><div className="card-body">
-        <div> <strong>Progress </strong></div>
         <span>Remainder   50%</span>
           <Progress progress={50}/>
           <span>goal      60%</span>

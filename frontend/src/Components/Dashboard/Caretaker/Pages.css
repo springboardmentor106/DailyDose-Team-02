@@ -181,6 +181,21 @@
   justify-content: space-around;
   background-color: #f2f1f9;
 }
+.progress-care-taker-container-accordin-body{
+  display: flex;
+  flex-direction: column;
+}
+.accordion-body-row-two {
+  margin-left: -30px;
+  display: flex;
+  margin-top: 9px;
+  gap: 11px;
+}
+.accordion-body-row-one {
+  margin-left: -30px;
+  display: flex;
+  gap: 11px;
+}
 .row-one-chart{
   display: grid;
 }
@@ -196,9 +211,12 @@
 .accordion-body .card{
   border-radius: 20px;
 }
-.accordion-body .card #circular-chart{
-  display: grid;
-  justify-content: center;
+
+.card-one{
+  width: 162px;
+    height: 84px;
+    background-color: #DED1EF;
+    border-radius: 15px;
 }
 .imgconatiner{
   width: 566px;
@@ -213,6 +231,19 @@
   justify-content:space-evenly;
   margin-right: 50px;
   font-size: 15px;
+}
+
+#circular-chart{
+  margin-left: -8px;
+    margin-top: -15px;
+}
+.card_title{
+  margin-left: 47px;
+}
+#care-progress{
+  height: 202px;
+  margin-left: -61px;
+
 }
 .acc-img img{
   width: 40px; height: 40px;

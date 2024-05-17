@@ -5,7 +5,7 @@
     margin-left: 35px;
   }
   .dropdown-container-left{
-    margin-left: 10px;
+    margin-left: 41px;
 }
   .dropdown {
     margin-bottom: 15px;
@@ -24,8 +24,11 @@
     display: flex;
     border: 1px solid #ccc;
     border-top: none;
-    border-radius: 10px;
+    border-radius: 30px;
     width: 1075px;
+  }
+  .btn{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
    #heading{
     color: white;
@@ -34,7 +37,7 @@
 }
 #right-input{
     width: 450px;
-    height: 91px;
+    height: 125px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -62,6 +65,12 @@
     border: 1px solid #ccc;
     border-radius: 10px;
   }
+  textarea {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+  #saow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
   #down-row-feild{
     width: 300px;
     padding: 8px;
@@ -70,14 +79,18 @@
   }
   #End-date-input input{
     margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+  #End-date-input {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
 #catogry-inputs {
   margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .catogry-feilds-right{
-  margin-top: 67px;
+  margin-top: 47px;
 }
-
 #Schedule-lable{
   margin-top: 10px;
   margin-top: 21px;

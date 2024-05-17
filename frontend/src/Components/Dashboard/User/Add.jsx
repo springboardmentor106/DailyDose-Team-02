@@ -17,18 +17,16 @@ const Add = () => {
         <button className="dropdown-button" onClick={() => handleItemClick('goal')}>
          <h4 id='heading'>Add Goals </h4>
         </button>
-       
         {selectedItem === 'goal' && (
-          
           <div className="dropdown-content">
             <div className="dropdown-container-left">
               <h4>Add Goals</h4>
             <label>Title</label>
-            <input type="text" />
+            <input type="text" id='saow' />
             <label>Date</label>
-            <input type="date" />
+            <input type="date" id='saow'/>
             <label> Start Date</label>
-            <input type="date" />
+            <input type="date" id='saow' />
             <div className="catogry-feilds">
             <label>Category</label>
             <input type="text" id='catogry-inputs' />
@@ -46,7 +44,7 @@ const Add = () => {
             <label> End Date</label>
             <input type="date" id='End-date-input' />
             <div className="catogry-feilds-right">
-              <input type="text" id='catogry-inputs-one' />
+              <input type="text" id='catogry-inputs' />
               <input type="text" id='catogry-inputs' />
               <input type="text" id='catogry-inputs' />
             </div>
@@ -63,10 +61,10 @@ const Add = () => {
             <div className="dropdown-container-left">
             <h4>Add Reminders</h4>
             <label>Title</label>
-            <input type="text" />
+            <input type="text" id='saow'/>
             <label>Date</label>
-            <input type="date" />
-            <div className="catogry-feilds">
+            <input type="date" id='saow'/>
+            <div className="catogry-feilds"> 
 
             <label id='Schedule-lable'>Schedule</label>
 
@@ -85,9 +83,9 @@ const Add = () => {
             <h4 id='heading' style={{ margin: 0, fontSize: '10px ',}}>Save </h4>
             </button>
             <label> Start Date</label>
-            <input type="date" />
+            <input type="date" id='saow' />
             <label> End Date</label>
-            <input type="date" />
+            <input type="date" id='saow'/>
             <div className="catogry-feilds-right">
               <label>Description</label>
             <textarea name="" id="right-input-two"></textarea>
@@ -106,11 +104,11 @@ const Add = () => {
             <div className="dropdown-container-left">
             <h4 id='heading'> Add Habits</h4>
             <label>Title</label>
-            <input type="text" />
+            <input type="text" id='saow' />
             <label>Date</label>
-            <input type="date" />
+            <input type="date" id='saow' />
             <label> Start Date</label>
-            <input type="date" />
+            <input type="date"id='saow' />
             <div className="catogry-feilds">
             <label>Category</label>
             <input type="text" id='catogry-inputs' />
@@ -123,9 +121,9 @@ const Add = () => {
             <h4 id='heading' style={{ margin: 0, fontSize: '10px ',}}>Save </h4>
             </button>
             <label>Description</label>
-            <input type="text" id='right-input'/>
+            <textarea name="" id="right-input"></textarea>
             <label> End Date</label>
-            <input type="date" />
+            <input type="date" id='saow' />
             <div className="catogry-feilds-right">
             <input type="text" id='catogry-inputs' />
               <input type="text" id='catogry-inputs' />

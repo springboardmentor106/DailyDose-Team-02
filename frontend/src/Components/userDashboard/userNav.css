@@ -18,6 +18,7 @@
   align-items: center;
   flex-wrap: nowrap;
   width: 70px;
+  margin-left: 13px;
 }
 .navbar__logo, .user__profile {
   width: 50px;
