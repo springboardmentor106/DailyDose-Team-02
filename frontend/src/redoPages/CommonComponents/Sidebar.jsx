@@ -6,32 +6,7 @@ import { Link } from 'react-router-dom'
 const Sidebar = () => {
     const UserDetails = Data.UserDetails
     const role = localStorage.getItem("role")
-    const NavLinks = role === "user" ? [
-        {
-            label: "Dashboard",
-            navigateTo: "/user-dash",
-        },
-        {
-            label: "Add",
-            navigateTo: "/add",
-        }, {
-            label: "Dashboard",
-            navigateTo: "/analytics",
-        },
-    ] : [
-        {
-            label: "Dashboard",
-            navigateTo: "/care-dashboard",
-        },
-        {
-            label: "Add",
-            navigateTo: "/care-add",
-        }, {
-            label: "Dashboard",
-            navigateTo: "/care-analytics",
-        },
-    ]
-
+    
     return (
         <div className='sidebar-container'>
             <img src={logo} className='sidebar-logo' alt="logo" />
