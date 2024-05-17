@@ -4,14 +4,14 @@ import logo from "../../assets/images/logo.png"
 import Data from "../staticData"
 import { Link } from 'react-router-dom'
 const Sidebar = () => {
-    const UserDetails = Data.UserDetails
     const role = localStorage.getItem("role")
-    
+    const UserDetails = role === "user" ? Data.UserDetails : Data.CaretakerDetails
+
     return (
         <div className='sidebar-container'>
             <img src={logo} className='sidebar-logo' alt="logo" />
             <div className='side-bar-icons'>
-                <Link to={role === "user" ? "/user-dash" : "/care-dashboard"}>
+                <Link to={role === "user" ? "/user-dash" : "/redo-care-dashboard"}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

@@ -14,7 +14,10 @@ import CareAdd from "../Components/Dashboard/Caretaker/CareAdd";
 import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 // import UserDashboard from "../Components/userDashboard/UserHome";
+
+// redo pages
 import UserDashboard from "../redoPages/userPages/UserDashboard"
+import CaretakerDashboard from "../redoPages/CaretakerPages/CaretakerDashboard";
 
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
@@ -49,7 +52,9 @@ function Routing() {
       <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} />} />
       <Route path="/care-add" element={<CareAdd />} />
       <Route path="/care-analytics" element={<Analytics />} />
+      {/* redo pages */}
       <Route path="/user-dash" element={<UserDashboard />} />
+      <Route path="/redo-care-dashboard" element={<CaretakerDashboard />} />
     </Routes>
   );
 }

@@ -1,7 +1,7 @@
 .sidebar-container {
     height: 100%;
     background-color: #6A58DC;
-    width: 70px;
+    width: 100px;
     margin: auto 0;
     padding: 16px 0;
     align-self: center;
@@ -32,7 +32,7 @@
 }
 
 .side-bar-icons {
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -55,6 +55,13 @@
     stroke: #6A58DC;
 }
 
+.care-dashboard-table {
+    display: flex;
+    background-color: violet;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media (max-width: 430px) {
     .sidebar-container {
         flex-direction: row;
@@ -64,6 +71,14 @@
         gap: 0px;
         margin-right: 0;
         margin: 0 auto;
+    }
+
+    .care-dashboard-tab1 {
+        font-size: 16px;
+    }
+
+    .care-dashboard-tab2 {
+        font-size: 16px;
     }
 
     .side-bar-icons {

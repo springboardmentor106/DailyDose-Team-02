@@ -1,0 +1,160 @@
+.care-dashboard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.care-dashboard-row1 {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.welcome-back-card {
+    background-color: #DAD4F7;
+    width: 50%;
+    display: flex;
+    flex: 3;
+    min-width: 350px;
+    padding: 16px 0 0 16px;
+    border-radius: 20px;
+    box-shadow: 0 8px 8px -4px #7b96b0;
+}
+
+.welcome-back-image {
+    width: 40%;
+    border-radius: 20px;
+}
+
+.welcome-back-description {
+    margin: 16px 0;
+}
+
+.care-dashboard-profile-container,
+.care-dashboard-user-update-container {
+    width: 20%;
+    border-radius: 20px;
+    background-color: #DAD4F7;
+    min-width: 150px;
+    box-shadow: 0 8px 8px -4px #7b96b0;
+    flex: 2;
+}
+
+.care-dashboard-profile-head,
+.care-dashboard-user-update {
+    height: 50px;
+    border-radius: 20px;
+    background-color: #8A79F5;
+    color: #fff;
+    padding: 8px
+}
+
+.care-dashboard-profile-details-profile-container,
+.care-dashboard-user-update-content {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    height: calc(100% - 60px);
+    gap: 8px
+}
+
+.care-dashboard-user-update-content {
+    align-items: flex-start;
+}
+
+.care-dashboard-profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.care-dashboard-profile-name {}
+
+.care-dashboard-profile {
+    padding: 10px 18px;
+    background-color: white;
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.care-dashboard-tabs {
+    background-color: #8A79F5;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 60px;
+    padding-left: 10%
+}
+
+.care-dashboard-tab1 {
+    cursor: pointer;
+    color: #fff;
+}
+
+.care-dashboard-tab2 {
+    color: #fff;
+    cursor: pointer;
+}
+
+.active-tab {
+    color: #8A79F5;
+    padding: 5px 20px;
+    background-color: #fff;
+    border-radius: 20px
+}
+
+.care-dashboard-users-list {}
+
+.care-dashboard-user {
+    color: #8A79F5;
+}
+
+/* For screens 430px and below */
+@media (max-width: 430px) {
+    .welcome-back-card {
+        width: 100%;
+        min-width: 200px
+    }
+
+    .welcome-back-image {
+        height: 90%;
+        align-self: flex-end;
+    }
+
+    .welcome-back-description {
+        font-size: 12px;
+    }
+
+    .care-dashboard-row1 {
+        flex-wrap: wrap;
+    }
+}
+
+/* For screens between 431px and 767px */
+@media (min-width: 431px) and (max-width: 767px) {
+    .welcome-back-card {
+        width: 50%;
+    }
+
+    .care-dashboard-row1 {
+        flex-wrap: wrap;
+    }
+
+    .welcome-back-description {
+        font-size: 12px;
+    }
+
+    .care-dashboard-profile-name {
+        font-size: 16px
+    }
+
+    .welcome-back-title {
+        font-size: 16px;
+    }
+}
