@@ -13,7 +13,8 @@ import Target from "../Components/Dashboard/User/Target"
 import CareAdd from "../Components/Dashboard/Caretaker/CareAdd";
 import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
-import UserDashboard from "../Components/userDashboard/UserHome";
+// import UserDashboard from "../Components/userDashboard/UserHome";
+import UserDashboard from "../redoPages/userPages/UserDashboard"
 
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
@@ -42,13 +43,13 @@ function Routing() {
       <Route path="/update-password" element={<UpdatePassword />} />
       {/* <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} /> */}
       <Route path="*" element={<Error404 />} />
-      <Route path="/add" element={<Add/>} />
-      <Route path="/dashboard" element={<Dashboard/>}/>
-      <Route path="/target" element={<Target/>} />
-      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
-      <Route path="/care-add" element={<CareAdd/>} />
-      <Route path="/care-analytics" element={<Analytics/>} />
-      <Route path="/user-dash" element={<UserDashboard/>} />
+      <Route path="/add" element={<Add />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/target" element={<Target />} />
+      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} />} />
+      <Route path="/care-add" element={<CareAdd />} />
+      <Route path="/care-analytics" element={<Analytics />} />
+      <Route path="/user-dash" element={<UserDashboard />} />
     </Routes>
   );
 }

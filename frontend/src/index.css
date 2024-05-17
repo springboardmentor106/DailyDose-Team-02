@@ -2,14 +2,18 @@
   font-family: "Poppins-Regular";
   src: url("./assets/fonts/Poppins-Regular.ttf");
 }
+
 @font-face {
   font-family: "Poppins-SemiBold";
   src: url("./assets/fonts/Poppins-SemiBold.ttf");
 }
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0
 }
 
 body {
@@ -17,4 +21,22 @@ body {
   color: #333;
   font-size: 13px;
   margin: 0;
+}
+
+.page-container {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  padding: 24px 20px;
+  overflow-y: hidden;
+}
+
+@media (max-width: 430px) {
+  .page-container {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    padding: 20px
+  }
 }
