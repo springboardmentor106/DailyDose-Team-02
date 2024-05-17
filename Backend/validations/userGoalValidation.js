@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { Joi } from "express-validation";
 
 export const createGoalSchema = Joi.object({
     title: Joi.string().required(),

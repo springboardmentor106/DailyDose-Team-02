@@ -42,6 +42,7 @@ export const caretakerRegistration = async (req, res) => {
 
 export const caretakerLogin = async (req, res) => {
     try {
+        
         const { email, password } = req.body;
 
         if (!(email && password)) {

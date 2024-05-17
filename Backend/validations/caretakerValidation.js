@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { Joi } from "express-validation";
 
 export const caretakerRegistrationSchema = Joi.object({
     firstname: Joi.string().required().trim(),
