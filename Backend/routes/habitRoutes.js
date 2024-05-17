@@ -6,16 +6,9 @@ import { createHabitSchema, updateHabitSchema } from '../validations/userHabitVa
 
 const router = express.Router();
 
-// Route to create a new habit
 router.post('/', validation(createHabitSchema), checkUserAuth, createHabit);
-
-// Route to get all habits
 router.get('/', checkUserAuth, getHabits);
-
-// Route to update a habit by ID
-router.patch('/:id', validation(updateHabitSchema), checkUserAuth, updateHabit);
-
-// Route to delete a habit by ID
-router.delete('/:id', checkUserAuth, deleteHabit);
+router.patch('/update/:id', validation(updateHabitSchema), checkUserAuth, updateHabit);
+router.delete('/delete/:id', checkUserAuth, deleteHabit);
 
 export default router;

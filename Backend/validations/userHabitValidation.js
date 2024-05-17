@@ -6,7 +6,7 @@ export const createHabitSchema = Joi.object({
 })
 
 export const updateHabitSchema = Joi.object({
-    id: Joi.string().required(),
+    // id: Joi.string().required(),
     title: Joi.string().required(),
     description: Joi.string()
 })
