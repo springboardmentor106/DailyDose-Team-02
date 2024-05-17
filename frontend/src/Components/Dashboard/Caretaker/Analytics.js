@@ -44,7 +44,16 @@ const Analytics = () => {
             ))}
           </div>
           <div className="ana-chart">
-            <div className="card"><div className='card-body'><Chart/></div></div>
+            <div className="card"><div className='card-body'>
+              <div><Chart/></div>
+            <div class="btn-group">
+              <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Monthly</a></li>
+                <li><a class="dropdown-item" href="#">Weekly</a></li>
+              </ul>
+            </div>
+            </div></div>
           </div>
           <div className="row-three">
         <div className="row-three-card">
@@ -115,15 +124,51 @@ const Analytics = () => {
         </div>
         
         <div className="ana-right-card-two">
-          <div className="ana-select">
-            <div><strong>Reminder</strong></div>
-            <div><strong>Goal</strong></div>
-            <div><strong>Habit</strong></div>
-            <div><AiFillSliders /></div>
-          </div>
-          <div className="ana-reminder">
+          
+          {/* <ul className="nav nav-underline" id="ana-select">
+            <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="#">Goal</a>
+            </li>
+          <li className="nav-item">
+    <a className="nav-link" href="#">Reminder</a>
+  </li>
+  <li className="nav-item">
+    <a className="nav-link" href="#">Goal</a>
+  </li>
+  
+  <li className="nav-item">
+    <a className="nav-link " ><AiFillSliders /></a>
+  </li>
+</ul> */}
+        <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li className="nav-item" role="presentation">
+    <button className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Goal</button>
+  </li>
+  <li className="nav-item" role="presentation">
+    <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reminder</button>
+  </li>
+  <li className="nav-item" role="presentation">
+    <button className="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Habit</button>
+  </li>
+  <li className="nav-item" role="presentation">
+    <button className="nav-link" id="pills-disabl-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false"><AiFillSliders /></button>
+  </li>
+</ul>
+<div className="tab-content" id="pills-tabContent">
+  <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0"><div className="ana-reminder">
           <ReminderList reminders={reminders} />
-          </div>
+          </div></div>
+  <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0"><div className="ana-reminder">
+          <ReminderList reminders={reminders} />
+          </div></div>
+  <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0"><div className="ana-reminder">
+          <ReminderList reminders={reminders} />
+          </div></div>
+  <div className="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+</div>
+          {/* <div className="ana-reminder">
+          <ReminderList reminders={reminders} />
+          </div> */}
         
         </div>
           </div>

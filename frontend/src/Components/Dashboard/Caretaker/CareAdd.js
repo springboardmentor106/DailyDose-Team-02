@@ -2,7 +2,7 @@ import React from "react";
 import "./Pages.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
-import CircularProgressBar from "../dashComponents/ProgressBar";
+import CircularProgressBar from "./CircularProgressbar";
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
@@ -29,95 +29,135 @@ const CareAdd = () => {
             </div>
           </div>
           <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
-            <div className="card-body" id="profile">
+            <div className="card-body" id="care-profile">
               <div><img src={profilepic} alt="" /></div>
-              <div  id="careTaker-Deatils"><p><strong>Dr Caretaker</strong></p> <br /><p>Occupation:MBBS</p><p>Age:30</p></div>
+              <div  id="careTaker-Deatils"><p><strong>Dr Caretaker</strong></p> <p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
           <div className="card" id="card3"><div className="card-title"><h6>User Update </h6></div></div>
         </div>
         <div className="line"><h2>User without Caretaker</h2></div>
         <div className="content">
         <div class="accordion" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+  <div className="accordion-item">
+    <h2 className="accordion-header">
+      <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
         <div className="acc-img">
           <img src={profilepic} alt="" />
         </div>
-        <div><strong>Chris Evan</strong>
-        ,Califonia,USA</div>
-        <div><button type="button" class="btn btn-secondary btn-sm" id="getAssign">Get Assigned</button></div>
+        <div><strong>Chris Evan</strong></div>
+        <div><button type="button" className="btn btn-secondary btn-sm" id="getAssign">Get Assigned</button></div>
         
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-      <div class="accordion-body">
-      <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
-        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
-        <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
-        <div className="card" id="care-progress"><div className="card-body">
-          <div> <strong>Progress </strong></div>
-        <span>Remainder   50%</span>
-          <Progress progress={50}/>
-          <span>goal      60%</span>
-          <Progress progress={60}/>
-          <span>habits    80%</span>
-          <Progress progress={80}/>
-        </div></div>
-        <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>  
-        </div></div>
-        <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>  
-        </div></div>
-        
-
+    <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
+    <div className="accordion-body" id="home-content">
+        <div className="home-col-one">
+          <div className="home-row-one">
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>
+            </div></div>
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>
+            </div></div>
+          </div>
+          <div className="home-row-two">
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>  
+            </div></div>
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>  
+            </div></div>
+          </div>
+        </div>
+        <div className="home-col-two">
+          <div className="card"><div className="card-body">
+            <div> <strong>Progress </strong></div>
+            <span>Remainder   50%</span>
+            <Progress progress={50}/>
+            <span>goal      60%</span>
+            <Progress progress={60}/>
+            <span>habits    80%</span>
+            <Progress progress={80}/>
+          </div></div>
+        </div>
+        <div className="home-col-three">
+          <div className="card"><div className="card-body">
+          <Table reminders={reminders}/>    
+          </div></div>
+        </div>
+        <div className="home-col-four">
+          <div className="card"><div className="card-body">
+          <Table reminders={reminders}/>    
+          </div></div>
+        </div>
       </div>
       <div id="toAssign">
-      <button type="button" class="btn btn-secondary btn-sm" >Click to Assign</button></div>
+      <button type="button" className="btn btn-secondary btn-sm" >Click to Assign</button></div>
     </div>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+  <div className="accordion-item">
+    <h2 className="accordion-header">
+      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
       <div className="acc-img">
           <img src={profilepic} alt="" />
         </div>
         <div><strong>Chris Evan</strong>
         ,Califonia,USA</div>
-        <div><button type="button" class="btn btn-secondary btn-sm" id="getAssign">Get Assigned</button></div>
+        <div><button type="button" className="btn btn-secondary btn-sm" id="getAssign">Get Assigned</button></div>
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-      <div class="accordion-body">
-        <div className="row-one-chart">
-          <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>1 hour walk</strong></div>  <CircularProgressBar value={75}/></div> </div>
-          <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Yoga</strong></div>  <CircularProgressBar value={75}/></div> </div>
+    <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse">
+    <div className="accordion-body" id="home-content">
+        <div className="home-col-one">
+          <div className="home-row-one">
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>
+            </div></div>
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>
+            </div></div>
+          </div>
+          <div className="home-row-two">
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>  
+            </div></div>
+            <div className="card"><div className="card-body">
+              <div><CircularProgressBar value={75}/></div>  
+              <div id="dis"><strong>1 hour walk</strong></div>  
+            </div></div>
+          </div>
         </div>
-        <div className="row-two-chart">
-          <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>Exercise</strong></div> <CircularProgressBar value={85}/></div> </div>
-          <div className="card"><div className="card-body" id="circular-chart"><div className="card_title"><strong>medidation</strong></div> <CircularProgressBar value={85}/></div> </div>
-
+        <div className="home-col-two">
+          <div className="card"><div className="card-body">
+            <div> <strong>Progress </strong></div>
+            <span>Remainder   50%</span>
+            <Progress progress={50}/>
+            <span>goal      60%</span>
+            <Progress progress={60}/>
+            <span>habits    80%</span>
+            <Progress progress={80}/>
+          </div></div>
         </div>
-                      
-        <div className="card" id="care-progress"><div className="card-body">
-        <div> <strong>Progress </strong></div>
-        <span>Remainder   50%</span>
-          <Progress progress={50}/>
-          <span>goal      60%</span>
-          <Progress progress={60}/>
-          <span>habits    80%</span>
-          <Progress progress={80}/>
-        </div></div>
-        <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>  
-        </div></div>
-        <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>  
-        </div></div>
+        <div className="home-col-three">
+          <div className="card"><div className="card-body">
+          <Table reminders={reminders}/>    
+          </div></div>
+        </div>
+        <div className="home-col-four">
+          <div className="card"><div className="card-body">
+          <Table reminders={reminders}/>    
+          </div></div>
+        </div>
       </div>
       <div id="toAssign">
-      <button type="button" class="btn btn-secondary btn-sm" >Click to Assign</button></div>
+      <button type="button" className="btn btn-secondary btn-sm" >Click to Assign</button></div>
     </div>
   </div>
   

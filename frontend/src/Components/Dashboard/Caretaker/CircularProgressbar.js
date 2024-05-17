@@ -3,15 +3,16 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 const CircularProgressBar = ({ value }) => {
   return (
-    <div style={{ width: 30, height: 30 }}>
+    <div style={{ width: 70, height: 70 }}>
       <CircularProgressbar
         value={value}
         text={`${value}%`}
         styles={buildStyles({
-          textSize: '16px',
-          textFont: 'bold',
-          pathColor: `#39CA50`,
-          textColor: '#00000',
+          textSize: '23px',
+          textFont: 'bolder',
+          pathColor: `#6a58dc`,
+          textColor: 'black',
+          trailColor: 'white',
         })}
       />
     </div>
