@@ -197,30 +197,36 @@ export const userRegistration = async (req, res) => {
 };
 
 
-
-// -------------------------------------------------------------------------------------
-
 // Read User
 export const readUserDetail = async (req, res) => {
     try {
-        const { email, role } = req.params;
+        const { userId, role } = req;
 
-        if (role !== "caretaker") {
-            const user = await User.findOne({ email }).select('-password');
-            if (!user) {
-                return res.status(404).json({ status: "failed", message: "User not found" });
-            }
-            res.status(200).json({ status: "success", data: user });
-        } else {
-            const caretaker = await Caretaker.findOne({ email }).select('-password');
-            if (!caretaker) {
-                return res.status(404).json({ status: "failed", message: "Caretaker not found" });
-            }
-            res.status(200).json({ status: "success", data: caretaker });
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+
+        let user;
+        if (role !== "caretaker") {
+            user = await User.findOne({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
+            }
+        } else {
+            user = await Caretaker.findOne({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
+            }
+        }
+
+        return res.status(200).json({ status: "success", user });
     } catch (error) {
         console.error("Error in reading user:", error);
-        res.status(500).json({ status: "error", message: "An error occurred during reading user information" });
+        res.status(500).json({ status: "error", message: error.message });
     }
 };
 
@@ -277,18 +283,26 @@ export const updateUser = async (req, res) => {
 // Delete User
 export const deleteUser = async (req, res) => {
     try {
-        const { email, role } = req.params;
+        const { userId, role } = req;
 
-        let deletedUser;
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+
+        let user;
         if (role !== "caretaker") {
-            deletedUser = await User.findOneAndDelete({ email });
-            if (!deletedUser) {
-                return res.status(404).json({ status: "failed", message: "User not found" });
+            user = await User.findOneAndDelete({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
             }
         } else {
-            deletedUser = await Caretaker.findOneAndDelete({ email });
-            if (!deletedUser) {
-                return res.status(404).json({ status: "failed", message: "Caretaker not found" });
+            user = await Caretaker.findOneAndDelete({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
             }
         }
 
@@ -298,8 +312,6 @@ export const deleteUser = async (req, res) => {
         res.status(500).json({ status: "error", message: "An error occurred during deletion" });
     }
 };
-
-// -----------------------------------------------------------------------------------------------------------------
 
 
 // Login

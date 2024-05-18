@@ -14,7 +14,7 @@ const goalSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    remiders: {
+    reminders: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'REMINDER'
     },
@@ -24,7 +24,7 @@ const goalSchema = new mongoose.Schema({
     },
     goalStatus: {
         type: String,
-        enum: ['not_started', 'in_progress', 'compleated'],
+        enum: ['not_started', 'in_progress', 'completed'],
         default: 'not_started'
     }
 }, {timestamps: true});

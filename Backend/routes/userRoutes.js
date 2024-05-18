@@ -1,6 +1,8 @@
 import {
+    deleteUser,
     // getUserDetailsByUuidAndRole,
     newUserEmailOtp,
+    readUserDetail,
     updateUser,
     userLogin,
     userPasswordReset,
@@ -35,6 +37,8 @@ router.post('/validate-otp', validation(userPasswordResetEmailSchema), validateO
 // router.post('/user/details/:uuid/:role', checkUserAuth, getUserDetailsByUuidAndRole);
 router.post('/reset-password', validation(userPasswordResetSchema), checkUserAuth, userPasswordReset)
 router.patch('/update-profile', validation(updateUserSchema), checkUserAuth, updateUser)
+router.get('/profile', checkUserAuth, readUserDetail)
+router.delete('/delete-profile', checkUserAuth, deleteUser)
 // router.post('/assign-user', checkUserAuth);
 // router.get('/dummy', checkUserAuth, (req, res)=>{
 //     res.send('I am dummy')
