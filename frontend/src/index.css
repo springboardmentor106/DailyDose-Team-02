@@ -30,11 +30,13 @@ body {
   display: flex;
   align-items: flex-start;
   padding: 24px 20px;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .page-content {
   display: flex;
+  margin-left: 100px;
+  width: calc(100%-100px)
 }
 
 .large-bold {
@@ -65,9 +67,14 @@ body {
 
 @media (max-width: 430px) {
   .page-container {
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
     justify-content: space-between;
     padding: 20px
+  }
+
+  .page-content {
+    margin-left: 0px;
+   margin-bottom: 60px
   }
 
   .title {

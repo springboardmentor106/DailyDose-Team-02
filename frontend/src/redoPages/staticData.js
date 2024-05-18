@@ -7,29 +7,26 @@ const UnassignedUsers = [
     {
         firstName: "Joe",
         startedToday: true,
-        Contact: "947598529",
-        Disease: "Blood pressure",
+        contact: "947598529",
+        disease: "Blood pressure",
+        allergy: "Daily products"
     },
     {
         firstName: "Nick",
-        Disease: "Blood pressure",
-        startedToday: true,
+        disease: "Blood pressure",
     },
     {
         firstName: "monica",
-        startedToday: false,
+        allergy: "Pineapple",
     }, {
         firstName: "Head",
-        startedToday: false,
     }, {
         firstName: "Julie",
-        Contact: "947598529",
-        startedToday: false,
+        contact: "947598529",
     },
     {
         firstName: "sam",
-        Contact: "947598529",
-        startedToday: false,
+        contact: "947598529",
     },
 ]
 
@@ -42,19 +39,19 @@ const CaretakerDetails = {
         {
             firstName: "John",
             startedToday: true,
-            Contact: "947598529",
-            Disease: "Blood pressure",
+            contact: "947598529",
+            disease: "Blood pressure",
         },
         {
             firstName: "Devin",
-            Disease: "Blood pressure",
+            disease: "Blood pressure",
             startedToday: true,
         }, {
             firstName: "Ava",
             startedToday: false,
         }, {
             firstName: "Josh",
-            Contact: "947598529",
+            contact: "947598529",
             startedToday: false,
         },
     ]

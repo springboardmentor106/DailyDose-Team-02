@@ -1,7 +1,7 @@
 .sidebar-container {
-    height: 100%;
+    height: calc(100% - 40px);
     background-color: #6A58DC;
-    width: 100px;
+    width: 80px;
     margin: auto 0;
     padding: 16px 0;
     align-self: center;
@@ -10,7 +10,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-right: 20px
+    margin-right: 20px;
+    position: fixed;
 }
 
 .sidebar-logo {
@@ -55,22 +56,18 @@
     stroke: #6A58DC;
 }
 
-.care-dashboard-table {
-    display: flex;
-    background-color: violet;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 @media (max-width: 430px) {
     .sidebar-container {
         flex-direction: row;
         height: 50px;
         max-height: 50px;
-        width: 100%;
+        width: calc(100% - 40px);
         gap: 0px;
         margin-right: 0;
         margin: 0 auto;
+        bottom: 16px;
     }
 
     .care-dashboard-tab1 {
