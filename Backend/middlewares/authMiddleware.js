@@ -16,7 +16,7 @@ const checkUserAuth = async (req, res, next) => {
         req.userId = decoded.userID;
         req.role = decoded.role;
 
-        console.log(decoded);
+        // console.log(decoded);
       }
     });
 

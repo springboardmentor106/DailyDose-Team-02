@@ -2,6 +2,7 @@ import { Joi } from "express-validation";
 
 export const createReminderSchema = Joi.object({
     title: Joi.string().required(),
+
     description: Joi.string(),
     date: Joi.array().items(Joi.date()),
     dayFrequency: Joi.array().items(Joi.string().valid(
@@ -10,13 +11,13 @@ export const createReminderSchema = Joi.object({
     )),
     completed: Joi.boolean().default(false),
     timeFrequency: Joi.number().integer().min(1).default(1),
-    createdBy: Joi.string().valid('user', 'caretaker'),
+    // createdBy: Joi.string().valid('user', 'caretaker'),
     pushNotification: Joi.boolean().default(false)
 }).options({ abortEarly: false });
 
 
 export const updateReminderSchema = Joi.object({
-    id: Joi.string().required(),
+    _id: Joi.string().required(),
     title: Joi.string(),
     description: Joi.string(),
     date: Joi.array().items(Joi.date()),

@@ -6,13 +6,17 @@ import User from '../models/userModel.js';
 export const createHabit = async (req, res) => {
     try {
         const { userId, role } = req;
+        
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
 
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access to create habits" });
-        }
-
-        if (!userId) {
-            return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
 
         const user = await User.findOne({ uuid: userId })
@@ -41,12 +45,16 @@ export const getHabits = async (req, res) => {
         const userId = req.userId;
         const role = req.role;
 
-        if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only users have access" });
-        }
-
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
         const user = await User.findOne({ uuid: userId })
@@ -77,12 +85,16 @@ export const updateHabit = async (req, res) => {
         // const habitId = req.params
         const { habitId, ...body } = req.body;
 
-        if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only users have access" });
-        }
-
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
         const user = await User.findOne({ uuid: userId })
@@ -113,12 +125,16 @@ export const deleteHabit = async (req, res) => {
         const { userId, role } = req;
         const _id = req.body;
 
-        if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only users have access" });
-        }
-
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+        
+        if (role !== 'user') {
+            return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
 
         const user = await User.findOne({ uuid: userId })

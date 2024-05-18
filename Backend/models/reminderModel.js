@@ -23,19 +23,19 @@ const reminderSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    createdBy: {
-        type: String,
-        enum: ['user', 'caretaker']
-    },
+    // createdBy: {
+    //     type: String,
+    //     enum: ['user', 'caretaker']
+    // },
     pushNotification: {
         type: Boolean,
         default: false
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    // user: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
     createdAt: {
         type: Date,
         default: Date.now
