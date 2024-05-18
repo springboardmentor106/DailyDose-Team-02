@@ -1,6 +1,7 @@
 import {
-    getUserDetailsByUuidAndRole,
+    // getUserDetailsByUuidAndRole,
     newUserEmailOtp,
+    updateUser,
     userLogin,
     userPasswordReset,
     userPasswordResetEmail,
@@ -12,6 +13,7 @@ import express from 'express';
 // import { validate } from 'express-validation';
 import {
     newUserEmailOtpSchema,
+    updateUserSchema,
     userLoginSchema,
     userPasswordResetEmailSchema,
     userPasswordResetSchema,
@@ -30,8 +32,9 @@ router.post('/validate-otp', validation(userPasswordResetEmailSchema), validateO
 
 
 // Protected Routes
-router.post('/user/details/:uuid/:role', checkUserAuth, getUserDetailsByUuidAndRole);
+// router.post('/user/details/:uuid/:role', checkUserAuth, getUserDetailsByUuidAndRole);
 router.post('/reset-password', validation(userPasswordResetSchema), checkUserAuth, userPasswordReset)
+router.patch('/update-profile', validation(updateUserSchema), checkUserAuth, updateUser)
 // router.post('/assign-user', checkUserAuth);
 // router.get('/dummy', checkUserAuth, (req, res)=>{
 //     res.send('I am dummy')

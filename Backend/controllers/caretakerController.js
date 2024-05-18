@@ -42,7 +42,7 @@ export const caretakerRegistration = async (req, res) => {
 
 export const caretakerLogin = async (req, res) => {
     try {
-        
+
         const { email, password } = req.body;
 
         if (!(email && password)) {
@@ -74,12 +74,9 @@ export const getAllUnassignedUser = async (req, res) => {
         }
 
         // Find all user's uuid in the database - which are not assigned
-        const users = await User.find({ caretaketAssigned: false }, 'uuid'); // Only get 'uuid' field
+        const users = await User.find({ caretaketAssigned: false }, ["uuid", "email"]);
 
-        // Extracting user UUIDs from the retrieved users
-        const userIds = users.map(user => user.uuid);
-
-        return res.status(200).json({ status: "success", userIds });
+        return res.status(200).json({ status: "success", users });
     } catch (error) {
         console.error("Error fetching users:", error);
         return res.status(500).json({ status: "error", message: "Internal server error." });
@@ -167,7 +164,7 @@ export const createUserGoal = async (req, res) => {
         if (!caretaker) {
             return res.status(404).json({ status: "failed", message: "caretaker not found" });
         }
-        
+
         // Check if senior assigned to caretaker
         const isUserAssigned = caretaker.assignedSeniors.find(element => element = userId)
         if (!Boolean(isUserAssigned)) {
@@ -189,7 +186,46 @@ export const createUserGoal = async (req, res) => {
         return res.status(201).json({ status: "success", message: "Goal created and assigned successfully." });
     } catch (error) {
         console.error("Error creating goal:", error);
-        
+
         return res.status(500).json({ status: "error", message: "Internal server error." });
+    }
+}
+
+
+export const getAssignedUserDetail = async (req, res) => {
+    try {
+        const { userId, role } = req
+
+        if (!userId) {
+            return res.status(403).json({ status: "failed", message: "error capturing uuid" });
+        }
+
+        if (!role) {
+            return res.status(403).json({ status: "failed", message: "error capturing role" });
+        }
+
+        if (role !== 'caretaker') {
+            return res.status(403).json({ status: "failed", message: "Only caretakers can access this endpoint" });
+        }
+
+        const caretaker = await Caretaker.findOne({ uuid: userId })
+
+        const assignedSeniorsArr = caretaker.assignedSeniors
+        const assignedSeniorsArrLen = assignedSeniorsArr.length
+        if (!assignedSeniorsArrLen) {
+            return res.status(200).json({ status: "success", message: "no senior assigned" })
+        }
+
+        let seniorArr = []
+        for (let i = 0; i < assignedSeniorsArrLen; i++) {
+            const senior = await User.findById(_id)
+
+            seniorArr.push(senior)
+        }
+
+        return res.status(200).json({ status: "success", seniorArr });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ status: "error", message: error.message });
     }
 }

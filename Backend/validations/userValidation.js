@@ -25,6 +25,17 @@ export const userRegistrationSchema = Joi.object({
     goals: Joi.array().items(Joi.string()),
 }).options({ abortEarly: false });
 
+export const updateUserSchema = Joi.object({
+    firstname: Joi.string(),
+    lastname: Joi.string(),
+    age: Joi.number().integer().min(18),
+    gender: Joi.string().valid('male', 'female', 'other').lowercase(),
+    phoneNumber: Joi.number(),
+    address: Joi.string(),
+    country: Joi.string(),
+    pincode: Joi.number(),
+}).options({ abortEarly: false });
+
 export const userLoginSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),

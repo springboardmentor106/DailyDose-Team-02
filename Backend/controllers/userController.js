@@ -90,33 +90,34 @@ const saveOrUpdateOtp = async (email, otp) => {
 };
 
 
-export const getUserDetailsByUuidAndRole = async (req, res) => {
-    try {
-        const { uuid, role } = req.params;
+// export const getUserDetailsByUuidAndRole = async (req, res) => {
+//     try {
+//         const { uuid, role } = req.params;
 
-        let user;
-        if (role !== "caretaker") {
-            user = await User.findOne({ uuid }).select("-password");
-        } else {
-            user = await Caretaker.findOne({ uuid }).select("-password");
-        }
+//         let user;
+//         if (role !== "caretaker") {
+//             user = await User.findOne({ uuid }).select("-password");
+//         } else {
+//             user = await Caretaker.findOne({ uuid }).select("-password");
+//         }
 
-        if (!user) {
-            return res.status(404).json({ status: "failed", message: "User not found" });
-        }
+//         if (!user) {
+//             return res.status(404).json({ status: "failed", message: "User not found" });
+//         }
 
-        console.log("Found User/Caretaker UUID:", user.uuid); // Log found user/caretaker UUID
-        res.status(200).json({ status: "success", user });
-    } catch (error) {
-        console.error("Error fetching user details:", error);
-        return res.status(500).json({ status: "error", message: "Failed to fetch user details" });
-    }
-};
+//         console.log("Found User/Caretaker UUID:", user.uuid); // Log found user/caretaker UUID
+//         res.status(200).json({ status: "success", user });
+//     } catch (error) {
+//         console.error("Error fetching user details:", error);
+//         return res.status(500).json({ status: "error", message: "Failed to fetch user details" });
+//     }
+// };
 
 
+// Create User
 export const userRegistration = async (req, res) => {
     try {
-        const { enteredOtp, firstname, lastname, email, gender, age, password, role } = req.body;
+        const { enteredOtp, firstname, lastname, email, gender, age, password, role, ...body } = req.body;
         console.log("Request body:", req.body);
 
         const savedOtp = await OTP.findOne({ email });
@@ -166,7 +167,8 @@ export const userRegistration = async (req, res) => {
             age,
             password: hashPassword,
             uuid: uuidv4(),
-            role
+            role,
+            ...body
         };
 
         let token;
@@ -176,14 +178,14 @@ export const userRegistration = async (req, res) => {
             if (!savedUser) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. User not created" });
             }
-            token = jwt.sign({ userID: savedUser.uuid, role: savedUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+            token = jwt.sign({ userID: savedUser.uuid, role: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
         } else {
-            const caretakerDoc = new Caretaker(userData);
-            const savedCaretaker = await caretakerDoc.save();
+            const caretaker = new Caretaker(userData);
+            const savedCaretaker = await caretaker.save();
             if (!savedCaretaker) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" });
             }
-            token = jwt.sign({ userID: savedCaretaker.uuid, role: savedCaretaker.role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+            token = jwt.sign({ userID: savedCaretaker.uuid, role: "caretaker" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
         }
 
         res.status(201).json({ status: "success", message: "Registered Successfully", token });
@@ -193,6 +195,111 @@ export const userRegistration = async (req, res) => {
         res.status(500).json({ status: "error", message: "An error occurred during registration" });
     }
 };
+
+
+
+// -------------------------------------------------------------------------------------
+
+// Read User
+export const readUserDetail = async (req, res) => {
+    try {
+        const { email, role } = req.params;
+
+        if (role !== "caretaker") {
+            const user = await User.findOne({ email }).select('-password');
+            if (!user) {
+                return res.status(404).json({ status: "failed", message: "User not found" });
+            }
+            res.status(200).json({ status: "success", data: user });
+        } else {
+            const caretaker = await Caretaker.findOne({ email }).select('-password');
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: "Caretaker not found" });
+            }
+            res.status(200).json({ status: "success", data: caretaker });
+        }
+    } catch (error) {
+        console.error("Error in reading user:", error);
+        res.status(500).json({ status: "error", message: "An error occurred during reading user information" });
+    }
+};
+
+
+// Update User
+export const updateUser = async (req, res) => {
+    try {
+        const { userId, role } = req;
+        const body = req.body;
+
+        // console.log("Request body:", req.body);
+
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+        }
+
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
+
+        let user;
+        let updateUser;
+        if (role !== "caretaker") {
+            user = await User.findOne({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
+            }
+
+            updateUser = await User.findByIdAndUpdate(user._id, body, { new: true })
+
+            if (!updateUser) {
+                return res.status(400).json({ status: "failed", message: "Error in updating" });
+            }
+        } else {
+            user = await Caretaker.findOne({ uuid: userId });
+            if (!user) {
+                return res.status(400).json({ status: "failed", message: "Email not found" });
+            }
+            
+            updateUser = await Caretaker.findByIdAndUpdate(user._id, body, { new: true })
+
+            if (!updateUser) {
+                return res.status(400).json({ status: "failed", message: "Error in updating" });
+            }
+        }
+        res.status(200).json({ status: "success", message: "User updated successfully" });
+    } catch (error) {
+        console.error("Error in updating user:", error);
+        res.status(500).json({ status: "error", message: "An error occurred during updating user information" });
+    }
+};
+
+
+// Delete User
+export const deleteUser = async (req, res) => {
+    try {
+        const { email, role } = req.params;
+
+        let deletedUser;
+        if (role !== "caretaker") {
+            deletedUser = await User.findOneAndDelete({ email });
+            if (!deletedUser) {
+                return res.status(404).json({ status: "failed", message: "User not found" });
+            }
+        } else {
+            deletedUser = await Caretaker.findOneAndDelete({ email });
+            if (!deletedUser) {
+                return res.status(404).json({ status: "failed", message: "Caretaker not found" });
+            }
+        }
+
+        res.status(200).json({ status: "success", message: "User deleted successfully" });
+    } catch (error) {
+        console.error("Error in deleting user:", error);
+        res.status(500).json({ status: "error", message: "An error occurred during deletion" });
+    }
+};
+
+// -----------------------------------------------------------------------------------------------------------------
 
 
 // Login
