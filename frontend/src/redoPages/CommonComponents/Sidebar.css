@@ -58,7 +58,7 @@
 
 
 
-@media (max-width: 430px) {
+@media (max-width: 460px) {
     .sidebar-container {
         flex-direction: row;
         height: 50px;

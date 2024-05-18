@@ -65,7 +65,7 @@ body {
   font-weight: 600
 }
 
-@media (max-width: 430px) {
+@media (max-width: 460px) {
   .page-container {
     /* flex-direction: column-reverse; */
     justify-content: space-between;

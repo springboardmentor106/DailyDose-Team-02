@@ -134,6 +134,7 @@
     font-size: 16px;
     text-wrap: nowrap;
     padding: 20px 8px;
+    min-width: fit-content
 }
 
 .head-cell-content {
@@ -208,7 +209,7 @@
 }
 
 /* For screens 430px and below */
-@media (max-width: 430px) {
+@media (max-width: 460px) {
     .welcome-back-card {
         width: 100%;
         min-width: 200px
@@ -254,7 +255,7 @@
 }
 
 /* For screens between 431px and 767px */
-@media (min-width: 431px) and (max-width: 767px) {
+@media (min-width: 461px) and (max-width: 767px) {
     .welcome-back-card {
         width: 50%;
     }
@@ -293,5 +294,10 @@
 
     .active-tab {
         padding: 5px 10px;
+    }
+
+    .care-dashboard-users-list {
+        max-width: 70vw;
+        overflow-x: auto;
     }
 }
