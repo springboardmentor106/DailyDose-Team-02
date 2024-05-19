@@ -1,7 +1,7 @@
 /* user profile info */
 const profileinfo = [
-    {  name: "Chris Evan", 
-       age: 30, 
+    {  name: "Mrs. User XYZ", 
+       age: 57, 
        location: "Delhi, India" }
   ];
   /* user - reminder list static data for userdashboard */

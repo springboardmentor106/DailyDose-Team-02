@@ -6,9 +6,6 @@
     justify-content: space-between;
     margin-top: 10px;
 }
-.card-user{
-  margin-top: 14px;
-}
 .left-side{
     width: 60%;
     padding: 20px;
@@ -28,8 +25,20 @@
     border-radius: 35px;
     box-shadow: rgba(118, 200, 206, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
+  button {
+    background-color: transparent;
+    border: transparent;
+  }
+
+  .card-center-details-links{
+    display: flex;
+    height: 20px;
+  }
   .lower-side{
     display: flex;
+  }
+  .active {
+    text-decoration: underline;
   }
   .img-container{
     width: 244px;
@@ -49,7 +58,7 @@
   .lower-side > p{
     margin-top: 31px;
     font-size: 13px;
-    width: 187px;
+    width: 188px;
 }
 
    .row-one-card-two {
@@ -80,20 +89,20 @@
 }
   .row-one-card-one-dashboard {
     padding: 20px;
-    width: 639px;
+    width: 715px;
     border-radius: 22px;
     height: 240px;
-    margin-left: 14px;
+    margin-left: 22px;
   }
   .right-card-two{
-    flex: 1;
     padding: 20px;
     height: 296px;
     width: 374px;
     background-color: white;
     border-radius: 35px;
-    margin-top: 13px;
+    margin-top: 37px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-left: -339px;
   }
   .card-center-details{
     margin-left: 23px;
@@ -210,10 +219,24 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .chart-heading{
+  display: flex;
+  flex-direction: column;
   margin-left: 45px;
   margin-top: 12px;
 }
-
+.year-container{
+  margin-top: -22px;
+  margin-left: 650px;
+}
+.year-container button {
+  background-color: #efeeee;
+  border-radius: 5px;
+  width: 75px;
+}
+#year-button-container {
+  margin-top: -21px;
+  margin-left: 55px;
+}
 .profile-name-conainter{
    width: 100px;
     height: 174px;
@@ -238,7 +261,7 @@
   width: 10px;
 }
 #CircularProgressBar{
-  margin-left: 34px;
+  margin-left: 2px;
   margin-top: -4px;
 }
 .Progress-details-container{
@@ -313,3 +336,119 @@
 .type-container{
     margin-left: 10px;
 }
+
+@media screen and (max-width:425px) {
+  .right-card-two {
+    margin-left: -382px;
+  }
+  .card-center-details {
+    
+  }
+  .right-card-one {
+    margin-left: -1px;
+    margin-bottom: -368px;
+  }
+  .right-side {
+    margin-top: 1332px;
+    width: 802px;
+    border-radius: 49px;
+    margin-left: -323px;
+  }
+  .card-center-details-links {
+    margin-left: 424px;
+  }
+  .row-three {
+    margin-top: 24px;
+    width: 797px;
+    margin-left: -108px;
+  }
+  .row-three-card{
+    height: 322px;
+  }
+  .row-one-chart {
+    width: 801px;
+    height: 373px;
+    margin-left: -107px;
+    margin-top: 23px;
+    border-radius: 48px;
+  }
+  .row-one {
+    display: flex;
+    flex-direction: column;
+    margin-left: -98px;
+  }
+  .row-one-card-one{
+    width: 800px;
+    height: 243px;
+    border-radius: 67px;
+  }
+  .row-one-card-one h5 {
+    font-size: 52px;
+    margin-top: 30px;
+    margin-left: 27px;
+
+  }
+  .row-one-card-one p {
+    font-size: 29px;
+    width: 385px;
+    margin-left: 28px;
+  }
+ 
+  .row-one-card-two{
+    width: 800px;
+    height: 271px;
+    border-radius: 67px;
+  }
+  .circle-das { 
+    width: 230px;
+    height: 230px;
+    margin-top: -2px;
+  }
+  .card-body strong {
+    font-size: 54px;
+  }
+  .card-body  {
+    margin-top: -65px;
+  }
+  .card-body p {
+
+  }
+  .img-container{
+    width: 373px;
+  }
+  .img-container > img {
+    width: 333px;
+    margin-top: -157px;
+    margin-left: 16px;
+  }
+  .chart-heading strong {
+    font-size: 39px;
+  }
+  .dashboard{
+    margin-left: -10px;
+  }
+
+}
+/* 
+ @media screen and (min-width : 425px ){
+  .row-one-card-one-dashboard{
+    margin-left: -27px;
+    width: 665px;
+}
+.row-one-card-one  {
+  margin-left: -35px;
+}
+.row-one-chart {
+  margin-left: -36px;
+} 
+.row-three-card{
+  margin-left: -34px;
+} 
+ .row-three {
+  margin-left: -34px;
+}
+.right-side{
+  margin-left: -9px;
+        width: 404px;
+}
+}  */

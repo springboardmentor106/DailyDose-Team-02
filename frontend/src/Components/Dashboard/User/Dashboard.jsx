@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
 import "./Dashboard.css";
 import UserNav from "../../userDashboard/UserNav";
+import { IoIosArrowDropdown } from "react-icons/io";
 import Chart from "../dashComponents/Chart";
 import CircularProgressBar from "../dashComponents/ProgressBar";
 import ReminderList from "./ReminderList";
@@ -9,7 +11,14 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
 import { profileinfo } from "./StaticDataUser";
 import { reminders } from "./StaticDataUser";
+import HabitReminderList from './HabitReminderList';
 const Dashboard = () => {
+  const [selectedBox, setSelectedBox] = useState(1);
+  
+  const handleLinkClick = (boxNumber) => {
+    setSelectedBox(boxNumber);
+  };
+
   return (
     <div className="dashboard">
       <UserNav />
@@ -21,7 +30,7 @@ const Dashboard = () => {
               <strong>Welcome Back...</strong>{" "}
             </h5>
             <div className="lower-side">
-              <p>Have a nice day and don't forget take your pills...</p>
+              <p>Have a nice day and don't forget take your pills</p>
               <div className="img-container">
                 <img src={dailyimg} alt="" />
               </div>
@@ -47,6 +56,12 @@ const Dashboard = () => {
             <h5>
               <strong>Goal Progress</strong>
             </h5>
+            <div className="year-container">
+            <button>year</button>
+            <div id="year-button-container">
+            <IoIosArrowDropdown />
+            </div>
+            </div>
           </div>
           <div className="row-one-card-one-dashboard">
             <Chart />
@@ -132,15 +147,31 @@ const Dashboard = () => {
           <ReactCalendar />
         </div>
         <div className="card-center-details">
-          <div className="Des-Rem">Reminder</div>
-          <div className="Des-goal">Goal</div>
-          <div className="Des-Hebit">Habit</div>
+          <div className="card-center-details-links">
+          <button onClick={() => handleLinkClick(1)}  className={selectedBox === 1 ? 'active' : ''}  > Reminder</button>
+            <button onClick={() => handleLinkClick(2)}  className={selectedBox === 2 ? 'active' : ''} >Goal</button>
+            <button onClick={() => handleLinkClick(3)} className={selectedBox === 3 ? 'active' : ''} >Habit</button>
+          </div>
           <div className="des-option-icon">
             <IoOptionsOutline />
           </div>
-        </div>
-        <div className="right-card-two">
+       <div>
+        {selectedBox === 1 && <div> 
+          <div className="right-card-two">
           <ReminderList reminders={reminders} />
+        </div>
+          </div>}
+        {selectedBox === 2 && <div>
+          <div className="right-card-two">
+          <HabitReminderList reminders={reminders} />
+        </div>
+          </div>}
+        {selectedBox === 3 && <div>
+          <div className="right-card-two">
+          <ReminderList reminders={reminders} />
+        </div>
+          </div>}
+      </div>
         </div>
       </div>
     </div>

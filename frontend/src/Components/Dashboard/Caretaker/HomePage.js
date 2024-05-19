@@ -48,9 +48,9 @@ const HomePage = () => {
         <div>,Califonia,USA</div>
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
-      <div className="accordion-body" id="home-content">
-        <div className="home-col-one">
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+    <div className="accordion-body" id="home-content">
+      <div className="home-col-one">
           <div className="home-row-one">
             <div className="card"><div className="card-body">
               <div><CircularProgressBar value={75}/></div>  
@@ -96,9 +96,9 @@ const HomePage = () => {
       </div>
     </div>
   </div>
-  <div className="accordion-item">
-    <h2 className="accordion-header">
-      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
       <div className="acc-img">
           <img src={profilepic} alt="" />
         </div>
@@ -107,7 +107,7 @@ const HomePage = () => {
       </button>
     </h2>
     <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse">
-      <div className="accordion-body" id="home-content">
+    <div className="accordion-body" id="home-content">
       <div className="home-col-one">
           <div className="home-row-one">
             <div className="card"><div className="card-body">

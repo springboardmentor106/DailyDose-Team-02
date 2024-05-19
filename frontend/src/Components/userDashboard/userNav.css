@@ -18,6 +18,7 @@
   align-items: center;
   flex-wrap: nowrap;
   width: 70px;
+  margin-left: 13px;
 }
 .navbar__logo, .user__profile {
   width: 50px;
@@ -164,14 +165,17 @@
 @media screen and (max-width: 425px) {
   .navbar {
     top: 92%;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0.5rem 0;
+        bottom: 0;
+        left: 0;
+        width: 814px;
+        height: 107px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0.5rem 0;
+        margin: 0px;
+        margin-top: 92px;
+        margin-left: 22px;
   }
   .navbar__menu{
     max-width: 45%;
