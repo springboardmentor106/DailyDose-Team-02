@@ -113,198 +113,7 @@
   margin: 10px;
 }
 
-/* --------------css of Home page------------------- */
 
-.main1{
-  display: flex;
-  color:black; margin: 2px;
-}
-.main1 .pages{
-  padding-left: 100px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-#card1{
-  width:500px; height:200px;
-  background-color:#DAD4F7 ; border-radius: 30px;
-  margin: 5px; 
-  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
-}
-#card2{
-  width: 330px; height: 200px;
-  background-color: #cdc8f5; border-radius: 30px;  margin: 5px;
-  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
-}
-#card3{
-  width: 330px; height:200px;
-  background-color: #cdc8f5; border-radius: 30px;  margin: 5px;
-  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
-}
-#heading{
-  display: flex;
-  margin-top: 3px;
-  color: black;
-}
-#heading img{
-  height: 201px;
-    width: 247px;
-}
-#heading p{
-  font-size: 15px;
-}
-.card-title{
-  background-color: #6a58dc;
-  font: bolder;
-  color: white;
-  padding: 3px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-.card-title h6{
-  padding: 2px;
-}
-#care-profile{
-  display: flex;
-  justify-content: space-around;
-  margin-top: -25px;
-}
-#care-profile img{
-  width: 100px; height:100px;
-  border-radius: 100%;
-}
-.progressBar-container{
-  display: flex;
-}
-#care-profile p{
-  font-size: 15px;
-}
-
-#careTaker-Deatils{
-  margin-top: -147px;
-  margin-left: 146px;
-}
-.accordion-body{
-  display: flex;
-  justify-content: space-around;
-  background-color: #f2f1f9;
-}
-.row-one-chart{
-  display: grid;
-}
-.row-one-chart .chart{
-  width: 132px; height: 62px;
-}
-.row-two-chart{
-  display: grid;
-}
-.row-two-chart .chart{
-  width: 132px; height: 62px;
-}
-.accordion-body .card{
-  border-radius: 20px;
-}
-.accordion-body .card #circular-chart{
-  display: grid;
-  justify-content: center;
-}
-.imgconatiner{
-  width: 566px;
-  margin-top: -157px;
-  margin-left: 240px;
-}
-#care-progress .card-body{
-  width: 200px;
- }
-.accordion-button{
-  display: flex;
-  justify-content:space-evenly;
-  margin-right: 50px;
-  font-size: 15px;
-}
-.acc-img img{
-  width: 40px; height: 40px;
-  border-radius: 100%;
-}
-#getAssign{
-  align-content: flex-end;
-}
-#toAssign{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5px;
-}
-.sidebar {
-    background-color: #6a58dc;
-    width: 50px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    border-radius: 20px;
-}
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-  }
-  .icon {
-    margin-right: 5px;
-    
-  }
-  .line{
-    margin: 20px;
-    
-  }
-  .line h2{
-    font-weight:700 ;
-  }
-  #home-content{
-    display: flex;
-    justify-content: space-between;
-    background-color: #f2f1f9;
-  }
-  .home-col-one{
-    display: grid;
-  }
-  .home-row-one{
-    display: flex; 
-  }
-  .home-row-one .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-one .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%;
-    padding: 10px 20px 0px 20px;
-  }
-  #dis{
-    margin: 10px;
-  }
-  .home-row-two{
-    display: flex;
-  }
-  .home-row-two .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-two .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%; 
-    padding: 10px 20px 0px 20px;;
-  }
-  .home-col-two .card .card-body{
-    width: 250px;
-    padding: 10px; margin-left: 10px; margin-right: 10px;
-  }
-  .home-col-three .card .card-body{
-    width: 220px;
-  }
-  .home-col-four .card .card-body{
-    width: 220px;
-  }
   /* --------Responsive ness of .Analytics-pages-------- */
 
   @media screen and (max-width:425px) {
@@ -322,6 +131,22 @@
     margin-top: 20px;
     display: flex;
   }
+  .ana-user{
+    display: flex; justify-content: flex-start; width: 100vh;
+  }
+  .ana-left-side .ana-user .card{
+    width: 98px;
+    height: 104px;
+  }
+  .ana-user .card #ana-card-body img{
+    width: 50px; height: 50px;
+  }
+  .ana-user .card #ana-card-body h6{
+    font-size: 13px;
+  }
+  .ana-user .card #ana-card-body p{
+    font-size: 8px;
+  }
   #ana-select{
     display: flex;
     justify-content: space-around;
@@ -337,13 +162,17 @@
   .ana-chart .card-body{
     height: 280px;
   }
+  .ana-chart .btn-group{
+    display: none;
+  }
   .ana-chart .card{
     border: 20px;
+    width: 49.5vh;
+    height: 200px;
     box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
   }
-  .ana-user .card{
-    height: 190px;
-    height:190px;
+  #ana-progress .row-three-card{
+    width: 100px;
   }
   
 }

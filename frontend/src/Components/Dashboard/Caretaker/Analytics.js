@@ -55,7 +55,7 @@ const Analytics = () => {
             </div>
             </div></div>
           </div>
-          <div className="row-three">
+          <div className="row-three" id="ana-progress">
         <div className="row-three-card">
           <h5 id='progres'><strong>Progress</strong></h5>
           <div className="box-left-top">

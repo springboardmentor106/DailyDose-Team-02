@@ -1,5 +1,5 @@
 import React from "react";
-import "./Pages.css"; // Import your CSS file for styling
+import "./Homepage.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
 import CircularProgressBar from "./CircularProgressbar";
@@ -96,7 +96,29 @@ const CareAdd = () => {
         </div>
       </div>
       <div id="toAssign">
-      <button type="button" className="btn btn-secondary btn-sm" >Click to Assign</button></div>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Click to assign 
+</button>
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Caretaker Responsibility</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <p>&#8226; Provide Emotional Support</p> <p>&#8226; Helping daily activities</p> <p>&#8226; Manageing medical care</p> <p>&#8226; Advocating the User needs</p>
+        <br /> <p>If you have any questions about your responsibilities as a caretaker,Please contact the User.Thank you for your willingness to be a caretaker!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      </div>
     </div>
   </div>
   <div className="accordion-item">
