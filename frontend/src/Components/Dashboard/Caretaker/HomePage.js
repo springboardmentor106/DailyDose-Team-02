@@ -1,5 +1,5 @@
 import React from "react";
-import "./Pages.css"; // Import your CSS file for styling
+import "./Homepage.css"; // Import your CSS file for styling
 import Progress from "../dashComponents/Progress";
 import Table from "../dashComponents/Table";
 
