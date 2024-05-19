@@ -429,8 +429,8 @@
   }
 
 }
-/* 
- @media screen and (min-width : 425px ){
+
+ @media screen and (min-width : 1000px ) and (max-width : 1149px){
   .row-one-card-one-dashboard{
     margin-left: -27px;
     width: 665px;
@@ -449,6 +449,170 @@
 }
 .right-side{
   margin-left: -9px;
-        width: 404px;
+  width: 404px;
 }
-}  */
+} 
+
+@media screen and (max-width : 335px) {
+  
+}
+
+@media screen and (min-width : 440px) and (max-width : 600px) {
+  .right-card-two {
+    margin-left: -382px;
+  }
+  .card-center-details {
+    
+  }
+  .right-card-one {
+    margin-left: -1px;
+    margin-bottom: -368px;
+  }
+  .right-side {
+    margin-top: 1332px;
+    width: 802px;
+    border-radius: 49px;
+    margin-left: -323px;
+  }
+  .card-center-details-links {
+    margin-left: 424px;
+  }
+  .row-three {
+    margin-top: 24px;
+    width: 797px;
+    margin-left: -108px;
+  }
+  .row-three-card{
+    height: 322px;
+  }
+  .row-one-chart {
+    width: 801px;
+    height: 373px;
+    margin-left: -107px;
+    margin-top: 23px;
+    border-radius: 48px;
+  }
+  .row-one {
+    display: flex;
+    flex-direction: column;
+    margin-left: -98px;
+  }
+  .row-one-card-one{
+    width: 800px;
+    height: 243px;
+    border-radius: 67px;
+  }
+  .row-one-card-one h5 {
+    font-size: 52px;
+    margin-top: 30px;
+    margin-left: 27px;
+
+  }
+  .row-one-card-one p {
+    font-size: 29px;
+    width: 385px;
+    margin-left: 28px;
+  }
+ 
+  .row-one-card-two{
+    width: 800px;
+    height: 271px;
+    border-radius: 67px;
+  }
+  .circle-das { 
+    width: 230px;
+    height: 230px;
+    margin-top: -2px;
+  }
+  .card-body strong {
+    font-size: 54px;
+  }
+  .card-body  {
+    margin-top: -65px;
+  }
+  .card-body p {
+
+  }
+  .img-container{
+    width: 373px;
+  }
+  .img-container > img {
+    width: 333px;
+    margin-top: -157px;
+    margin-left: 16px;
+  }
+  .chart-heading strong {
+    font-size: 39px;
+  }
+  .dashboard{
+    margin-left: -10px;
+  }
+
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+  .right-side {
+    margin-top: 678px;
+        margin-left: -799px;
+        margin-right: 15px;
+        width: 775px;
+        border-radius: 33px;
+        height: 367px;
+    }
+
+    .right-card-one {
+      margin-left: -11px;
+      margin-top: -8px;
+    }
+
+    .right-card-two {
+      margin-top: 34px;
+      margin-left: -353px;
+    }
+
+    .card-center-details {
+      margin-top: -333px;
+      margin-left: 401px;
+    }
+    .row-one-chart {
+      margin-left: -126px;
+      width: 778px;
+      height: 247px;
+    }
+    .row-one-card-one-dashboard{
+      width: 612px;
+    }
+    .row-three{
+      width: 668px;
+        margin-left: 7px;
+      gap: 93px;
+      margin-top: 13px;
+    }
+    .row-three-card {
+      margin-left: -112px;
+      margin-right: 44px;
+    } 
+    .left-side {
+      width: 684px;
+    }
+    .row-one {
+
+    }
+    .row-one-card-one  {
+      margin-left: -111px;
+      margin-top: -20px;
+    } 
+    .row-one-card-two {
+      width: 390px;
+      margin-top: -19px;
+    }
+
+  }
+
+  @media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+    .right-side {
+      
+    }
+  }
