@@ -27,5 +27,9 @@ const profileinfo = [
     {name:'May', performance:30},{name:'Jun', performance:20},{name:'Jul', performance:40},{name:'Aug', performance:90},
     {name:'Sep', performance:70},{name:'Oct', performance:60},{name:'Nov', performance:50},{name:'Dec', performance:20}
 ]
-  export { profileinfo, reminders , remindersAddData,Month };
+
+const AboutUSer = [
+  {nameABout :'Disease',} , {Details : 'Blood pressure'}
+]
+  export { profileinfo, reminders , remindersAddData,Month , AboutUSer};
   

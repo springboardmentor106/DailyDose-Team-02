@@ -11,14 +11,13 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
 import { profileinfo } from "./StaticDataUser";
 import { reminders } from "./StaticDataUser";
-import HabitReminderList from './HabitReminderList';
+import HabitReminderList from './GoalReminderList';
+import GoalReminderList from './GoalReminderList';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
-  
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
-
   return (
     <div className="dashboard">
       <UserNav />
@@ -26,8 +25,7 @@ const Dashboard = () => {
         <div className="row-one">
           <div className="row-one-card-one">
             <h5>
-              {" "}
-              <strong>Welcome Back...</strong>{" "}
+              <strong>Welcome Back...</strong>
             </h5>
             <div className="lower-side">
               <p>Have a nice day and don't forget take your pills</p>
@@ -38,7 +36,6 @@ const Dashboard = () => {
           </div>
           <div className="row-one-card-two">
           <div className="circle-das">
-
          </div>
           <div className="details-das">
                   {profileinfo.map((profile,index)=>(
@@ -163,12 +160,12 @@ const Dashboard = () => {
           </div>}
         {selectedBox === 2 && <div>
           <div className="right-card-two">
-          <HabitReminderList reminders={reminders} />
+          < GoalReminderList reminders={reminders} />
         </div>
           </div>}
         {selectedBox === 3 && <div>
           <div className="right-card-two">
-          <ReminderList reminders={reminders} />
+          <HabitReminderList reminders={reminders} />
         </div>
           </div>}
       </div>
