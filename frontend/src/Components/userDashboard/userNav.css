@@ -162,18 +162,18 @@
 
 @media screen and (max-width: 425px) {
   .navbar {
-    top: 92%;
+    top: 84%;
         bottom: 0;
         left: 0;
-        width: 814px;
-        height: 107px;
+        width: 95%;
+        height: 85px;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
         padding: 0.5rem 0;
         margin: 0px;
         margin-top: 92px;
-        margin-left: 22px;
+        margin-left: 15px;
   }
   .navbar__menu{
     max-width: 45%;

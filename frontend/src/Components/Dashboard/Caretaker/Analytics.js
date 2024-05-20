@@ -3,28 +3,24 @@ import Chart from '../dashComponents/Chart'
 import CircularProgressBar from '../dashComponents/ProgressBar'
 import './Pages.css'
 import Calendar from '../dashComponents/Calendar'
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import ReminderList from '../User/ReminderList';
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from '../../userDashboard/UserNav'
 import { AiFillSliders } from "react-icons/ai";
 import { profileinfo } from './StaticDataCare'
 import { reminders } from './StaticDataCare'
-const Analytics = () => {
-  // const profileinfo=[
-  //   {name:"Chris Evan" , email:"chris@gmail.com", age:30,blood:"O+"},
-  //   {name:"John sinna" , email:"john@gmail.com", age:30,blood:"A+"},
-  //   {name:"harry potter" , email:"harry@gmail.com", age:30,blood:"B+"},
-  //   {name:"Ryan smith" , email:"ryan@gmail.com", age:30,blood:"AB+"},
-  // ]
-  
-  //   const reminders = [
-  //     { time: '10:05 PM', activity: 'Gardening' },
-  //     { time: '10:05 PM', activity: 'Gardening' },
-  //     { time: '10:05 PM', activity: 'Gardening' },
+import Slider from "react-slick";
 
-  //   ];
- 
+const Analytics = () => {
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
   return (
       <div className="ana-main" >
         <div className="nav-bar">
@@ -32,7 +28,9 @@ const Analytics = () => {
         </div>
         <div className="Analytics-pages">
         <div className="ana-left-side">
+        
           <div className="ana-user">
+          {/* <Slider {...settings}> */}
             {profileinfo.map((profile,index)=>(
               <div className="card" key={index}><div className="card-body" id="ana-card-body">
                 <img src={profilepic} alt="" />
@@ -42,10 +40,15 @@ const Analytics = () => {
                 <p>Blood: {profile.blood}</p>
               </div></div>
             ))}
+            {/* </Slider> */}
           </div>
+          {/* <div>
+            <Cardlist profileinfo={profileinfo}/>
+          </div> */}
+          
           <div className="ana-chart">
             <div className="card"><div className='card-body'>
-              <div><Chart/></div>
+              <div id="ana-bargraph"><Chart/></div>
             <div class="btn-group">
               <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
               <ul class="dropdown-menu">
