@@ -1,12 +1,10 @@
 import React from "react";
 import "./Homepage.css"; // Import your CSS file for styling
-import Progress from "../dashComponents/Progress";
-import Table from "../dashComponents/Table";
-
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
-import CircularProgressBar from "./CircularProgressbar";
+import Assigned from "./Assigned";
+import CareAdd from "./CareAdd";
 const HomePage = () => {
   const reminders = [
     { time: "08:00 AM", activity: "Morning walk" },
@@ -30,131 +28,31 @@ const HomePage = () => {
           </div>
           <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
             <div className="card-body" id="care-profile">
-              <div><img src={profilepic} alt="" /></div>
+              <div><img src="" alt="" /></div>
               <div id="careTaker-Deatils"><p><strong>Dr Caretaker</strong> </p><p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
           <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
         </div>
-        <div className="line"><h2>User's Profile</h2></div>
+        
         <div className="content">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-  <div className="accordion-item">
-    <h2 className="accordion-header">
-      <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        <div className="acc-img">
-          <img src={profilepic} alt="" />
-        </div>
-        <div><strong>Chris Evan</strong></div>
-        <div>,Califonia,USA</div>
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-    <div className="accordion-body" id="home-content">
-      <div className="home-col-one">
-          <div className="home-row-one">
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>
-            </div></div>
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>
-            </div></div>
-          </div>
-          <div className="home-row-two">
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>  
-            </div></div>
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>  
-            </div></div>
-          </div>
-        </div>
-        <div className="home-col-two">
-          <div className="card"><div className="card-body">
-            <div> <strong>Progress </strong></div>
-            <span>Remainder   50%</span>
-            <Progress progress={50}/>
-            <span>goal      60%</span>
-            <Progress progress={60}/>
-            <span>habits    80%</span>
-            <Progress progress={80}/>
-          </div></div>
-        </div>
-        <div className="home-col-three">
-          <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>    
-          </div></div>
-        </div>
-        <div className="home-col-four">
-          <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>    
-          </div></div>
-        </div>
-      </div>
-    </div>
+        <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><strong>Assigned User</strong></button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><strong>Unassigned User</strong></button>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-      <div className="acc-img">
-          <img src={profilepic} alt="" />
+</nav>
+        <div className="profile-heading">
+          <div id='ass-name'><strong>Name</strong></div>
+          <div id='ass-phno'><strong>Ph no</strong></div>
+          <div id='ass-disease'><strong>Disease</strong></div>
+          <div id='ass-allergy'><strong>Allergy</strong></div>
         </div>
-        <div><strong>Chris Evan</strong></div>
-        <div>,Califonia,USA</div>
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse">
-    <div className="accordion-body" id="home-content">
-      <div className="home-col-one">
-          <div className="home-row-one">
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>
-            </div></div>
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>
-            </div></div>
-          </div>
-          <div className="home-row-two">
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>  
-            </div></div>
-            <div className="card"><div className="card-body">
-              <div><CircularProgressBar value={75}/></div>  
-              <div id="dis"><strong>1 hour walk</strong></div>  
-            </div></div>
-          </div>
-        </div>
-        <div className="home-col-two">
-          <div className="card"><div className="card-body">
-            <div> <strong>Progress </strong></div>
-            <span>Remainder   50%</span>
-            <Progress progress={50}/>
-            <span>goal      60%</span>
-            <Progress progress={60}/>
-            <span>habits    80%</span>
-            <Progress progress={80}/>
-          </div></div>
-        </div>
-        <div className="home-col-three">
-          <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>    
-          </div></div>
-        </div>
-        <div className="home-col-four">
-          <div className="card"><div className="card-body">
-          <Table reminders={reminders}/>    
-          </div></div>
-        </div>
-      </div>
-    </div>
+        
+        <div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><Assigned/></div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd/></div>
   </div>
-</div>
+
         </div>
       <br />
       </div>

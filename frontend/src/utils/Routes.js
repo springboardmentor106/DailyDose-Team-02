@@ -10,11 +10,11 @@ import Error404 from "../Components/pageNotFound/Error404";
 import Add from "../Components/Dashboard/User/Add"
 import Dashboard from "../Components/Dashboard/User/Dashboard"
 import Target from "../Components/Dashboard/User/Target"
-import CareAdd from "../Components/Dashboard/Caretaker/CareAdd";
+
 import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 import UserDashboard from "../Components/userDashboard/UserHome";
-
+import AssignTask from "../Components/Dashboard/Caretaker/AssignTask";
 function ProtectedRoute({ Component }) {
   const userInfo = localStorage.getItem("user-info");
   const token = localStorage.getItem("token");
@@ -45,8 +45,8 @@ function Routing() {
       <Route path="/add" element={<Add/>} />
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/target" element={<Target/>} />
-      <Route path="/care-dashboard" element={<HomePage/>} />
-      <Route path="/care-add" element={<CareAdd/>} />
+      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
+      <Route path="/care-add" element={<AssignTask/>} />
       <Route path="/care-analytics" element={<Analytics/>} />
       <Route path="/user-dash" element={<UserDashboard/>} />
     </Routes>

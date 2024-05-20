@@ -28,6 +28,9 @@
     margin-left: 5px;
     border-radius: 51px 0px 0px 51px;
 }
+.btn-group{
+  height: 27px;
+}
 .ana-right-card-one{
   padding: 0px;
     height: 344px;
@@ -46,6 +49,7 @@
 .ana-user{
     display: flex;
     justify-content:space-between;
+    
 }
 .ana-reminder{
   background-color: white;
@@ -68,7 +72,7 @@
   background-image: linear-gradient(#ada0f8,#f0eef9);
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
-.ana-user .card  #ana-card-body img{
+ .card  #ana-card-body img{
   width: 58px; height: 59px;
   border-radius: 100%;
 }
@@ -113,13 +117,14 @@
   margin: 10px;
 }
 
-
+.ana-right-card-two .nav{
+  background-color: #ebe8fd;
+} 
   /* --------Responsive ness of .Analytics-pages-------- */
 
   @media screen and (max-width:425px) {
   .ana-main{
-    width: 100vh;
-    height: 100vh;
+    width: 100%;
   }
   .Analytics-pages{
     padding-left: 0px;
@@ -132,16 +137,22 @@
     display: flex;
   }
   .ana-user{
-    display: flex; justify-content: flex-start; width: 100vh;
+    display: flex; justify-content:space-around; width: 100%;
   }
   .ana-left-side .ana-user .card{
     width: 98px;
-    height: 104px;
+    height: 104px; border-radius: 20px;
+  }
+  .ana-user #ana-card-body{
+    padding:8px ;
+    gap: 0px; width: 100%;
+    margin-top: 0px;
+    
   }
   .ana-user .card #ana-card-body img{
-    width: 50px; height: 50px;
+    width: 40px; height: 40px;
   }
-  .ana-user .card #ana-card-body h6{
+  .ana-user .card #ana-card-body strong{
     font-size: 13px;
   }
   .ana-user .card #ana-card-body p{
@@ -160,7 +171,12 @@
     margin-top: 10px;
   }
   .ana-chart .card-body{
+    width: 100%;
     height: 280px;
+  }
+  #ana-bargraph{
+    margin-top: 89px;
+    margin-left: -49px;
   }
   .ana-chart .btn-group{
     display: none;
@@ -171,8 +187,100 @@
     height: 200px;
     box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
   }
-  #ana-progress .row-three-card{
-    width: 100px;
+  #ana-progress {
+    display:flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: -6px;
   }
+  #ana-progress .row-three-card{
+    height: 241px; width: 100%;
+  }
+  .ana-right-side {
+    display: grid;
+    justify-content: space-around;
+    width: 92%;
+
+  }
+  #ana-progress .box-left-top{
+    margin-left:35px ;
+  }
+  #ana-progress #about {
+    margin-left: 25px;
+}
+#ana-progress .Progress-details-container{
+  display:flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+#ana-progress .third-pro-detail{
+  display: none;
+}
+.ana-right-card-one {
+  padding-left: 31px;
+  width: 371px;
+}
+.ana-right-card-two{
   
+  margin-top: 30px;
+  margin-left:5px;
+
+}
+}
+@media screen and (max-width:820px) and (min-width:425px) {
+  .ana-main{
+    width: 97%;
+  }
+  .Analytics-pages{
+    display: grid;
+    justify-content: space-around;
+    width: 97%;
+  }
+  .ana-right-side{
+    display:flex;
+    justify-content: space-around;
+  }
+  .ana-right-card-two{
+    margin-top: -24px;
+  }
+  .ana-right-card-one{
+    margin-top: 10px;
+  }
+  .nav-bar{
+    top:74%
+  }
+}
+
+/* ------------Assign Task ---------------*/
+.Assign_pages{
+  padding-left:110px ;
+  
+}
+.assign-heading{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: #6a58dc;
+  color: white;
+  padding:15px 5px 15px 5px ;
+  border-radius: 30px;
+}
+.assign-main{
+  display: flex;
+  justify-content:space-evenly;
+
+}
+.assign-heading h5{
+  margin-left: 20px;
+}
+.Assign_pages input{
+  width: 420px;
+}
+.Assign_pages #textarea{
+  margin-left: 130px;
+}
+.Assign_pages #textarea textarea{
+  width: 990px;
+  height: 100px;
 }

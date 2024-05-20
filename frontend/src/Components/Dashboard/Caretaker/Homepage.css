@@ -1,7 +1,7 @@
 *{
     
     margin: 1px;
-    
+    text-decoration: none;
 }
 .nav-bar{
   
@@ -45,6 +45,7 @@
 #heading img{
   height: 201px;
     width: 247px;
+    
 }
 #heading p{
   font-size: 15px;
@@ -64,10 +65,11 @@
   display: flex;
   justify-content: space-around;
   margin-top: -25px;
+  width: 100%;
 }
 #care-profile img{
   width: 100px; height:100px;
-  border-radius: 100%;
+  border-radius: 100%; background-color: whitesmoke;
 }
 .progressBar-container{
   display: flex;
@@ -129,6 +131,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
+  background-color:#f2f1f9;
 }
 .sidebar {
     background-color: #6a58dc;
@@ -200,6 +203,56 @@
   .home-col-four .card .card-body{
     width: 220px;
   }
+  .nav{
+    margin-top:15px ;
+    margin-bottom: 15px;
+    background-color: #6a58dc;
+    border-radius: 20px;
+    padding-top: 5px; 
+    justify-content: space-around;
+  }
+  .nav-link strong{
+    color: black;
+    font-size: 20px;
+    
+  }
+
+  /* .nav button{
+    background-color: #6a58dc;
+    
+  } */
+  .profile-heading{
+    display: flex;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .profile-heading div{
+    margin-right: 110px;
+    margin-left: 30px;
+  }
+  .ass-user-detail{
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+  }
+  .ass-user-detail div{
+    margin-right: 110px;
+    margin-left: 23px;
+  }
+  .accordion-item{
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+  #ass-name{
+    margin-left: 102px;
+  }
+  #ass-phno{
+    margin-left: 56px;
+  }
+  #ass-disease{
+    margin-left: 37px;
+  }
+  
 /* -------Responsive ness of Home Page --------*/
 /* @media screen and (max-width:425px) {
   .main1 .pages{
