@@ -15,8 +15,7 @@ import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 import UserDashboard from "../Components/userDashboard/UserHome";
 import AssignTask from "../Components/Dashboard/Caretaker/AssignTask";
-function ProtectedRoute({ Component }) {
-  const userInfo = localStorage.getItem("user-info");
+function ProtectedRoute({ Component, authorizedFor }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   console.log("token:", token, "role:", role);
@@ -24,11 +23,22 @@ function ProtectedRoute({ Component }) {
   useEffect(() => {
     if (!token) {
       toast.warn("Unauthorized Access, Please Login First", {
-        position: "top-center",
+        position: "top-right",
       });
       navigate("/login");
     }
-  }, []);
+    if (authorizedFor !== role) {
+      toast.warn(`Unauthorized Access,${authorizedFor}s only can access the page.`, {
+        position: "top-right",
+      });
+    }
+    if (role === "user") {
+      navigate("/dashboard");
+    }
+    if (role === "caretaker") {
+      navigate("/care-dashboard");
+    }
+  }, [role, token]);
   return <Component />;
 }
 function Routing() {
@@ -40,15 +50,16 @@ function Routing() {
       <Route path="/reset" element={<Reset />} />
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/update-password" element={<UpdatePassword />} />
-      {/* <Route path="/user-home" element={<ProtectedRoute Component={UserHome} />} /> */}
       <Route path="*" element={<Error404 />} />
-      <Route path="/add" element={<Add/>} />
-      <Route path="/dashboard" element={<Dashboard/>}/>
-      <Route path="/target" element={<Target/>} />
-      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage}/>} />
-      <Route path="/care-add" element={<AssignTask/>} />
-      <Route path="/care-analytics" element={<Analytics/>} />
-      <Route path="/user-dash" element={<UserDashboard/>} />
+
+      <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} authorizedFor="user" />} />
+      <Route path="/add" element={<ProtectedRoute Component={Add} authorizedFor="user" />} />
+      <Route path="/target" element={<ProtectedRoute Component={Target} authorizedFor="user" />} />
+
+      <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} authorizedFor="caretaker" />} />
+      <Route path="/care-add" element={<ProtectedRoute Component={AssignTask} authorizedFor="caretaker" />} />
+      <Route path="/care-analytics" element={<ProtectedRoute Component={Analytics} authorizedFor="caretaker" />} />
+      <Route path="/user-dash" element={<UserDashboard />} />
     </Routes>
   );
 }

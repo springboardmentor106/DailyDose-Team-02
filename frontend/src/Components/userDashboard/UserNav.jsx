@@ -3,6 +3,7 @@ import "./userNav.css";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 const UserNav = () => {
+  const role = localStorage.getItem("role")
   return (
     <nav className="navbar">
       <div className="navbar__logo">
@@ -10,7 +11,7 @@ const UserNav = () => {
       </div>
       <ul className="navbar__menu">
         <li className="navbar__item">
-          <Link to="/care-dashboard"  className="navbar__link">
+          <Link to={role === "user" ? "/dashboard" : "/care-dashboard"}  className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -29,7 +30,7 @@ const UserNav = () => {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link  to="/Care-add" className="navbar__link">
+          <Link to={role === "user" ? "/add" : "/care-add"} className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -48,7 +49,7 @@ const UserNav = () => {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link to="/care-analytics" className="navbar__link">
+          <Link to={role === "user" ? "/target" : "/care-analytics"} className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
