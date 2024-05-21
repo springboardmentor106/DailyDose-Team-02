@@ -13,7 +13,7 @@ const otpSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-})
+});
 
 const OTP = mongoose.model('OTP', otpSchema)
 

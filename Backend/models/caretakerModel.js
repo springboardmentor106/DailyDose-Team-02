@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const caretakerSchema = new mongoose.Schema(
   {
+    uuid: {
+      type: String,
+      required: true
+
+    },
     firstname: {
       type: String,
       required: true,
@@ -41,5 +46,6 @@ const caretakerSchema = new mongoose.Schema(
 );
 
 const Caretaker = mongoose.model("caretaker", caretakerSchema);
+
 
 export default Caretaker

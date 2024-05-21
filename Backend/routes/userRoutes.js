@@ -1,33 +1,47 @@
-import UserController from '../controllers/userController.js';
-import CaretakerController from '../controllers/caretakerController.js';
-import checkUserAuth from '../middlewares/auth-middleware.js';
-import express from 'express'
-
+import {
+    deleteUser,
+    // getUserDetailsByUuidAndRole,
+    newUserEmailOtp,
+    readUserDetail,
+    updateUser,
+    userLogin,
+    userPasswordReset,
+    userPasswordResetEmail,
+    userRegistration,
+    validateOtp
+} from '../controllers/userController.js';
+import checkUserAuth from '../middlewares/authMiddleware.js';
+import express from 'express';
+// import { validate } from 'express-validation';
+import {
+    newUserEmailOtpSchema,
+    updateUserSchema,
+    userLoginSchema,
+    userPasswordResetEmailSchema,
+    userPasswordResetSchema,
+    userRegistrationSchema
+} from '../validations/userValidation.js';
+import { validation } from '../middlewares/validationMiddleware.js';
 
 const router = express.Router();
 
-
-// // Middleware - To protect
-// router.use('/changepassword', checkUserAuth)
-// router.use('/loggeduser', checkUserAuth)
-
-
 // Public Routes  e.g --> Register
-router.post('/new-user', UserController.newUserEmailOtp)
-router.post('/register', UserController.userRegistration)
-router.post('/login', UserController.userLogin)
-router.post('/reset-password-email', UserController.UserPasswordResetEmail)
-router.post('/validate-otp', UserController.validateOtp)
-router.post('/reset-password', UserController.userPasswordReset)
+router.post('/new-user', validation(newUserEmailOtpSchema), newUserEmailOtp)
+router.post('/register', validation(userRegistrationSchema), userRegistration)
+router.post('/login', validation(userLoginSchema), userLogin)
+router.post('/reset-password-email', validation(userPasswordResetEmailSchema), userPasswordResetEmail)
+router.post('/validate-otp', validation(userPasswordResetEmailSchema), validateOtp)
 
 
-// router.post('/reset-password/:id/:token', UserController.userPasswordReset)
-// router.get('/reset-password/:id/:token', UserController.resetPasswordPage)
-
-
-// Protected Routes e.g ---> Dashboard
-// router.post('/changepassword', UserController.changeUserPassword)
-// router.get('/loggeduser', UserController.loggedUser)
-
+// Protected Routes
+// router.post('/user/details/:uuid/:role', checkUserAuth, getUserDetailsByUuidAndRole);
+router.post('/reset-password', validation(userPasswordResetSchema), checkUserAuth, userPasswordReset)
+router.patch('/update-profile', validation(updateUserSchema), checkUserAuth, updateUser)
+router.get('/profile', checkUserAuth, readUserDetail)
+router.delete('/delete-profile', checkUserAuth, deleteUser)
+// router.post('/assign-user', checkUserAuth);
+// router.get('/dummy', checkUserAuth, (req, res)=>{
+//     res.send('I am dummy')
+// })
 
 export default router
