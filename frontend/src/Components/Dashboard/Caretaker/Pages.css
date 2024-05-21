@@ -19,6 +19,7 @@
 }
 .ana-left-side{
     margin: 6px 30px 6px 6px;
+    min-width:750px
 }
 .ana-right-side{
     background-color: #ebe8fd;
@@ -49,7 +50,10 @@
 .ana-user{
     display: flex;
     justify-content:space-between;
-    
+    overflow-x: scroll; max-height:198px;
+}
+.ana-user::-webkit-scrollbar{
+  width: 2px;
 }
 .ana-reminder{
   background-color: white;
@@ -62,7 +66,7 @@
 .ana-user .card{
     margin: 4px;
     border-radius: 30px;
-    width: 178px; height: 166px;
+    min-width: 178px; height: 166px; 
     background-image: linear-gradient(#d3cbf7,white);
     transition: 0.5s;
 }
@@ -124,7 +128,7 @@
 
   @media screen and (max-width:425px) {
   .ana-main{
-    width: 100%;
+    width: 95%;
   }
   .Analytics-pages{
     padding-left: 0px;
@@ -137,7 +141,7 @@
     display: flex;
   }
   .ana-user{
-    display: flex; justify-content:space-around; width: 100%;
+    display: flex; justify-content:space-around; 
   }
   .ana-left-side .ana-user .card{
     width: 98px;
@@ -224,10 +228,9 @@
   
   margin-top: 30px;
   margin-left:5px;
-
 }
 }
-@media screen and (max-width:820px) and (min-width:425px) {
+/* @media screen and (max-width:820px) and (min-width:425px) {
   .ana-main{
     width: 97%;
   }
@@ -249,38 +252,71 @@
   .nav-bar{
     top:74%
   }
-}
+} */
 
 /* ------------Assign Task ---------------*/
 .Assign_pages{
   padding-left:110px ;
-  
+  font-size: inherit;
 }
 .assign-heading{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
-  background-color: #6a58dc;
-  color: white;
-  padding:15px 5px 15px 5px ;
-  border-radius: 30px;
+  margin-top: 22px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #6a58dc;
+    color: white;
+    padding: 18px 8px 18px 10px;
+    border-radius: 30px;
 }
-.assign-main{
+#Assign-card .card-body{
   display: flex;
-  justify-content:space-evenly;
-
+  justify-content: space-around;
+  flex-direction: row;
+  width:100%
 }
 .assign-heading h5{
   margin-left: 20px;
 }
 .Assign_pages input{
-  width: 420px;
+  width: 100%;
 }
-.Assign_pages #textarea{
-  margin-left: 130px;
+.Assign_pages .input-group{
+  width:100%
+}
+.assign-left{
+  width: 100%;
+}
+.assign-right{
+  width: 100%;
 }
 .Assign_pages #textarea textarea{
-  width: 990px;
-  height: 100px;
+  width: 100%;
+  height: 110px;
+  
+}
+#Assign-card{
+  margin-left: 46px;
+  margin-right: 46px;
+  padding: 5px 25px 5px 25px;
+  border-radius: 10px;
+}
+@media screen and (max-width:768px){
+  .Assign_pages{
+    padding-left:0px ;
+    font-size:10px;
+  }
+  #Assign-card .card-body{
+    margin-top: 0px;
+    display: block;
+  justify-content: space-around;
+  width:100%
+  }
+  .assign-heading{
+    margin: 0px;
+    /* padding: 0px; */
+  }
+  #Assign-card{
+    margin: 2px;;
+  }
 }

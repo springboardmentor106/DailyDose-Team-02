@@ -3,24 +3,34 @@ import Chart from '../dashComponents/Chart'
 import CircularProgressBar from '../dashComponents/ProgressBar'
 import './Pages.css'
 import Calendar from '../dashComponents/Calendar'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import ReminderList from '../User/ReminderList';
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from '../../userDashboard/UserNav'
 import { AiFillSliders } from "react-icons/ai";
 import { profileinfo } from './StaticDataCare'
 import { reminders } from './StaticDataCare'
-import Slider from "react-slick";
-
+import {data} from './StaticDataCare' 
+import { useState } from 'react'
+import { Month } from '../User/StaticDataUser'
 const Analytics = () => {
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-  };
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [cardStyles, setCardStyles] = useState({});
+
+    const handleCardClick = (email) => {
+        const cardStyle = {
+          transform: "scale(1.05)",
+            backgroundImage: 'linear-gradient(#ada0f8,#f0eef9)',
+            boxShadow:'1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15)'
+        };
+
+        setSelectedCard(email);
+        setCardStyles({ ...cardStyles, [email]: cardStyle });
+    };
+
+    const getProfileData = (email) => {
+        const profile = data.find(profile => profile.email === email);
+        return profile ? profile.month : data[0].month;
+    };
   return (
       <div className="ana-main" >
         <div className="nav-bar">
@@ -30,9 +40,10 @@ const Analytics = () => {
         <div className="ana-left-side">
         
           <div className="ana-user">
-          {/* <Slider {...settings}> */}
+          
             {profileinfo.map((profile,index)=>(
-              <div className="card" key={index}><div className="card-body" id="ana-card-body">
+              <div className="card" key={index} onClick={()=>{handleCardClick(profile.email)}}
+              style={cardStyles[profile.email]}><div className="card-body" id="ana-card-body">
                 <img src={profilepic} alt="" />
                 <h6><strong>{profile.name}</strong></h6>
                 <p>{profile.email}</p>
@@ -40,15 +51,16 @@ const Analytics = () => {
                 <p>Blood: {profile.blood}</p>
               </div></div>
             ))}
-            {/* </Slider> */}
+            
           </div>
           {/* <div>
             <Cardlist profileinfo={profileinfo}/>
           </div> */}
           
+          {selectedCard && (
           <div className="ana-chart">
             <div className="card"><div className='card-body'>
-              <div id="ana-bargraph"><Chart/></div>
+              <div id="ana-bargraph"><Chart Month={getProfileData(selectedCard)}/></div>
             <div class="btn-group">
               <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
               <ul class="dropdown-menu">
@@ -58,6 +70,7 @@ const Analytics = () => {
             </div>
             </div></div>
           </div>
+          )}
           <div className="row-three" id="ana-progress">
         <div className="row-three-card">
           <h5 id='progres'><strong>Progress</strong></h5>

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Month } from '../User/StaticDataUser'
 import {ResponsiveContainer,BarChart,Bar, YAxis,XAxis, Tooltip} from 'recharts'
-const Chart = () => {
+const Chart = ({Month}) => {
 
   return (
     <div className='App'>
