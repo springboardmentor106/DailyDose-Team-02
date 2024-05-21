@@ -1,7 +1,6 @@
-*{
-    
-    margin: 1px;
-    text-decoration: none;
+* {
+  /* margin: 1px; */
+  text-decoration: none;
 }
 .nav-bar {
   position: relative;
@@ -57,8 +56,7 @@
 }
 #heading img {
   height: 201px;
-    width: 247px;
-    
+  width: 247px;
 }
 #heading p {
   font-size: 15px;
@@ -80,9 +78,11 @@
   margin-top: -25px;
   width: 100%;
 }
-#care-profile img{
-  width: 100px; height:100px;
-  border-radius: 100%; background-color: whitesmoke;
+#care-profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: whitesmoke;
 }
 .progressBar-container {
   display: flex;
@@ -147,7 +147,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
-  background-color:#f2f1f9;
+  background-color: #f2f1f9;
 }
 .sidebar {
   background-color: #6a58dc;
@@ -159,162 +159,341 @@
   border-radius: 20px;
 }
 .sidebar-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-  }
-  .icon {
-    margin-right: 5px;
-    
-  }
-  .line{
-    margin: 20px;
-    
-  }
-  .line h2{
-    font-weight:700 ;
-  }
-  #home-content{
-    display: flex;
-    justify-content: space-between;
-    background-color: #f2f1f9;
-  }
-  .home-col-one{
-    display: grid;
-  }
-  .home-row-one{
-    display: flex; 
-  }
-  .home-row-one .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-one .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%;
-    padding: 10px 20px 0px 20px;
-  }
-  #dis{
-    margin: 10px;
-  }
-  .home-row-two{
-    display: flex;
-  }
-  .home-row-two .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-two .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%; 
-    padding: 10px 20px 0px 20px;;
-  }
-  .home-col-two .card .card-body{
-    width: 250px;
-    padding: 10px; margin-left: 10px; margin-right: 10px;
-  }
-  .home-col-three .card .card-body{
-    width: 220px;
-  }
-  .home-col-four .card .card-body{
-    width: 220px;
-  }
-  .nav{
-    margin-top:15px ;
-    margin-bottom: 15px;
-    background-color: #6a58dc;
-    border-radius: 20px;
-    padding-top: 5px; 
-    justify-content: space-around;
-  }
-  .nav-link strong{
-    color: black;
-    font-size: 20px;
-    
-  }
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+.icon {
+  margin-right: 5px;
+}
+.line {
+  margin: 20px;
+}
+.line h2 {
+  font-weight: 700;
+}
+#home-content {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2f1f9;
+}
+.home-col-one {
+  display: grid;
+}
+.home-row-one {
+  display: flex;
+}
+.home-row-one .card {
+  background-color: #ded1ef;
+  margin-right: 10px;
+}
+.home-row-one .card .card-body {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px 20px 0px 20px;
+}
+#dis {
+  margin: 10px;
+}
+.home-row-two {
+  display: flex;
+}
+.home-row-two .card {
+  background-color: #ded1ef;
+  margin-right: 10px;
+}
+.home-row-two .card .card-body {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px 20px 0px 20px;
+}
+.home-col-two .card .card-body {
+  width: 250px;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.home-col-three .card .card-body {
+  width: 220px;
+}
+.home-col-four .card .card-body {
+  width: 220px;
+}
+.nav {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #6a58dc;
+  border-radius: 20px;
+  padding-top: 5px;
+  justify-content: space-around;
+}
+.nav-link strong {
+  color: black;
+  font-size: 20px;
+}
 
-  /* .nav button{
+/* .nav button{
     background-color: #6a58dc;
     
   } */
-  .profile-heading{
-    display: flex;
-    font-size: 15px;
-    text-decoration: none;
-  }
-  .profile-heading div{
-    margin-right: 110px;
-    margin-left: 30px;
-  }
-  .ass-user-detail{
-    display: flex;
-    justify-content: space-around;
-    font-size: 15px;
-  }
-  .ass-user-detail div{
-    margin-right: 110px;
-    margin-left: 23px;
-  }
-  .accordion-item{
-    margin-bottom: 10px;
-    border-radius: 20px;
-  }
-  #ass-name{
-    margin-left: 102px;
-  }
-  #ass-phno{
-    margin-left: 56px;
-  }
-  #ass-disease{
-    margin-left: 37px;
-  }
-  
+.profile-heading {
+  display: flex;
+  font-size: 15px;
+  text-decoration: none;
+}
+.profile-heading div {
+  margin-right: 110px;
+  margin-left: 30px;
+}
+.ass-user-detail {
+  display: flex;
+  justify-content: space-around;
+  font-size: 15px;
+}
+.ass-user-detail div {
+  margin-right: 110px;
+  margin-left: 23px;
+}
+.accordion-item {
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+#ass-name {
+  margin-left: 102px;
+}
+#ass-phno {
+  margin-left: 56px;
+}
+#ass-disease {
+  margin-left: 37px;
+}
+
 /* -------Responsive ness of Home Page --------*/
-/* @media screen and (max-width:425px) {
-  .main1 .pages{
+@media screen and (max-width: 425px) {
+  .main1 .pages {
     padding-left: 0px;
-    width: 99vh;
-    margin-right: 2px;
+    width: 100%;
+    height: 92%;
+    margin-right: 0px;
+    margin: 0;
   }
-  
-  .header{
-    display:grid;
-    justify-content: flex-start;
+
+  .header {
+    width: 100%;
+    height: 10vh;
+    display: grid;
+    justify-content: space-around;
+    margin: 0;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1vw;
+  }
+  #heading {
+    margin-top: 0;
+    margin-left: 0;
+    width: auto;
+    gap: 0;
+    padding: 1vw;
+    display: initial;
+    position: relative;
+    overflow: hidden;
+  }
+  #heading > div {
+    width: 62%;
+    height: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding-left: 2vw;
+  }
+  strong {
+    margin: 0;
+    font-size: 0;
   }
   #card1 {
-    width: 99%;
-    height: 86%;
+    width: 100%;
+    height: 125px;
+    margin: 0;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    overflow: hidden;
   }
-  #card2{
-    margin-top: -5px;
-    width: 97%;
-  }
-  .imgconatiner{
+  #card2 {
     display: none;
   }
-  #heading img{
+  #heading .imgconatiner {
+    align-items: flex-end;
+    gap: 1vw;
+    margin: 0;
+    height: 50%;
+    position: absolute;
+    right: -32px;
+    bottom: 20px;
+  }
+  #heading img {
     height: 153%;
     width: 154%;
   }
-  #heading p{
-    font-size: 12px;
+  #heading p {
+    font-size: 9px;
+    line-height: 12px;
   }
-  #heading h3{
+  #heading h3 {
     font-size: 18px;
+    margin: 0;
+    /* text-align: center; */
   }
   #card3 {
-    display: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
   }
-  #home-content{
+  #home-content {
     display: grid;
   }
   #care-profile img {
     width: 60px;
     height: 60px;
-    margin-top: ;
+    /* margin-top: ;[ */
   }
-  #care-profile{
-    padding-left: 36px;
-    margin-top: -131px;
+  .card-title h6 {
+    font-size: 13px;
   }
-} */
+  .content {
+    margin-top: 10vh;
+  }
+  .nav-link strong {
+    font-size: 10px;
+  }
+  .profile-heading {
+    width: 100%;
+    display: flex;
+    font-size: 10px;
+    justify-content: center;
+    gap: 9vw;
+  }
+  .profile-heading strong {
+    font-size: 10px;
+  }
+  #ass-name {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #ass-phno {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #ass-disease {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #ass-allergy {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  #nav-tabContent {
+    margin-top: 0px;
+    width: 100%;
+    height: auto;
+    border: 1px solid red;
+  }
+
+  .ass-user-detail {
+    gap: 1vw;
+    font-size: 10px;
+    width: 70%;
+  }
+
+  .ass-user-detail div {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .accordion-button {
+    padding: 0;
+    margin-right: 0;
+  }
+
+  .accordion-button button {
+    padding: 1vw;
+    font-size: 10px;
+  }
+
+  #home-content {
+    padding: 4px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .home-col-one{
+    grid-row: 1/2;
+    grid-column: 1/2;
+    gap: 1vh;
+  }
+
+  #dis strong {
+    font-size: 10px;
+  }
+
+  .card-body strong {
+    font-size: 12px;
+  }
+
+  .home-row-one .card .card-body {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    padding: 0px;
+    margin-top: 0;
+    gap: 0;
+}
+
+.card-body .CircularProgressbar {
+  width: 65%;
+  vertical-align: middle;
+}
+
+#dis{
+  margin: 0;
+}
+#dis strong {
+  font-size: 6px;
+}
+#home-content .card{
+  width: 100px;
+  height: 60px;
+  
+}
+
+.home-row-two .card .card-body{
+  padding: 67px 4px 0px 3px;
+  gap: 0;
+}
+
+.home-col-two .card .card-body {
+  width: 100px;
+  height: auto;
+  padding: 0px;
+  margin-left: 8px;
+  margin-right: 0px;
+  gap: 0;
+  margin-top: 0;
+}
+#home-content .home-col-two .card{
+  width: 100%;
+  height: 130px;
+}
+
+.card .card-body span{
+  font-size: 10px;
+}
+}
