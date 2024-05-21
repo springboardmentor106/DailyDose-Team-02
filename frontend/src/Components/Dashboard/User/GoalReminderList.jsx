@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Reminder from './HabitReminder';
-const HabitReminderList = () => {
+import Reminder from './GoalReminder';
+const GoalReminderList = () => {
   const [reminders, setReminders] = useState([
-    { id: 1, date: '11:05 PM', type: 'cooking' },
-    { id: 2, date: '11:05 PM', type: 'cooking' },
-    { id: 3, date: '11:05 PM', type: 'cooking' },
-    { id: 4, date: '11:05 PM', type: 'cooking' },
+    { id: 1, date: '11:05 PM', type: 'cooking', checked: true },
+    { id: 2, date: '11:05 PM', type: 'cooking', checked: true },
+    { id: 3, date: '11:05 PM', type: 'cooking', checked: true },
+    { id: 4, date: '11:05 PM', type: 'cooking', checked: true },
   ]);
   const handleCheckChange = (changedReminder) => {
     const updatedReminders = reminders.map((reminder) =>
@@ -36,4 +36,4 @@ const HabitReminderList = () => {
     </div>
   )
 };
-export default HabitReminderList;
+export default GoalReminderList;
