@@ -1,3 +1,4 @@
+import { types } from "joi";
 import mongoose from "mongoose";
 
 const reminderSchema = new mongoose.Schema({
@@ -13,7 +14,11 @@ const reminderSchema = new mongoose.Schema({
     },
     dayFrequency: {
         type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
+        default: []
+    },
+    endDate: {
+        type: Date
     },
     completed: {
         type: Boolean,

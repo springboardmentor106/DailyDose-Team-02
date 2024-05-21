@@ -297,12 +297,12 @@ export const deleteUser = async (req, res) => {
         if (role !== "caretaker") {
             user = await User.findOneAndDelete({ uuid: userId });
             if (!user) {
-                return res.status(400).json({ status: "failed", message: "Email not found" });
+                return res.json({ message: "Email not found" });
             }
         } else {
             user = await Caretaker.findOneAndDelete({ uuid: userId });
             if (!user) {
-                return res.status(400).json({ status: "failed", message: "Email not found" });
+                return res.json({ message: "Email not found" });
             }
         }
 

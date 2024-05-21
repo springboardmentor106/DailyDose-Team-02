@@ -146,7 +146,7 @@ export const assignUser = async (req, res) => {
 export const createUserGoal = async (req, res) => {
     try {
         if (req.role !== 'caretaker') {
-            return res.status(403).json({ status: "failed", message: "Only caretakers can access this endpoint" });
+            return res.json({ message: "Only caretakers can access this endpoint" });
         }
 
         const caretakerId = req.userId;

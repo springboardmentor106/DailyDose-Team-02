@@ -39,7 +39,7 @@ export const updateUserSchema = Joi.object({
 export const userLoginSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
-    role: Joi.string().valid('user', 'caretaker').required(),
+    role: Joi.string().valid('user').required(),
 }).options({ abortEarly: false })
 
 export const changeUserPasswordSchema = Joi.object({
@@ -49,8 +49,8 @@ export const changeUserPasswordSchema = Joi.object({
 
 export const userPasswordResetEmailSchema = Joi.object({
     email: Joi.string().required(),
-    // role: Joi.string().valid('user', 'caretaker').required(),
-    otp: Joi.string().required()
+    role: Joi.string().valid('user', 'caretaker').required(),
+    // otp: Joi.string().required()
 }).options({ abortEarly: false })
 
 export const validateOtpSchema = Joi.object({

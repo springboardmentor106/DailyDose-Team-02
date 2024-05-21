@@ -17,7 +17,7 @@ export const createReminderSchema = Joi.object({
 
 
 export const updateReminderSchema = Joi.object({
-    _id: Joi.string().required(),
+    reminderId: Joi.string().required(),
     title: Joi.string(),
     description: Joi.string(),
     date: Joi.array().items(Joi.date()),
