@@ -10,6 +10,7 @@ const reminderSchema = new mongoose.Schema({
     },
     date: {
         type: [Date],
+        required: true
     },
     dayFrequency: {
         type: [String],
