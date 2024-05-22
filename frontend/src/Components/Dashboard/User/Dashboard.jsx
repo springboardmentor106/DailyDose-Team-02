@@ -18,10 +18,11 @@ import Constants from "../../../constants"
 import noRemindersImage from "../../../assets/images/noReminders.png"
 import noProgress from "../../../assets/images/noProgress.png"
 import noUserDetails from "../../../assets/images/noUserDetails.png"
-
+import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
+  const navigate =useNavigate()
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
@@ -36,6 +37,11 @@ const Dashboard = () => {
           'Authorization': token
         }
       })
+
+      if(response.status === 401){
+        navigate("/login");
+        localStorage.clear()
+      }
       const data = await response.json()
       console.log(data)
       if (data.status === "success") {
@@ -51,6 +57,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUserReminders()
+    console.log("user")
   }, [])
 
   useEffect(() => {

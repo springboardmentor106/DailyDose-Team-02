@@ -178,14 +178,14 @@ export const userRegistration = async (req, res) => {
             if (!savedUser) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. User not created" });
             }
-            token = jwt.sign({ userID: savedUser.uuid, role: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+            token = jwt.sign({ userID: savedUser.uuid, role: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
         } else {
             const caretaker = new Caretaker(userData);
             const savedCaretaker = await caretaker.save();
             if (!savedCaretaker) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" });
             }
-            token = jwt.sign({ userID: savedCaretaker.uuid, role: "caretaker" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+            token = jwt.sign({ userID: savedCaretaker.uuid, role: "caretaker" }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
         }
 
         res.status(201).json({ status: "success", message: "Registered Successfully", token });
@@ -265,7 +265,7 @@ export const updateUser = async (req, res) => {
             if (!user) {
                 return res.status(400).json({ status: "failed", message: "Email not found" });
             }
-            
+
             updateUser = await Caretaker.findByIdAndUpdate(user._id, body, { new: true })
 
             if (!updateUser) {
@@ -331,7 +331,7 @@ export const userLogin = async (req, res) => {
                 if ((user.email === email) && isMatch) {
                     console.log(user);
                     // JWT Token Generate
-                    const token = jwt.sign({ userID: user.uuid, role: role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+                    const token = jwt.sign({ userID: user.uuid, role: role }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
 
                     res.send({ "status": "success", "message": "Login Successfully", "token": token });
                 } else {

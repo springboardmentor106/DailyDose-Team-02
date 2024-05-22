@@ -9,13 +9,12 @@ const checkUserAuth = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
       if (err) {
-        return res.status(400).json({ status: "failed", message: err.message });
+        return res.status(401).json({ status: "failed", message: err.message });
         // console.log(err);
       }
       else {
         req.userId = decoded.userID;
         req.role = decoded.role;
-
         // console.log(decoded);
       }
     });
