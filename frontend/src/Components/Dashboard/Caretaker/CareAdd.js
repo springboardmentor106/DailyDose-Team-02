@@ -31,6 +31,7 @@ const CareAdd = () => {
     </h2>
     <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
     <div className="accordion-body" id="home-content">
+    <div className="home-flex-one">
         <div className="home-col-one">
           <div className="home-row-one">
             <div className="card"><div className="card-body">
@@ -64,6 +65,8 @@ const CareAdd = () => {
             <Progress progress={unassign.habit}/>
           </div></div>
         </div>
+        </div>
+        <div className="home-flex-two">
         <div className="home-col-three">
           <div className="card"><div className="card-body">
           <Table reminders={unassign.reminders}/>    
@@ -73,6 +76,7 @@ const CareAdd = () => {
           <div className="card"><div className="card-body">
           <Table reminders={unassign.reminders}/>    
           </div></div>
+        </div>
         </div>
       </div>
       <div id="toAssign">

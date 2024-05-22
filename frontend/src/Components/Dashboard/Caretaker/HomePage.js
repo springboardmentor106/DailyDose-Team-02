@@ -20,7 +20,7 @@ const HomePage = () => {
         <div className="header">
           <div className="card" id="card1">
             <div className="card-body" id="heading">
-              <div>
+              <div className='welcome'>
                 <strong>
                   <h3> Welcome back...</h3>
                 </strong>
@@ -39,7 +39,7 @@ const HomePage = () => {
               <h6>Profile</h6>
             </div>
             <div className="card-body" id="care-profile">
-              <div>
+              <div className="caretaker-pic">
                 <img src="" alt="" />
               </div>
               <div id="careTaker-Deatils">

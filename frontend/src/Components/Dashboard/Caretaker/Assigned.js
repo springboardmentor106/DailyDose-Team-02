@@ -23,6 +23,7 @@ const Assigned = () => {
                   <img src={profilepic} alt="" />
                 </div>
                 <div className="ass-user-detail">
+                
                   <div>
                     <strong>{assignedUser.name}</strong>
                   </div>
@@ -36,15 +37,17 @@ const Assigned = () => {
                     <p>{assignedUser.allergy}</p>
                   </div>
                 </div>
+                <div>
                 <button className="btn btn-light">
                   <p>Show More</p>
-                </button>
+                </button> </div>
               </button>
             </h2>
             <div
               id="panelsStayOpen-collapseOne"
               class="accordion-collapse collapse show">
               <div className="accordion-body" id="home-content">
+                <div className="home-flex-one">
                 <div className="home-col-one">
                   <div className="home-row-one">
                     <div className="card">
@@ -109,20 +112,23 @@ const Assigned = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="home-col-three">
+                </div>
+                <div className="home-flex-two">
+                <div className="home-col-three">
                   <div className="card">
                     <div className="card-body">
                       <Table reminders={assignedUser.reminders} />
                     </div>
                   </div>
-                </div> */}
-                {/* <div className="home-col-four">
+                </div>
+                <div className="home-col-four">
                   <div className="card">
                     <div className="card-body">
                       <Table reminders={assignedUser.reminders} />
                     </div>
                   </div>
-                </div> */}
+                </div>
+                </div>
               </div>
             </div>
           </div>

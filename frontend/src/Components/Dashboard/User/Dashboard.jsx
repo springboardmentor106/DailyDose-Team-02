@@ -9,7 +9,7 @@ import ReactCalendar from "../dashComponents/Calendar";
 import dailyimg from "../../../assets/images/User.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
-import { profileinfo } from "./StaticDataUser";
+import { Month, profileinfo } from "./StaticDataUser";
 import { reminders } from "./StaticDataUser";
 import HabitReminderList from './GoalReminderList';
 import GoalReminderList from './GoalReminderList';
@@ -61,7 +61,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-one-dashboard">
-            <Chart />
+            <Chart Month={Month}/>
           </div>
         </div>
         <div className="row-three">
