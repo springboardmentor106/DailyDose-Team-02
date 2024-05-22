@@ -52,7 +52,9 @@
 #heading {
   display: flex;
   margin-top: 3px;
-  color: black;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size:x-large;
 }
 #heading img {
   height: 201px;

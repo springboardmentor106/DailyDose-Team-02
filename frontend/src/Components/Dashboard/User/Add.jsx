@@ -36,7 +36,7 @@ const Add = () => {
             </div>
             <div className="dropdown-container-right">
             <button className="btn" onClick={() => handleItemClick('goal')} style={{ padding: '6px 20px', fontSize: '10px', backgroundColor: '#E0DCF8', color: 'white' , marginLeft: '370px', borderRadius:'15px' ,}}>
-            <h4 id='heading' style={{ margin: 0, fontSize: '10px ',}}>Save </h4>
+            <h4 id='heading' style={{ margin: 0, fontSize: '15px ',color: "#403774"}}>Save </h4>
             </button>
               
             <label id='Label'>Description</label>
@@ -80,7 +80,7 @@ const Add = () => {
             </div>
             <div className="dropdown-container-right">
             <button className="btn" onClick={() => handleItemClick('goal')} style={{ padding: '6px 20px', fontSize: '10px', backgroundColor: '#E0DCF8', color: 'white' , marginLeft: '380px', borderRadius:'15px' ,}}>
-            <h4 id='heading' style={{ margin: 0, fontSize: '10px ',}}>Save </h4>
+            <h4 id='heading' style={{ margin: 0,  fontSize: '15px ',color: "#403774"}}>Save </h4>
             </button>
             <label> Start Date</label>
             <input type="date" id='saow' />
@@ -118,7 +118,7 @@ const Add = () => {
             </div>
             <div className="dropdown-container-right">
             <button className="btn" onClick={() => handleItemClick('goal')} style={{ padding: '6px 20px', fontSize: '10px', backgroundColor: '#E0DCF8', color: 'white' , marginLeft: '380px', borderRadius:'15px' ,}}>
-            <h4 id='heading' style={{ margin: 0, fontSize: '10px ',}}>Save </h4>
+            <h4 id='heading' style={{ margin: 0,  fontSize: '15px ',color: "#403774"}}>Save </h4>
             </button>
             <label>Description</label>
             <textarea name="" id="right-input"></textarea>
