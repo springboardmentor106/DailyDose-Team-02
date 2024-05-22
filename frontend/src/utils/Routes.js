@@ -26,33 +26,23 @@ function ProtectedRoute({ Component, authorizedFor }) {
         position: "top-right",
       });
       navigate("/login");
+    }else{
+      if (authorizedFor !== role) {
+        toast.warn(`Unauthorized Access,${authorizedFor}s only can access the page.`, {
+          position: "top-right",
+        });
+        if (role === "user") {
+          navigate("/dashboard");
+        }
+        if (role === "caretaker") {
+          navigate("/care-dashboard");
+        }
+      }
     }
-    if (authorizedFor !== role) {
-      toast.warn(`Unauthorized Access,${authorizedFor}s only can access the page.`, {
-        position: "top-right",
-      });
-    }
-    if (role === "user") {
-      navigate("/dashboard");
-    }
-    if (role === "caretaker") {
-      navigate("/care-dashboard");
-    }
-  }, [role, token]);
+  }, []);
   return <Component />;
 }
 function Routing() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    if (!token) {
-      navigate("/login");
-    } else {
-      navigate("/user-home")
-    }
-  })
-
   return (
     <Routes>
       <Route path="/" element={<Login />} />

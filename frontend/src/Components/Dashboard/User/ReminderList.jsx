@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Reminder from '../User/Reminder';
-const ReminderList = () => {
-  const [reminders, setReminders] = useState([
-    { id: 1, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 2, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 3, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 4, date: '10:05 PM', type: 'Gardening', checked: true },
-  ]);
+const ReminderList = ({ remindersList }) => {
+  const [reminders, setReminders] = useState(remindersList || null);
   const handleCheckChange = (changedReminder) => {
     const updatedReminders = reminders.map((reminder) =>
       reminder.id === changedReminder.id
@@ -15,6 +10,9 @@ const ReminderList = () => {
     );
     setReminders(updatedReminders);
   };
+  useEffect(() => {
+    setReminders(remindersList)
+  }, [remindersList])
   const handleDelete = (reminderToDelete) => {
     const updatedReminders = reminders.filter(
       (reminder) => reminder.id !== reminderToDelete.id
@@ -23,16 +21,16 @@ const ReminderList = () => {
   };
   return (
     <div className="main">
-    <div className="reminder-list">
-      {reminders.map((reminder) => (
-        <Reminder
-          key={reminder.id}
-          reminder={reminder}
-          onCheckChange={handleCheckChange}
-          onDelete={handleDelete}
-        />
-      ))}
-    </div>
+      <div className="reminder-list">
+        {reminders && reminders.map((reminder) => (
+          <Reminder
+            key={reminder.id}
+            reminder={reminder}
+            onCheckChange={handleCheckChange}
+            onDelete={handleDelete}
+          />
+        ))}
+      </div>
     </div>
   )
 };

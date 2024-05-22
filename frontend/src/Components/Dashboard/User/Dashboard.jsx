@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Dashboard.css";
 import UserNav from "../../userDashboard/UserNav";
 import { IoIosArrowDropdown } from "react-icons/io";
@@ -10,14 +10,48 @@ import dailyimg from "../../../assets/images/User.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
 import { profileinfo } from "./StaticDataUser";
-import { reminders } from "./StaticDataUser";
+// import { reminders } from "./StaticDataUser";
 import HabitReminderList from './GoalReminderList';
 import GoalReminderList from './GoalReminderList';
+import { toast } from "react-toastify"
+import Constants from "../../../constants"
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
+  const [reminders, setReminders] = useState(null)
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
+
+  const getUserReminders = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/reminders', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+      const data = await response.json()
+      console.log(data)
+      if (data.status === "success") {
+        data.reminders ? setReminders(data.reminders) : setReminders(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getUserReminders()
+  }, [])
+
+  useEffect(() => {
+     console.log(reminders, new Date().toISOString(), new Date().toJSON())
+  }, [reminders])
   return (
     <div className="dashboard">
       <UserNav />
@@ -35,16 +69,16 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-two">
-          <div className="circle-das">
-         </div>
-          <div className="details-das">
-                  {profileinfo.map((profile,index)=>(
-              <div className="card-user" key={index}><div className="card-body">
-                <h6><strong>{profile.name}</strong></h6>
-                <p>Age: {profile.age}</p>
-                <p><IoLocationSharp /> {profile.location}</p>
-              </div></div>
-            ))}
+            <div className="circle-das">
+            </div>
+            <div className="details-das">
+              {profileinfo.map((profile, index) => (
+                <div className="card-user" key={index}><div className="card-body">
+                  <h6><strong>{profile.name}</strong></h6>
+                  <p>Age: {profile.age}</p>
+                  <p><IoLocationSharp /> {profile.location}</p>
+                </div></div>
+              ))}
             </div>
           </div>
         </div>
@@ -54,10 +88,10 @@ const Dashboard = () => {
               <strong>Goal Progress</strong>
             </h5>
             <div className="year-container">
-            <button>year</button>
-            <div id="year-button-container">
-            <IoIosArrowDropdown />
-            </div>
+              <button>year</button>
+              <div id="year-button-container">
+                <IoIosArrowDropdown />
+              </div>
             </div>
           </div>
           <div className="row-one-card-one-dashboard">
@@ -109,7 +143,7 @@ const Dashboard = () => {
                     <strong>Disease</strong>
                   </h7>
                   <p>Blood pressure</p>
-                  <p>Cholestrol</p>
+                  <p>Cholesterol</p> br
                 </div>
                 <div className="row-three-detail-second">
                   <h7>
@@ -145,30 +179,30 @@ const Dashboard = () => {
         </div>
         <div className="card-center-details">
           <div className="card-center-details-links">
-          <button onClick={() => handleLinkClick(1)}  className={selectedBox === 1 ? 'active' : ''}  > Reminder</button>
-            <button onClick={() => handleLinkClick(2)}  className={selectedBox === 2 ? 'active' : ''} >Goal</button>
+            <button onClick={() => handleLinkClick(1)} className={selectedBox === 1 ? 'active' : ''}  > Reminder</button>
+            <button onClick={() => handleLinkClick(2)} className={selectedBox === 2 ? 'active' : ''} >Goal</button>
             <button onClick={() => handleLinkClick(3)} className={selectedBox === 3 ? 'active' : ''} >Habit</button>
           </div>
           <div className="des-option-icon">
             <IoOptionsOutline />
           </div>
-       <div>
-        {selectedBox === 1 && <div> 
-          <div className="right-card-two">
-          <ReminderList reminders={reminders} />
-        </div>
-          </div>}
-        {selectedBox === 2 && <div>
-          <div className="right-card-two">
-          < GoalReminderList reminders={reminders} />
-        </div>
-          </div>}
-        {selectedBox === 3 && <div>
-          <div className="right-card-two">
-          <HabitReminderList reminders={reminders} />
-        </div>
-          </div>}
-      </div>
+          <div>
+            {selectedBox === 1 && <div>
+              <div className="right-card-two">
+                <ReminderList remindersList={reminders} />
+              </div>
+            </div>}
+            {selectedBox === 2 && <div>
+              <div className="right-card-two">
+                < GoalReminderList reminders={reminders} />
+              </div>
+            </div>}
+            {selectedBox === 3 && <div>
+              <div className="right-card-two">
+                <HabitReminderList reminders={reminders} />
+              </div>
+            </div>}
+          </div>
         </div>
       </div>
     </div>

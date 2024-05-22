@@ -104,7 +104,9 @@
   animation: gooeyEffect-1 250ms 1;
 }
 
-
+.logout-button{
+  cursor: pointer;
+}
 
 
 .navbar__item:first-child:nth-last-child(3):hover ~ li:last-child:before, .navbar__item:first-child:nth-last-child(3) ~ li:hover ~ li:last-child:before {

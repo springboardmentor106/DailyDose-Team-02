@@ -54,6 +54,7 @@ const Register = () => {
     }
     const fetchUrl = Constants.BASE_URL + "/api/user/register";
     setErrors(tempErrors);
+    console.log(JSON.stringify({ email: formData.email, role: formData.role }))
     if (Object.keys(tempErrors).length === 0) {
       // making API call to send the OTP
       fetch(Constants.BASE_URL + "/api/user/new-user", {
@@ -61,7 +62,7 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: formData.email, role: formData.role }),
+        body: JSON.stringify({ email: formData.email }),
       })
         .then((response) => response.json())
         .then((data) => {

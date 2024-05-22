@@ -15,7 +15,6 @@ export const createReminderSchema = Joi.object({
     pushNotification: Joi.boolean().default(false)
 }).options({ abortEarly: false });
 
-
 export const updateReminderSchema = Joi.object({
     _id: Joi.string().required(),
     title: Joi.string(),
