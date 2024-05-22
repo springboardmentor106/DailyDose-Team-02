@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./userNav.css";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const UserNav = () => {
+  const role = localStorage.getItem("role")
+  const token = localStorage.getItem("token")
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate("/login")
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar__logo">
@@ -10,7 +19,7 @@ const UserNav = () => {
       </div>
       <ul className="navbar__menu">
         <li className="navbar__item">
-          <Link to="/care-dashboard"  className="navbar__link">
+          <Link to={role === "user" ? "/dashboard" : "/care-dashboard"} className="navbar__link nav-link_active">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -29,7 +38,7 @@ const UserNav = () => {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link  to="/Care-add" className="navbar__link">
+          <Link to={role === "user" ? "/add" : "/care-add"} className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -48,7 +57,7 @@ const UserNav = () => {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link to="/care-analytics" className="navbar__link">
+          <Link to={role === "user" ? "/target" : "/care-analytics"} className="navbar__link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -96,6 +105,7 @@ const UserNav = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
+          color="white"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
@@ -105,6 +115,14 @@ const UserNav = () => {
           <circle cx="12" cy="7" r="4" />
         </svg>
       </div>
+
+      {/* <div className="logout-button" onClick={() => handleLogout()}>
+        Logout
+      </div>
+
+      <div className="">
+        Notifications
+      </div> */}
     </nav>
   );
 };
