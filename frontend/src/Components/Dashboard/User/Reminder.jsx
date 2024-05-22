@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import { RiDeleteBinLine } from "react-icons/ri";
 const Reminder = ({ reminder, onCheckChange, onDelete }) => {
-  const { date, title, checked } = reminder;
+  const { date, title, checked } = reminder || {};
   const todayDate = new Date().getDate()
   const timeNow = new Date().getHours()
   const timeInMin = new Date().getMinutes()

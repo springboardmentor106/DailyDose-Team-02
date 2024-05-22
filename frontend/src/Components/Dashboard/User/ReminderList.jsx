@@ -22,14 +22,16 @@ const ReminderList = ({ remindersList }) => {
   return (
     <div className="main">
       <div className="reminder-list">
-        {reminders && reminders.map((reminder) => (
-          <Reminder
-            key={reminder.id}
-            reminder={reminder}
-            onCheckChange={handleCheckChange}
-            onDelete={handleDelete}
-          />
-        ))}
+        {reminders&& 
+          reminders?.length ? reminders.map((reminder) => (
+            <Reminder
+              key={reminder}
+              reminder={reminder}
+              onCheckChange={handleCheckChange}
+              onDelete={handleDelete}
+            />
+          )) : <div>no reminders</div>
+        }
       </div>
     </div>
   )

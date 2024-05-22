@@ -61,8 +61,7 @@ export const getReminders = async (req, res) => {
         let reminderLength = user.reminders.length
         for (let i = 0; i < reminderLength; i++) {
             const reminder = await REMINDER.findById(user.reminders[i])
-
-            reminders.push(reminder)
+            reminder ? reminders.push(reminder) : null
         }
         res.json({ status: "success", reminders });
     } catch (error) {
@@ -75,7 +74,7 @@ export const updateReminder = async (req, res) => {
         const { userId, role } = req;
 
         // const reminderId = req.params
-        const {reminderId, ...body} = req.body
+        const { reminderId, ...body } = req.body
 
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
@@ -138,7 +137,7 @@ export const deleteReminder = async (req, res) => {
         if (!reminder) {
             return res.status(404).json({ status: "failed", message: 'reminder not found' });
         }
-        
+
         res.json({ status: "success", message: 'Reminder deleted successfully' });
     }
     catch (error) {

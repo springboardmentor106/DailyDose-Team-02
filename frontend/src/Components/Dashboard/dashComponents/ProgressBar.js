@@ -12,7 +12,7 @@ const ProgressBar = ({ value }) => {
         styles={buildStyles({
           textSize: '16px',
           textFont: 'bold',
-          pathColor: `rgb(100,85,198, ${value / 100})`,
+          pathColor: `#6455C6`,
           textColor: '#1f165c',
           trailColor: 'white',
         })}
