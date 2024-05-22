@@ -10,10 +10,15 @@ const reminderSchema = new mongoose.Schema({
     },
     date: {
         type: [Date],
+        required: true
     },
     dayFrequency: {
         type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
+        default: []
+    },
+    endDate: {
+        type: Date
     },
     completed: {
         type: Boolean,

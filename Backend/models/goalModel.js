@@ -9,7 +9,10 @@ const goalSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    targetDate: Date,
+    targetDate: {
+        type: Date,
+        required: true
+    },
     completed: {
         type: Boolean,
         default: false
@@ -20,7 +23,8 @@ const goalSchema = new mongoose.Schema({
     },
     dayFrequency: {
         type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly']
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
+        required: true
     },
     goalStatus: {
         type: String,

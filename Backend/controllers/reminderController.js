@@ -85,17 +85,17 @@ export const updateReminder = async (req, res) => {
         }
 
         if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only users have access" });
+            return res.json({ message: "Only users have access" });
         }
 
         const user = await User.findOne({ uuid: userId });
         if (!user) {
-            return res.status(404).json({ status: "failed", message: "User not found" });
+            return res.json({ message: "User not found" });
         }
 
         const verifyReminder = user.reminders.includes(reminderId);
         if (!verifyReminder) {
-            return res.status(403).json({ status: "failed", message: "Unauthorized to update this reminder" });
+            return res.json({ message: "Unauthorized to update this reminder" });
         }
 
         const updateReminder = await REMINDER.findByIdAndUpdate(reminderId, body, { new: true });
@@ -125,12 +125,12 @@ export const deleteReminder = async (req, res) => {
         }
 
         if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only users have access" });
+            return res.json({ message: "Only users have access" });
         }
 
         const user = await User.findOne({ uuid: userId });
         if (!user) {
-            return res.status(404).json({ status: "failed", message: "User not found" });
+            return res.json({ message: "User not found" });
         }
 
         const reminder = await REMINDER.findByIdAndDelete(_id);
