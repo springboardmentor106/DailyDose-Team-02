@@ -17,14 +17,26 @@ const user = {
   toStart: "40",
 }
 /* user - reminder list static data for userdashboard */
-const reminders = [
-  { time: '10:05 PM', activity: 'Gardening' },
-  { time: '10:10 PM', activity: 'Cooking' },
+const remindersList = [
+  { time: '10:05 PM', title: 'Gardening' },
+  { time: '10:10 PM', title: 'Cooking' },
+  { time: '10:15 PM', title: 'Reading' },
+  { time: '10:20 PM', title: 'Exercise' },
+  { time: '10:25 PM', title: 'Relaxing' },
+  { time: '10:30 PM', title: 'Watching a movie' },
+  { time: '10:35 PM', title: 'Preparing for bed' }
+];
+
+const goalsList = [
   { time: '10:15 PM', activity: 'Reading' },
   { time: '10:20 PM', activity: 'Exercise' },
   { time: '10:25 PM', activity: 'Relaxing' },
-  { time: '10:30 PM', activity: 'Watching a movie' },
-  { time: '10:35 PM', activity: 'Preparing for bed' }
+];
+
+const habitsList = [
+  { activity: 'Gardening' },
+  { activity: 'Watching a movie' },
+  { activity: 'Preparing for bed' }
 ];
 /* Remider-list-data for Add */
 const remindersAddData = [
@@ -43,4 +55,4 @@ const Month = [
 const AboutUSer = [
   { nameABout: 'Disease', }, { Details: 'Blood pressure' }
 ]
-export { profileinfo, user, reminders, remindersAddData, Month, AboutUSer };
+export { profileinfo, user, goalsList, habitsList, remindersList, remindersAddData, Month, AboutUSer };

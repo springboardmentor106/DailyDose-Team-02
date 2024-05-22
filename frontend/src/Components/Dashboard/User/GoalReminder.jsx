@@ -1,12 +1,12 @@
 import React from 'react';
 import { RiDeleteBinLine } from "react-icons/ri";
 const GoalReminder = ({ reminder, onCheckChange, onDelete }) => {
-const { date, type, checked } = reminder;
+  const { date, type, checked, activity } = reminder;
   return (
     <div className="reminder-item">
-      <div id='datepicker'>{date}</div>
+      <div id='datepicker'>10:00 am</div>
       <div className="type-container">
-      <div>{type}</div>
+      <div>{activity}</div>
       </div>
       <div>
         <input
@@ -16,9 +16,9 @@ const { date, type, checked } = reminder;
           id='check'
         />
       </div>
-      <div>
+      {/* <div>
         <button onClick={() => onDelete(reminder)}><RiDeleteBinLine /></button>
-      </div>
+      </div> */}
     </div>
   );
 };

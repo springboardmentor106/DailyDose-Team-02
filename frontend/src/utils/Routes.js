@@ -26,16 +26,20 @@ function ProtectedRoute({ Component, authorizedFor }) {
         position: "top-right",
       });
       navigate("/login");
-    }else{
+    } else {
       if (authorizedFor !== role) {
         toast.warn(`Unauthorized Access,${authorizedFor}s only can access the page.`, {
           position: "top-right",
         });
-        if (role === "user") {
-          navigate("/dashboard");
-        }
-        if (role === "caretaker") {
-          navigate("/care-dashboard");
+        if (token) {
+          if (role === "user") {
+            navigate("/dashboard");
+          }
+          if (role === "caretaker") {
+            navigate("/care-dashboard");
+          }
+        }else{
+          navigate("/login")
         }
       }
     }

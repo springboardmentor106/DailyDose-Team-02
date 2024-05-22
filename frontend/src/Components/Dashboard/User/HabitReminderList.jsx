@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Reminder from './HabitReminder';
+import HabitReminder from './HabitReminder';
 const HabitReminderList = () => {
   const [reminders, setReminders] = useState([
     { id: 1, date: '11:05 PM', type: 'cooking' },
@@ -25,7 +25,7 @@ const HabitReminderList = () => {
     <div className="main">
     <div className="reminder-list">
       {reminders.map((reminder) => (
-        <Reminder
+        <HabitReminder
           key={reminder.id}
           reminder={reminder}
           onCheckChange={handleCheckChange}

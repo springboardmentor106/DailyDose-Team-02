@@ -109,8 +109,9 @@ button {
 
 .right-card-two {
   padding: 20px;
-  height: 296px;
-  width: 374px;
+  width: 'fit-content';
+  /* height: 296px;
+  width: 374px; */
   background-color: white;
   border-radius: 35px;
   margin-top: 37px;
@@ -439,12 +440,15 @@ background-color: #CFCAEE;
 
 .reminder-list {
   display: flex;
+  flex:1;
   flex-direction: column;
   margin-top: -28px;
 }
 
 .reminder-item {
   display: flex;
+  flex:1;
+  width:100%;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ccc;
@@ -477,6 +481,8 @@ background-color: #CFCAEE;
 
 .type-container {
   margin-left: 10px;
+  flex:1;
+  width:100%
 }
 
 .no-reminders-image {

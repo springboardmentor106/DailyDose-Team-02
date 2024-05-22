@@ -9,9 +9,9 @@ import ReactCalendar from "../dashComponents/Calendar";
 import dailyimg from "../../../assets/images/User.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
-import { user } from "./StaticDataUser";
+import { user, remindersList, goalsList, habitsList, } from "./StaticDataUser";
 // import { reminders } from "./StaticDataUser";
-import HabitReminderList from './GoalReminderList';
+import HabitReminderList from './HabitReminderList';
 import GoalReminderList from './GoalReminderList';
 import { toast } from "react-toastify"
 import Constants from "../../../constants"
@@ -21,8 +21,8 @@ import noUserDetails from "../../../assets/images/noUserDetails.png"
 import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
-  const [reminders, setReminders] = useState(null)
-  const navigate =useNavigate()
+  const [reminders, setReminders] = useState(remindersList)
+  const navigate = useNavigate()
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
@@ -38,7 +38,7 @@ const Dashboard = () => {
         }
       })
 
-      if(response.status === 401){
+      if (response.status === 401) {
         navigate("/login");
         localStorage.clear()
       }
@@ -55,10 +55,10 @@ const Dashboard = () => {
     }
   }
 
-  useEffect(() => {
-    getUserReminders()
-    console.log("user")
-  }, [])
+  // useEffect(() => {
+  //   getUserReminders()
+  //   console.log("user")
+  // }, [])
 
   useEffect(() => {
     console.log(reminders, new Date().toISOString(), new Date().toJSON())
@@ -222,8 +222,8 @@ const Dashboard = () => {
             </div>}
             {selectedBox === 2 && <div>
               <div className="right-card-two">
-                {reminders && reminders.length ?
-                  < GoalReminderList reminders={reminders} />
+                {goalsList && goalsList.length ?
+                  < GoalReminderList goalsList={goalsList} />
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />
