@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import HabitReminder from './HabitReminder';
-const HabitReminderList = () => {
-  const [reminders, setReminders] = useState([
-    { id: 1, date: '11:05 PM', type: 'cooking' },
-    { id: 2, date: '11:05 PM', type: 'cooking' },
-    { id: 3, date: '11:05 PM', type: 'cooking' },
-    { id: 4, date: '11:05 PM', type: 'cooking' },
-  ]);
+const HabitReminderList = ({ habitsList }) => {
+  const [reminders, setReminders] = useState(habitsList);
   const handleCheckChange = (changedReminder) => {
     const updatedReminders = reminders.map((reminder) =>
       reminder.id === changedReminder.id

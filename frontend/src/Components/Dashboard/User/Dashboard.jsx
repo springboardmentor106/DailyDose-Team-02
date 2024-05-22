@@ -132,11 +132,6 @@ const Dashboard = () => {
                   </div>
 
                   <div className="pro-detail">
-                    <div className="cirlce-pro-one in-progress"></div>
-                    <div className="pro-text"><div className='pro-percentage'>{user.inProgress}%</div> in progress</div>
-                  </div>
-
-                  <div className="pro-detail">
                     <div className="cirlce-pro-one"></div>
                     <div className="pro-text"><div className='pro-percentage'>{user.toStart}%</div> to start</div>
                   </div>
@@ -234,8 +229,8 @@ const Dashboard = () => {
             </div>}
             {selectedBox === 3 && <div>
               <div className="right-card-two">
-                {reminders && reminders.length ?
-                  <HabitReminderList reminders={reminders} />
+                {habitsList && habitsList.length ?
+                  <HabitReminderList habitsList={habitsList} />
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />

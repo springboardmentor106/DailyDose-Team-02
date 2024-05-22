@@ -13,8 +13,7 @@ const user = {
   age: 57,
   progress: "30",
   completed: "30",
-  inProgress: "30",
-  toStart: "40",
+  toStart: "70",
 }
 /* user - reminder list static data for userdashboard */
 const remindersList = [
