@@ -15,11 +15,10 @@ const checkUserAuth = async (req, res, next) => {
       else {
         req.userId = decoded.userID;
         req.role = decoded.role;
-        // console.log(decoded);
+        next();
       }
     });
 
-    next();
   } catch (error) {
     console.error("Error in token verification:", error);
     return res.status(401).json({ status: "failed", message: "Failed to authenticate token." });

@@ -21,12 +21,12 @@ import noUserDetails from "../../../assets/images/noUserDetails.png"
 import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
-  const [reminders, setReminders] = useState(remindersList)
+  const [reminders, setReminders] = useState(null)
+  const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
-
   const getUserReminders = async () => {
     try {
       const token = localStorage.getItem("token")
@@ -55,13 +55,12 @@ const Dashboard = () => {
     }
   }
 
-  // useEffect(() => {
-  //   getUserReminders()
-  //   console.log("user")
-  // }, [])
+  useEffect(() => {
+    getUserReminders()
+    setRefresh(false)
+  }, [refresh === true])
 
   useEffect(() => {
-    console.log(reminders, new Date().toISOString(), new Date().toJSON())
   }, [reminders])
   return (
     <div className="dashboard">
@@ -206,7 +205,7 @@ const Dashboard = () => {
             {selectedBox === 1 && <div>
               <div className="right-card-two">
                 {reminders && reminders.length ?
-                  <ReminderList remindersList={reminders} />
+                  <ReminderList remindersList={reminders} setRefresh={setRefresh }/>
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />

@@ -46,14 +46,8 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'caretaker'],
       required: true
     },
-    reminders: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Reminder'
-    }],
-    goals: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Goal'
-    }],
+    reminders: [String],
+    goals: [String],
     caretaker: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Caretaker',
@@ -63,10 +57,7 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    habits: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'HABIT'
-    }]
+    habits: [String]
   },
   { timestamps: true }
 )

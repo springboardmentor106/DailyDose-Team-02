@@ -178,14 +178,14 @@ export const userRegistration = async (req, res) => {
             if (!savedUser) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. User not created" });
             }
-            token = jwt.sign({ userID: savedUser.uuid, role: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
+            token = jwt.sign({ userID: savedUser.uuid, role: "user" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
         } else {
             const caretaker = new Caretaker(userData);
             const savedCaretaker = await caretaker.save();
             if (!savedCaretaker) {
                 return res.status(500).json({ status: "failed", message: "Internal server error. Caretaker not created" });
             }
-            token = jwt.sign({ userID: savedCaretaker.uuid, role: "caretaker" }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
+            token = jwt.sign({ userID: savedCaretaker.uuid, role: "caretaker" }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
         }
 
         res.status(201).json({ status: "success", message: "Registered Successfully", token });
@@ -331,7 +331,7 @@ export const userLogin = async (req, res) => {
                 if ((user.email === email) && isMatch) {
                     console.log(user);
                     // JWT Token Generate
-                    const token = jwt.sign({ userID: user.uuid, role: role }, process.env.JWT_SECRET_KEY, { expiresIn: '3m' });
+                    const token = jwt.sign({ userID: user.uuid, role: role }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 
                     res.send({ "status": "success", "message": "Login Successfully", "token": token });
                 } else {

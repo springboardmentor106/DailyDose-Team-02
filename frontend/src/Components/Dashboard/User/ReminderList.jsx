@@ -1,34 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import Reminder from '../User/Reminder';
-const ReminderList = ({ remindersList }) => {
+import { toast } from 'react-toastify';
+import Constants from '../../../constants';
+const ReminderList = ({ remindersList, setRefresh }) => {
   const [reminders, setReminders] = useState(remindersList || null);
-  const handleCheckChange = (changedReminder) => {
-    const updatedReminders = reminders.map((reminder) =>
-      reminder.id === changedReminder.id
-        ? { ...reminder, checked: !reminder.checked }
-        : reminder
-    );
-    setReminders(updatedReminders);
+  const handleCheckChange = async (changedReminder) => {
+    try {
+      const url = Constants.BASE_URL + "/api/reminders/update"
+      const token = localStorage.getItem("token")
+      const payload = {
+        reminderId: changedReminder.uuid,
+        completedToday: !changedReminder.completedToday
+      }
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Authorization": token,
+          'Content-Type': "application/json",
+        },
+        body:JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+      if (data.success === "false") {
+        toast.warn(data.message)
+      } else {
+        setRefresh(true)
+        toast.success(data.message)
+      }
+    } catch (err) {
+      console.log(err)
+      toast.error("Error:" + err)
+    }
   };
+
   useEffect(() => {
     setReminders(remindersList)
   }, [remindersList])
-  const handleDelete = (reminderToDelete) => {
-    const updatedReminders = reminders.filter(
-      (reminder) => reminder.id !== reminderToDelete.id
-    );
-    setReminders(updatedReminders);
-  };
+
   return (
     <div className="main">
       <div className="reminder-list">
-        {reminders&& 
+        {reminders &&
           reminders?.length ? reminders.map((reminder) => (
             <Reminder
-              key={reminder}
+              key={reminder.uuid}
               reminder={reminder}
               onCheckChange={handleCheckChange}
-              onDelete={handleDelete}
             />
           )) : <div>no reminders</div>
         }
