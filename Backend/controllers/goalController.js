@@ -1,6 +1,7 @@
 import Caretaker from '../models/caretakerModel.js';
 import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
+import { v4 as uuidv4 } from 'uuid'
 
 // All routes - validate uuid from jwt token and match with uuid to create goal
 
@@ -12,7 +13,7 @@ export const createGoal = async (req, res) => {
         console.log(userId, role);
 
         if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only user have access" });
+            return res.status(401).json({ status: "failed", message: "Only user have access" });
         }
 
         if (!userId) {
@@ -25,7 +26,14 @@ export const createGoal = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
 
-        const goal = new GOAL(req.body);
+        const bodyData = req.body
+        const newGoal = {
+            uuid: uuidv4(),
+            createdBy: [userId, role],
+            createdForSenior: userId,
+            ...bodyData
+        }
+        const goal = new GOAL(newGoal);
         await goal.save();
 
         user.goals.push(goal._id)
@@ -163,11 +171,6 @@ export const deleteGoal = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        // const verifyGoal = user.goals.includes(goalId);
-        // if (!verifyGoal) {
-        //     return res.status(403).json({ status: "failed", message: "Unauthorized to delete goal" });
-        // }
-
         const goal = await GOAL.findByIdAndDelete(goalId);
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
@@ -273,18 +276,17 @@ export const getMonthlyGoalProgress = async (req, res) => {
         let seniorId, senior;
 
         if (role === 'user') {
-            senior = await User.findOne({ uuid: userId })
+            senior = await User.findOne({ uuid: userId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
             seniorId = userId;
         } else if (role === 'caretaker') {
-            const caretaker = await Caretaker.findOne({ uuid: userId })
+            const caretaker = await Caretaker.findOne({ uuid: userId });
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
             seniorId = req.body.seniorId;
-
             senior = await User.findById(seniorId);
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
@@ -292,8 +294,6 @@ export const getMonthlyGoalProgress = async (req, res) => {
         } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
-
-        const totalYearlyGoals = senior.goals.length;
 
         const currentYear = new Date().getFullYear();
         const monthsData = [];
@@ -305,14 +305,18 @@ export const getMonthlyGoalProgress = async (req, res) => {
             const monthName = firstDayOfMonth.toLocaleString('default', { month: 'long' });
 
             const monthlyGoals = await GOAL.countDocuments({
-                senior: seniorId,
-                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
+                createdBy: seniorId,
+                startDate: { $lte: lastDayOfMonth },
+                endDate: { $gte: firstDayOfMonth },
+                // dayFrequency: { $in: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Monthly'] }
             });
 
             const completedGoals = await GOAL.countDocuments({
-                senior: seniorId,
+                createdBy: seniorId,
                 completed: true,
-                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
+                startDate: { $lte: lastDayOfMonth },
+                endDate: { $gte: firstDayOfMonth },
+                // dayFrequency: { $in: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Monthly'] }
             });
 
             const completePercentage = monthlyGoals > 0 ? (completedGoals / monthlyGoals) * 100 : 0;
@@ -326,7 +330,7 @@ export const getMonthlyGoalProgress = async (req, res) => {
         }
 
         res.json({
-            totalYearlyGoals,
+            totalYearlyGoals: senior.goals.length,
             monthsData
         });
     } catch (error) {
@@ -367,21 +371,33 @@ export const getDailyGoalProgress = async (req, res) => {
 
         const totalTodayGoals = await GOAL.countDocuments({
             senior: seniorId,
-            targetDate: today
+            startDate: { $lte: today },
+            endDate: { $gte: today },
+            // dayFrequency: { $in: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Today'] }
         });
 
         const completedGoals = await GOAL.countDocuments({
             senior: seniorId,
-            targetDate: today,
+            startDate: { $lte: today },
+            endDate: { $gte: today },
+            // dayFrequency: { $in: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Today'] },
             completed: true
         });
 
+        const inProgressGoals = await GOAL.countDocuments({
+            senior: seniorId,
+            startDate: { $lte: today },
+            endDate: { $gte: today },
+            // dayFrequency: { $in: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Today'] },
+            goalStatus: 'in_progress'
+        });
+
         const completePercent = totalTodayGoals > 0 ? (completedGoals / totalTodayGoals) * 100 : 0;
+        const inProgressPercent = totalTodayGoals > 0 ? (inProgressGoals / totalTodayGoals) * 100 : 0;
 
         res.json({
-            totalTodayGoals,
-            completedGoals,
-            completePercent: completePercent.toFixed(2)
+            completePercent: completePercent.toFixed(2),
+            inProgressPercent: inProgressPercent.toFixed(2)
         });
     }
     catch (error) {

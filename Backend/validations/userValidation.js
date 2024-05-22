@@ -7,22 +7,33 @@ export const newUserEmailOtpSchema = Joi.object({
 }).options({ abortEarly: false })
 
 export const userRegistrationSchema = Joi.object({
-    enteredOtp: Joi.string().required(),
-    role: Joi.string().valid('user', 'caretaker').required(),
 
+    // common in senior, caretaker
+    enteredOtp: Joi.string().required(),
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    age: Joi.number().integer().min(18).required(),
-
     gender: Joi.string().valid('male', 'female', 'other').lowercase(),
+    age: Joi.number().integer().min(18).required(),
+    role: Joi.string().valid('user', 'caretaker').required(),
     phoneNumber: Joi.number(),
-    address: Joi.string(),
-    country: Joi.string(),
-    pincode: Joi.number(),
+    
+    // senior specific
     reminders: Joi.array().items(Joi.string()),
     goals: Joi.array().items(Joi.string()),
+    habits: Joi.array().items(Joi.string()),
+    caretaker: Joi.string(),
+    caretaketAssigned: Joi.boolean(),
+    
+    // caretaker specific
+    assignedSeniors: Joi.array().items(Joi.string()),
+
+
+    // not used currently
+    // address: Joi.string(),
+    // country: Joi.string(),
+    // pincode: Joi.number(),
 }).options({ abortEarly: false });
 
 export const updateUserSchema = Joi.object({
@@ -31,15 +42,15 @@ export const updateUserSchema = Joi.object({
     age: Joi.number().integer().min(18),
     gender: Joi.string().valid('male', 'female', 'other').lowercase(),
     phoneNumber: Joi.number(),
-    address: Joi.string(),
-    country: Joi.string(),
-    pincode: Joi.number(),
+    // address: Joi.string(),
+    // country: Joi.string(),
+    // pincode: Joi.number(),
 }).options({ abortEarly: false });
 
 export const userLoginSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
-    role: Joi.string().valid('user').required(),
+    role: Joi.string().valid('user', 'caretaker').required(),
 }).options({ abortEarly: false })
 
 export const changeUserPasswordSchema = Joi.object({

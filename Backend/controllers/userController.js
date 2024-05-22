@@ -7,6 +7,7 @@ import OTP from '../models/otpModel.js';
 import Caretaker from '../models/caretakerModel.js';
 import { generateNumberOTP } from '../config/generateOtp.js';
 
+// New user email verification
 export const newUserEmailOtp = async (req, res) => {
     try {
         const { email, role } = req.body;
@@ -160,13 +161,13 @@ export const userRegistration = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, salt);
 
         const userData = {
+            uuid: uuidv4(),
             firstname,
             lastname,
             email,
             gender,
             age,
             password: hashPassword,
-            uuid: uuidv4(),
             role,
             ...body
         };

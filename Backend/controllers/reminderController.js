@@ -1,5 +1,6 @@
 import REMINDER from '../models/reminderModel.js';
 import User from '../models/userModel.js';
+import { v4 as uuidv4 } from 'uuid';
 
 // only user can CRUD
 export const createReminder = async (req, res) => {
@@ -23,8 +24,14 @@ export const createReminder = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        const newReminder = new REMINDER(req.body);
-        await newReminder.save();
+        const bodyData = req.body
+        const newReminder = {
+            uuid: uuidv4(),
+            createdBy: userId,
+            ...bodyData
+        }
+        const reminder = new REMINDER(newReminder);
+        await reminder.save();
 
         user.reminders.push(newReminder._id)
         await user.save()

@@ -1,7 +1,7 @@
 import Caretaker from '../models/caretakerModel.js';
 import bcrypt from 'bcrypt';
 import User from '../models/userModel.js';
-
+import { v4 as uuidv4 } from 'uuid';
 
 export const caretakerRegistration = async (req, res) => {
     try {
@@ -145,13 +145,14 @@ export const assignUser = async (req, res) => {
 
 export const createUserGoal = async (req, res) => {
     try {
-        if (req.role !== 'caretaker') {
-            return res.json({ message: "Only caretakers can access this endpoint" });
+        const role = req.role;
+        if (role !== 'caretaker') {
+            return res.status(401).json({ status: "failed", message: "Only caretakers can access this endpoint" });
         }
 
         const caretakerId = req.userId;
 
-        const { userId, title, description, targetDate, dayFrequency } = req.body;
+        const { userId, ...goalData } = req.body;
 
         // Check if user exists
         const user = await User.findById(userId);
@@ -172,10 +173,10 @@ export const createUserGoal = async (req, res) => {
         }
 
         const newGoal = new Goal({
-            title,
-            description,
-            targetDate,
-            dayFrequency,
+            uuid: uuidv4(),
+            createdBy: [caretakerId, role],
+            createdForSenior: userId,
+            ...goalData
         });
 
         await newGoal.save();

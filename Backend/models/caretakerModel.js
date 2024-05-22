@@ -36,18 +36,24 @@ const caretakerSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ['caretaker'],
+      required: true
+    },
+    phoneNumber: {
+      type: Number
+    },
     assignedSeniors: [
       {
         type: String
       }
     ]
 
-
   },
   { timestamps: true }
 );
 
 const Caretaker = mongoose.model("caretaker", caretakerSchema);
-
 
 export default Caretaker

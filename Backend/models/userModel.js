@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
-// import { boolean } from 'joi';
 
 const userSchema = new mongoose.Schema(
   {
@@ -43,8 +41,11 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'caretaker'],
+      enum: ['user'],
       required: true
+    },
+    phoneNumber: {
+      type: Number
     },
     reminders: [{
       type: mongoose.Schema.Types.ObjectId,
@@ -54,6 +55,10 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Goal'
     }],
+    habits: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'HABIT'
+    }],
     caretaker: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Caretaker',
@@ -62,15 +67,12 @@ const userSchema = new mongoose.Schema(
     caretaketAssigned: {
       type: Boolean,
       default: false
-    },
-    habits: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'HABIT'
-    }]
+    }
   },
   { timestamps: true }
 )
 
 const User = mongoose.model("User", userSchema);
+
 
 export default User;

@@ -1,5 +1,6 @@
 import HABIT from '../models/habitModel.js';
 import User from '../models/userModel.js';
+import { v4 as uuidv4 } from 'uuid';
 
 // only user can CRUD
 
@@ -24,9 +25,13 @@ export const createHabit = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        const habitData = req.body;
-
-        const habit = new HABIT(habitData);
+        const habitData = req.body
+        const newHabit = {
+            uuid: uuidv4(),
+            createdBy: userId,
+            ...habitData
+        }
+        const habit = new HABIT(newHabit);
         await habit.save();
 
         user.habits.push(habit._id)
