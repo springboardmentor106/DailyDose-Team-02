@@ -39,7 +39,7 @@ export const updateUserSchema = Joi.object({
 export const userLoginSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
-    role: Joi.string().valid('user').required(),
+    role: Joi.string().required()
 }).options({ abortEarly: false })
 
 export const changeUserPasswordSchema = Joi.object({
