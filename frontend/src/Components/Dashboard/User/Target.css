@@ -4,6 +4,7 @@
   .main-container-target{
   display: flex;
   }
+
   .header-container{
       width: 1053px;
       height: 40px;
@@ -32,19 +33,28 @@
       width: 55px;
       position: relative;
       left: 107px;
-      top: -8px;
+      top: -2px;
+      font-weight: bolder;
+      font-size: large;
   }
   .header-details-EndDate{
       width: 112px;
       position: relative;
       left: 458px;
-      top: -25px;
+      top: -27px;
+      /* top: -6px; */
+      font-weight: bolder;
+      font-size: large;
   }
   .header-details-Status{
       width: 112px;
       position: relative;
       left: 735px;
-      top: -51px;
+      top: -55px;
+      /* top: -6px; */
+      font-weight: bolder;
+      font-size: large;
+     
   }
   .Progress-bar{
       position: relative;
@@ -55,6 +65,9 @@
       position: relative;
       top: -23px;
       left: -16px;
+      font-weight: bold;
+      font-size:14px;
+      
   }
   .dot{
       position: relative;
@@ -84,10 +97,30 @@
     top: -65px;
     z-index: 9;
     margin-bottom: -4px;
+    font-weight: bold
   }
-  .status{
+ 
+
+  .status {
     position: relative;
     left: 631px;
-    top: -25px;
+    /* top: -22px; */
     margin-bottom: -21px;
+    color: white;
+    padding: 3px 8px; 
+    border-radius: 17px; 
+    font-weight: bold; 
+    text-align: center; 
+    font-size:smaller;
+}
+  
+  .completed {
+    background-color: #2CDF8C; /* Green for completed */
+    bottom: 20px;
   }
+  
+  .not-completed {
+    background-color: #F6B95E; /* Orange for not completed */
+    bottom: 15px;
+  }
+  

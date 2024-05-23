@@ -60,6 +60,7 @@ const Login = () => {
           <h3 style={{ marginBottom: "0px", textAlign: "left" }}>
             Welcome Back 🖐
           </h3>
+          <br></br>
           <p style={{ marginTop: "0px", marginBottom: "2vw" }}>
             Experience the power of seamless caregiving at your fingertips! Log
             in today and discover how our platform can revolutionize your
@@ -155,9 +156,9 @@ const Login = () => {
           </div>
         </form>
         <div className="image-holder">
-          <div id="mini-box">
-            <img src={login_img} alt="illustration" />
-            <p style={{ padding: "1vw" }}>
+        <div id="mini-box" style={{ position: 'relative' }}>
+  <img src={login_img} alt="illustration" style={{ position: 'relative', zIndex: 2 }} />
+  <p style={{ padding: '1vw', position: 'absolute', top: 0, left: 0, zIndex: 1, color: 'white' }}>
               Log in now to discover <br />
               personalized features <br />
               tailored to your
