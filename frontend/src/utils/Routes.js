@@ -49,6 +49,17 @@ function ProtectedRoute({ Component, authorizedFor }) {
   return <Component />;
 }
 function Routing() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    if (!token) {
+      navigate("/login");
+    } else {
+      navigate("/user-home")
+    }
+  })
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />

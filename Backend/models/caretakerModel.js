@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const caretakerSchema = new mongoose.Schema(
   {
+    uuid: {
+      type: String,
+      required: true
+
+    },
     firstname: {
       type: String,
       required: true,
@@ -31,11 +36,21 @@ const caretakerSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ['caretaker'],
+      required: true
+    },
+    phoneNumber: {
+      type: Number
+    },
     assignedSeniors: [
       {
-        type: String
+        type: String,
+        unique: true
       }
     ]
+
   },
   { timestamps: true }
 );
