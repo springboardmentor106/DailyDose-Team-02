@@ -22,6 +22,7 @@ const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
   const [goals, setGoals] = useState(null)
+  const [habits, setHabits] = useState(null)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
@@ -84,14 +85,42 @@ const Dashboard = () => {
     }
   }
 
+  const getUserHabits = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/habits', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      if (data.status === "success") {
+        data.habits ? setHabits(data.habits) : setHabits(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
   useEffect(() => {
     getUserReminders()
     getUserGoals()
+    getUserHabits()
     setRefresh(false)
   }, [refresh === true])
 
   useEffect(() => {
-  }, [reminders,goals])
+  }, [reminders, goals])
   return (
     <div className="dashboard">
       <UserNav />
@@ -256,8 +285,8 @@ const Dashboard = () => {
             </div>}
             {selectedBox === 3 && <div>
               <div className="right-card-two">
-                {habitsList && habitsList.length ?
-                  <HabitReminderList habitsList={habitsList} />
+                {habits && habits.length ?
+                  <HabitReminderList habitsList={habits} />
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />

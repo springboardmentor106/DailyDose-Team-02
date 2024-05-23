@@ -10,12 +10,7 @@ const HabitReminderList = ({ habitsList }) => {
     );
     setReminders(updatedReminders);
   };
-  const handleDelete = (reminderToDelete) => {
-    const updatedReminders = reminders.filter(
-      (reminder) => reminder.id !== reminderToDelete.id
-    );
-    setReminders(updatedReminders);
-  };
+  
   return (
     <div className="main">
     <div className="reminder-list">
@@ -24,7 +19,6 @@ const HabitReminderList = ({ habitsList }) => {
           key={reminder.id}
           reminder={reminder}
           onCheckChange={handleCheckChange}
-          onDelete={handleDelete}
         />
       ))}
     </div>

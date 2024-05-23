@@ -27,7 +27,7 @@ const Add = () => {
   const [minDate, setMinDate] = useState(formatDate(new Date()));
 
   const handleAddCategory = (category, type) => {
-    if (type = "goal") {
+    if (type === "goal") {
       if (!goalSelectedCategoriesList.includes(category)) {
         setGoalSelectedCategoriesList([...goalSelectedCategoriesList, category]);
       }
@@ -59,7 +59,7 @@ const Add = () => {
 
   const addReminder = async () => {
     try {
-      const url = Constants.BASE_URL + "/api/remindersv2"
+      const url = Constants.BASE_URL + "/api/reminders"
       const token = localStorage.getItem("token")
       const payload = {
         title: details.reminderTitle,
@@ -84,6 +84,7 @@ const Add = () => {
         toast.warn(data.message)
       } else {
         toast.success(data.message)
+        setDetails({})
       }
     } catch (err) {
       toast.error("Error:" + err)
@@ -95,13 +96,10 @@ const Add = () => {
       const url = Constants.BASE_URL + "/api/goals"
       const token = localStorage.getItem("token")
       const payload = {
-        title: details.reminderTitle,
-        startDate: details.reminderStartDate,
-        endDate: details.reminderEndDate,
-        startTime: details.reminderStartTime,
-        endTime: details.reminderEndTime,
-        timeFrequency: details.reminderTimeFrequency,
-        dayFrequency: selectedCategoriesList
+        title: details.goalTitle,
+        startDate: details.goalStartDate,
+        endDate: details.goalEndDate,
+        dayFrequency: goalSelectedCategoriesList,
       }
       const response = await fetch(url, {
         method: "POST",
@@ -117,6 +115,36 @@ const Add = () => {
         toast.warn(data.message)
       } else {
         toast.success(data.message)
+        setDetails({})
+      }
+    } catch (err) {
+      toast.error("Error:" + err)
+    }
+  }
+
+
+  const addHabit = async () => {
+    try {
+      const url = Constants.BASE_URL + "/api/habits"
+      const token = localStorage.getItem("token")
+      const payload = {
+        title: details.habitTitle,
+      }
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+      if (data.status === "failed") {
+        toast.warn(data.message)
+      } else {
+        toast.success(data.message)
+        setDetails({})
       }
     } catch (err) {
       toast.error("Error:" + err)
@@ -178,34 +206,34 @@ const Add = () => {
             <div className='add-content-container'>
               <div className='input-container'>
                 <div className='input-label'>Title</div>
-                <input type="text" className='add-input' onChange={(e) => onAddDetail("reminderTitle", e.target.value)} />
+                <input type="text" className='add-input' value={details.reminderTitle || ""} onChange={(e) => onAddDetail("reminderTitle", e.target.value)} />
               </div>
 
               <div className='two-input-container'>
                 <div className='input-container'>
                   <div className='input-label'>Start Date</div>
-                  <input type="date" className='add-input' min={minDate} onChange={(e) => onAddDetail("reminderStartDate", e.target.value)} />
+                  <input type="date" className='add-input' value={details.reminderStartDate || ""} min={minDate} onChange={(e) => onAddDetail("reminderStartDate", e.target.value)} />
                 </div>
                 <div className='input-container'>
                   <div className='input-label'>End Date</div>
-                  <input type="date" className='add-input' onChange={(e) => onAddDetail("reminderEndDate", e.target.value)} />
+                  <input type="date" className='add-input' value={details.reminderEndDate || ""} onChange={(e) => onAddDetail("reminderEndDate", e.target.value)} />
                 </div>
               </div>
 
               <div className='two-input-container'>
                 <div className='input-container'>
                   <div className='input-label'>Start Time</div>
-                  <input type="time" className='add-input' onChange={(e) => onAddDetail("reminderStartTime", e.target.value)} />
+                  <input type="time" className='add-input' value={details.reminderStartTime || ""} onChange={(e) => onAddDetail("reminderStartTime", e.target.value)} />
                 </div>
                 <div className='input-container'>
                   <div className='input-label'>End Time</div>
-                  <input type="time" className='add-input' onChange={(e) => onAddDetail("reminderEndTime", e.target.value)} />
+                  <input type="time" className='add-input' value={details.reminderEndTime || ""} onChange={(e) => onAddDetail("reminderEndTime", e.target.value)} />
                 </div>
               </div>
 
               <div className='input-container'>
                 <div className='input-label'>Frequency Per Day</div>
-                <input type="number" defaultValue={1} className='add-input frequency-per-day' onChange={(e) => onAddDetail("reminderTimeFrequency", e.target.value)} />
+                <input type="number" defaultValue={1} className='add-input frequency-per-day' value={details.reminderTimeFrequency} onChange={(e) => onAddDetail("reminderTimeFrequency", e.target.value)} />
               </div>
 
               <div className='input-container'>
@@ -234,9 +262,21 @@ const Add = () => {
         </div>
 
         <div className='add-container'>
-          <div className='add-heading' onClick={() => handleItemClick('habit')}>Add Habits</div>
+          <div className='add-heading'
+            onClick={() => handleItemClick('habit')}>
+            Add Habits
+          </div>
           {selectedItem === "habit" ?
-            <div className='add-content-container'>Add Habits </div>
+            <div className='add-content-container'>
+              <div className='input-container'>
+                <div className='input-label'>Title</div>
+                <input type="text" className='add-input' value={details.habitTitle || ""} onChange={(e) => onAddDetail("habitTitle", e.target.value)} />
+              </div>
+
+              <div className='add-save-button-row'>
+                <button className='add-save-button' onClick={() => addHabit()}>Save</button>
+              </div>
+            </div>
             : null}
         </div>
 

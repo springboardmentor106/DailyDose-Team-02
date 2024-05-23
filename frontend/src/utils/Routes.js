@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Login from "../Components/auth/Login";
 import Register from "../Components/auth/Register";
 import Reset from "../Components/auth/Reset";
@@ -10,7 +10,6 @@ import Error404 from "../Components/pageNotFound/Error404";
 import Add from "../Components/Dashboard/User/Add"
 import Dashboard from "../Components/Dashboard/User/Dashboard"
 import Target from "../Components/Dashboard/User/Target"
-
 import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 import UserDashboard from "../Components/userDashboard/UserHome";
@@ -19,6 +18,7 @@ function ProtectedRoute({ Component, authorizedFor }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   console.log("token:", token, "role:", role);
+  
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
@@ -32,6 +32,7 @@ function ProtectedRoute({ Component, authorizedFor }) {
           position: "top-right",
         });
         if (token) {
+          console.log("Token hai",token)
           if (role === "user") {
             navigate("/dashboard");
           }
@@ -46,10 +47,11 @@ function ProtectedRoute({ Component, authorizedFor }) {
   }, []);
   return <Component />;
 }
+
 function Routing() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset" element={<Reset />} />

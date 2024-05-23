@@ -192,7 +192,7 @@ export const userRegistration = async (req, res) => {
 
     } catch (error) {
         console.error("Error in user registration:", error);
-        res.status(500).json({ status: "error", message: "An error occurred during registration" });
+        res.status(500).json({ status: "error", message: "An error occurred during registration" + error });
     }
 };
 

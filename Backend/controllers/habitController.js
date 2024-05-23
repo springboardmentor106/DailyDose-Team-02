@@ -2,11 +2,10 @@ import HABIT from '../models/habitModel.js';
 import User from '../models/userModel.js';
 
 // only user can CRUD
-
 export const createHabit = async (req, res) => {
     try {
         const { userId, role } = req;
-        
+
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
@@ -27,10 +26,16 @@ export const createHabit = async (req, res) => {
         const habitData = req.body;
 
         const habit = new HABIT(habitData);
-        await habit.save();
+        const savedHabit = await habit.save();
+        if (!savedHabit) {
+            res.status(400).json({ status: "failed", message: "Error while updating the habit" });
+        }
 
-        user.habits.push(habit._id)
-        await user.save()
+        user.habits.push(habit.uuid)
+        const savedUser = await user.save()
+        if (!savedUser) {
+            res.status(400).json({ status: "failed", message: "Error while updating the user" });
+        }
 
         res.status(201).json({ status: "success", message: "Habit saved successfully" });
     } catch (error) {
@@ -38,7 +43,6 @@ export const createHabit = async (req, res) => {
         res.status(400).json({ message: "Failed to create habit", error: error.message });
     }
 };
-
 
 export const getHabits = async (req, res) => {
     try {
@@ -65,24 +69,19 @@ export const getHabits = async (req, res) => {
         let habits = [];
         let habitLength = user.habits.length
 
-        // console.log(habitLength)
-
         for (let i = 0; i < habitLength; i++) {
-            const habit = await HABIT.findById(user.habits[i])
-
-            habits.push(habit)
+            const habit = await HABIT.findOne({ uuid: user.habits[i] })
+            habit ? habits.push(habit) : null
         }
-        res.json({ status: "success", habits });
+        return res.json({ status: "success", habits });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
-
 
 export const updateHabit = async (req, res) => {
     try {
         const { userId, role } = req;
-        // const habitId = req.params
         const { habitId, ...body } = req.body;
 
         if (!userId) {
@@ -102,12 +101,12 @@ export const updateHabit = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        const verifyHabit = user.habits.includes(habitId);
-        if (!verifyHabit) {
-            return res.status(403).json({ status: "failed", message: "Unauthorized to update this habit" });
-        }
+        // const verifyHabit = user.habits.includes(habitId);
+        // if (!verifyHabit) {
+        //     return res.status(403).json({ status: "failed", message: "Unauthorized to update this habit" });
+        // }
 
-        const updatedHabit = await HABIT.findByIdAndUpdate(habitId, body, { new: true });
+        const updatedHabit = await HABIT.findOneAndUpdate({ uuid: habitId }, body, { new: true });
         if (!updatedHabit) {
             return res.status(404).json({ status: "failed", message: "Habit not found" });
         }
@@ -119,11 +118,10 @@ export const updateHabit = async (req, res) => {
     }
 };
 
-
 export const deleteHabit = async (req, res) => {
     try {
         const { userId, role } = req;
-        const _id = req.body;
+        const habitId = req.body;
 
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
@@ -132,7 +130,7 @@ export const deleteHabit = async (req, res) => {
         if (!role) {
             return res.status(404).json({ status: "failed", message: "role not captured" });
         }
-        
+
         if (role !== 'user') {
             return res.status(403).json({ status: "failed", message: "Only users have access" });
         }
@@ -142,17 +140,14 @@ export const deleteHabit = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
 
-        // console.log(user);
-        // console.log(_id);
-
-        const habit = await HABIT.findByIdAndDelete(_id);
+        const habit = await HABIT.findOneAndDelete({ uuid: habitId });
         if (!habit) {
             return res.status(404).json({ status: "failed", message: 'Habit not found' });
         }
 
-        res.json({ status: "success", message: 'Habit deleted successfully' });
+        return res.json({ status: "success", message: 'Habit deleted successfully' });
     }
     catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };

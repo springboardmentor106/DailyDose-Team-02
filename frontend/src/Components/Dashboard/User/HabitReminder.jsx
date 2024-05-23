@@ -1,11 +1,11 @@
 import React from 'react';
 import { RiDeleteBinLine } from "react-icons/ri";
-const HabitReminder = ({ reminder, onCheckChange, onDelete }) => {
-const {  activity } = reminder;
+const HabitReminder = ({ reminder }) => {
+  const { title } = reminder;
   return (
     <div className="reminder-item">
       <div className="type-container">
-        <div>{activity}</div>
+        <div>{title}</div>
       </div>
     </div>
   );
