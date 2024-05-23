@@ -8,6 +8,7 @@ import Constants from '../../../constants';
 const Add = () => {
   const [selectedItem, setSelectedItem] = useState('goal');
   const [selectedCategoriesList, setSelectedCategoriesList] = useState([])
+  const [goalSelectedCategoriesList, setGoalSelectedCategoriesList] = useState([])
   const [details, setDetails] = useState({})
 
   const handleItemClick = (item) => {
@@ -25,15 +26,26 @@ const Add = () => {
   }
   const [minDate, setMinDate] = useState(formatDate(new Date()));
 
-  const handleAddCategory = (category) => {
-    if (!selectedCategoriesList.includes(category)) {
-      setSelectedCategoriesList([...selectedCategoriesList, category]);
+  const handleAddCategory = (category, type) => {
+    if (type = "goal") {
+      if (!goalSelectedCategoriesList.includes(category)) {
+        setGoalSelectedCategoriesList([...goalSelectedCategoriesList, category]);
+      }
+    } else {
+      if (!selectedCategoriesList.includes(category)) {
+        setSelectedCategoriesList([...selectedCategoriesList, category]);
+      }
     }
   };
 
-  const handleRemoveItem = (category) => {
-    const updatedList = selectedCategoriesList.filter(item => item !== category);
-    setSelectedCategoriesList(updatedList);
+  const handleRemoveItem = (category, type) => {
+    if (type === "goal") {
+      const updatedList = goalSelectedCategoriesList.filter(item => item !== category);
+      setGoalSelectedCategoriesList(updatedList);
+    } else {
+      const updatedList = selectedCategoriesList.filter(item => item !== category);
+      setSelectedCategoriesList(updatedList);
+    }
   };
 
   const onAddDetail = (key, value) => {
@@ -78,6 +90,39 @@ const Add = () => {
     }
   }
 
+  const addGoal = async () => {
+    try {
+      const url = Constants.BASE_URL + "/api/goals"
+      const token = localStorage.getItem("token")
+      const payload = {
+        title: details.reminderTitle,
+        startDate: details.reminderStartDate,
+        endDate: details.reminderEndDate,
+        startTime: details.reminderStartTime,
+        endTime: details.reminderEndTime,
+        timeFrequency: details.reminderTimeFrequency,
+        dayFrequency: selectedCategoriesList
+      }
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+      if (data.status === "failed") {
+        toast.warn(data.message)
+      } else {
+        toast.success(data.message)
+      }
+    } catch (err) {
+      toast.error("Error:" + err)
+    }
+  }
+
   return (
     <div className="main-container">
       <SideBar />
@@ -85,7 +130,45 @@ const Add = () => {
         <div className='add-container'>
           <div className='add-heading' onClick={() => handleItemClick('goal')}>Add goals</div>
           {selectedItem === "goal" ?
-            <div className='add-content-container'>ffffffff </div>
+            <div className='add-content-container'>
+              <div className='input-container'>
+                <div className='input-label'>Title</div>
+                <input type="text" className='add-input' value={details.goalTitle || ""} onChange={(e) => onAddDetail("goalTitle", e.target.value)} />
+              </div>
+
+              <div className='two-input-container'>
+                <div className='input-container'>
+                  <div className='input-label'>Start Date</div>
+                  <input type="date" className='add-input' value={details.goalStartDate || ""} min={minDate} onChange={(e) => onAddDetail("goalStartDate", e.target.value)} />
+                </div>
+                <div className='input-container'>
+                  <div className='input-label'>End Date</div>
+                  <input type="date" className='add-input' value={details.goalEndDate || ""} onChange={(e) => onAddDetail("goalEndDate", e.target.value)} />
+                </div>
+              </div>
+
+              <div className='input-container'>
+                <div className='input-label'>Frequency Category</div>
+                <div className='categories-list'>
+                  {categoriesList.map((category) => (
+                    <div className='category-item' key={category}>
+                      <div onClick={() => handleAddCategory(category, "goal")}>
+                        {category}
+                      </div>
+                      {goalSelectedCategoriesList.includes(category) && (
+                        <div className='category-cross-icon' onClick={() => handleRemoveItem(category, "goal")}>
+                          <RxCross2 />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className='add-save-button-row'>
+                <button className='add-save-button' onClick={() => addGoal()}>Save</button>
+              </div>
+            </div>
             : null}
         </div>
 
@@ -130,11 +213,11 @@ const Add = () => {
                 <div className='categories-list'>
                   {categoriesList.map((category) => (
                     <div className='category-item' key={category}>
-                      <div onClick={() => handleAddCategory(category)}>
+                      <div onClick={() => handleAddCategory(category, "reminder")}>
                         {category}
                       </div>
                       {selectedCategoriesList.includes(category) && (
-                        <div className='category-cross-icon' onClick={() => handleRemoveItem(category)}>
+                        <div className='category-cross-icon' onClick={() => handleRemoveItem(category, "reminder")}>
                           <RxCross2 />
                         </div>
                       )}

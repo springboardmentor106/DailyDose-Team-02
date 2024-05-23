@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
-
+import { v4 as uuidv4 } from 'uuid';
 const goalSchema = new mongoose.Schema({
-    title: {
+    uuid: {
         type: String,
-        required: true
+        default: uuidv4,
+        unique: true
     },
     title: {
         type: String,

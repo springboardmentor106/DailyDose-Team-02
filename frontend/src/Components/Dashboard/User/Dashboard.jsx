@@ -9,8 +9,7 @@ import ReactCalendar from "../dashComponents/Calendar";
 import dailyimg from "../../../assets/images/User.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
-import { user, remindersList, goalsList, habitsList, } from "./StaticDataUser";
-// import { reminders } from "./StaticDataUser";
+import { user, habitsList, } from "./StaticDataUser";
 import HabitReminderList from './HabitReminderList';
 import GoalReminderList from './GoalReminderList';
 import { toast } from "react-toastify"
@@ -22,8 +21,10 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
+  const [goals, setGoals] = useState(null)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
+
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
@@ -55,13 +56,42 @@ const Dashboard = () => {
     }
   }
 
+  const getUserGoals = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/goals', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      console.log(data)
+      if (data.status === "success") {
+        data.goals ? setGoals(data.goals) : setGoals(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
   useEffect(() => {
     getUserReminders()
+    getUserGoals()
     setRefresh(false)
   }, [refresh === true])
 
   useEffect(() => {
-  }, [reminders])
+  }, [reminders,goals])
   return (
     <div className="dashboard">
       <UserNav />
@@ -83,13 +113,11 @@ const Dashboard = () => {
               {user.firstName[0]}
             </div>
             <div className="details-das">
-              {/* {profileinfo.map((profile, index) => ( */}
               <div className="card-user" ><div className="card-body">
                 <h6><strong>{user.firstName} {user.lastName}</strong></h6>
                 <p>Age: {user.age}</p>
                 <p><IoLocationSharp /> {user.location || "--"}</p>
               </div></div>
-              {/* // ))} */}
             </div>
           </div>
         </div>
@@ -205,7 +233,7 @@ const Dashboard = () => {
             {selectedBox === 1 && <div>
               <div className="right-card-two">
                 {reminders && reminders.length ?
-                  <ReminderList remindersList={reminders} setRefresh={setRefresh }/>
+                  <ReminderList remindersList={reminders} setRefresh={setRefresh} />
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />
@@ -216,8 +244,8 @@ const Dashboard = () => {
             </div>}
             {selectedBox === 2 && <div>
               <div className="right-card-two">
-                {goalsList && goalsList.length ?
-                  < GoalReminderList goalsList={goalsList} />
+                {goals && goals.length ?
+                  < GoalReminderList goalsList={goals} setRefresh={setRefresh} />
                   :
                   <div className='no-reminders-container'>
                     <img src={noRemindersImage} alt="no reminders" className='no-reminders-image' />

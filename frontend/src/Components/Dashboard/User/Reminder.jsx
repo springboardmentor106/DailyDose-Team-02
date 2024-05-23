@@ -1,10 +1,8 @@
 import React ,{useState} from 'react';
 import { RiDeleteBinLine } from "react-icons/ri";
 const Reminder = ({ reminder, onCheckChange }) => {
-  const { date, title, completedToday, startTime } = reminder || {};
-  const todayDate = new Date().getDate()
-  const timeNow = new Date().getHours()
-  const timeInMin = new Date().getMinutes()
+  const {  title, completedToday, startTime } = reminder || {};
+ 
   return (
     <div className="reminder-item">
       <div id='datepicker'>{startTime} {startTime.split(':')[0] > 12 ? "pm" : "am"} </div>
