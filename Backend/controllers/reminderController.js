@@ -1,4 +1,4 @@
-import REMINDER from '../models/reminderModelv2.js';
+import REMINDER from '../models/reminderModel.js';
 import User from '../models/userModel.js';
 
 // only user can CRUD

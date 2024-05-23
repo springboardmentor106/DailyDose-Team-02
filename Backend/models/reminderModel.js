@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
-
+import { v4 as uuidv4 } from 'uuid';
 const reminderSchema = new mongoose.Schema({
+    uuid: {
+        type: String,
+        default: uuidv4,
+        unique: true
+    },
     title: {
         type: String,
         required: true
     },
-    description: {
-        type: String
-    },
-    date: {
-        type: [Date],
+    startDate: {
+        type: Date,
         required: true
     },
     dayFrequency: {
@@ -20,7 +22,17 @@ const reminderSchema = new mongoose.Schema({
     endDate: {
         type: Date
     },
+    startTime:{
+        type: String
+    },
+    endTime: {
+        type: String
+    },
     completed: {
+        type: Boolean,
+        default: false
+    },
+    completedToday: {
         type: Boolean,
         default: false
     },
@@ -28,19 +40,10 @@ const reminderSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    // createdBy: {
-    //     type: String,
-    //     enum: ['user', 'caretaker']
-    // },
     pushNotification: {
         type: Boolean,
         default: false
     },
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
     createdAt: {
         type: Date,
         default: Date.now

@@ -5,33 +5,38 @@ const goalSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description:{
+    title: {
         type: String,
         required: true
     },
-    targetDate: {
+    startDate: {
         type: Date,
         required: true
+    },
+    dayFrequency: {
+        type: [String],
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
+        default: []
+    },
+    endDate: {
+        type: Date
     },
     completed: {
         type: Boolean,
         default: false
     },
-    reminders: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'REMINDER'
+    completedToday: {
+        type: Boolean,
+        default: false
     },
-    dayFrequency: {
-        type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
-        required: true
+    pushNotification: {
+        type: Boolean,
+        default: false
     },
-    goalStatus: {
+    createdBy: {
         type: String,
-        enum: ['not_started', 'in_progress', 'completed'],
-        default: 'not_started'
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
 const GOAL = mongoose.model('GOAL', goalSchema);
 

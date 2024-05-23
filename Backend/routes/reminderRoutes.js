@@ -11,10 +11,4 @@ router.get('/', checkUserAuth, getReminders);
 router.patch('/update', validation(updateReminderSchema), checkUserAuth, updateReminder);
 router.delete('/delete', checkUserAuth, deleteReminder);
 
-
-// router.post('/reminder', checkUserAuth, validateUserOrCaretaker,createReminder );
-// router.get('/reminder', checkUserAuth, validateUserOrCaretaker,getReminders );
-// router.patch('/reminder/:id', checkUserAuth, validateUserOrCaretaker,updateReminder );
-// router.delete('/reminder/:id', checkUserAuth, validateUserOrCaretaker, deleteReminder);
-
 export default router;
