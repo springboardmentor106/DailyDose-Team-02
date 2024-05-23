@@ -19,7 +19,7 @@ const HomePage = () => {
       <div className="pages">
         <div className="header">
           <div className="card" id="card1">
-            <div className="card-body" id="heading">
+            <div className="card-body" id="home-heading">
               <div className='welcome'>
                 <strong>
                   <h3> Welcome back...</h3>
