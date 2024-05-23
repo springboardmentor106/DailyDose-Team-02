@@ -49,11 +49,11 @@ const Analytics = () => {
           <div className="ana-chart">
             <div className="card"><div className='card-body'>
               <div id="ana-bargraph"><Chart/></div>
-            <div class="btn-group">
-              <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Monthly</a></li>
-                <li><a class="dropdown-item" href="#">Weekly</a></li>
+            <div  className="btn-group">
+              <button  className="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
+              <ul  className="dropdown-menu">
+                <li><a  className="dropdown-item" href="#">Monthly</a></li>
+                <li><a  className="dropdown-item" href="#">Weekly</a></li>
               </ul>
             </div>
             </div></div>

@@ -9,7 +9,7 @@ const Assigned = () => {
   return (
     <div>
         
-      <div class="accordion" id="accordionExample" >
+      <div className="accordion" id="accordionExample" >
       {AssignedUser.map((assignedUser,index)=>(
   <div className="accordion-item" key={index}>
     <h2 className="accordion-header">
