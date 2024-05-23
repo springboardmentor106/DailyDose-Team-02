@@ -46,7 +46,8 @@ const caretakerSchema = new mongoose.Schema(
     },
     assignedSeniors: [
       {
-        type: String
+        type: String,
+        unique: true
       }
     ]
 

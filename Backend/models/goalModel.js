@@ -44,7 +44,8 @@ const goalSchema = new mongoose.Schema({
     },
     reminders: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'REMINDER'
+        ref: 'REMINDER',
+        unique: true
     },
     dayFrequency: {
         type: [String],

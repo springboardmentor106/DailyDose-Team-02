@@ -213,17 +213,19 @@ export const readUserDetail = async (req, res) => {
 
         let user;
         if (role !== "caretaker") {
-            user = await User.findOne({ uuid: userId });
+            user = await User.findOne({ uuid: userId }).lean()
             if (!user) {
                 return res.status(400).json({ status: "failed", message: "Email not found" });
             }
         } else {
-            user = await Caretaker.findOne({ uuid: userId });
+            user = await Caretaker.findOne({ uuid: userId }).lean()
             if (!user) {
                 return res.status(400).json({ status: "failed", message: "Email not found" });
             }
         }
 
+        console.log(user.reminders)
+        // console.log(user.reminders, user.goals, user.habits)
         return res.status(200).json({ status: "success", user });
     } catch (error) {
         console.error("Error in reading user:", error);

@@ -48,21 +48,27 @@ const userSchema = new mongoose.Schema(
       type: Number
     },
     reminders: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Reminder'
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: 'REMINDER'
+      type: String,
+      default: uuidv4,
+      unique: true
     }],
     goals: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Goal'
+      ref: 'GOAL'
     }],
     habits: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'HABIT'
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: 'HABIT'
+      type: String,
+      default: uuidv4,
+      unique: true
     }],
     caretaker: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Caretaker',
-      default: null
+      unique: true
     },
     caretaketAssigned: {
       type: Boolean,

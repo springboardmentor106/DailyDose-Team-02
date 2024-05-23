@@ -34,7 +34,7 @@ export const createHabit = async (req, res) => {
         const habit = new HABIT(newHabit);
         await habit.save();
 
-        user.habits.push(habit._id)
+        user.habits.push(habit.uuid)
         await user.save()
 
         res.status(201).json({ status: "success", message: "Habit saved successfully" });
@@ -73,7 +73,7 @@ export const getHabits = async (req, res) => {
         // console.log(habitLength)
 
         for (let i = 0; i < habitLength; i++) {
-            const habit = await HABIT.findById(user.habits[i])
+            const habit = await HABIT.find({uuid: user.habits[i]})
 
             habits.push(habit)
         }

@@ -86,58 +86,50 @@ export const getAllUnassignedUser = async (req, res) => {
 
 export const assignUser = async (req, res) => {
     try {
-        if (req.role !== 'caretaker') {
-            return res.status(403).json({ status: "failed", message: "Only caretakers can assign users" });
+        const { userId, role } = req;
+
+        if (!userId) {
+            return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
 
-        const caretakerId = req.userId;
-        const { userIds } = req.body;
+        if (!role) {
+            return res.status(404).json({ status: "failed", message: "role not captured" });
+        }
 
-        const caretaker = await Caretaker.findById(caretakerId);
+        if (role !== 'caretaker') {
+            return res.status(403).json({ status: "failed", message: "Only caretakers have access" });
+        }
+
+        const { seniorId } = req.body;
+
+        if (!seniorId) {
+            return res.status(400).json({ status: "failed", message: "seniorId is required." });
+        }
+
+        const caretaker = await Caretaker.findOne({ uuid: userId });
         if (!caretaker) {
             return res.status(404).json({ status: "failed", message: "Caretaker not found." });
         }
 
-        const userNotFound = [];
-        const assignedUsers = [];
-
-        for (const userId of userIds) {
-            const user = await User.findById(userId);
-            if (!user) {
-                userNotFound.push(userId);
-                continue;
-            }
-
-            caretaker.assignedSeniors.push(userId);
-            assignedUsers.push(userId);
+        const user = await User.findOne({ uuid: seniorId });
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "senior not found." });
         }
 
-        // Updating caretaker and users by transaction
-        const session = await Caretaker.startSession();
-        const transactionOptions = {
-            readConcern: { level: 'majority' },
-            writeConcern: { w: 'majority' },
-            maxTimeMS: 15 * 1000
-        };
-        session.startTransaction(transactionOptions);
-        try {
-            await caretaker.save();
-            await User.updateMany({ _id: { $in: assignedUsers } }, { $set: { caretaker: caretakerId, caretakerAssigned: true } });
-            await session.commitTransaction();
-        } catch (error) {
-            await session.abortTransaction();
-            throw error;
-        } finally {
-            session.endSession();
+        if (caretaker.assignedSeniors.includes(seniorId)) {
+            return res.status(400).json({ status: "failed", message: "User is already assigned to this caretaker." });
         }
 
-        if (userNotFound) {
-            return res.status(200).json({ status: "success", message: `Users assigned successfully, ${assignedUsers}`, warning: `Users not found, ${userNotFound}` });
-        }
-        return res.status(200).json({ status: "success", message: `Users assigned successfully, ${assignedUsers}` });
+        // Assign user to caretaker
+        caretaker.assignedSeniors.push(seniorId);
+        await caretaker.save();
+
+        await User.updateOne({ uuid: seniorId }, { $set: { caretaker: userId, caretakerAssigned: true } });
+
+        return res.status(200).json({ status: "success", message: "User successfully assigned to caretaker." });
 
     } catch (error) {
-        console.error("Error assigning users to caretaker:", error);
+        console.error("Error assigning user to caretaker:", error);
         return res.status(500).json({ status: "error", message: "Internal server error." });
     }
 };
@@ -154,17 +146,18 @@ export const createUserGoal = async (req, res) => {
 
         const { userId, ...goalData } = req.body;
 
+        // Check if caretaker exists
+        const caretaker = await Caretaker.findOne({ uuid: caretakerId });
+        if (!caretaker) {
+            return res.status(404).json({ status: "failed", message: "caretaker not found" });
+        }
+
         // Check if user exists
-        const user = await User.findById(userId);
+        const user = await User.findOne({ uuid: userId });
         if (!user) {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
 
-        // Check if caretaker exists
-        const caretaker = await Caretaker.findById(caretakerId);
-        if (!caretaker) {
-            return res.status(404).json({ status: "failed", message: "caretaker not found" });
-        }
 
         // Check if senior assigned to caretaker
         const isUserAssigned = caretaker.assignedSeniors.find(element => element = userId)

@@ -33,7 +33,7 @@ export const createReminder = async (req, res) => {
         const reminder = new REMINDER(newReminder);
         await reminder.save();
 
-        user.reminders.push(newReminder._id)
+        user.reminders.push(reminder.uuid)
         await user.save()
 
         return res.status(200).json({ status: "success", message: "Reminders Added Successfully" });
@@ -66,8 +66,12 @@ export const getReminders = async (req, res) => {
 
         let reminders = []
         let reminderLength = user.reminders.length
+        // console.log(reminderLength);
+
         for (let i = 0; i < reminderLength; i++) {
-            const reminder = await REMINDER.findById(user.reminders[i])
+            const reminder = await REMINDER.find({uuid: user.reminders[i]})
+
+            // console.log(reminder);
 
             reminders.push(reminder)
         }
