@@ -54,6 +54,7 @@
 }
 .navbar__link span {
   position: absolute;
+  /* z-index: 9999; */
   left: 100%;
   transform: translate(-3rem);
   margin-left: 1rem;
@@ -398,7 +399,7 @@
   
 }
 
-@media only screen 
+/* @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
   .navbar {
@@ -514,4 +515,4 @@ and (max-device-width : 1024px) {
       transform: scale(1, 1);
     }
   }
-}
+} */

@@ -23,9 +23,10 @@
   height: 172px;
   width: 348px;
   gap: 20px;
-  background-color: #E1DEF8;
+  background-color: #e1def8;
   border-radius: 35px;
-  box-shadow: rgba(118, 200, 206, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(118, 200, 206, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 button {
@@ -54,17 +55,17 @@ button {
   margin-right: -38px;
 }
 
-.img-container>img {
+.img-container > img {
   width: 196px;
   margin-top: -31px;
   margin-left: -10px;
 }
 
-.row-one-card-one>h2 {
+.row-one-card-one > h2 {
   font-weight: 600;
 }
 
-.lower-side>p {
+.lower-side > p {
   margin-top: 31px;
   font-size: 13px;
   width: 188px;
@@ -76,9 +77,10 @@ button {
   padding: 20px;
   height: 172px;
   width: 455px;
-  background-color: #E1DEF8;
+  background-color: #e1def8;
   border-radius: 35px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .right-side {
@@ -97,7 +99,8 @@ button {
   border-radius: 35px;
   margin-top: -3px;
   background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .row-one-card-one-dashboard {
@@ -110,13 +113,14 @@ button {
 
 .right-card-two {
   padding: 20px;
-  width: 'fit-content';
+  width: "fit-content";
   /* height: 296px;
   width: 374px; */
   background-color: white;
   border-radius: 35px;
   margin-top: 37px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   margin-left: -339px;
 }
 
@@ -129,7 +133,7 @@ button {
 
 .no-bar-graph-data-text {
   font-size: 18px;
-  color: #625D5D;
+  color: #625d5d;
   text-align: center;
 }
 
@@ -143,12 +147,12 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #605E5E;
+  color: #605e5e;
   font-size: 14px;
 }
 
 .edit-profile-button {
-  background-color: #8A79F5;
+  background-color: #8a79f5;
   padding: 4px 16px;
   color: #fff;
   border-radius: 8px;
@@ -233,14 +237,14 @@ button {
   margin-left: -24px;
 }
 
-.Additional-row-one-das>h3 {
+.Additional-row-one-das > h3 {
   font-weight: lighter;
 }
 
 .image-container-silder {
   width: 10px;
   height: 20px;
-  background-color: #BDB1FF;
+  background-color: #bdb1ff;
 }
 
 .row-three-card {
@@ -249,9 +253,15 @@ button {
   justify-content: space-between;
   /* height: 208px;
   width: 200px; */
-  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(216, 211, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(216, 211, 248, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
   border-radius: 27px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .row-three-content {
@@ -316,7 +326,8 @@ button {
   margin-top: 16px;
   border-radius: 22px;
   border: 0.5px solid black;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
 .chart-heading {
@@ -325,7 +336,8 @@ button {
   justify-content: space-between;
 }
 
-.year-container {}
+.year-container {
+}
 
 .year-container button {
   background-color: #efeeee;
@@ -341,7 +353,7 @@ button {
 .profile-name-conainter {
   width: 100px;
   height: 174px;
-  background-color: #8A79F5;
+  background-color: #8a79f5;
   margin-top: -20px;
   border-radius: 40px;
   margin-left: -21px;
@@ -374,7 +386,7 @@ button {
 
 .pro-text-percentage {
   font-size: 16px;
-  font-weight: 600
+  font-weight: 600;
 }
 
 .pro-percentage {
@@ -397,17 +409,16 @@ button {
   width: 16px;
   height: 16px;
   border-radius: 50px;
-background-color: #fff;
+  background-color: #fff;
 }
 
 .completed {
-  background-color: #6455C6;
+  background-color: #6455c6;
 }
 
 .in-progress {
-  background-color: #857AC6;
+  background-color: #857ac6;
 }
-
 
 .cirlce-pro-two {
   width: 1vw;
@@ -415,7 +426,7 @@ background-color: #fff;
   max-width: 10px;
   max-height: 10px;
   border-radius: 50px;
-  background-color: #857AC6;
+  background-color: #857ac6;
 }
 
 .cirlce-pro-three {
@@ -424,7 +435,7 @@ background-color: #fff;
   max-width: 10px;
   max-height: 10px;
   border-radius: 50px;
-  background-color: #CFCAEE;
+  background-color: #cfcaee;
 }
 
 .pro-detail {
@@ -441,15 +452,15 @@ background-color: #fff;
 
 .reminder-list {
   display: flex;
-  flex:1;
+  flex: 1;
   flex-direction: column;
   margin-top: -28px;
 }
 
 .reminder-item {
   display: flex;
-  flex:1;
-  width:100%;
+  flex: 1;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ccc;
@@ -482,13 +493,13 @@ background-color: #fff;
 
 .type-container {
   margin-left: 10px;
-  flex:1;
-  width:100%
+  flex: 1;
+  width: 100%;
 }
 
 .no-reminders-image {
   width: 80%;
-  max-height: 60%
+  max-height: 60%;
 }
 
 .no-reminders-container {
@@ -497,17 +508,18 @@ background-color: #fff;
   align-items: center;
   gap: 20px;
   max-height: 100%;
-  color: #605E5E;
+  color: #605e5e;
   font-size: 14px;
   text-align: center;
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width: 425px) {
   .right-card-two {
     margin-left: -382px;
   }
 
-  .card-center-details {}
+  .card-center-details {
+  }
 
   .right-card-one {
     margin-left: -1px;
@@ -559,7 +571,6 @@ background-color: #fff;
     font-size: 52px;
     margin-top: 30px;
     margin-left: 27px;
-
   }
 
   .row-one-card-one p {
@@ -574,7 +585,6 @@ background-color: #fff;
     border-radius: 67px;
   }
 
-
   .card-body strong {
     font-size: 54px;
   }
@@ -583,13 +593,14 @@ background-color: #fff;
     margin-top: -65px;
   }
 
-  .card-body p {}
+  .card-body p {
+  }
 
   .img-container {
     width: 373px;
   }
 
-  .img-container>img {
+  .img-container > img {
     width: 333px;
     margin-top: -157px;
     margin-left: 16px;
@@ -602,10 +613,9 @@ background-color: #fff;
   .dashboard {
     margin-left: -10px;
   }
-
 }
 
-@media screen and (min-width : 1000px) and (max-width : 1149px) {
+@media screen and (min-width: 1000px) and (max-width: 1149px) {
   .row-one-card-one-dashboard {
     margin-left: -27px;
     width: 665px;
@@ -633,14 +643,16 @@ background-color: #fff;
   }
 }
 
-@media screen and (max-width : 335px) {}
+@media screen and (max-width: 335px) {
+}
 
-@media screen and (min-width : 440px) and (max-width : 600px) {
+@media screen and (min-width: 440px) and (max-width: 600px) {
   .right-card-two {
     margin-left: -382px;
   }
 
-  .card-center-details {}
+  .card-center-details {
+  }
 
   .right-card-one {
     margin-left: -1px;
@@ -692,7 +704,6 @@ background-color: #fff;
     font-size: 52px;
     margin-top: 30px;
     margin-left: 27px;
-
   }
 
   .row-one-card-one p {
@@ -707,7 +718,6 @@ background-color: #fff;
     border-radius: 67px;
   }
 
-
   .card-body strong {
     font-size: 54px;
   }
@@ -716,13 +726,14 @@ background-color: #fff;
     margin-top: -65px;
   }
 
-  .card-body p {}
+  .card-body p {
+  }
 
   .img-container {
     width: 373px;
   }
 
-  .img-container>img {
+  .img-container > img {
     width: 333px;
     margin-top: -157px;
     margin-left: 16px;
@@ -735,10 +746,9 @@ background-color: #fff;
   .dashboard {
     margin-left: -10px;
   }
-
 }
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .right-side {
     margin-top: 678px;
     margin-left: -799px;
@@ -756,7 +766,6 @@ background-color: #fff;
   .right-card-two {
     margin-top: 34px;
     margin-left: -353px;
-
   }
 
   .card-center-details {
@@ -790,7 +799,8 @@ background-color: #fff;
     width: 684px;
   }
 
-  .row-one {}
+  .row-one {
+  }
 
   .row-one-card-one {
     margin-left: -111px;
@@ -801,9 +811,79 @@ background-color: #fff;
     width: 390px;
     margin-top: -19px;
   }
-
 }
 
 @media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
-  .right-side {}
+  .navbar {
+    left: 0;
+    width: 60px;
+    transform: translateY(-55%);
+  }
+  .left-side {
+    width: 55%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-left: 122px;
+  }
+  .row-one {
+    gap: 10px;
+  }
+  .row-one-card-one {
+    width: 310px;
+  }
+  .img-container {
+    width: 243px;
+    margin-left: 25px;
+    height: 108px;
+    margin-top: 25.5px;
+    margin-right: -36px;
+  }
+  .circle-das {
+    background: white;
+    width: 70px;
+    height: 70px;
+    margin-top: 33px;
+  }
+  .details-das {
+    margin-left: 0px;
+  }
+  .chart-heading{
+    padding-right: 55px;
+  }
+  .row-one-card-one-dashboard {
+    margin-left: 0px;
+    width: 550px;
+}
+.row-three {
+  margin-left: -35px;
+}
+.row-three-card {
+  margin-left: 0px;
+}
+  .right-side {
+    margin-left: 1px;
+    padding: 16px;
+  }
+  .dashboard {
+    margin-left: -10px;
+  }
+
+  .right-card-one {
+    /* padding: 20px; */
+    height: 308px;
+    width: 308px;
+    padding: 0;
+    margin-top: 0;
+  }
+  .right-card-two {
+    padding: 20px 0px;
+    width: 310px;
+  }
+  .no-reminders-image {
+    width: 60%;
+    max-height: 60%;
+  }
+  .no-reminders-container div {
+    width: 80%;
+  }
 }
