@@ -1,16 +1,12 @@
 import React from "react";
 import "./Homepage.css"; // Import your CSS file for styling
 import Caretacker from "../../../assets/images/Caretacker.png";
-import profilepic from "../../../assets/images/profilepic.png";
+
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
 const HomePage = () => {
-  const reminders = [
-    { time: "08:00 AM", activity: "Morning walk" },
-    { time: "12:00 PM", activity: "Lunch break" },
-    { time: "03:00 PM", activity: "Meeting" },
-  ];
+  
   return (
     <div className="main1">
       <div className="nav-bar">

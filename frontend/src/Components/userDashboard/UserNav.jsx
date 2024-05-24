@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./userNav.css";
 import logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";

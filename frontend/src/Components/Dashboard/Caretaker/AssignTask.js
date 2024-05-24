@@ -12,7 +12,8 @@ const AssignTask = () => {
         startTime:"",
         endTime:"",
         discription:"",
-        category:""
+        category:"",
+        dayFrequency:""
     })
     const handleChanges=(e)=>{
         const { name, value } = e.target;
@@ -36,7 +37,7 @@ const AssignTask = () => {
         .then((data) => {
           console.log(data);
           if (data.status === "success") {
-            toast.info("Please Verify your account");
+            toast.info("Task assigned");
           }else {
             // Handle errors, e.g., display a message to the user
             toast.error(data.message);
@@ -73,12 +74,17 @@ const AssignTask = () => {
                         <label for="exampleFormControlInput1" class="form-label">Date</label>
                         <input type="date" className='form-control' onChange={handleChanges} name='date'/>
                     </div>
+                    <div class="input-group">
+                        <select class="form-select" id="inputGroupSelect04" onChange={handleChanges} name="dayFrequency" aria-label="Example select with button addon" required>
+                        <option selected>Select User</option>
+                        <option value='daily' >weekly</option>
+                        <option value='daily' >Daily</option>
+                        </select>
+                    </div>
                     <div>
                         <label for="exampleFormControlInput1" class="form-label">Category</label>
                         <input type="text" className='form-control' onChange={handleChanges} name='category'/> <br />
                         <input type="text" className='form-control' onChange={handleChanges} name='category'/> <br />
-                        <input type="text" className='form-control' onChange={handleChanges} name='category'/> <br />
-                        <input type="text" className='form-control' onChange={handleChanges} name='category'/>
                     </div>
                 </div>
                 <div className='assign-right'>

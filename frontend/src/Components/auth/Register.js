@@ -61,7 +61,7 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: formData.email, role: formData.role }),
+        body: JSON.stringify({ email: formData.email }),
       })
         .then((response) => response.json())
         .then((data) => {
