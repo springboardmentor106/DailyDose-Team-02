@@ -5,6 +5,7 @@ import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
+// import CareProfile from "../dashComponents/CareProfile"
 const HomePage = () => {
   const reminders = [
     { time: "08:00 AM", activity: "Morning walk" },
@@ -16,6 +17,29 @@ const HomePage = () => {
       <div className="nav-bar">
         <UserNav/>
       </div>
+      
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"> Profile</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div></div>
+        <div>
+          <strong>Username</strong>
+          <p>username@gmail.com</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
       <div className="pages">
         <div className="header">
           <div className="card" id="card1">

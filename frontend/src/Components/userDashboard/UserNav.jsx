@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./userNav.css";
 import logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-// import CareProfile from "../Dashboard/dashComponents/CareProfile";
+
 const UserNav = () => {
   const role = localStorage.getItem("role")
   const token = localStorage.getItem("token")
@@ -117,7 +117,7 @@ const UserNav = () => {
           <circle cx="12" cy="7" r="4" />
         </svg>
         </button>
-
+        
         
       </div>
       
