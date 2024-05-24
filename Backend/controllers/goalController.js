@@ -186,11 +186,10 @@ export const deleteGoal = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-
-            const verifyGoal = user.goals.find(goal => String(goal.uuid) === goalId);
-            if (!verifyGoal) {
-                return res.status(404).json({ status: "failed", message: "Goal not found" });
-            }
+            // const verifyGoal = user.goals.find(goal => goal.uuid === goalId);
+            // if (!verifyGoal) {
+            //     return res.status(404).json({ status: "failed", message: "Goal not found" });
+            // }
         } else if (role === 'caretaker') {
             user = await Caretaker.findOne({ uuid: userId });
             if (!user) {
@@ -204,13 +203,14 @@ export const deleteGoal = async (req, res) => {
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
         }
+        const updatedGoals = user.goals.map((item) => item.uuid !== goalId ? item : null)
+        const body = {
+            goals: updatedGoals
+        }
 
-        const updatedGoals = user.goals.filter(goalItem => String(goalItem.uuid) !== goalId);
-        console.log("udpated goals", updatedGoals)
-        user.goals = updatedGoals; // Update user's goals list
-
-        const savedUser = await user.save(); // Save the updated user document
-        if (!savedUser) {
+        const updateUser = await User.findOneAndUpdate({ uuid: userId }, body, { new: true })
+        console.log(updatedGoals, user.goals, typeof user.goals[2], typeof goalId)
+        if (!updateUser) {
             return res.status(400).json({ status: "failed", message: 'Error while updating user details' });
         }
 

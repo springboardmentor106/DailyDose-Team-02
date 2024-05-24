@@ -6,7 +6,7 @@ import noBarGraphDataImage from "../../../assets/images/noBarGraphData.png"
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../../constants'
-const Chart = () => {
+const Chart = ({ setRefresh }) => {
   const [chartData, setChartData] = useState(null)
   const navigate = useNavigate()
   const getGoalProgress = async () => {
@@ -30,8 +30,8 @@ const Chart = () => {
 
       const data = await response.json();
       if (data.status === "success") {
-        console.log("chart data", data.monthsData)
         setChartData(data.monthsData)
+        setRefresh(true)
       } else {
         toast.error(data.message);
       }

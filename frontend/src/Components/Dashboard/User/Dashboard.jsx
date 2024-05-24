@@ -241,7 +241,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-one-dashboard">
-            <Chart />
+            <Chart setRefresh={setRefresh} />
           </div>
         </div>
 
