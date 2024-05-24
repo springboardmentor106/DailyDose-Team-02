@@ -6,7 +6,8 @@ import {
     getUserGoals,
     getMonthlyGoalProgress,
     getDailyGoalProgress,
-    deleteAllGoal
+    deleteAllGoal,
+    getUsersProgressToday
 } from '../controllers/goalController.js';
 import { validation } from '../middlewares/validationMiddleware.js';
 import { createGoalSchema, updateGoalSchema } from '../validations/userGoalValidation.js';
@@ -21,6 +22,7 @@ router.delete('/delete', checkUserAuth, deleteGoal);
 router.post('/monthly-stats', checkUserAuth, getMonthlyGoalProgress)
 router.post('/daily-stats', checkUserAuth, getDailyGoalProgress)
 router.delete('/delete-all', checkUserAuth, deleteAllGoal)
+router.get('/user-update', checkUserAuth, getUsersProgressToday)
 
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);

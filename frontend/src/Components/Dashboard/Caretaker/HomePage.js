@@ -1,16 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Homepage.css"; // Import your CSS file for styling
 import Caretacker from "../../../assets/images/Caretacker.png"
 import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
+import Constants from "../../../constants";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const HomePage = () => {
+  const [userDetails, setUserDetails] = useState(null)
+  const navigate = useNavigate()
+  const getUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/user/profile', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      if (data.status === "success") {
+        data.user ? setUserDetails(data.user) : setUserDetails(null)
+        // localStorage.setItem("caretakerId", data.user.caretaker)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     const role = localStorage.getItem("role")
     if (token) {
       console.log(token)
+      getUserDetails()
     }
   }, [])
   return (
@@ -28,11 +62,16 @@ const HomePage = () => {
               <div className="imgconatiner"><img src={Caretacker} alt="" /></div>
             </div>
           </div>
-          <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
-            <div className="card-body" id="care-profile">
-              <div><img src="" alt="" /></div>
-              <div id="careTaker-Deatils"><p><strong>Dr Caretaker</strong> </p><p>Occupation:MBBS</p><p>Age:30</p></div>
-            </div></div>
+          {userDetails &&
+            <div className="card" id="card2"><div className="card-title"><h6>Profile</h6></div>
+              <div className="card-body" id="care-profile">
+                <div className="circle-das">
+                  {userDetails.firstname[0]}
+                </div>
+                <div id="careTaker-Deatils"><p><strong>{userDetails.firstname} {userDetails.lastname}</strong> </p><p>Gender: {userDetails.gender}</p><p>Age:{userDetails.age}</p></div>
+              </div></div>
+          }
+
           <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
         </div>
 

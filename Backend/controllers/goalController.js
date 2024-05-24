@@ -15,7 +15,7 @@ const getTodayGoals = async ({ userId, caretakerId }) => {
                 { dayFrequency: 'Daily' },
                 { dayFrequency: 'Today' },
                 { dayFrequency: dayOfWeek }
-            ]
+            ],
         });
 
         return { todaysGoals, error: null };
@@ -41,7 +41,6 @@ export const createGoal = async (req, res) => {
         if (!user) {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
-
         const goal = new GOAL({ ...req.body, createdBy: role, createdById: userId });
         const savedGoal = await goal.save();
         if (!savedGoal) {
@@ -171,6 +170,7 @@ export const updateGoal = async (req, res) => {
     }
 };
 
+// need work
 export const deleteGoal = async (req, res) => {
     try {
         const { role, userId } = req;
@@ -220,8 +220,7 @@ export const deleteGoal = async (req, res) => {
     }
 };
 
-
-
+// did not check
 export const deleteAllGoal = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -309,6 +308,8 @@ export const deleteAllGoal = async (req, res) => {
         return res.status(500).json({ status: "error", message: error.message });
     }
 }
+
+// working ok
 export const getMonthlyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -426,6 +427,55 @@ export const getMonthlyGoalProgress = async (req, res) => {
 };
 
 
+// need to work
+const updateGoalStatus = async ({ userId, caretakerId }) => {
+    try {
+        const totalGoals = await GOAL.find({
+            createdById: { $in: [userId, caretakerId] },
+        });
+
+        if (!totalGoals) {
+            return { error: "Error while fetching goals", status: "failed" }
+        }
+
+        for (let i = 0; i < totalGoals.length; i++) {
+            if (totalGoals[i].lastUpdated < new Date()) {
+                const updatedSkippedDays = totalGoals[i].skippedDays.map((day) => {
+                    return day.toISOString().split('T')[0]
+                })
+
+                const updatedCompletedDays = totalGoals[i].completedDays.map((day) => {
+                    return day.toISOString().split('T')[0]
+                })
+                const dateStr = new Date().toISOString().split('T')[0]
+                let completedTodayStatus
+                if (updatedSkippedDays.length === 0) {
+                    if (updatedCompletedDays.length === 0) {
+                        completedTodayStatus = false
+                    } else {
+                        completedTodayStatus = updatedCompletedDays.includes(dateStr) ? true : false
+                    }
+                } else {
+                    completedTodayStatus = false
+                }
+                console.log("copletd status", updatedCompletedDays, updatedCompletedDays.includes(dateStr), completedTodayStatus)
+                const body = {
+                    completedToday: completedTodayStatus,
+                    completed: new Date(totalGoals[i]?.endDate) < new Date() ? true : false
+                }
+
+                const updatedGoal = await GOAL.findOneAndUpdate({ uuid: totalGoals[i].uuid }, body, { new: true })
+                if (!updatedGoal) {
+                    return { error: "Error while updating the status of goal" + totalGoals[i].uuid, status: "failed" }
+                }
+            }
+        }
+        return { error: null, status: "success" }
+    } catch (err) {
+        return { error: err, status: "failed" }
+    }
+}
+
 export const getDailyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -452,8 +502,11 @@ export const getDailyGoalProgress = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
+        const resultUpdatingDailyGoalStatus = await updateGoalStatus({ userId: seniorId, caretakerId })
         const { todaysGoals, error } = await getTodayGoals({ userId: seniorId, caretakerId });
-
+        if (resultUpdatingDailyGoalStatus.error) {
+            return res.status(400).json({ status: "error", message: resultUpdatingDailyGoalStatus.error + "omg error" })
+        }
         if (error) {
             return res.status(500).json({ status: "error", message: "Failed to get today's goals" });
         }
@@ -470,6 +523,50 @@ export const getDailyGoalProgress = async (req, res) => {
             completePercent: completePercent.toFixed(2),
             toStartPercent: 100 - completePercent.toFixed(2)
         });
+    } catch (error) {
+        console.error('Error fetching daily goal progress:', error);
+        res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
+    }
+};
+
+
+export const getUsersProgressToday = async (req, res) => {
+    try {
+        const { userId, role } = req;
+
+        if (role === 'user') {
+            return res.status(401).json({ status: "failed", message: `Only caretakers are authorized to access this API` });
+        } else {
+            const caretaker = await Caretaker.findOne({ uuid: userId });
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+
+            const usersList = caretaker.assignedSeniors;
+            let countStartedUsers = 0;
+
+            for (let i = 0; i < usersList.length; i++) {
+                const user = await User.findOne({ uuid: usersList[i] });
+                if (!user) {
+                    return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${usersList[i]}` });
+                }
+
+                const goalsList = user.goals;
+                for (let j = 0; j < goalsList.length; j++) {
+                    const goal = await GOAL.findOne({ uuid: goalsList[j] });
+                    if (!goal) {
+                        return res.status(404).json({ status: "failed", message: `Goal not found for ID: ${goalsList[j]}` });
+                    }
+
+                    if (goal.completedToday === true) {
+                        countStartedUsers++;
+                        break; // Break the inner loop to avoid counting the same user multiple times
+                    }
+                }
+            }
+
+            return res.status(200).json({ status: "success", count: countStartedUsers });
+        }
     } catch (error) {
         console.error('Error fetching daily goal progress:', error);
         res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
