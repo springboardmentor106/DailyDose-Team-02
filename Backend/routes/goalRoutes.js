@@ -15,11 +15,11 @@ import checkUserAuth from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 router.post('/', validation(createGoalSchema), checkUserAuth, createGoal);
-router.get('/', checkUserAuth, getUserGoals);
+router.post('/getTodayGoals', checkUserAuth, getUserGoals);
 router.patch('/update', validation(updateGoalSchema), checkUserAuth, updateGoal);
 router.delete('/delete', checkUserAuth, deleteGoal);
-router.get('/monthly-stats', checkUserAuth, getMonthlyGoalProgress)
-router.get('/daily-stats', checkUserAuth, getDailyGoalProgress)
+router.post('/monthly-stats', checkUserAuth, getMonthlyGoalProgress)
+router.post('/daily-stats', checkUserAuth, getDailyGoalProgress)
 router.delete('/delete-all', checkUserAuth, deleteAllGoal)
 
 

@@ -46,6 +46,11 @@ const Login = () => {
   };
   // reset the state values when the component is unmounted
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      const role = localStorage.getItem("role")
+      role === "user" ? navigate("/dashboard") : navigate("/care-dashboard")
+    }
     return () => {
       setEmail("");
       setPassword("");

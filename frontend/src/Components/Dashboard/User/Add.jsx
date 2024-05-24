@@ -167,7 +167,7 @@ const Add = () => {
               <div className='two-input-container'>
                 <div className='input-container'>
                   <div className='input-label'>Start Date</div>
-                  <input type="date" className='add-input' value={details.goalStartDate || ""} min={minDate} onChange={(e) => onAddDetail("goalStartDate", e.target.value)} />
+                  <input type="date" className='add-input' value={details.goalStartDate || ""} onChange={(e) => onAddDetail("goalStartDate", e.target.value)} />
                 </div>
                 <div className='input-container'>
                   <div className='input-label'>End Date</div>

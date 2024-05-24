@@ -3,6 +3,26 @@ import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
 
 // All routes - validate uuid from jwt token and match with uuid to create goal
+const getTodayGoals = async ({ userId, caretakerId }) => {
+    try {
+        const today = new Date();
+        const dayOfWeek = today.toLocaleString('en-us', { weekday: 'long' }); // e.g., 'Monday'
+
+        const todaysGoals = await GOAL.find({
+            createdById: { $in: [userId, caretakerId] },
+            completed: false,
+            $or: [
+                { dayFrequency: 'Daily' },
+                { dayFrequency: 'Today' },
+                { dayFrequency: dayOfWeek }
+            ]
+        });
+
+        return { todaysGoals, error: null };
+    } catch (error) {
+        return { error: error, todaysGoals: null }
+    }
+};
 
 export const createGoal = async (req, res) => {
     try {
@@ -22,7 +42,7 @@ export const createGoal = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
 
-        const goal = new GOAL({ ...req.body, createdBy: role });
+        const goal = new GOAL({ ...req.body, createdBy: role, createdById: userId });
         const savedGoal = await goal.save();
         if (!savedGoal) {
             return res.status(400).json({ status: "failed", message: 'Error while saving the new goal. try again!' });
@@ -43,35 +63,42 @@ export const getUserGoals = async (req, res) => {
     try {
         const userId = req.userId; // userId is actually uuid, so dont findById
         const role = req.role;
+        let { seniorCitizenId, caretakerId } = req.body
+        role === "user" ? seniorCitizenId = userId : caretakerId = userId
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
 
-        let goals;
-        if (role === 'user') {
-            const user = await User.findOne({ uuid: userId })
-            if (!user) {
-                return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
-            }
-            const goalIds = user.goals;
-            goals = await GOAL.find({ uuid: { $in: goalIds } });
-        } else if (role === 'caretaker') {
-            const caretaker = await Caretaker.findOne({ uuid: userId })
-            if (!caretaker) {
-                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
-            }
+        // let goals;
+        // if (role === 'user') {
+        //     const user = await User.findOne({ uuid: userId })
+        //     if (!user) {
+        //         return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
+        //     }
+        //     const goalIds = user.goals;
+        //     goals = await GOAL.find({ uuid: { $in: goalIds } });
+        // } else if (role === 'caretaker') {
+        //     // if caretaker send senior id in body
+        //     const caretaker = await Caretaker.findOne({ uuid: userId })
+        //     if (!caretaker) {
+        //         return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+        //     }
 
-            const seniorId = req.body.seniorId;
+        //     const seniorId = req.body.seniorId;
 
-            const senior = await User.find(seniorId);
-            if (!senior) {
-                return res.status(404).json({ status: "failed", message: `Senior not found for ID: ${seniorId}` });
-            }
-            const goalIds = senior.goals;
-            goals = await GOAL.find({ _id: { $in: goalIds } });
+        //     const senior = await User.find(seniorId);
+        //     if (!senior) {
+        //         return res.status(404).json({ status: "failed", message: `Senior not found for ID: ${seniorId}` });
+        //     }
+        //     const goalIds = senior.goals;
+        //     goals = await GOAL.find({ uuid: { $in: goalIds } });
+        // }
+
+        const { error, todaysGoals } = await getTodayGoals({ userId: seniorCitizenId, caretakerId: caretakerId })
+        if (error) {
+            return res.status(200).json({ status: "failed", message: error });
         }
-
-        return res.status(200).json({ status: "success", goals });
+        return res.status(200).json({ status: "success", goals: todaysGoals });
 
     } catch (error) {
         console.error('Error fetching user goals:', error);
@@ -83,7 +110,7 @@ export const getUserGoals = async (req, res) => {
 export const updateGoal = async (req, res) => {
     try {
         const { role, userId } = req;
-        const { goalId, ...body } = req.body;
+        const { goalId, completedToday, ...body } = req.body;
 
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
@@ -95,7 +122,7 @@ export const updateGoal = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-            const verifyGoal = user.goals.map(goal => String(goal) === goalId);
+            const verifyGoal = user.goals.includes(goalId);
             if (!verifyGoal) {
                 return res.status(404).json({ status: "failed", message: "Goal not found" });
             }
@@ -108,21 +135,41 @@ export const updateGoal = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        const updatedGoalData = await GOAL.findOneAndUpdate({ uuid: goalId }, body, { new: true });
-        if (!updatedGoalData) {
-            return res.status(404).json({ status: "failed", message: `Error in updating goal for ID: ${goalId}` });
-        }
-        if (!updatedGoalData && role === 'caretaker') {
-            return res.status(404).json({ status: "failed", message: `Error in updating goal or goal not found` });
+        const goal = await GOAL.findOne({ uuid: goalId });
+
+        if (!goal) {
+            return res.status(404).json({ status: "failed", message: `Goal not found for ID: ${goalId}` });
         }
 
-        return res.status(200).json({ status: "success", message: 'Goal Updated Successfully' });
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (completedToday) {
+            // Mark today's goal as completed
+            if (!goal.completedDays.some(date => date.getTime() === today.getTime())) {
+                goal.completedDays.push(today);
+                goal.skippedDays.remove(today);
+            }
+            goal.completedToday = true;
+        } else {
+            // Mark today's goal as skipped if it's not completed
+            if (!goal.completedDays.some(date => date.getTime() === today.getTime()) &&
+                !goal.skippedDays.some(date => date.getTime() === today.getTime())) {
+                goal.skippedDays.push(today);
+            }
+            goal.completedToday = false;
+        }
+
+        Object.assign(goal, body);
+
+        const updatedGoal = await goal.save();
+
+        return res.status(200).json({ status: "success", message: 'Goal Updated Successfully', goal: updatedGoal });
     } catch (error) {
         console.error('Error updating goal:', error);
         res.status(500).json({ status: "error", message: "Failed to update goal" });
     }
 };
-
 
 export const deleteGoal = async (req, res) => {
     try {
@@ -130,22 +177,22 @@ export const deleteGoal = async (req, res) => {
         const { goalId } = req.body;
 
         if (!userId) {
-            return res.status(404).json({ status: "failed", message: "uuid not captured" });
+            return res.status(404).json({ status: "failed", message: "UUID not captured" });
         }
 
-        let user
+        let user;
         if (role === 'user') {
-            user = await User.findOne({ uuid: userId })
+            user = await User.findOne({ uuid: userId });
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
 
-            const verifyGoal = user.goals.find(goal => String(goal) === goalId);
+            const verifyGoal = user.goals.find(goal => String(goal.uuid) === goalId);
             if (!verifyGoal) {
                 return res.status(404).json({ status: "failed", message: "Goal not found" });
             }
         } else if (role === 'caretaker') {
-            user = await Caretaker.findOne({ uuid: userId })
+            user = await Caretaker.findOne({ uuid: userId });
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
@@ -153,21 +200,26 @@ export const deleteGoal = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        // const verifyGoal = user.goals.includes(goalId);
-        // if (!verifyGoal) {
-        //     return res.status(403).json({ status: "failed", message: "Unauthorized to delete goal" });
-        // }
-
-        const goal = await GOAL.findByIdAndDelete(goalId);
+        const goal = await GOAL.findOneAndDelete({ uuid: goalId });
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
         }
 
-        res.json({ status: "success", message: 'Goal deleted successfully' });
+        const updatedGoals = user.goals.filter(goalItem => String(goalItem.uuid) !== goalId);
+        console.log("udpated goals", updatedGoals)
+        user.goals = updatedGoals; // Update user's goals list
+
+        const savedUser = await user.save(); // Save the updated user document
+        if (!savedUser) {
+            return res.status(400).json({ status: "failed", message: 'Error while updating user details' });
+        }
+
+        return res.json({ status: "success", message: 'Goal deleted successfully' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
+
 
 
 export const deleteAllGoal = async (req, res) => {
@@ -199,13 +251,16 @@ export const deleteAllGoal = async (req, res) => {
 
             for (let i = 0; i < goalsLength; i++) {
                 try {
-                    const deleteGoal = await GOAL.findByIdAndDelete(user.goals[i]);
+                    const deleteGoal = await GOAL.findOneAndDelete({ uuid: user.goals[i] });
+                    if (!deleteGoal) {
+                        return res.json({ status: "failed", message: 'Error while deleting goal please try again' });
+                    }
                 } catch (error) {
-                    console.log({ goalId: user.goals[i], error: error });
+                    return res.json({ status: "failed", message: 'Error while deleting goal please try again' + error });
                 }
             }
 
-            res.json({ status: "success", message: 'All Goal deleted successfully' });
+            return res.json({ status: "success", message: 'All Goal deleted successfully' });
 
         } else if (role === 'caretaker') {
             const caretaker = await Caretaker.findOne({ uuid: userId })
@@ -237,13 +292,13 @@ export const deleteAllGoal = async (req, res) => {
             }
 
             for (let i = 0; i < goalsLength; i++) {
-                const deleteGoal = await GOAL.findByIdAndDelete(user.goals[i]);
+                const deleteGoal = await GOAL.findOneAndDelete({ uuid: user.goals[i] });
                 if (!deleteGoal) {
-                    console.log(`error in deleting goal with _id: "${user.goals[i]}"`);
+                    return res.json({ status: "failed", message: 'Error while deleting goal please try again' });
                 }
             }
 
-            res.json({ status: "success", message: 'All Goal deleted successfully' });
+            return res.json({ status: "success", message: 'All Goal deleted successfully' });
 
         } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
@@ -251,29 +306,28 @@ export const deleteAllGoal = async (req, res) => {
 
     } catch (error) {
         console.error('Error deleting all goals:', error);
-        res.status(500).json({ status: "error", message: error.message });
-
+        return res.status(500).json({ status: "error", message: error.message });
     }
 }
-
 export const getMonthlyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
-
+        let { seniorCitizenId, caretakerId } = req.body;
+        role === "user" ? seniorCitizenId = userId : caretakerId = userId;
         let seniorId, senior;
 
         if (role === 'user') {
-            senior = await User.findOne({ uuid: userId })
+            senior = await User.findOne({ uuid: userId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
             seniorId = userId;
         } else if (role === 'caretaker') {
-            const caretaker = await Caretaker.findOne({ uuid: userId })
+            const caretaker = await Caretaker.findOne({ uuid: userId });
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            seniorId = req.body.seniorId;
+            seniorId = seniorCitizenId;
 
             senior = await User.findById(seniorId);
             if (!senior) {
@@ -283,9 +337,8 @@ export const getMonthlyGoalProgress = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        const totalYearlyGoals = senior.goals.length;
-
         const currentYear = new Date().getFullYear();
+        const currentDate = new Date();
         const monthsData = [];
 
         for (let month = 0; month < 12; month++) {
@@ -294,29 +347,76 @@ export const getMonthlyGoalProgress = async (req, res) => {
 
             const monthName = firstDayOfMonth.toLocaleString('default', { month: 'long' });
 
-            const monthlyGoals = await GOAL.countDocuments({
-                senior: seniorId,
-                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
+            const monthlyGoals = await GOAL.find({
+                createdById: seniorId,
+                startDate: { $lte: lastDayOfMonth },
+                $or: [
+                    { endDate: { $exists: false } },
+                    { endDate: { $gte: firstDayOfMonth } }
+                ]
             });
 
-            const completedGoals = await GOAL.countDocuments({
-                senior: seniorId,
-                completed: true,
-                targetDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
-            });
+            let totalGoals = 0;
+            let totalCompletedDays = 0;
+            let totalSkippedDays = 0;
 
-            const completePercentage = monthlyGoals > 0 ? (completedGoals / monthlyGoals) * 100 : 0;
+            for (const goal of monthlyGoals) {
+                const startDate = new Date(goal.startDate);
+                const endDate = goal.endDate ? new Date(goal.endDate) : lastDayOfMonth;
+
+                const start = startDate < firstDayOfMonth ? firstDayOfMonth : startDate;
+                const end = endDate > lastDayOfMonth ? lastDayOfMonth : endDate;
+
+                const daysInMonth = (end - start) / (1000 * 60 * 60 * 24) + 1;
+
+                const completedDaysInMonth = goal.completedDays.filter(date => {
+                    const dateObj = new Date(date);
+                    return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
+                }).length;
+
+                let skippedDaysInMonth = goal.skippedDays.filter(date => {
+                    const dateObj = new Date(date);
+                    return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
+                }).length;
+
+                for (let d = new Date(start); d <= currentDate && d <= end; d.setDate(d.getDate() + 1)) {
+                    const dateStr = d.toISOString().split('T')[0];
+
+                    // Check if the date is within the goal period and if it's not already marked as completed or skipped
+                    if (!goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === dateStr) &&
+                        (!goal.skippedDays.some(date => new Date(date).toISOString().split('T')[0] === dateStr) ||
+                            !goal.skippedDays.map(date => date.toISOString().split('T')[0]).includes(dateStr)) &&
+                        d < currentDate) {
+
+                        // Push the skipped day to the skippedDays list
+                        goal.skippedDays.push(new Date(dateStr));
+                        skippedDaysInMonth++;
+                    }
+                }
+
+
+                await goal.save();
+
+                totalGoals += daysInMonth;
+                totalCompletedDays += completedDaysInMonth;
+                totalSkippedDays += skippedDaysInMonth;
+            }
+
+            const completePercentage = totalGoals > 0 ? ((totalCompletedDays) / (totalCompletedDays + totalSkippedDays)) * 100 : 0;
 
             monthsData.push({
                 month: monthName,
-                monthlyGoals,
-                completedGoals,
-                completePercentage: completePercentage.toFixed(2)
+                totalGoals,
+                completedDays: totalCompletedDays,
+                skippedDays: totalSkippedDays,
+                completePercentage: parseFloat(completePercentage.toFixed(2))
             });
         }
 
-        res.json({
-            totalYearlyGoals,
+        return res.status(200).json({
+            status: "success",
+            userId: seniorId,
+            role,
             monthsData
         });
     } catch (error) {
@@ -329,22 +429,22 @@ export const getMonthlyGoalProgress = async (req, res) => {
 export const getDailyGoalProgress = async (req, res) => {
     try {
         const { userId, role } = req;
-
         let seniorId, senior;
+        const { seniorCitizenId, caretakerId } = req.body;
 
         if (role === 'user') {
-            senior = await User.findOne({ uuid: userId })
+            senior = await User.findOne({ uuid: userId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
             seniorId = userId;
         } else if (role === 'caretaker') {
-            const caretaker = await Caretaker.findOne({ uuid: userId })
+            const caretaker = await Caretaker.findOne({ uuid: userId });
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            seniorId = req.body.seniorId;
-            senior = await User.findById(seniorId);
+            seniorId = seniorCitizenId;
+            senior = await User.findOne({ uuid: seniorId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
             }
@@ -352,29 +452,25 @@ export const getDailyGoalProgress = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        const { todaysGoals, error } = await getTodayGoals({ userId: seniorId, caretakerId });
 
-        const totalTodayGoals = await GOAL.countDocuments({
-            senior: seniorId,
-            targetDate: today
-        });
+        if (error) {
+            return res.status(500).json({ status: "error", message: "Failed to get today's goals" });
+        }
 
-        const completedGoals = await GOAL.countDocuments({
-            senior: seniorId,
-            targetDate: today,
-            completed: true
-        });
+        const totalTodayGoals = todaysGoals.length;
+        const completedGoals = todaysGoals.filter(goal => goal.completedToday);
+        const completedGoalsLength = completedGoals.length;
+        const completePercent = totalTodayGoals > 0 ? (completedGoalsLength / totalTodayGoals) * 100 : 0;
 
-        const completePercent = totalTodayGoals > 0 ? (completedGoals / totalTodayGoals) * 100 : 0;
-
-        res.json({
+        return res.status(200).json({
+            status: "success",
             totalTodayGoals,
-            completedGoals,
-            completePercent: completePercent.toFixed(2)
+            completedGoalsLength,
+            completePercent: completePercent.toFixed(2),
+            toStartPercent: 100 - completePercent.toFixed(2)
         });
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Error fetching daily goal progress:', error);
         res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
     }

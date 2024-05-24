@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
+
 const goalSchema = new mongoose.Schema({
     uuid: {
         type: String,
@@ -16,8 +17,8 @@ const goalSchema = new mongoose.Schema({
     },
     dayFrequency: {
         type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today'],
-        default: []
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily',  'Today'],
+        default: ['Daily']
     },
     endDate: {
         type: Date
@@ -36,6 +37,21 @@ const goalSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
+    },
+    createdById: {
+        type: String,
+    },
+    completedDays: {
+        type: [Date],
+        default: []
+    },
+    skippedDays: {
+        type: [Date],
+        default: []
+    },
+    lastUpdated: {
+        type: Date,
+        default: new Date()
     }
 }, { timestamps: true });
 
