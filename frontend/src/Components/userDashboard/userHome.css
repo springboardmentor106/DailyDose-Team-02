@@ -25,16 +25,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  /* font-size: 2rem;
   color: #7192d4;
-  font-weight: 600;
+  font-weight: 600; */
   transition: 0.5s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .main__content .boxes:hover {
-  background-color: #7192d4;
-  color: #fff;
+  /* background-color: #7192d4;
+  color: #fff; */
 }
 
 #user__welcome {
@@ -74,7 +75,7 @@
   opacity: 0.75;
 }
 .welcome__img__container {
-  width: 45%;
+  width: 55%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -84,7 +85,7 @@
   padding-bottom: 0;
   /* margin-bottom: -5%; */
   position: absolute;
-  bottom: -15px;
+  bottom: 0px;
   right: 0px;
 }
 .welcome__img__container img {
@@ -211,8 +212,8 @@
   margin-left: 0;
 }
 #chart .year-container button {
-  width: 100px;
-  height: 35px;
+  width: 6vw;
+  height: 4vh;
   border: none;
   background-color: #7192d4;
   color: #fff;
@@ -282,6 +283,7 @@
   flex-direction: column;
   justify-content: start;
   gap: 1vh;
+  border-radius: 0;
 }
 
 #progress #CircularProgressBar {
@@ -304,10 +306,8 @@
 
 #progress .box-left-top {
   margin-top: 0px;
-  height: 100px;
+  height: auto;
 }
-
-
 
 #about__user {
   width: 50%;
@@ -366,6 +366,37 @@
 
 #profile {
   grid-row: span 2 / auto;
+}
+
+#user-mini-nav{
+  width: 100%;
+  /* height: 5vh; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1vw;
+  background-color: #7192d4;
+  border-radius: 1rem;
+}
+
+#tasks .right-card-two {
+  padding: 2vw;
+  width: 100%;
+  background-color: white;
+  border-radius: 0;
+  margin-top: 0;
+  box-shadow: initial;
+  margin-left: 0;
+}
+
+#tasks .no-reminders-container {
+  gap: 2vh;
+  font-size: 1vw;
+}
+
+.no-reminders-image {
+  width: 60%;
+  max-height: 60%;
 }
 
 @media (max-width: 425px) {
@@ -498,7 +529,7 @@
     width: 80%;
   }
   .welcome__img__container {
-    bottom: -2vh;
+    /* bottom: -2vh; */
   }
   #chart .year-container button {
     height: 25px;

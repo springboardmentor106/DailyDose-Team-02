@@ -9,14 +9,15 @@
   padding: 1rem 0;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
   height: calc(100vh - 4rem);
-  width: 86px;
+  /* width: 86px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  width: 70px;
-  margin-left: 13px;
+  width: 5.5vw;
+  max-width: 70px;
+  /* margin-left: 13px; */
 }
 .navbar__logo, .user__profile {
   width: 50px;
@@ -282,7 +283,7 @@
 
 
 
-@media screen and (max-width: 441px) and (min-width : 426px) {
+/* @media screen and (max-width: 441px) and (min-width : 426px) {
   .navbar {
     top: 88%;
         bottom: 0;
@@ -397,7 +398,7 @@
     }
   }
   
-}
+} */
 
 /* @media only screen 
 and (min-device-width : 768px) 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Constants from "../../constants";
 import UserNav from "./UserNav";
 import "./userHome.css";
-import welcome from "../../assets/images/User.png";
+import welcome from "../../assets/images/UserCrop.png";
 import profilePic from "../../assets/images/profilepic.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
@@ -17,6 +17,10 @@ import { IoIosArrowDropdown } from "react-icons/io";
 import { user, habitsList } from "../Dashboard/User/StaticDataUser";
 import noProgress from "../../assets/images/noProgress.png";
 import noUserDetails from "../../assets/images/noUserDetails.png";
+import noRemindersImage from "../../assets/images/noReminders.png";
+import ReminderList from "../Dashboard/User/ReminderList";
+import HabitReminderList from "../Dashboard/User/HabitReminderList";
+import GoalReminderList from "../Dashboard/User/GoalReminderList";
 
 const UserHome = () => {
   const [selectedBox, setSelectedBox] = useState(1);
@@ -160,8 +164,99 @@ const UserHome = () => {
                 <ReactCalendar />
               </div>
             </div>
+            <div id="user-mini-nav">
+              <div className="card-center-details-links">
+                <button
+                  onClick={() => handleLinkClick(1)}
+                  className={selectedBox === 1 ? "active" : ""}>
+                  {" "}
+                  Reminder
+                </button>
+                <button
+                  onClick={() => handleLinkClick(2)}
+                  className={selectedBox === 2 ? "active" : ""}>
+                  Goal
+                </button>
+                <button
+                  onClick={() => handleLinkClick(3)}
+                  className={selectedBox === 3 ? "active" : ""}>
+                  Habit
+                </button>
+              </div>
+              <div className="des-option-icon">
+                <IoOptionsOutline />
+              </div>
+            </div>
             <div className="boxes" id="tasks">
-              Tasks
+              {selectedBox === 1 && (
+                <div>
+                  <div className="right-card-two">
+                    {reminders && reminders.length ? (
+                      <ReminderList
+                        remindersList={reminders}
+                        setRefresh={setRefresh}
+                      />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some reminders to stay on top of
+                          your tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {selectedBox === 2 && (
+                <div>
+                  <div className="right-card-two">
+                    {goals && goals.length ? (
+                      <GoalReminderList
+                        goalsList={goals}
+                        setRefresh={setRefresh}
+                      />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some goals to stay on top of your
+                          tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {selectedBox === 3 && (
+                <div>
+                  <div className="right-card-two">
+                    {habits && habits.length ? (
+                      <HabitReminderList habitsList={habits} />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some habits to stay on top of your
+                          tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="boxes" id="chart">
