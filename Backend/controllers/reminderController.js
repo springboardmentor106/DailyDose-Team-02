@@ -46,7 +46,7 @@ export const createReminder = async (req, res) => {
 export const getReminders = async (req, res) => {
     try {
         const { userId, role } = req;
-
+        let { seniorCitizenId } = req.body
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
@@ -59,7 +59,7 @@ export const getReminders = async (req, res) => {
         //     return res.status(403).json({ status: "failed", message: "Only users have access" });
         // }
 
-        const user = await User.findOne({ uuid: userId });
+        const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId });
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
         }
@@ -67,7 +67,7 @@ export const getReminders = async (req, res) => {
         let reminders = []
         let reminderLength = user.reminders.length
         for (let i = 0; i < reminderLength; i++) {
-            const reminder = await REMINDER.findOne({uuid: user.reminders[i]})
+            const reminder = await REMINDER.findOne({ uuid: user.reminders[i] })
             reminder ? reminders.push(reminder) : null
         }
         res.json({ status: "success", reminders });
@@ -104,7 +104,7 @@ export const updateReminder = async (req, res) => {
             return res.json({ message: "Unauthorized to update this reminder" });
         }
 
-        const updateReminder = await REMINDER.findOneAndUpdate({uuid: reminderId}, body, { new: true });
+        const updateReminder = await REMINDER.findOneAndUpdate({ uuid: reminderId }, body, { new: true });
         if (!updateReminder) {
             return res.status(404).json({ status: "failed", message: "Reminder not found" });
         }

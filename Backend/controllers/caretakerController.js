@@ -103,13 +103,13 @@ export const assignUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ status: "failed", message: `User not found` });
         }
-        if(caretaker.assignedSeniors.includes(userId)){
+        if (caretaker.assignedSeniors.includes(userId)) {
             return res.status(400).json({ status: "failed", message: `User is already assigned to caretaker` });
         }
         caretaker.assignedSeniors.push(userId)
         const savedCaretaker = await caretaker.save()
         const savedUser = await User.findOneAndUpdate({ uuid: userId }, { caretaker: caretakerId, caretaketAssigned: true }, { new: true })
-        
+
         if (!savedCaretaker || !savedUser) {
             return res.status(404).json({ status: "failed", message: `Error while adding user to caretaker` });
         }
@@ -198,9 +198,8 @@ export const getAssignedUserDetail = async (req, res) => {
 
         let seniorArr = []
         for (let i = 0; i < assignedSeniorsArrLen; i++) {
-            const senior = await User.findById(_id)
-
-            seniorArr.push(senior)
+            const senior = await User.findOne({ uuid: assignedSeniorsArr[i] })
+            senior ? seniorArr.push(senior) : null
         }
 
         return res.status(200).json({ status: "success", seniorArr });

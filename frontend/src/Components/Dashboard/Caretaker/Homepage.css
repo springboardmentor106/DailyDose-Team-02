@@ -235,7 +235,8 @@
 .home-row-one .card .card-body {
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
+  flex-grow: 1;
+  flex-direction: column;
   width: 100%;
   padding: 10px 20px 0px 20px;
 }

@@ -35,12 +35,12 @@ const Dashboard = () => {
   const getUserReminders = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(Constants.BASE_URL + '/api/reminders', {
-        method: "GET",
+      const response = await fetch(Constants.BASE_URL + '/api/reminders/get-reminders', {
+        method: "POST",
         headers: {
           'Content-Type': "application/json",
           'Authorization': token
-        }
+        },
       })
 
       if (response.status === 401) {
