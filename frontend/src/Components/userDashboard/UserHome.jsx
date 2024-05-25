@@ -164,6 +164,8 @@ const UserHome = () => {
                 <ReactCalendar />
               </div>
             </div>
+            
+            <div className="boxes" id="tasks">
             <div id="user-mini-nav">
               <div className="card-center-details-links">
                 <button
@@ -187,7 +189,6 @@ const UserHome = () => {
                 <IoOptionsOutline />
               </div>
             </div>
-            <div className="boxes" id="tasks">
               {selectedBox === 1 && (
                 <div>
                   <div className="right-card-two">

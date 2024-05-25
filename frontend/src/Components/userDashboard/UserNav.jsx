@@ -116,13 +116,13 @@ const UserNav = () => {
         </svg>
       </div>
 
-      <div className="logout-button" onClick={() => handleLogout()}>
+      {/* <div className="logout-button" onClick={() => handleLogout()}>
         Logout
       </div>
 
       <div className="">
         Notifications
-      </div>
+      </div> */}
     </nav>
   );
 };

@@ -177,6 +177,8 @@
 #tasks {
   width: 100%;
   height: 45%;
+  position: relative;
+  overflow: visible;
 }
 #chart {
   grid-row: span 2 / auto;
@@ -368,7 +370,10 @@
   grid-row: span 2 / auto;
 }
 
-#user-mini-nav{
+#user-mini-nav {
+  position: absolute;
+  top: -3.8vh;
+  left: 0;
   width: 100%;
   /* height: 5vh; */
   display: flex;
@@ -399,6 +404,30 @@
   max-height: 60%;
 }
 
+@media (max-width: 1024px) {
+  .user__body .navbar {
+    /* width: 55px; */
+    margin-left: 0;
+    left: 1vw;
+  }
+  .row-three-card {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #chart .no-bar-graph-data-text {
+    font-size: 1vw;
+  }
+  #about__user #about-img-div {
+    width: 80%;
+  }
+  .welcome__img__container {
+    /* bottom: -2vh; */
+  }
+  #chart .year-container button {
+    height: 25px;
+  }
+}
+
 @media (max-width: 425px) {
   .user__body {
     width: 100vw;
@@ -407,15 +436,17 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    overflow: hidden;
   }
+
   .main__content {
-    width: 90%;
+    width: 95%;
     margin-right: 0;
     margin-top: 1vh;
-    height: 80%;
+    height: 90%;
     border-radius: 1rem;
     display: grid;
-    background-color: #7192d4;
+    /* background-color: #7192d4; */
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(6, 1fr);
     gap: 0.5rem;
@@ -430,7 +461,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
   }
   .welcome__text h3 {
@@ -510,28 +541,95 @@
     width: 45%;
     height: 100%;
   }
-}
-
-@media (max-width: 1024px) {
-  .user__body .navbar {
-    width: 55px;
-    margin-left: 0;
-    left: 1vw;
+  #chart .year-container button {
+    height: 15px;
+    width: 12vw;
+    font-size: 1.5vw;
   }
-  .row-three-card {
-    margin-left: 0px;
-    margin-right: 0px;
+  #chart h5,
+  #progress h5,
+  #about__user h5 {
+    font-size: 3vw;
+    padding-left: 1vw;
+  }
+  #chart .row-one-card-one-dashboard {
+    width: 90%;
   }
   #chart .no-bar-graph-data-text {
-    font-size: 1vw;
+    font-size: 2vw;
   }
-  #about__user #about-img-div {
-    width: 80%;
+  #progress #CircularProgressBar div {
+    width: 16vw !important;
+    height: 16vw !important;
   }
-  .welcome__img__container {
-    /* bottom: -2vh; */
+  .cirlce-pro-one {
+    width: 8px;
+    height: 8px;
+    border-radius: 50px;
+    /* background-color: #fff; */
   }
-  #chart .year-container button {
-    height: 25px;
+  .pro-percetage {
+    font-size: 12px;
+  }
+  #progress .pro-text {
+    font-size: 1.75vw;
+  }
+  .edit-profile-button {
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .no-progress-image {
+    width: 85%;
+    object-fit: cover;
+  }
+
+  #calender {
+    width: 54%;
+  }
+  .css-1rtg91x-MuiDateCalendar-root {
+    width: 185px !important;
+    height: 285px !important;
+  }
+  .css-1aqny2q-MuiPickersCalendarHeader-root {
+    margin-top: 8px !important;
+    margin-bottom: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 0px !important;
+  }
+  .css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    margin: 0 !important;
+
+    font-size: 0.55rem !important;
+    width: 22px !important;
+    height: 30px !important;
+    margin: 0 2px !important;
+  }
+  .css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root {
+    width: 32px !important;
+    height: 32px !important;
+
+    /* margin: 0 2px; */
+  }
+  .css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+    font-size: 13px !important;
+  }
+
+  #tasks .no-reminders-container {
+    font-size: 2vw;
+  }
+  .no-reminders-image {
+    width: 100%;
+  }
+  #user-mini-nav {
+    position: absolute;
+    top: 0;
+  }
+  .card-center-details-links button {
+    font-size: 8px;
+  }
+  .des-option-icon {
+    padding-right: 5px;
   }
 }
