@@ -18,6 +18,7 @@ import noRemindersImage from "../../../assets/images/noReminders.png"
 import noProgress from "../../../assets/images/noProgress.png"
 import noUserDetails from "../../../assets/images/noUserDetails.png"
 import { useNavigate } from 'react-router-dom';
+
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
@@ -182,12 +183,15 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    getUserReminders()
-    getUserGoals()
-    getUserHabits()
-    getUserDetails()
-    getGoalProgress()
-    setRefresh(false)
+    const token = localStorage.getItem("token")
+    if (token) {
+      getUserReminders()
+      getUserGoals()
+      getUserHabits()
+      getUserDetails()
+      getGoalProgress()
+      setRefresh(false)
+    }
   }, [refresh === true])
 
   useEffect(() => {

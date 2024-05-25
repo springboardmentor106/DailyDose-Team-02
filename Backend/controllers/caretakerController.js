@@ -91,54 +91,34 @@ export const assignUser = async (req, res) => {
         }
 
         const caretakerId = req.userId;
-        const { userIds } = req.body;
+        const { userId } = req.body;
 
-        const caretaker = await Caretaker.findById(caretakerId);
+        const caretaker = await Caretaker.findOne({ uuid: caretakerId });
         if (!caretaker) {
             return res.status(404).json({ status: "failed", message: "Caretaker not found." });
         }
 
-        const userNotFound = [];
-        const assignedUsers = [];
-
-        for (const userId of userIds) {
-            const user = await User.findById(userId);
-            if (!user) {
-                userNotFound.push(userId);
-                continue;
-            }
-
-            caretaker.assignedSeniors.push(userId);
-            assignedUsers.push(userId);
+        const user = await User.findOne({ uuid: userId });
+        console.log(user)
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: `User not found` });
+        }
+        if(caretaker.assignedSeniors.includes(userId)){
+            return res.status(400).json({ status: "failed", message: `User is already assigned to caretaker` });
+        }
+        caretaker.assignedSeniors.push(userId)
+        const savedCaretaker = await caretaker.save()
+        const savedUser = await User.findOneAndUpdate({ uuid: userId }, { caretaker: caretakerId, caretaketAssigned: true }, { new: true })
+        
+        if (!savedCaretaker || !savedUser) {
+            return res.status(404).json({ status: "failed", message: `Error while adding user to caretaker` });
         }
 
-        // Updating caretaker and users by transaction
-        const session = await Caretaker.startSession();
-        const transactionOptions = {
-            readConcern: { level: 'majority' },
-            writeConcern: { w: 'majority' },
-            maxTimeMS: 15 * 1000
-        };
-        session.startTransaction(transactionOptions);
-        try {
-            await caretaker.save();
-            await User.updateMany({ _id: { $in: assignedUsers } }, { $set: { caretaker: caretakerId, caretakerAssigned: true } });
-            await session.commitTransaction();
-        } catch (error) {
-            await session.abortTransaction();
-            throw error;
-        } finally {
-            session.endSession();
-        }
-
-        if (userNotFound) {
-            return res.status(200).json({ status: "success", message: `Users assigned successfully, ${assignedUsers}`, warning: `Users not found, ${userNotFound}` });
-        }
-        return res.status(200).json({ status: "success", message: `Users assigned successfully, ${assignedUsers}` });
+        return res.status(200).json({ status: "success", message: `Users assigned successfully` });
 
     } catch (error) {
         console.error("Error assigning users to caretaker:", error);
-        return res.status(500).json({ status: "error", message: "Internal server error." });
+        return res.status(500).json({ status: "error", message: "Internal server error." + error });
     }
 };
 
