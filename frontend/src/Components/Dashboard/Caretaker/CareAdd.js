@@ -6,13 +6,13 @@ import CircularProgressBar from "./CircularProgressbar";
 import profilepic from "../../../assets/images/profilepic.png"
 
 import { UnAssignedUser } from "./StaticDataCare";
-const CareAdd = () => {
+const CareAdd = ({ unAssignedUserDetails }) => {
 
   return (
 
     <div className="content">
       <div class="accordion" id="accordionExample">
-        {UnAssignedUser.map((unassign, index) => (
+        {unAssignedUserDetails && unAssignedUserDetails.length > 0 ? unAssignedUserDetails.map((unassign, index) => (
           <div className="accordion-item" key={index}>
             <h2 className="accordion-header">
               <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -20,10 +20,10 @@ const CareAdd = () => {
                   <img src={profilepic} alt="" />
                 </div>
                 <div className="ass-user-detail">
-                  <div><strong>{unassign.name}</strong></div>
-                  <div><p>{unassign.phno}</p></div>
-                  <div><p>{unassign.disease}</p></div>
-                  <div><p>{unassign.allergy}</p></div>
+                  <div><strong>{unassign.firstname}</strong></div>
+                  <div><p>{unassign.email}</p></div>
+                  <div><p>{unassign.disease || "--"}</p></div>
+                  <div><p>{unassign.allergy || "--"}</p></div>
                 </div>
                 <div><button type="button" className="btn btn-light btn-sm" id="getAssign" style={{ marginLeft: "10px" }}>Get Assigned</button></div> <br />
                 <div><button type="button" className="btn btn-light btn-sm" id="getAssign">Show More</button></div>
@@ -34,44 +34,19 @@ const CareAdd = () => {
                 <div className="home-col-one">
                   <div className="home-row-one">
                     <div className="card"><div className="card-body">
-                      <div><CircularProgressBar value={unassign.walk} /></div>
-                      <div id="dis"><strong>1 hour walk</strong></div>
-                    </div></div>
-                    <div className="card"><div className="card-body">
-                      <div><CircularProgressBar value={unassign.exercise} /></div>
-                      <div id="dis"><strong>1 hour walk</strong></div>
+                      <div id="dis"><strong>Goal progress</strong></div>
+                      <div><CircularProgressBar value={unassign.progress.complete || 0} /></div>
                     </div></div>
                   </div>
-                  <div className="home-row-two">
-                    <div className="card"><div className="card-body">
-                      <div><CircularProgressBar value={unassign.meditation} /></div>
-                      <div id="dis"><strong>1 hour walk</strong></div>
-                    </div></div>
-                    <div className="card"><div className="card-body">
-                      <div><CircularProgressBar value={unassign.sleep} /></div>
-                      <div id="dis"><strong>1 hour walk</strong></div>
-                    </div></div>
-                  </div>
-                </div>
-                <div className="home-col-two">
-                  <div className="card"><div className="card-body">
-                    <div> <strong>Progress </strong></div>
-                    <span>Remainder   {unassign.reminds}</span>
-                    <Progress progress={unassign.reminds} />
-                    <span>goal      {unassign.reminds}</span>
-                    <Progress progress={unassign.goal} />
-                    <span>habits    {unassign.reminds}</span>
-                    <Progress progress={unassign.habit} />
-                  </div></div>
                 </div>
                 <div className="home-col-three">
                   <div className="card"><div className="card-body">
-                    <Table reminders={unassign.reminders} />
+                    <Table reminders={unassign.reminders} type="Reminders" />
                   </div></div>
                 </div>
                 <div className="home-col-four">
                   <div className="card"><div className="card-body">
-                    <Table reminders={unassign.reminders} />
+                    <Table reminders={unassign.goals} type="Goals" />
                   </div></div>
                 </div>
               </div>
@@ -102,7 +77,8 @@ const CareAdd = () => {
             </div>
           </div>
 
-        ))}
+        )) :
+          null}
       </div>
     </div>
 

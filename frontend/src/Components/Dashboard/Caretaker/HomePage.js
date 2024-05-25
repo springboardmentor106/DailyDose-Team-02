@@ -12,6 +12,7 @@ const HomePage = () => {
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState(null)
   const [assignedUserDetails, setAssignedUserDetails] = useState(null)
+  const [unAssignedUserDetails, setUnassignedUserDetails] = useState(null)
   const getUserDetails = async () => {
     try {
       const token = localStorage.getItem("token")
@@ -225,6 +226,60 @@ const HomePage = () => {
     }
   }
 
+  const getUnassignedUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/caretaker/all-unassigned-user', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      if (data.status === "success") {
+        if (data.users) {
+          const assignedUserGoals = await getAssignedUserGoals(data.users)
+          const assignedUserReminders = await getAssignedUserReminders(data.users)
+          const assignedUserProgress = await getAssignedUserProgress(data.users)
+          const finalArray = [];
+
+          data.users.forEach(user => {
+            const userUuid = user.uuid;
+            const { firstname, lastname, age, gender, email } = user
+
+            const userGoals = assignedUserGoals?.map(goal => goal.uuid === userUuid ? goal.goals : null) || {};
+            const userReminders = assignedUserReminders?.map(reminder => reminder.uuid === userUuid ? reminder.reminders : null) || {};
+            const userProgress = assignedUserProgress?.map(progress => progress.uuid === userUuid ? progress.progress : null) || {};
+
+            const userDetails = {
+              firstname, lastname, age, gender, email,
+              uuid: userUuid,
+              goals: userGoals[0] || [],
+              reminders: userReminders[0] || [],
+              progress: userProgress[0] || {}
+            };
+
+            finalArray.push(userDetails);
+          });
+          console.log(finalArray)
+          setUnassignedUserDetails(finalArray)
+        }
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     const role = localStorage.getItem("role")
@@ -232,6 +287,7 @@ const HomePage = () => {
       console.log(token)
       getUserDetails()
       getAssignedUserDetails()
+      getUnassignedUserDetails()
     }
   }, [])
 
@@ -280,7 +336,7 @@ const HomePage = () => {
 
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><Assigned assignedUserDetails={assignedUserDetails} /></div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd /></div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd unAssignedUserDetails={unAssignedUserDetails} /></div>
           </div>
 
         </div>

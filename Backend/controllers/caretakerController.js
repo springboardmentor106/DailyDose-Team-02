@@ -74,7 +74,7 @@ export const getAllUnassignedUser = async (req, res) => {
         }
 
         // Find all user's uuid in the database - which are not assigned
-        const users = await User.find({ caretaketAssigned: false }, ["uuid", "email"]);
+        const users = await User.find({ caretaketAssigned: false });
 
         return res.status(200).json({ status: "success", users });
     } catch (error) {

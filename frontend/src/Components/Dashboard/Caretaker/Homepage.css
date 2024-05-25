@@ -299,18 +299,23 @@
   } */
 .profile-heading {
   display: flex;
+  justify-content: space-evenly;
+  flex:1;
+  width:100%;
   font-size: 15px;
   text-decoration: none;
 }
 
 .profile-heading div {
-  margin-right: 110px;
-  margin-left: 30px;
+  /* margin-right: 110px;
+  margin-left: 30px; */
 }
 
 .ass-user-detail {
   display: flex;
-  justify-content: space-around;
+  flex:1;
+  width:100%;
+  justify-content: space-evenly;
   font-size: 15px;
 }
 
@@ -323,19 +328,6 @@
   margin-bottom: 10px;
   border-radius: 20px;
 }
-
-#ass-name {
-  margin-left: 102px;
-}
-
-#ass-phno {
-  margin-left: 56px;
-}
-
-#ass-disease {
-  margin-left: 37px;
-}
-
 /* -------Responsive ness of Home Page --------*/
 /* @media screen and (max-width:425px) {
   .main1 .pages{
