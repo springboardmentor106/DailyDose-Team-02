@@ -69,32 +69,22 @@ export const getUserGoals = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
 
-        // let goals;
-        // if (role === 'user') {
-        //     const user = await User.findOne({ uuid: userId })
-        //     if (!user) {
-        //         return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
-        //     }
-        //     const goalIds = user.goals;
-        //     goals = await GOAL.find({ uuid: { $in: goalIds } });
-        // } else if (role === 'caretaker') {
-        //     // if caretaker send senior id in body
-        //     const caretaker = await Caretaker.findOne({ uuid: userId })
-        //     if (!caretaker) {
-        //         return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
-        //     }
-
-        //     const seniorId = req.body.seniorId;
-
-        //     const senior = await User.find(seniorId);
-        //     if (!senior) {
-        //         return res.status(404).json({ status: "failed", message: `Senior not found for ID: ${seniorId}` });
-        //     }
-        //     const goalIds = senior.goals;
-        //     goals = await GOAL.find({ uuid: { $in: goalIds } });
-        // }
-
         const { error, todaysGoals } = await getTodayGoals({ userId: seniorCitizenId, caretakerId: caretakerId })
+
+        for (let i = 0; i < todaysGoals.length; i++) {
+            const goal = todaysGoals[i];
+            const today = new Date().toISOString().split('T')[0];
+
+            // Check if today's date is in the completedDays list
+            const isCompletedToday = goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === today);
+
+            // Update the completedToday status
+            goal.completedToday = isCompletedToday;
+
+            // Save the updated goal
+            await goal.save();
+        }
+
         if (error) {
             return res.status(200).json({ status: "failed", message: error });
         }
@@ -105,7 +95,6 @@ export const getUserGoals = async (req, res) => {
         return res.status(500).json({ status: "error", message: "Failed to retrieve user goals" });
     }
 };
-
 
 export const updateGoal = async (req, res) => {
     try {
@@ -141,8 +130,7 @@ export const updateGoal = async (req, res) => {
             return res.status(404).json({ status: "failed", message: `Goal not found for ID: ${goalId}` });
         }
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        const today = new Date().toISOString();
 
         if (completedToday) {
             // Mark today's goal as completed
@@ -220,8 +208,6 @@ export const deleteGoal = async (req, res) => {
     }
 };
 
-
-
 export const deleteAllGoal = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -240,8 +226,6 @@ export const deleteAllGoal = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-
-            // console.log(user);
 
             const goalsLength = user.goals.length
 
@@ -360,6 +344,7 @@ export const getMonthlyGoalProgress = async (req, res) => {
             let totalCompletedDays = 0;
             let totalSkippedDays = 0;
 
+            // updating the goal with completed days and skipped days
             for (const goal of monthlyGoals) {
                 const startDate = new Date(goal.startDate);
                 const endDate = goal.endDate ? new Date(goal.endDate) : lastDayOfMonth;
@@ -379,6 +364,8 @@ export const getMonthlyGoalProgress = async (req, res) => {
                     return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
                 }).length;
 
+
+                // updating the goal as completed
                 for (let d = new Date(start); d <= currentDate && d <= end; d.setDate(d.getDate() + 1)) {
                     const dateStr = d.toISOString().split('T')[0];
 
@@ -392,10 +379,22 @@ export const getMonthlyGoalProgress = async (req, res) => {
                         goal.skippedDays.push(new Date(dateStr));
                         skippedDaysInMonth++;
                     }
+
                 }
 
 
                 await goal.save();
+
+                // Check if endDate < today and endDate is in skippedDays or completedDays
+                const today = new Date();
+                const goalEndDate = new Date(end);
+                if (endDate < today &&
+                    (goal.skippedDays.some(date => new Date(date).toISOString().split('T')[0] === goalEndDate.toISOString().split('T')[0]) ||
+                        goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === goalEndDate.toISOString().split('T')[0]))) {
+                    goal.completed = true
+                }
+
+                await goal.save()
 
                 totalGoals += daysInMonth;
                 totalCompletedDays += completedDaysInMonth;
@@ -424,7 +423,6 @@ export const getMonthlyGoalProgress = async (req, res) => {
         res.status(500).json({ status: "error", message: "Failed to retrieve monthly goal progress" });
     }
 };
-
 
 export const getDailyGoalProgress = async (req, res) => {
     try {
@@ -470,6 +468,7 @@ export const getDailyGoalProgress = async (req, res) => {
             completePercent: completePercent.toFixed(2),
             toStartPercent: 100 - completePercent.toFixed(2)
         });
+
     } catch (error) {
         console.error('Error fetching daily goal progress:', error);
         res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
