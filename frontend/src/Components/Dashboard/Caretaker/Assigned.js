@@ -33,7 +33,7 @@ const Assigned = ({ assignedUserDetails }) => {
                   <div className="home-row-one">
                     <div className="card"><div className="card-body">
                       <div id="dis"><strong>Goal progress</strong></div>
-                      <div><CircularProgressBar value={assignedUser.progress.complete} /></div>
+                      <div><CircularProgressBar value={assignedUser.progress.complete || 0} /></div>
                     </div></div>
                   </div>
                 </div>
