@@ -11,8 +11,10 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState(null)
+  const [refresh, setRefresh] = useState(false)
   const [assignedUserDetails, setAssignedUserDetails] = useState(null)
   const [unAssignedUserDetails, setUnassignedUserDetails] = useState(null)
+  const [updateUserCount, setUpdateUserCount] = useState(null)
   const getUserDetails = async () => {
     try {
       const token = localStorage.getItem("token")
@@ -289,7 +291,20 @@ const HomePage = () => {
       getAssignedUserDetails()
       getUnassignedUserDetails()
     }
-  }, [])
+    setRefresh(false)
+  }, [refresh === true])
+
+
+  const calculateNumberOfUsersStartedGoals = () => {
+    const usersCount = assignedUserDetails && assignedUserDetails.filter((user) => {
+      return user.progress.complete > 0
+    })
+    setUpdateUserCount(usersCount?.length)
+  }
+
+  useEffect(() => {
+    calculateNumberOfUsersStartedGoals()
+  }, [assignedUserDetails])
 
   return (
     <div className="main1">
@@ -315,8 +330,11 @@ const HomePage = () => {
                 <div id="careTaker-Deatils"><p><strong>{userDetails.firstname} {userDetails.lastname}</strong> </p><p>gender: {userDetails.gender}</p><p>Age: {userDetails.age}</p></div>
               </div></div>
           }
+          {updateUserCount &&
+            <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div>
+              No of users started hitting their goals: {updateUserCount} </div>
+          }
 
-          <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
         </div>
 
         <div className="content">
@@ -336,7 +354,7 @@ const HomePage = () => {
 
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><Assigned assignedUserDetails={assignedUserDetails} /></div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd unAssignedUserDetails={unAssignedUserDetails} /></div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd unAssignedUserDetails={unAssignedUserDetails} setRefresh={setRefresh} /></div>
           </div>
 
         </div>
