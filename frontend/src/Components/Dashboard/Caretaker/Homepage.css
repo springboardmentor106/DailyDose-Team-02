@@ -176,6 +176,8 @@
 .accordion-button button:last-child {
   width: 15%;
   /* max-width: 130px; */
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 #getAssign {
   align-content: flex-end;
@@ -379,6 +381,7 @@
 #caretaker-action-btns button{
   width: 50%;
   font-size: 0.75em;
+  font-weight: 600;
 }
 
 /* -------Responsive ness of Home Page --------*/
