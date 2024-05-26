@@ -331,6 +331,7 @@
 .accordion-item {
   margin-bottom: 10px;
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .accordion-button::after {
@@ -368,6 +369,16 @@
 .home-col-one .card-body div:first-child div{
   width:  4vw !important;
     height:  4vw !important;
+}
+
+#caretaker-action-btns{
+  display: flex;
+  gap: 1vw;
+  width: 15%;
+}
+#caretaker-action-btns button{
+  width: 50%;
+  font-size: 0.75em;
 }
 
 /* -------Responsive ness of Home Page --------*/
