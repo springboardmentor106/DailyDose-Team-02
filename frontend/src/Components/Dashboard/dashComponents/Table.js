@@ -2,7 +2,7 @@ import React from 'react';
 
 const Table = ({ reminders }) => {
   const reminderTableStyle = {
-    marginBottom: '10px',
+    // marginBottom: '10px',
   };
 
   const headerStyle = {

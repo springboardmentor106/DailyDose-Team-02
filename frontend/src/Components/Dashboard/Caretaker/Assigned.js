@@ -43,7 +43,7 @@ const Assigned = () => {
           <div className="home-row-one">
             <div className="card"><div className="card-body">
               <div><CircularProgressBar value={assignedUser.meditation}/></div>  
-              <div id="dis"><strong>Meditation</strong></div>  
+              <div id="dis"><strong>Meditate</strong></div>  
             </div></div>
             <div className="card"><div className="card-body">
               <div><CircularProgressBar value={assignedUser.sleep}/></div>  
@@ -67,7 +67,7 @@ const Assigned = () => {
           <Table reminders={assignedUser.reminders}/>    
           </div></div>
         </div>
-        <div className="home-col-four">
+        <div className="home-col-two">
           <div className="card"><div className="card-body">
           <Table reminders={assignedUser.reminders}/>    
           </div></div>

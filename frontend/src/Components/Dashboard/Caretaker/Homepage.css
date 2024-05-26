@@ -19,8 +19,8 @@
 
 .main1 .pages {
   width: 100%;
-    padding: 0.55vw;
-    padding-left: 100px;
+  padding: 0.55vw;
+  padding-left: 100px;
 }
 .header {
   display: flex;
@@ -43,7 +43,7 @@
 #heading div:nth-child(1) {
   width: 60%;
 }
-#heading div:nth-child(1) h3{
+#heading div:nth-child(1) h3 {
   font-size: 1.5rem;
 }
 #card2 {
@@ -55,7 +55,7 @@
   /* margin: 5px; */
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+  overflow: hidden;
 }
 #care-profile div:nth-child(1) {
   width: 4vw;
@@ -71,7 +71,7 @@
   /* margin: 5px; */
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+  overflow: hidden;
 }
 #heading {
   /* display: flex; */
@@ -98,12 +98,12 @@
 }
 #care-profile {
   display: flex;
-    justify-content: center;
-    /* margin-top: -25px; */
-    width: 100%;
-    align-items: center;
-    flex-direction: row;
-    gap: 2vw;
+  justify-content: center;
+  /* margin-top: -25px; */
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+  gap: 2vw;
 }
 #care-profile img {
   width: 100%;
@@ -119,7 +119,6 @@
 }
 
 #careTaker-Deatils {
-  
 }
 .accordion-body {
   display: flex;
@@ -161,12 +160,12 @@
   justify-content: center;
   align-items: center;
   font-size: 0.85rem;
-padding-left: 0;
-padding-right: 0;
-text-align: center;
-position: relative;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  position: relative;
 }
-.acc-img{
+.acc-img {
   width: 15%;
 }
 .acc-img img {
@@ -174,8 +173,9 @@ position: relative;
   height: 40px;
   border-radius: 100%;
 }
-.accordion-button button:last-child{
+.accordion-button button:last-child {
   width: 15%;
+  max-width: 130px;
 }
 #getAssign {
   align-content: flex-end;
@@ -215,6 +215,12 @@ position: relative;
   display: flex;
   justify-content: space-between;
   background-color: #f2f1f9;
+  gap: 1vw;
+  width: 100%;
+  height: 40vh;
+  max-height: 300px;
+  padding: 1vw;
+  align-items: center;
 }
 /* .home-col-one {
   display: grid;
@@ -222,7 +228,7 @@ position: relative;
 .home-col-one {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 30%;
   gap: 8px;
 }
 .home-row-one {
@@ -301,10 +307,10 @@ position: relative;
   text-decoration: none;
   margin-bottom: 2vh;
 }
-.dummy-div{
+.dummy-div {
   width: 15%;
 }
-.main-profile-heading{
+.main-profile-heading {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -318,7 +324,7 @@ position: relative;
   width: 50%;
 }
 
-.ass-user-detail div{
+.ass-user-detail div {
   width: 20%;
 }
 
@@ -341,15 +347,27 @@ position: relative;
   right: 1vw;
 }
 
-.home-col-two{
-  width: 25%;
+.home-col-two {
+  width: 23%;
   max-width: 400px;
 }
-.home-col-two .card{
+.home-col-two .card {
   width: 100%;
 }
-.home-col-two .card-body div:first-child{
+#home-content .home-col-two:nth-child(2) .card-body div:first-child {
   font-size: 1rem;
+  color: rgb(106, 88, 220);
+}
+
+.home-col-two h5 {
+  font-size: 1rem;
+  margin-bottom: 1vh;
+  font-weight: 600;
+}
+
+.home-col-one .card-body div:first-child div{
+  width:  4vw !important;
+    height:  4vw !important;
 }
 
 /* -------Responsive ness of Home Page --------*/
