@@ -10,7 +10,7 @@
 .main__content {
   width: 90%;
   margin-right: 1vw;
-  height: 90%;
+  height: 95%;
   border-radius: 1rem;
   display: grid;
   background-color: #eaeef6;
@@ -25,16 +25,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  /* font-size: 2rem;
   color: #7192d4;
-  font-weight: 600;
+  font-weight: 600; */
   transition: 0.5s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .main__content .boxes:hover {
-  background-color: #7192d4;
-  color: #fff;
+  /* background-color: #7192d4;
+  color: #fff; */
 }
 
 #user__welcome {
@@ -43,98 +44,108 @@
   grid-column: span 4 / auto;
   grid-row: span 2 / auto;
 }
-#welcome{
-    width: 63%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    color: #000;
-    overflow: hidden;
+#welcome {
+  width: 58%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  color: #000;
+  overflow: hidden;
+  position: relative;
 }
-.welcome__text{
-    width: 60%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    align-items: start;
-    padding: 1rem;
+.welcome__text {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
-.welcome__text h3{
-    font-size: 2rem;
-    font-weight: 600; 
+.welcome__text h3 {
+  font-size: 2vw;
+  font-weight: 600;
 }
-.welcome__text p{
-    font-size: 1.3rem;
-    font-weight: 500;
-    opacity: 0.75;
+.welcome__text p {
+  width: 80%;
+  font-size: 1.2vw;
+  font-weight: 500;
+  opacity: 0.75;
 }
-.welcome__img__container{
-    width: 45%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    border-radius: 1rem;
-    overflow: hidden;
-    padding-bottom: 0;
-    margin-bottom: -5%;
+.welcome__img__container {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding-bottom: 0;
+  /* margin-bottom: -5%; */
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
-.welcome__img__container img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem;
+.welcome__img__container img {
+  width: 100%;
+  height: 85%;
+  object-fit: cover;
+  border-radius: 1rem;
 }
-#profile{
-    width: 34%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    color: #000;
+#profile {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: #000;
 }
-.card-user{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    margin-top: 0;
-    justify-content: center;
-    align-items: center;    
-    /* background-color: #fff; */
+.card-user {
+  /* width: 100%;
+  height: 100%; */
+  display: flex;
+  margin-top: 0;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #fff; */
 }
-.card-profile{
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
+.card-profile {
+  max-width: 200px;
+  max-height: 200px;
+  width: 6vw;
+  height: 6vw;
+  min-width: 70px;
+  min-height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
 }
-#profile .card-profile img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+#profile .card-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
-.card-body{
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem;
+.card-body {
+  /* width: 70%;
+  height: 100%; */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
 }
-.card-body h6{
-    font-size: 1.5rem;
-    font-weight: 600;
+.card-body h6 {
+  font-size: 1vw;
+  font-weight: 600;
 }
-.card-body p{
-    font-size: 1rem;
-    font-weight: 500;
-    opacity: 0.75;
+.card-body p {
+  font-size: 0.75vw;
+  font-weight: 500;
+  opacity: 0.75;
 }
 
 #right-pane {
@@ -148,16 +159,80 @@
 
 #calender {
   width: 100%;
-  height: 45%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 1vh;
+  overflow: hidden;
+}
+
+#calender-container {
+}
+
+#calender-container > div {
+  padding-top: 0;
 }
 
 #tasks {
   width: 100%;
   height: 45%;
+  position: relative;
+  overflow: visible;
 }
 #chart {
   grid-row: span 2 / auto;
   grid-column: span 4 / auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* gap: 1vh; */
+}
+#chart .chart-heading {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5vh 1vw;
+}
+#chart h5,
+#progress h5,
+#about__user h5 {
+  font-size: 1.2vw;
+  font-weight: 600;
+  color: #000;
+}
+#chart .year-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+#chart #year-button-container {
+  margin-top: 0;
+  margin-left: 0;
+}
+#chart .year-container button {
+  width: 6vw;
+  height: 4vh;
+  border: none;
+  background-color: #7192d4;
+  color: #fff;
+  font-size: 1vw;
+  font-weight: 600;
+  cursor: pointer;
+}
+#chart .row-one-card-one-dashboard {
+  padding: 0px;
+  flex: 1;
+  width: 50%;
+  height: 90%;
+  border-radius: 0px;
+  margin-left: 0px;
+}
+#chart .no-bar-graph-data-text {
+  font-size: 1vw;
 }
 #reminder {
   grid-row: span 2 / auto;
@@ -188,35 +263,70 @@
   align-items: center;
   padding: 0 1vw;
 }
-.progress-details-container .progress-detail{
+.progress-details-container .progress-detail {
   display: flex;
   align-items: center;
   /* width: 25%; */
   gap: 0.75vw;
 }
 
-.progress-detail-text{
+.progress-detail-text {
   font-size: 0.75rem;
   font-weight: 600;
   color: #000;
   opacity: 0.75;
-  
+}
+
+#progress .row-three-card {
+  width: 100%;
+  height: 100%;
+  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 1vh;
+  border-radius: 0;
+}
+
+#progress #CircularProgressBar {
+  margin-left: 0;
+  margin-top: 0;
+}
+#progress #CircularProgressBar div {
+  width: 5vw !important;
+  height: 5vw !important;
+}
+
+#progress .pro-text {
+  font-size: 0.75vw;
+  color: #000;
+}
+
+#progress .pro-detail {
+  gap: 0.5vw;
+}
+
+#progress .box-left-top {
+  margin-top: 0px;
+  height: auto;
 }
 
 #about__user {
-  width: 45%;
+  width: 50%;
   height: 100%;
   position: relative;
   color: #000;
   flex-direction: column;
-  
+  padding: 1vw;
+  align-items: start;
+  justify-content: start;
 }
-#about__user h3{
+#about__user h3 {
   position: absolute;
   top: 2%;
   font-size: 2rem;
 }
-#about__user .disease__info{
+#about__user .disease__info {
   width: 100%;
   height: auto;
   display: flex;
@@ -227,7 +337,7 @@
   margin-top: 1vw;
   /* border: 1px solid red; */
 }
-#about__user .disease__info .user-disease{
+#about__user .disease__info .user-disease {
   width: 50%;
   height: 100%;
   display: flex;
@@ -236,21 +346,86 @@
   /* gap: 1vw; */
   align-items: center;
 }
-.user-disease:nth-last-child(1){
+.user-disease:nth-last-child(1) {
   border-left: 1px solid gray;
 }
-#about__user .disease__info .user-disease h6{
+#about__user .disease__info .user-disease h6 {
   font-size: 1.1rem;
   font-weight: 600;
 }
-#about__user .disease__info .user-disease p{
+#about__user .disease__info .user-disease p {
   font-size: 0.75rem;
   font-weight: 500;
   opacity: 0.75;
 }
+#about__user .no-progress {
+  width: 100%;
+}
+#about__user #about-img-div {
+  width: 50%;
+  height: auto;
+}
 
 #profile {
   grid-row: span 2 / auto;
+}
+
+#user-mini-nav {
+  position: absolute;
+  top: -3.8vh;
+  left: 0;
+  width: 100%;
+  /* height: 5vh; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1vw;
+  background-color: #7192d4;
+  border-radius: 1rem;
+}
+
+#tasks .right-card-two {
+  padding: 2vw;
+  width: 100%;
+  background-color: white;
+  border-radius: 0;
+  margin-top: 0;
+  box-shadow: initial;
+  margin-left: 0;
+}
+
+#tasks .no-reminders-container {
+  gap: 2vh;
+  font-size: 1vw;
+}
+
+.no-reminders-image {
+  width: 60%;
+  max-height: 60%;
+}
+
+@media (max-width: 1024px) {
+  .user__body .navbar {
+    /* width: 55px; */
+    margin-left: 0;
+    left: 1vw;
+  }
+  .row-three-card {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  #chart .no-bar-graph-data-text {
+    font-size: 1vw;
+  }
+  #about__user #about-img-div {
+    width: 80%;
+  }
+  .welcome__img__container {
+    /* bottom: -2vh; */
+  }
+  #chart .year-container button {
+    height: 25px;
+  }
 }
 
 @media (max-width: 425px) {
@@ -261,15 +436,17 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    overflow: hidden;
   }
+
   .main__content {
-    width: 90%;
+    width: 95%;
     margin-right: 0;
     margin-top: 1vh;
-    height: 80%;
+    height: 90%;
     border-radius: 1rem;
     display: grid;
-    background-color: #7192d4;
+    /* background-color: #7192d4; */
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(6, 1fr);
     gap: 0.5rem;
@@ -280,21 +457,20 @@
     grid-row: span 1 / auto;
   }
 
-    #welcome {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .welcome__text h3{
-        font-size: 1.2rem;
-    }
-    .welcome__text p{
-        font-size: 0.75rem;
-        display: initial;
-
-    }
+  #welcome {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  .welcome__text h3 {
+    font-size: 1.2rem;
+  }
+  .welcome__text p {
+    font-size: 0.75rem;
+    display: initial;
+  }
 
   #profile {
     display: none;
@@ -317,7 +493,7 @@
     justify-content: space-around;
     align-items: center;
   }
-  
+
   .progress-details-container {
     width: 100%;
     height: auto;
@@ -325,12 +501,12 @@
     justify-content: space-between;
     align-items: center;
   }
-  .progress-details-container .progress-detail{
+  .progress-details-container .progress-detail {
     gap: 0.25rem;
   }
-  
-  .progress-detail-text{
-    font-size: 0.35rem;    
+
+  .progress-detail-text {
+    font-size: 0.35rem;
   }
 
   #about__user {
@@ -338,16 +514,14 @@
     height: 100%;
   }
 
-  #about__user .disease__info .user-disease h6{
+  #about__user .disease__info .user-disease h6 {
     font-size: 0.75rem;
-    
   }
-  #about__user .disease__info .user-disease p{
+  #about__user .disease__info .user-disease p {
     font-size: 0.45rem;
-    
   }
 
-  #about__user h3{
+  #about__user h3 {
     position: absolute;
     top: 2%;
     font-size: 1rem;
@@ -366,5 +540,96 @@
   #tasks {
     width: 45%;
     height: 100%;
+  }
+  #chart .year-container button {
+    height: 15px;
+    width: 12vw;
+    font-size: 1.5vw;
+  }
+  #chart h5,
+  #progress h5,
+  #about__user h5 {
+    font-size: 3vw;
+    padding-left: 1vw;
+  }
+  #chart .row-one-card-one-dashboard {
+    width: 90%;
+  }
+  #chart .no-bar-graph-data-text {
+    font-size: 2vw;
+  }
+  #progress #CircularProgressBar div {
+    width: 16vw !important;
+    height: 16vw !important;
+  }
+  .cirlce-pro-one {
+    width: 8px;
+    height: 8px;
+    border-radius: 50px;
+    /* background-color: #fff; */
+  }
+  .pro-percetage {
+    font-size: 12px;
+  }
+  #progress .pro-text {
+    font-size: 1.75vw;
+  }
+  .edit-profile-button {
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .no-progress-image {
+    width: 85%;
+    object-fit: cover;
+  }
+
+  #calender {
+    width: 54%;
+  }
+  .css-1rtg91x-MuiDateCalendar-root {
+    width: 185px !important;
+    height: 285px !important;
+  }
+  .css-1aqny2q-MuiPickersCalendarHeader-root {
+    margin-top: 8px !important;
+    margin-bottom: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 0px !important;
+  }
+  .css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    margin: 0 !important;
+
+    font-size: 0.55rem !important;
+    width: 22px !important;
+    height: 30px !important;
+    margin: 0 2px !important;
+  }
+  .css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root {
+    width: 32px !important;
+    height: 32px !important;
+
+    /* margin: 0 2px; */
+  }
+  .css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+    font-size: 13px !important;
+  }
+
+  #tasks .no-reminders-container {
+    font-size: 2vw;
+  }
+  .no-reminders-image {
+    width: 100%;
+  }
+  #user-mini-nav {
+    position: absolute;
+    top: 0;
+  }
+  .card-center-details-links button {
+    font-size: 8px;
+  }
+  .des-option-icon {
+    padding-right: 5px;
   }
 }

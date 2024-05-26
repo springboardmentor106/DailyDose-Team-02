@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.css"; // Import your CSS file for styling
-import Caretacker from "../../../assets/images/Caretacker.png"
-import profilepic from "../../../assets/images/profilepic.png"
+import Caretacker from "../../../assets/images/Caretacker.png";
+import profilepic from "../../../assets/images/profilepic.png";
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
@@ -309,12 +309,24 @@ const HomePage = () => {
   return (
     <div className="main1">
       <div className="nav-bar">
-        <UserNav />
+        <UserNav/>
       </div>
       <div className="pages">
         <div className="header">
           <div className="card" id="card1">
             <div className="card-body" id="heading">
+              <div>
+                <strong>
+                  <h3> Welcome back...</h3>
+                </strong>
+                <p>
+                  Upgrade your crowd by surrounding yourself with supportive,
+                  and uplifting individuals who encourage positivity.
+                </p>
+              </div>
+              <div className="imgconatiner">
+                <img src={Caretacker} alt="" />
+              </div>
               <div ><strong><h3> Welcome back...</h3></strong>
                 <p>Upgrade your crowd by surrounding yourself with supportive,
                   and uplifting individuals who encourage positivity.</p></div>
