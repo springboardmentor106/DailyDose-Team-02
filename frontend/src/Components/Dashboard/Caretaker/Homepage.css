@@ -175,7 +175,7 @@
 }
 .accordion-button button:last-child {
   width: 15%;
-  max-width: 130px;
+  /* max-width: 130px; */
 }
 #getAssign {
   align-content: flex-end;
