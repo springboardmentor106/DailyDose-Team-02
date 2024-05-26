@@ -116,11 +116,11 @@
   
   .completed {
     background-color: #2CDF8C; /* Green for completed */
-    bottom: 20px;
+    bottom: 32px;
   }
   
   .not-completed {
     background-color: #F6B95E; /* Orange for not completed */
-    bottom: 15px;
+    bottom: 31px;
   }
   
