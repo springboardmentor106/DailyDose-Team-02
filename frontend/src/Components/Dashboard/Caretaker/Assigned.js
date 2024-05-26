@@ -40,7 +40,7 @@ const Assigned = () => {
               <div id="dis"><strong>Exercise</strong></div>
             </div></div>
           </div>
-          <div className="home-row-two">
+          <div className="home-row-one">
             <div className="card"><div className="card-body">
               <div><CircularProgressBar value={assignedUser.meditation}/></div>  
               <div id="dis"><strong>Meditation</strong></div>  
@@ -62,7 +62,7 @@ const Assigned = () => {
             <Progress progress={assignedUser.habit}/>
           </div></div>
         </div>
-        <div className="home-col-three">
+        <div className="home-col-two">
           <div className="card"><div className="card-body">
           <Table reminders={assignedUser.reminders}/>    
           </div></div>
