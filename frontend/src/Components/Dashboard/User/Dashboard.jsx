@@ -18,11 +18,14 @@ import noRemindersImage from "../../../assets/images/noReminders.png"
 import noProgress from "../../../assets/images/noProgress.png"
 import noUserDetails from "../../../assets/images/noUserDetails.png"
 import { useNavigate } from 'react-router-dom';
+
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
   const [goals, setGoals] = useState(null)
   const [habits, setHabits] = useState(null)
+  const [userDetails, setUserDetails] = useState(null)
+  const [goalProgress, setGoalProgress] = useState(null)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
@@ -60,12 +63,14 @@ const Dashboard = () => {
   const getUserGoals = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(Constants.BASE_URL + '/api/goals', {
-        method: "GET",
+      const caretakerId = localStorage.getItem("caretakerId")
+      const response = await fetch(Constants.BASE_URL + '/api/goals/getTodayGoals', {
+        method: "POST",
         headers: {
           'Content-Type': "application/json",
           'Authorization': token
         }
+        , body: JSON.stringify({ caretakerId: caretakerId })
       })
 
       if (response.status === 401) {
@@ -112,15 +117,86 @@ const Dashboard = () => {
     }
   }
 
+  const getGoalProgress = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(Constants.BASE_URL + '/api/goals/daily-stats', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify({ caretakerId: caretakerId })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        const completePercent = parseFloat(data.completePercent);
+        const toStartPercent = parseFloat(data.toStartPercent);
+        setGoalProgress({
+          completed: isNaN(completePercent) ? 0 : completePercent,
+          toStart: isNaN(toStartPercent) ? 0 : toStartPercent
+        });
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+
+
+  const getUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/user/profile', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      if (data.status === "success") {
+        data.user ? setUserDetails(data.user) : setUserDetails(null)
+        localStorage.setItem("caretakerId", data.user.caretaker)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
   useEffect(() => {
-    getUserReminders()
-    getUserGoals()
-    getUserHabits()
-    setRefresh(false)
+    const token = localStorage.getItem("token")
+    if (token) {
+      getUserReminders()
+      getUserGoals()
+      getUserHabits()
+      getUserDetails()
+      getGoalProgress()
+      setRefresh(false)
+    }
   }, [refresh === true])
 
   useEffect(() => {
   }, [reminders, goals])
+
   return (
     <div className="dashboard">
       <UserNav />
@@ -137,18 +213,23 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="row-one-card-two">
-            <div className="circle-das">
-              {user.firstName[0]}
+          {userDetails &&
+            <div className="row-one-card-two">
+              <div className="circle-das">
+                {userDetails.firstname[0]}
+              </div>
+              <div className="details-das">
+
+                <div className="card-user" ><div className="card-body">
+                  <h6><strong>{userDetails.firstname} {userDetails.lastname}</strong></h6>
+                  <p>Age: {userDetails.age}</p>
+                  <p><IoLocationSharp /> {userDetails.location || "--"}</p>
+                </div></div>
+
+              </div>
             </div>
-            <div className="details-das">
-              <div className="card-user" ><div className="card-body">
-                <h6><strong>{user.firstName} {user.lastName}</strong></h6>
-                <p>Age: {user.age}</p>
-                <p><IoLocationSharp /> {user.location || "--"}</p>
-              </div></div>
-            </div>
-          </div>
+          }
+
         </div>
 
         <div className="row-one-chart">
@@ -164,7 +245,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-one-dashboard">
-            <Chart />
+            <Chart setRefresh={setRefresh} />
           </div>
         </div>
 
@@ -173,29 +254,29 @@ const Dashboard = () => {
             <h5 id="progres">
               <strong>Progress</strong>
             </h5>
-            {user.progress ?
+            {goalProgress !== null && goals.length ?
               <div className='row-three-content'>
                 <div className="box-left-top">
                   <div id="CircularProgressBar">
-                    <CircularProgressBar value={user.progress || 0} />{" "}
+                    <CircularProgressBar value={parseFloat(goalProgress.completed) || 0} />{" "}
                   </div>{" "}
                   <br />
                 </div>
+
                 <div className="Progress-details-container">
                   <div className="pro-detail">
                     <div className="cirlce-pro-one completed"></div>
-                    <div className="pro-text"><div className='pro-percentage'>{user.completed}%</div> completed</div>
+                    <div className="pro-text"><div className='pro-percentage'>{goalProgress.completed}%</div> completed</div>
                   </div>
 
                   <div className="pro-detail">
                     <div className="cirlce-pro-one"></div>
-                    <div className="pro-text"><div className='pro-percentage'>{user.toStart}%</div> to start</div>
+                    <div className="pro-text"><div className='pro-percentage'>{goalProgress.toStart}%</div> to start</div>
                   </div>
                 </div>
               </div>
               : <div className='no-progress'>
-                <img src={noProgress} alt="no progress" className='no-progress-image' /> Progress will appear here when you complete the tasks in time</div>}
-
+                <img src={noProgress} alt="no progress" className='no-progress-image' /> Progress will appear here when you complete the goals in time</div>}
           </div>
           < div className="row-three-card">
             <h5 id="about">

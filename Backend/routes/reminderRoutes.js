@@ -7,7 +7,7 @@ import { createReminderSchema, updateReminderSchema } from  '../validations/user
 const router = express.Router();
 
 router.post('/', validation(createReminderSchema), checkUserAuth, createReminder);
-router.get('/', checkUserAuth, getReminders);
+router.post('/get-reminders', checkUserAuth, getReminders);
 router.patch('/update', validation(updateReminderSchema), checkUserAuth, updateReminder);
 router.delete('/delete', checkUserAuth, deleteReminder);
 
