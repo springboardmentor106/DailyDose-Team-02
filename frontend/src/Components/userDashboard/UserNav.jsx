@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./userNav.css";
 import logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-
+import { IoNotifications } from "react-icons/io5";
 const UserNav = () => {
   const role = localStorage.getItem("role")
   const token = localStorage.getItem("token")
   const navigate = useNavigate()
-
   const handleLogout = () => {
     localStorage.clear()
     navigate("/login")
   }
-
+  
+  
   return (
     <nav className="navbar">
       <div className="navbar__logo">
@@ -99,8 +99,8 @@ const UserNav = () => {
           </a>
         </li> */}
       </ul>
-      <div className="user__profile">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <div id="user__profile" >
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -121,16 +121,16 @@ const UserNav = () => {
         
       </div>
       
-        
-
-      <div className="logout-button" onClick={() => handleLogout()}>
+      
+      
+      {/* <div className="logout-button" onClick={() => handleLogout()}>
         Logout
       </div>
 
       <div className="">
-        Notifications
-      </div>
-    </nav>
+      <mdiBell />
+      </div> */}
+      </nav>
   );
 };
 
