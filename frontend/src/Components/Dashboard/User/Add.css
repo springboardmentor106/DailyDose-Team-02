@@ -7,7 +7,7 @@
 
   .main-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100vw;
     /* flex: 1 1; */
@@ -16,11 +16,13 @@
 
 .add-page-container {
   /* margin-left: 125px; */
-  width: 50%;
-  margin-top: 5vh;
+  width: 90%;
+  min-height: 100vh;
+  padding-top: 6vh;
   display: flex;
   flex-direction: column;
   gap: 1vh;
+  padding-right: 2vw;
 }
 
 .add-heading {
