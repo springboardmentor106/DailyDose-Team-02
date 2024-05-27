@@ -34,6 +34,9 @@
 
 .add-content-container {
   padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }
 
 .add-container {
