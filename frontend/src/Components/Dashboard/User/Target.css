@@ -1,93 +1,99 @@
 /* .main-contaoner{
     display: flex;
   } */
-  .main-container-target{
+.main-container-target {
   display: flex;
-  }
-  .header-container{
-      width: 1053px;
-      height: 40px;
-      background-color: white;
-      border-radius: 10px;
-      background-color: #E0DCF8;
-  }
-  .details{
-      width: 1053px;
-      height: 44px;
-      background-color: #E0DCF8;
-      border-radius: 10px;
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-  #chaeck-icon{
-      position: relative;
-      height: 10px;
-      width: 17px;
-      top: 11px;
-      left: 28px;
-  }
-  .header-details-Task{
-      width: 55px;
-      position: relative;
-      left: 107px;
-      top: -8px;
-  }
-  .header-details-EndDate{
-      width: 112px;
-      position: relative;
-      left: 458px;
-      top: -25px;
-  }
-  .header-details-Status{
-      width: 112px;
-      position: relative;
-      left: 735px;
-      top: -51px;
-  }
-  .Progress-bar{
-      position: relative;
-      left: 397px;
-      top: 5px;
-  }
-  .end-date{
-      position: relative;
-      top: -23px;
-      left: -16px;
-  }
-  .dot{
-      position: relative;
-      left: 483px;
-      top: -40px;
-  }
+  justify-content: center;
+  align-items: center;
+}
+.header-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  border-radius: 10px;
+  background-color: #e0dcf8;
+}
+.details {
+  width: 100%;
+  height: 44px;
+  background-color: #e0dcf8;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#chaeck-icon {
+  /* position: relative;
+  height: 10px;
+  width: 17px;
+  top: 11px;
+  left: 28px; */
+}
+.header-details-Task {
+  /* width: 55px;
+  position: relative;
+  left: 107px;
+  top: -8px; */
+}
+.header-details-EndDate {
+  /* width: 112px;
+  position: relative;
+  left: 458px;
+  top: -25px; */
+}
+.header-details-Status {
+  /* width: 112px;
+  position: relative;
+  left: 735px;
+  top: -51px; */
+}
+.Progress-bar {
+  /* position: relative;
+  left: 397px;
+  top: 5px; */
+}
+.end-date {
+  /* position: relative;
+  top: -23px;
+  left: -16px; */
+}
+.dot {
+  /* position: relative;
+  left: 483px;
+  top: -40px; */
+}
 
-  /*  CheckBox.css  */
+/*  CheckBox.css  */
 
-  .checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 28px; 
-  }
-  .checkbox input[type="checkbox"] {
-    margin: 0; 
-    margin-left: -717px;
-    top: -64px;
-    position: relative;
-  }
-  .checkbox label {
-    font-size: 16px;
-    cursor: pointer;
-    margin: 0;
-    position: relative;
-    left: -164px;
-    top: -65px;
-    z-index: 9;
-    margin-bottom: -4px;
-  }
-  .status{
-    position: relative;
-    left: 631px;
-    top: -25px;
-    margin-bottom: -21px;
-  }
+.checkbox {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 28px; */
+}
+.checkbox input[type="checkbox"] {
+  margin: 0;
+  /* margin-left: -717px; */
+  /* top: -64px; */
+  /* position: relative; */
+}
+.checkbox label {
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
+  /* position: relative;
+  left: -164px;
+  top: -65px;
+  z-index: 9;
+  margin-bottom: -4px; */
+}
+.status {
+  /* position: relative;
+  left: 631px;
+  top: -25px;
+  margin-bottom: -21px; */
+}

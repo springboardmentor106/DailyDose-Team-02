@@ -16,8 +16,8 @@
 
 .add-page-container {
   /* margin-left: 125px; */
-  width: 70%;
-  /* margin-top: 36px; */
+  width: 50%;
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   gap: 1vh;
