@@ -12,7 +12,7 @@ import { AiFillSliders } from "react-icons/ai";
 import { profileinfo } from './StaticDataCare'
 import { reminders } from './StaticDataCare'
 import Slider from "react-slick";
-
+import CareProfile from "../dashComponents/CareProfile"
 const Analytics = () => {
   var settings = {
     dots: false,
@@ -26,6 +26,7 @@ const Analytics = () => {
         <div className="nav-bar">
           <UserNav/>
         </div>
+        <CareProfile/>
         <div className="Analytics-pages">
         <div className="ana-left-side">
         
