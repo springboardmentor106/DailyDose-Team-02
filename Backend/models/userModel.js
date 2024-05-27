@@ -46,11 +46,16 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'caretaker'],
       required: true
     },
-    reminders: [String],
-    goals: [String],
+    reminders: {
+      type: [String],
+      default: []
+    },
+    goals: {
+      type: [String],
+      default: []
+    },
     caretaker: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Caretaker',
+      type: String,
       default: null
     },
     caretaketAssigned: {

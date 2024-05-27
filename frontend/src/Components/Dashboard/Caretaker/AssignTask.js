@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import UserNav from '../../userDashboard/UserNav'
 import'./Pages.css'
 import {profileinfo} from './StaticDataCare' 

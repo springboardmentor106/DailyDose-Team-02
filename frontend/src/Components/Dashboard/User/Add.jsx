@@ -15,7 +15,7 @@ const Add = () => {
     setSelectedItem(item === selectedItem ? null : item);
   };
 
-  const categoriesList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'evenWeeks', 'oddWeeks', 'Monthly', 'Today']
+  const categoriesList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Today']
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -116,6 +116,8 @@ const Add = () => {
       } else {
         toast.success(data.message)
         setDetails({})
+        selectedCategoriesList(null)
+        setGoalSelectedCategoriesList(null)
       }
     } catch (err) {
       toast.error("Error:" + err)
@@ -213,7 +215,7 @@ const Add = () => {
               <div className='two-input-container'>
                 <div className='input-container'>
                   <div className='input-label'>Start Date</div>
-                  <input type="date" className='add-input' value={details.reminderStartDate || ""} min={minDate} onChange={(e) => onAddDetail("reminderStartDate", e.target.value)} />
+                  <input type="date" className='add-input' value={details.reminderStartDate || ""} onChange={(e) => onAddDetail("reminderStartDate", e.target.value)} />
                 </div>
                 <div className='input-container'>
                   <div className='input-label'>End Date</div>

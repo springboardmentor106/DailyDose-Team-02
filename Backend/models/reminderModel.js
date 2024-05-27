@@ -6,6 +6,10 @@ const reminderSchema = new mongoose.Schema({
         default: uuidv4,
         unique: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -22,17 +26,13 @@ const reminderSchema = new mongoose.Schema({
     endDate: {
         type: Date
     },
-    startTime:{
+    startTime: {
         type: String
     },
     endTime: {
         type: String
     },
     completed: {
-        type: Boolean,
-        default: false
-    },
-    completedToday: {
         type: Boolean,
         default: false
     },

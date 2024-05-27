@@ -1,12 +1,14 @@
-*{
-    
-    margin: 1px;
-    text-decoration: none;
+* {
+
+  margin: 1px;
+  text-decoration: none;
 }
+
 .nav-bar {
   position: relative;
   z-index: 999;
 }
+
 /* --------------css of Home page------------------- */
 
 .main1 {
@@ -14,14 +16,17 @@
   color: black;
   margin: 2px;
 }
+
 .main1 .pages {
   padding-left: 100px;
   width: 100%;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
 }
+
 #card1 {
   width: 500px;
   height: 200px;
@@ -31,6 +36,7 @@
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
+
 #card2 {
   width: 330px;
   height: 200px;
@@ -40,6 +46,7 @@
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
+
 #card3 {
   width: 330px;
   height: 200px;
@@ -50,19 +57,23 @@
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
+
 #heading {
   display: flex;
   margin-top: 3px;
   color: black;
 }
+
 #heading img {
   height: 201px;
-    width: 247px;
-    
+  width: 247px;
+
 }
+
 #heading p {
   font-size: 15px;
 }
+
 .card-title {
   background-color: #6a58dc;
   font: bolder;
@@ -71,22 +82,29 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
+
 .card-title h6 {
   padding: 2px 1rem;
 }
+
 #care-profile {
   display: flex;
   justify-content: space-around;
   margin-top: -25px;
   width: 100%;
 }
-#care-profile img{
-  width: 100px; height:100px;
-  border-radius: 100%; background-color: whitesmoke;
+
+#care-profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: whitesmoke;
 }
+
 .progressBar-container {
   display: flex;
 }
+
 #care-profile p {
   font-size: 15px;
 }
@@ -95,60 +113,74 @@
   margin-top: -147px;
   margin-left: 146px;
 }
+
 .accordion-body {
   display: flex;
   justify-content: space-around;
   background-color: #f2f1f9;
 }
+
 .row-one-chart {
   display: grid;
 }
+
 .row-one-chart .chart {
   width: 132px;
   height: 62px;
 }
+
 .row-two-chart {
   display: grid;
 }
+
 .row-two-chart .chart {
   width: 132px;
   height: 62px;
 }
+
 .accordion-body .card {
   border-radius: 20px;
 }
+
 .accordion-body .card #circular-chart {
   display: grid;
   justify-content: center;
 }
+
 .imgconatiner {
   width: 566px;
   margin-top: -157px;
   margin-left: 240px;
 }
+
 #care-progress .card-body {
   width: 200px;
 }
+
 .accordion-button {
   display: flex;
   justify-content: space-evenly;
   margin-right: 50px;
   font-size: 15px;
 }
+
 .acc-img img {
   width: 40px;
   height: 40px;
   border-radius: 100%;
 }
+
 #getAssign {
   align-content: flex-end;
 }
+
 #toAssign {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
-  background-color:#f2f1f9;
+  background-color: #f2f1f9;
 }
+
 .sidebar {
   background-color: #6a58dc;
   width: 50px;
@@ -158,117 +190,144 @@
   padding-top: 20px;
   border-radius: 20px;
 }
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-  }
-  .icon {
-    margin-right: 5px;
-    
-  }
-  .line{
-    margin: 20px;
-    
-  }
-  .line h2{
-    font-weight:700 ;
-  }
-  #home-content{
-    display: flex;
-    justify-content: space-between;
-    background-color: #f2f1f9;
-  }
-  .home-col-one{
-    display: grid;
-  }
-  .home-row-one{
-    display: flex; 
-  }
-  .home-row-one .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-one .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%;
-    padding: 10px 20px 0px 20px;
-  }
-  #dis{
-    margin: 10px;
-  }
-  .home-row-two{
-    display: flex;
-  }
-  .home-row-two .card{
-    background-color:#ded1ef; margin-right: 10px;
-  }
-  .home-row-two .card .card-body{
-    display: flex; justify-content: space-around;
-    flex-direction: row; width: 100%; 
-    padding: 10px 20px 0px 20px;;
-  }
-  .home-col-two .card .card-body{
-    width: 250px;
-    padding: 10px; margin-left: 10px; margin-right: 10px;
-  }
-  .home-col-three .card .card-body{
-    width: 220px;
-  }
-  .home-col-four .card .card-body{
-    width: 220px;
-  }
-  .nav{
-    margin-top:15px ;
-    margin-bottom: 15px;
-    background-color: #6a58dc;
-    border-radius: 20px;
-    padding-top: 5px; 
-    justify-content: space-around;
-  }
-  .nav-link strong{
-    color: black;
-    font-size: 20px;
-    
-  }
 
-  /* .nav button{
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.icon {
+  margin-right: 5px;
+
+}
+
+.line {
+  margin: 20px;
+
+}
+
+.line h2 {
+  font-weight: 700;
+}
+
+#home-content {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2f1f9;
+}
+
+.home-col-one {
+  display: grid;
+}
+
+.home-row-one {
+  display: flex;
+}
+
+.home-row-one .card {
+  background-color: #ded1ef;
+  margin-right: 10px;
+}
+
+.home-row-one .card .card-body {
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px 20px 0px 20px;
+}
+
+#dis {
+  margin: 10px;
+}
+
+.home-row-two {
+  display: flex;
+}
+
+.home-row-two .card {
+  background-color: #ded1ef;
+  margin-right: 10px;
+}
+
+.home-row-two .card .card-body {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px 20px 0px 20px;
+  ;
+}
+
+.home-col-two .card .card-body {
+  width: 250px;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.home-col-three .card .card-body {
+  width: 220px;
+}
+
+.home-col-four .card .card-body {
+  width: 220px;
+}
+
+.nav {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #6a58dc;
+  border-radius: 20px;
+  padding-top: 5px;
+  justify-content: space-around;
+}
+
+.nav-link strong {
+  color: black;
+  font-size: 20px;
+
+}
+
+/* .nav button{
     background-color: #6a58dc;
     
   } */
-  .profile-heading{
-    display: flex;
-    font-size: 15px;
-    text-decoration: none;
-  }
-  .profile-heading div{
-    margin-right: 110px;
-    margin-left: 30px;
-  }
-  .ass-user-detail{
-    display: flex;
-    justify-content: space-around;
-    font-size: 15px;
-  }
-  .ass-user-detail div{
-    margin-right: 110px;
-    margin-left: 23px;
-  }
-  .accordion-item{
-    margin-bottom: 10px;
-    border-radius: 20px;
-  }
-  #ass-name{
-    margin-left: 102px;
-  }
-  #ass-phno{
-    margin-left: 56px;
-  }
-  #ass-disease{
-    margin-left: 37px;
-  }
-  
+.profile-heading {
+  display: flex;
+  justify-content: space-evenly;
+  flex:1;
+  width:100%;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.profile-heading div {
+  /* margin-right: 110px;
+  margin-left: 30px; */
+}
+
+.ass-user-detail {
+  display: flex;
+  flex:1;
+  width:100%;
+  justify-content: space-evenly;
+  font-size: 15px;
+}
+
+.ass-user-detail div {
+  margin-right: 110px;
+  margin-left: 23px;
+}
+
+.accordion-item {
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
 /* -------Responsive ness of Home Page --------*/
 /* @media screen and (max-width:425px) {
   .main1 .pages{
