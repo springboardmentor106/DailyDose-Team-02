@@ -116,6 +116,8 @@ const Add = () => {
       } else {
         toast.success(data.message)
         setDetails({})
+        selectedCategoriesList(null)
+        setGoalSelectedCategoriesList(null)
       }
     } catch (err) {
       toast.error("Error:" + err)

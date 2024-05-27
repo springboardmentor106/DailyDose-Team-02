@@ -16,15 +16,15 @@ const Table = ({ data, type }) => {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f2f2f2' }}>Time</th>
+              {type === "Reminders" && <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f2f2f2' }}>Time</th>}
               <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f2f2f2' }}>Activity</th>
             </tr>
           </thead>
           <tbody>
             {data.map((reminder, index) => (
               <tr key={index}>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{reminder.time}</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{reminder.activity}</td>
+                {type === "Reminders" && <td style={{ border: '1px solid #ddd', padding: '8px' }}>{reminder.startTime}</td>}
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{reminder.title}</td>
               </tr>
             ))}
           </tbody>

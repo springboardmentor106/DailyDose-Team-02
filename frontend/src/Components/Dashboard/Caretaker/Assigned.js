@@ -33,7 +33,8 @@ const Assigned = ({ assignedUserDetails }) => {
                   <div className="home-row-one">
                     <div className="card"><div className="card-body">
                       <div id="dis"><strong>Goal progress</strong></div>
-                      <div><CircularProgressBar value={assignedUser.progress.complete || 0} /></div>
+                      <div>
+                        {assignedUser.goals.length ? <CircularProgressBar value={assignedUser.progress.complete || 0} /> : <div>No goals yet. rogress will be updated when you complete your goals.</div>}</div>
                     </div></div>
                   </div>
                 </div>
@@ -50,12 +51,12 @@ const Assigned = ({ assignedUserDetails }) => {
                 </div> */}
                 <div className="home-col-three">
                   <div className="card"><div className="card-body">
-                    <Table reminders={assignedUser.reminders} type="Reminders" />
+                    <Table data={assignedUser.reminders} type="Reminders" />
                   </div></div>
                 </div>
                 <div className="home-col-four">
                   <div className="card"><div className="card-body">
-                    <Table reminders={assignedUser.goals} type="Goals" />
+                    <Table data={assignedUser.goals} type="Goals" />
                   </div></div>
                 </div>
               </div>

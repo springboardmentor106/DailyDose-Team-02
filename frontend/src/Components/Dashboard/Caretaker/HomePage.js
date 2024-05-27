@@ -52,7 +52,7 @@ const HomePage = () => {
           'Content-Type': "application/json",
           'Authorization': token
         }
-        , body: JSON.stringify({ caretakerId: userId })
+        , body: JSON.stringify({ seniorCitizenId: userId })
       })
 
       if (response.status === 401) {
@@ -104,7 +104,6 @@ const HomePage = () => {
         localStorage.clear()
       }
       const data = await response.json()
-      console.log(data)
       if (data.status === "success") {
         return data.reminders ? data.reminders : null
       } else {
@@ -197,7 +196,6 @@ const HomePage = () => {
           const assignedUserReminders = await getAssignedUserReminders(data.seniorArr)
           const assignedUserProgress = await getAssignedUserProgress(data.seniorArr)
           const finalArray = [];
-
           data.seniorArr.forEach(user => {
             const userUuid = user.uuid;
             const { firstname, lastname, age, gender, email } = user
@@ -218,6 +216,7 @@ const HomePage = () => {
           });
           console.log(finalArray)
           setAssignedUserDetails(finalArray)
+          localStorage.setItem("assignedUsers", finalArray)
         }
       } else {
         toast.error(data.message)

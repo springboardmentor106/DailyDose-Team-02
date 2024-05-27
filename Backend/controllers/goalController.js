@@ -28,16 +28,13 @@ export const createGoal = async (req, res) => {
     try {
         const userId = req.userId;
         const role = req.role;
-
-        if (role !== 'user') {
-            return res.status(403).json({ status: "failed", message: "Only user have access" });
-        }
+        const { seniorCitizenId } = req.body
 
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
 
-        const user = await User.findOne({ uuid: userId })
+        const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId })
         if (!user) {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
