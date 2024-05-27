@@ -14,6 +14,7 @@ import HomePage from "../Components/Dashboard/Caretaker/HomePage";
 import Analytics from "../Components/Dashboard/Caretaker/Analytics";
 import UserDashboard from "../Components/userDashboard/UserHome";
 import AssignTask from "../Components/Dashboard/Caretaker/AssignTask";
+import Notification from "../Components/Dashboard/dashComponents/Notification"
 function ProtectedRoute({ Component, authorizedFor }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
@@ -66,7 +67,7 @@ function Routing() {
       <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} authorizedFor="caretaker" />} />
       <Route path="/care-add" element={<ProtectedRoute Component={AssignTask} authorizedFor="caretaker" />} />
       <Route path="/care-analytics" element={<ProtectedRoute Component={Analytics} authorizedFor="caretaker" />} />
-      <Route path="/user-dash" element={<UserDashboard />} />
+      <Route path="/Notification" element={<Notification />} />
     </Routes>
   );
 }

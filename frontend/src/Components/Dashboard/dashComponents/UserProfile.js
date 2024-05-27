@@ -1,5 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import Notification from '../dashComponents/Notification'
 const UserProfile = () => {
   const navigate = useNavigate()
   const handleLogout = () => {
@@ -14,9 +15,11 @@ const UserProfile = () => {
         <div className="modal-dialog modal-sm">
           <div className="modal-content" style={{backgroundColor:"#6a58dc",width:"fit-content",marginTop: "150%",marginLeft: "-130%"}}>
             <div className="modal-body" style={{display:"flex", flexDirection:"column", justifyContent:"flex-evenly"}}>
+              
               <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Edit Profile</button></div>
               <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Setting</button></div>
-              <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style={{backgroundColor:"#e0dcf8",width:"100%"}} onClick={() => handleLogout()}>Logout</button></div>
+              <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Notification</button></div>
+              <div><button type="button" class="btn" style={{backgroundColor:"#e0dcf8",width:"100%"}} onClick={() => handleLogout()}>Logout</button></div>
             </div>
           </div>
         </div>
@@ -128,6 +131,8 @@ const UserProfile = () => {
     </div>
   </div>
 </div>
+
+      <Notification/>
     </div>
   )
 }

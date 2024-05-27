@@ -2,12 +2,14 @@ import React from 'react'
 import UserNav from '../../userDashboard/UserNav'
 import'./Pages.css'
 import {profileinfo} from './StaticDataCare' 
+import CareProfile from '../dashComponents/CareProfile'
 const AssignTask = () => {
   return (
     <div className='Assign'>
         <div className="nav-bar">
             <UserNav/>
         </div>
+        <CareProfile/>
         <div className="Assign_pages">
         <div className='assign-heading'>
             <h5><strong>Assign Task</strong></h5>

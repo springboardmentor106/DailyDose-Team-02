@@ -6,6 +6,8 @@ import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
 import CareProfile from "../dashComponents/CareProfile"
+import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
 // import CareProfile from "../dashComponents/CareProfile"
 const HomePage = () => {
   const reminders = [
@@ -36,7 +38,16 @@ const HomePage = () => {
               <div><img src="" alt="" /></div>
               <div id="careTaker-Deatils"><p><strong>Dr Caretaker</strong> </p><p>Occupation:MBBS</p><p>Age:30</p></div>
           </div></div>
-          <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div></div>
+          <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div>
+          <div className="card-body">
+          <AvatarGroup max={24}>
+            <Avatar alt="Remy Sharp" src={profilepic} />
+            <Avatar alt="Travis Howard" src={profilepic} />
+            <Avatar alt="Cindy Baker" src={profilepic} />
+            <Avatar alt="Agnes Walker" src={profilepic} />
+            </AvatarGroup>
+          </div>
+          </div>
         </div>
         
         <div className="content">

@@ -1,17 +1,19 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import Notification from '../dashComponents/Notification'
 const CareProfile = () => {
   const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.clear()
     navigate("/login")
   }
+  
   return (
     
     
 
     <div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">      
+      <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">      
       <div className="modal-dialog modal-sm">
         <div className="modal-content" style={{backgroundColor:"#6a58dc",width:"fit-content",marginTop: "140%",marginLeft: "-130%"}}>
       
@@ -20,7 +22,8 @@ const CareProfile = () => {
       }}>
         <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Edit Profile</button></div>
         <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Setting</button></div>
-        <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style={{backgroundColor:"#e0dcf8",width:"100%"}} onClick={() => handleLogout()}>Logout</button></div>
+        <div><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style={{backgroundColor:"#e0dcf8",width:"100%"}}>Notification</button></div>
+        <div><button type="button" class="btn" style={{backgroundColor:"#e0dcf8",width:"100%"}} onClick={() => handleLogout()}>Logout</button></div>
 
       </div>
     </div>
@@ -86,7 +89,8 @@ const CareProfile = () => {
     </div>
   </div>
 </div>
-
+ 
+      <Notification/>
     </div>
   )
 }
