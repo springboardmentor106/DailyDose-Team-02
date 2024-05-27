@@ -9,20 +9,23 @@ z-index: 999;
 /* --------------------Design for Analytics----------------  */
 
 .main{
-  display: flex;
-  color:black;
-  margin: 2px;
+    display: flex;
+    color:black;
+    margin: 2px;
+    width: 100%;
 }
 .Analytics-pages{
-padding-left: 110px;
-display: flex;
+  padding-left: 110px;
+  display: flex;
+  width:100%
 }
 .ana-left-side{
-  margin: 6px 30px 6px 6px;
+    margin:6px 15px 6px 6px;
+    width:63%;
 }
 .ana-right-side{
   background-color: #ebe8fd;
-  width: 100%;
+  width: 35%;
   padding: 26px 26px 40px 26px;
   box-sizing: border-box;
   margin-left: 5px;
@@ -41,10 +44,10 @@ padding: 0px;
   padding-top: 5px;
 }
 .ana-right-card-two{
-flex: 1;
-padding: 14px;
-margin-top: 20px;
-display: grid;
+  flex: 1;
+  padding: 14px;
+  margin-top: 15px;
+  display: grid;
 }
 .ana-user{
   display: flex;
@@ -52,12 +55,11 @@ display: grid;
   
 }
 .ana-reminder{
-background-color: white;
-border-radius: 15px;
-height: 300px;
-width: 332px;
-padding-top: 24px;
-box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  border-radius: 15px;
+  height: 300px;
+  padding-top: 24px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15), -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
 }
 .ana-user .card{
   margin: 4px;
@@ -227,52 +229,53 @@ margin-left:5px;
 
 }
 }
-@media screen and (max-width:820px) and (min-width:425px) {
-.ana-main{
-  width: 97%;
-}
-.Analytics-pages{
-  display: grid;
-  justify-content: space-around;
-  width: 97%;
-}
-.ana-right-side{
-  display:flex;
-  justify-content: space-around;
-}
-.ana-right-card-two{
-  margin-top: -24px;
-}
-.ana-right-card-one{
-  margin-top: 10px;
-}
-.nav-bar{
-  top:74%
-}
-}
+/* @media screen and (max-width:1352px) and (min-width:1000px) {
+  .ana-main{
+    width: 97%;
+  }
+  .Analytics-pages{
+    display: grid;
+    justify-content: space-around;
+    width: 97%;
+  }
+  .ana-right-side{
+    display:flex;
+    justify-content: space-around;
+  }
+  .ana-right-card-two{
+    margin-top: -24px;
+  }
+  .ana-right-card-one{
+    margin-top: 10px;
+  }
+  .nav-bar{
+    top:74%
+  }
+} */
 
 /* ------------Assign Task ---------------*/
 .Assign_pages{
-padding-left:110px ;
-
+  padding-left:110px ;
 }
 .assign-heading{
-margin-top: 10px;
-margin-bottom: 10px;
-margin-left: 50px;
-margin-right: 50px;
-background-color: #6a58dc;
-color: white;
-padding:15px 5px 15px 5px ;
-border-radius: 30px;
+  margin-top: 36px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: #6a58dc;
+  color: white;
+  padding: 26px 10px 25px 10px;
+  border-radius: 30px;
+  
 }
 .assign-main{
-display: flex;
-justify-content:space-evenly;
+  display: flex;
+  justify-content:center;
 
 }
 .assign-heading h5{
-margin-left: 20px;
+  margin-left: 20px;
+  font-size: 23px;
 }
 .Assign_pages input{
 width: 420px;
