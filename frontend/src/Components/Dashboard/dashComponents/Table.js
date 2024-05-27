@@ -29,7 +29,7 @@ const Table = ({ data, type }) => {
             ))}
           </tbody>
         </table> :
-        <div>No reminders yet</div>}
+        <div>No {type} yet</div>}
     </div>
   );
 }

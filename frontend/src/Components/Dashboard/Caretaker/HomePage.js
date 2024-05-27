@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.css"; // Import your CSS file for styling
 import Caretacker from "../../../assets/images/Caretacker.png"
-import profilepic from "../../../assets/images/profilepic.png"
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
@@ -293,7 +292,6 @@ const HomePage = () => {
     setRefresh(false)
   }, [refresh === true])
 
-
   const calculateNumberOfUsersStartedGoals = () => {
     const usersCount = assignedUserDetails && assignedUserDetails.filter((user) => {
       return user.progress.complete > 0
@@ -329,9 +327,9 @@ const HomePage = () => {
                 <div id="careTaker-Deatils"><p><strong>{userDetails.firstname} {userDetails.lastname}</strong> </p><p>gender: {userDetails.gender}</p><p>Age: {userDetails.age}</p></div>
               </div></div>
           }
-          {updateUserCount &&
+          {
             <div className="card" id="card3"><div className="card-title"><h6>User Update</h6></div>
-              No of users started hitting their goals: {updateUserCount} </div>
+              No of users started hitting their goals: {updateUserCount || 0} </div>
           }
 
         </div>
@@ -350,7 +348,6 @@ const HomePage = () => {
             <div id='ass-allergy'><strong>Allergy</strong></div>
             <div id='ass-allergy'><strong>Action</strong></div>
           </div>
-
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><Assigned assignedUserDetails={assignedUserDetails} /></div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><CareAdd unAssignedUserDetails={unAssignedUserDetails} setRefresh={setRefresh} /></div>

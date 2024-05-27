@@ -17,7 +17,6 @@ const getTodayGoals = async ({ userId, caretakerId }) => {
                 { dayFrequency: dayOfWeek }
             ]
         });
-
         return { todaysGoals, error: null };
     } catch (error) {
         return { error: error, todaysGoals: null }
@@ -175,6 +174,10 @@ export const deleteGoal = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
+            // const verifyGoal = user.goals.find(goal => goal.uuid === goalId);
+            // if (!verifyGoal) {
+            //     return res.status(404).json({ status: "failed", message: "Goal not found" });
+            // }
         } else if (role === 'caretaker') {
             user = await Caretaker.findOne({ uuid: userId });
             if (!user) {
@@ -188,28 +191,15 @@ export const deleteGoal = async (req, res) => {
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
         }
-        const previousGoals = user.goals
-        let newGoals = []
-
-        // console.log(previousGoals);
-
-        previousGoals.forEach(goal => {
-            if (goal !== goalId) {
-                newGoals.push(goal)
-            }
-        });
-
-        // console.log(newGoals);
-
-        user.goals = newGoals
-        await user.save();
+        const updatedGoals = user.goals.filter((goal) => goal !== goalId)
+        user.goals = updatedGoals
+        user.save()
 
         return res.json({ status: "success", message: 'Goal deleted successfully' });
     } catch (error) {
-        return res.status(500).json({ status: "failed", message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
-
 
 export const deleteAllGoal = async (req, res) => {
     try {
@@ -451,23 +441,34 @@ export const getDailyGoalProgress = async (req, res) => {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
         }
 
-        const { todaysGoals, error } = await getTodayGoals({ userId: seniorId, caretakerId });
+        const { todaysGoals, error } = await getTodayGoals(role === "user" ? { userId: seniorId, caretakerId } : { userId: seniorCitizenId, caretakerId: userId });
 
         if (error) {
             return res.status(500).json({ status: "error", message: "Failed to get today's goals" });
         }
 
-        const totalTodayGoals = todaysGoals.length;
-        const completedGoals = todaysGoals.filter(goal => goal.completedToday);
+        const today = new Date().toISOString().split('T')[0];
+
+        const updatedGoals = await Promise.all(todaysGoals.map(async (goalData) => {
+            const goal = await GOAL.findOne({ uuid: goalData.uuid });
+            const goalEndDate = new Date(goal.endDate).toISOString().split('T')[0];
+            if (goalEndDate < today) {
+                goal.completed = true;
+            }
+            await goal.save();
+            return goal;
+        }));
+
+        const completedGoals = updatedGoals.filter(goal => goal.completedToday);
         const completedGoalsLength = completedGoals.length;
-        const completePercent = totalTodayGoals > 0 ? (completedGoalsLength / totalTodayGoals) * 100 : 0;
+        const completePercent = updatedGoals.length > 0 ? (completedGoalsLength / updatedGoals.length) * 100 : 0;
 
         return res.status(200).json({
             status: "success",
-            totalTodayGoals,
+            totalTodayGoals: updatedGoals,
             completedGoalsLength,
             completePercent: completePercent.toFixed(2),
-            toStartPercent: 100 - completePercent.toFixed(2)
+            toStartPercent: (100 - completePercent).toFixed(2)
         });
 
     } catch (error) {
