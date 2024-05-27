@@ -64,6 +64,10 @@
     width: 1069px;
     border-radius: 18px;
   }
+    .header-details-dots{
+      margin-left: 1002px;
+      margin-top: -75px;
+    }
 
   /*  CheckBox.css  */
 

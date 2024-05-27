@@ -7,6 +7,7 @@ import CircularProgressBar from '../User/ProgressBarForTarget';
 import './Target.css'
 import UserNav from '../../userDashboard/UserNav';
 import UserProfile from '../dashComponents/UserProfile';
+import { PiDotsThreeOutlineFill } from "react-icons/pi";
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState('goal'); // Default to 'goal' being selected
   const handleItemClick = (item) => {
@@ -36,6 +37,9 @@ const Target = () => {
                       </div>
                       <div className="header-details-Status">
                         <h5>Status</h5>
+                      </div>
+                      <div className="header-details-dots">
+                      <PiDotsThreeOutlineFill />
                       </div>
                   </div>
                   <div className="details-container">
@@ -165,6 +169,9 @@ const Target = () => {
                       <div className="header-details-Status">
                         <h5>Status</h5>
                       </div>
+                      <div className="header-details-dots">
+                      <PiDotsThreeOutlineFill />
+                      </div>
                   </div>
                   <div className="details-container">
                     <div className="details">
@@ -293,6 +300,9 @@ const Target = () => {
                       </div>
                       <div className="header-details-Status">
                         <h5>Status</h5>
+                      </div>
+                      <div className="header-details-dots">
+                      <PiDotsThreeOutlineFill />
                       </div>
                   </div>
                   <div className="details-container">
