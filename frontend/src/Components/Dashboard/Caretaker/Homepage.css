@@ -64,10 +64,10 @@
   margin-top: 0;
 }
 #card3 {
+  max-height: 180px;
   height: 30vh;
   width: 30%;
-  max-height: 200px;
-  flex: 1;
+  /* flex: 1; */
   background-color: #cdc8f5;
   border-radius: 30px;
   /* margin: 5px; */
@@ -217,7 +217,7 @@
 }
 #home-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   background-color: #f2f1f9;
   gap: 1vw;
   width: 100%;
@@ -250,11 +250,10 @@
 }
 .home-row-one .card .card-body {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  /* padding: 10px 20px 0px 20px; */
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
 }
 /* .card-body div div{
   width: 50px !important;
