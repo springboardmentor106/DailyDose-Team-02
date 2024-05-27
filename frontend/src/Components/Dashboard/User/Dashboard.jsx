@@ -26,6 +26,7 @@ const Dashboard = () => {
   const [habits, setHabits] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
   const [goalProgress, setGoalProgress] = useState(null)
+  const [chartData, setChartData] = useState(null)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
@@ -182,6 +183,37 @@ const Dashboard = () => {
     }
   }
 
+  const getMonthlyGoalProgress = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(Constants.BASE_URL + '/api/goals/monthly-stats', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify({ caretakerId: caretakerId })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        setChartData(data.monthsData)
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (token) {
@@ -190,6 +222,7 @@ const Dashboard = () => {
       getUserHabits()
       getUserDetails()
       getGoalProgress()
+      getMonthlyGoalProgress()
       setRefresh(false)
     }
   }, [refresh === true])
@@ -245,7 +278,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row-one-card-one-dashboard">
-            <Chart setRefresh={setRefresh} />
+            <Chart chartData={chartData} />
           </div>
         </div>
 
@@ -254,7 +287,7 @@ const Dashboard = () => {
             <h5 id="progres">
               <strong>Progress</strong>
             </h5>
-            {goalProgress !== null && goals.length ?
+            {goalProgress !== null && goals?.length ?
               <div className='row-three-content'>
                 <div className="box-left-top">
                   <div id="CircularProgressBar">
