@@ -116,7 +116,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="home-col-three">
+                    <div className="home-col-two">
                       <div className="card">
                         <div className="card-body">
                           <Table
@@ -126,7 +126,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="home-col-four">
+                    <div className="home-col-two">
                       <div className="card">
                         <div className="card-body">
                           <Table reminders={unassign.goals} type="Goals" />
