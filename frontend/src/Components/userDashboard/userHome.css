@@ -326,6 +326,7 @@
   padding: 1vw;
   align-items: start;
   justify-content: start;
+  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(216, 211, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 #about__user h3 {
   position: absolute;
