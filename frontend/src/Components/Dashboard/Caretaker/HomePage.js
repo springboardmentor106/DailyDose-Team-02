@@ -8,6 +8,7 @@ import CareAdd from "./CareAdd";
 import Constants from "../../../constants";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CareProfile from "../dashComponents/CareProfile";
 const HomePage = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
@@ -370,6 +371,9 @@ const HomePage = () => {
       <div className="nav-bar">
         <UserNav />
       </div>
+      
+      <CareProfile/>
+      
       <div className="pages">
         <div className="header">
           <div className="card" id="card1">

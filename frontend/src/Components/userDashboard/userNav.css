@@ -19,8 +19,7 @@
   max-width: 70px;
   /* margin-left: 13px; */
 }
-.navbar__logo,
-.user__profile {
+.navbar__logo, #user__profile {
   width: 50px;
   height: auto;
   /* margin: 0 auto; */
@@ -28,7 +27,7 @@
   align-items: center;
   justify-content: center;
 }
-.user__profile {
+#user__profile{
   height: 50px;
   border-radius: 50%;
   padding: 0.25rem;
@@ -203,16 +202,15 @@
   .navbar__link {
     width: 3.5rem;
   }
-
-  .user__profile,
-  .navbar__logo {
+  
+  #user__profile, .navbar__logo {
     margin: 0 auto;
     width: 35px;
   }
   .user__profile{
     height: 35px;
   }
-  .user__profile img {
+  #user__profile img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -345,10 +343,10 @@
     width: 3.5rem;
   }
   
-  .user__profile, .navbar__logo {
+  #user__profile, .navbar__logo {
     margin: 0 auto;
   }
-  .user__profile img {
+  #user__profile img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -464,10 +462,10 @@ and (max-device-width : 1024px) {
     width: 3.5rem;
   }
   
-  .user__profile, .navbar__logo {
+  #user__profile, .navbar__logo {
     margin: 0 auto;
   }
-  .user__profile img {
+  #user__profile img {
     width: 100%;
     height: auto;
     object-fit: cover;

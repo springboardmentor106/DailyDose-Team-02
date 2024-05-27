@@ -18,7 +18,7 @@ import noRemindersImage from "../../../assets/images/noReminders.png"
 import noProgress from "../../../assets/images/noProgress.png"
 import noUserDetails from "../../../assets/images/noUserDetails.png"
 import { useNavigate } from 'react-router-dom';
-
+import UserProfile from '../dashComponents/UserProfile';
 const Dashboard = () => {
   const [selectedBox, setSelectedBox] = useState(1);
   const [reminders, setReminders] = useState(null)
@@ -200,6 +200,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <UserNav />
+      <UserProfile/>
       <div className="left-side">
         <div className="row-one">
           <div className="row-one-card-one">
