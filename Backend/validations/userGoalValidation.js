@@ -6,11 +6,12 @@ export const createGoalSchema = Joi.object({
     endDate: Joi.date().required(),
     dayFrequency: Joi.array().items(Joi.string().valid(
         'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
-        'Daily',  'Today'
+        'Daily', 'Today'
     )),
     completed: Joi.boolean().default(false),
     completedToday: Joi.boolean().default(false),
     pushNotification: Joi.boolean().default(false),
+    seniorCitizenId: Joi.string()
 });
 
 export const updateGoalSchema = Joi.object({
@@ -20,7 +21,7 @@ export const updateGoalSchema = Joi.object({
     endDate: Joi.date(),
     dayFrequency: Joi.array().items(Joi.string().valid(
         'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
-        'Daily',  'Today'
+        'Daily', 'Today'
     )),
     completed: Joi.boolean().default(false),
     completedToday: Joi.boolean().default(false),
