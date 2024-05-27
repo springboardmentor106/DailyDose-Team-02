@@ -6,6 +6,7 @@ const UserProfile = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
+    window.location.reload()
   };
   return (
     <div>

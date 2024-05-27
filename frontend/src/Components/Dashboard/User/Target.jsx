@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import moment from "moment";
-// import SideBar from "../User/SideBar"
 import TargetList from "../User/CheckBoxTarget";
 import { RiCheckboxCircleLine } from "react-icons/ri";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import CircularProgressBar from "../User/ProgressBarForTarget";
 import "./Target.css";
 import UserNav from "../../userDashboard/UserNav";
-
+import UserProfile from "../dashComponents/UserProfile";
+import { PiDotsThreeOutlineFill } from "react-icons/pi";
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState("goal"); // Default to 'goal' being selected
   const handleItemClick = (item) => {
@@ -16,6 +16,7 @@ const Target = () => {
   return (
     <div className="main-container-target">
       <UserNav />
+      <UserProfile />
       <div className="add-page-container">
         <div className="dropdown">
           <button
@@ -39,23 +40,129 @@ const Target = () => {
                   <div className="header-details-Status">
                     <h5>Status</h5>
                   </div>
+                  <div className="header-details-dots">
+                    <PiDotsThreeOutlineFill />
+                  </div>
                 </div>
                 <div className="details-container">
                   <div className="details">
-                    <TargetList />
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={55} />
+                    </div>
                     <div className="end-date">
                       <strong>
                         {moment().format("MMMM Do YYYY h:mm:ss a")}
                       </strong>
                     </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                    <TargetList />
+                  </div>
+                  <div className="details">
                     <div className="Progress-bar">
-                      <CircularProgressBar value={55} />
+                      <CircularProgressBar value={100} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
                     </div>
                     <div className="dot">
                       <PiDotsThreeOutlineVerticalBold />
                     </div>
                   </div>
-                  
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={80} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={68} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={40} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={75} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={63} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={33} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
+                  <div className="details">
+                    <div className="Progress-bar">
+                      <CircularProgressBar value={5} />
+                    </div>
+                    <div className="end-date">
+                      <strong>
+                        {moment().format("MMMM Do YYYY h:mm:ss a")}
+                      </strong>
+                    </div>
+                    <div className="dot">
+                      <PiDotsThreeOutlineVerticalBold />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,6 +190,9 @@ const Target = () => {
                   </div>
                   <div className="header-details-Status">
                     <h5>Status</h5>
+                  </div>
+                  <div className="header-details-dots">
+                    <PiDotsThreeOutlineFill />
                   </div>
                 </div>
                 <div className="details-container">
@@ -232,6 +342,9 @@ const Target = () => {
                   </div>
                   <div className="header-details-Status">
                     <h5>Status</h5>
+                  </div>
+                  <div className="header-details-dots">
+                    <PiDotsThreeOutlineFill />
                   </div>
                 </div>
                 <div className="details-container">

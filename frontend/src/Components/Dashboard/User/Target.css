@@ -1,99 +1,129 @@
-/* .main-contaoner{
+
+.main-container-target{
+  display: flex;
+  }
+  .header-container{
+      width: 100%;
+      height: 40px;
+      background-color: white;
+      border-radius: 10px;
+      background-color: #E0DCF8;
+  }
+  .details{
+      width: 100%;
+      height: 43px;
+      background-color: #E0DCF8;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* justify-content: center;
+      gap: 1vh; */
+  }
+  #chaeck-icon{
+      position: relative;
+      height: 10px;
+      width: 17px;
+      top: 11px;
+      left: 17vw;
+  }
+  .header-details-Task{
+      width: 55px;
+      position: relative;
+      left: 20vw;
+      top: -1px;
+  }
+  .header-details-EndDate{
+      width: 112px;
+      position: relative;
+      left: 39vw;
+      top: -25px;
+  }
+  .header-details-Status{
+      width: 112px;
+      position: relative;
+      left: 54vw;
+      top: -51px;
+  }
+  .Progress-bar{
+      position: relative;
+      left: 20vw;
+      top: 5px;
+  }
+  .end-date{
+      position: relative;
+      top: -23px;
+      left: -2vw;
+  }
+  .dot{
+      position: relative;
+      left: 27vw;
+      top: -40px;
+  } 
+  .dropdown {
+    border: 1px solid black;
+    width: 100%;
+    border-radius: 3rem;
+    padding: 1vw;
     display: flex;
-  } */
-.main-container-target {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    flex-direction: column;
+    gap: 1vh;
 }
-.header-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+
+.dropdown > button{
   width: 100%;
-  height: 40px;
-  background-color: white;
-  border-radius: 10px;
-  background-color: #e0dcf8;
+    text-align: left;
 }
-.details {
-  width: 100%;
-  height: 44px;
-  background-color: #e0dcf8;
-  border-radius: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-}
-#chaeck-icon {
-  /* position: relative;
-  height: 10px;
-  width: 17px;
-  top: 11px;
-  left: 28px; */
-}
-.header-details-Task {
-  /* width: 55px;
-  position: relative;
-  left: 107px;
-  top: -8px; */
-}
-.header-details-EndDate {
-  /* width: 112px;
-  position: relative;
-  left: 458px;
-  top: -25px; */
-}
-.header-details-Status {
-  /* width: 112px;
-  position: relative;
-  left: 735px;
-  top: -51px; */
-}
-.Progress-bar {
-  /* position: relative;
-  left: 397px;
-  top: 5px; */
-}
-.end-date {
-  /* position: relative;
-  top: -23px;
-  left: -16px; */
-}
-.dot {
-  /* position: relative;
-  left: 483px;
-  top: -40px; */
-}
+
+  
+    .header-details-dots{
+      margin-left: 70vw;
+      margin-top: -75px;
+    }
 
 /*  CheckBox.css  */
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  /* margin-bottom: 28px; */
-}
-.checkbox input[type="checkbox"] {
-  margin: 0;
-  /* margin-left: -717px; */
-  /* top: -64px; */
-  /* position: relative; */
-}
-.checkbox label {
-  font-size: 16px;
-  cursor: pointer;
-  margin: 0;
-  /* position: relative;
-  left: -164px;
-  top: -65px;
-  z-index: 9;
-  margin-bottom: -4px; */
-}
-.status {
-  /* position: relative;
-  left: 631px;
-  top: -25px;
-  margin-bottom: -21px; */
-}
+  .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px; 
+  }
+  .checkbox input[type="checkbox"] {
+    margin: 0; 
+    margin-left: -26vw;
+    top: -7vh;
+    position: relative;
+  }
+  .checkbox label {
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    left: 39px;
+    top: -7vh;
+    z-index: 9;
+    margin-bottom: -4px;
+  }
+  .status{
+    position: relative;
+    left: 646px;
+    top: -30px;
+    margin-bottom: -21px;
+    padding: 3px 8px; 
+    border-radius: 17px; 
+    font-weight: bold; 
+    text-align: center; 
+    font-size:smaller;
+    color: white;
+  }
+  
+  .completed {
+    background-color: #2CDF8C; /* Green for completed */
+    bottom: 32px;
+  }
+  
+  .not-completed {
+    background-color: #F6B95E; /* Orange for not completed */
+    bottom: 31px;
+  }

@@ -36,6 +36,7 @@ const TargetList = () => {
       target.id === targetId ? { ...target, completed } : target
     );
     setTargets(updatedTargets);
+
   };
   const gardeningTasks = targets.filter(target => target.name === 'Gardening');
   return (
