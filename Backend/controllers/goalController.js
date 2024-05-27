@@ -178,10 +178,6 @@ export const deleteGoal = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ status: "failed", message: `User not found for ID: ${userId}` });
             }
-            // const verifyGoal = user.goals.find(goal => goal.uuid === goalId);
-            // if (!verifyGoal) {
-            //     return res.status(404).json({ status: "failed", message: "Goal not found" });
-            // }
         } else if (role === 'caretaker') {
             user = await Caretaker.findOne({ uuid: userId });
             if (!user) {
@@ -195,15 +191,28 @@ export const deleteGoal = async (req, res) => {
         if (!goal) {
             return res.status(404).json({ status: "failed", message: 'Goal not found' });
         }
-        const updatedGoals = user.goals.filter((goal) => goal !== goalId)
-        user.goals = updatedGoals
-        user.save()
+        const previousGoals = user.goals
+        let newGoals = []
+
+        // console.log(previousGoals);
+
+        previousGoals.forEach(goal => {
+            if (goal !== goalId) {
+                newGoals.push(goal)
+            }
+        });
+
+        // console.log(newGoals);
+
+        user.goals = newGoals
+        await user.save();
 
         return res.json({ status: "success", message: 'Goal deleted successfully' });
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ status: "failed", message: error.message });
     }
 };
+
 
 export const deleteAllGoal = async (req, res) => {
     try {
