@@ -1,6 +1,4 @@
-/* .main-contaoner{
-    display: flex;
-  } */
+
   .main-container-target{
   display: flex;
   }
@@ -60,6 +58,11 @@
       position: relative;
       left: 483px;
       top: -40px;
+  } 
+  .dropdown {
+    border: 1px solid black;
+    width: 1069px;
+    border-radius: 18px;
   }
 
   /*  CheckBox.css  */
@@ -71,7 +74,7 @@
   }
   .checkbox input[type="checkbox"] {
     margin: 0; 
-    margin-left: -717px;
+    margin-left: -499px;
     top: -64px;
     position: relative;
   }
@@ -80,14 +83,30 @@
     cursor: pointer;
     margin: 0;
     position: relative;
-    left: -164px;
+    left: 39px;
     top: -65px;
     z-index: 9;
     margin-bottom: -4px;
   }
   .status{
     position: relative;
-    left: 631px;
-    top: -25px;
+    left: 646px;
+    top: -30px;
     margin-bottom: -21px;
+    padding: 3px 8px; 
+    border-radius: 17px; 
+    font-weight: bold; 
+    text-align: center; 
+    font-size:smaller;
+    color: white;
+  }
+  
+  .completed {
+    background-color: #2CDF8C; /* Green for completed */
+    bottom: 32px;
+  }
+  
+  .not-completed {
+    background-color: #F6B95E; /* Orange for not completed */
+    bottom: 31px;
   }

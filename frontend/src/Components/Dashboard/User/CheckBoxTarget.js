@@ -11,11 +11,13 @@ const TargetCheckbox = ({ target, onToggle }) => {
         checked={target.completed}
         onChange={handleCheckboxChange}
       />
-      <label>{target.name}  
-      <div className='status'>
-      {target.completed ? 'Completed' : 'Not Completed'}
-      </div>
-      </label>
+      <label>
+  {target.name}  
+  <div className={`status ${target.completed ? 'completed' : 'not-completed'}`}>
+    {target.completed ? 'Completed' : 'Not Completed'}
+  </div>
+</label>
+
     </div>
   );
 };
