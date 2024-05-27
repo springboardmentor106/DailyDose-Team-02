@@ -9,6 +9,7 @@ import caretakerRoutes from './routes/caretakerRoutes.js';
 import goalRoutes from './routes/goalRoutes.js';
 import reminderRoutes from './routes/reminderRoutes.js';
 import habitRoutes from './routes/habitRoutes.js';
+import notificationRoutes from "./routes/notificationRoutes.js"
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/api/caretaker', caretakerRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/reminders', reminderRoutes);
 app.use('/api/habits', habitRoutes)
+app.use('/api/notifications', notificationRoutes)
 
 
 // Error Handling Middleware
