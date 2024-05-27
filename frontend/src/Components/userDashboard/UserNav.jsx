@@ -19,7 +19,7 @@ const UserNav = () => {
       </div>
       <ul className="navbar__menu">
         <li className="navbar__item">
-          <Link to={role === "user" ? "/dashboard" : "/care-dashboard"} className="navbar__link nav-link_active">
+          <Link to={role === "user" ? "/user-dash" : "/care-dashboard"} className="navbar__link nav-link_active">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

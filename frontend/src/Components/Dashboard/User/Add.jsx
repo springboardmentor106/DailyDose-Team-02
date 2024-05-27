@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import SideBar from "../User/SideBar"
+// import SideBar from "../User/SideBar"
 import { RxCross2 } from "react-icons/rx";
 import './Add.css'
 import { toast } from 'react-toastify';
 import Constants from '../../../constants';
+import UserNav from "../../userDashboard/UserNav";
+
 
 const Add = () => {
   const [selectedItem, setSelectedItem] = useState('goal');
@@ -153,7 +155,7 @@ const Add = () => {
 
   return (
     <div className="main-container">
-      <SideBar />
+      <UserNav />
       <div className="add-page-container">
         <div className='add-container'>
           <div className='add-heading' onClick={() => handleItemClick('goal')}>Add goals</div>

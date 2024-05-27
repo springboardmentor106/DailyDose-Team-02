@@ -32,7 +32,7 @@ const Login = () => {
       localStorage.setItem("role", role)
       setTimeout(() => {
         if (role === "user") {
-          navigate("/dashboard", { replace: true })
+          navigate("/user-dash", { replace: true })
         } else {
           navigate("/care-dashboard", { replace: true })
         }

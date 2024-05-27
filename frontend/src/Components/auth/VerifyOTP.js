@@ -54,7 +54,7 @@ const VerifyOTP = () => {
           }
           setTimeout(() => {
             if (flow === "register") {
-              navigate(formData.role  === "user" ? "/dashboard" : "/care-dashboard", { replace: true });
+              navigate(formData.role  === "user" ? "/user-dash" : "/care-dashboard", { replace: true });
             } else {
               console.log(role)
               navigate("/update-password", { state: { email: email, role: formData && formData.role ? formData.role : role} });

@@ -34,7 +34,7 @@ function ProtectedRoute({ Component, authorizedFor }) {
         if (token) {
           console.log("Token hai",token)
           if (role === "user") {
-            navigate("/dashboard");
+            navigate("/user-dash");
           }
           if (role === "caretaker") {
             navigate("/care-dashboard");
@@ -66,7 +66,7 @@ function Routing() {
       <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} authorizedFor="caretaker" />} />
       <Route path="/care-add" element={<ProtectedRoute Component={AssignTask} authorizedFor="caretaker" />} />
       <Route path="/care-analytics" element={<ProtectedRoute Component={Analytics} authorizedFor="caretaker" />} />
-      <Route path="/user-dash" element={<UserDashboard />} />
+      <Route path="/user-dash" element={<ProtectedRoute Component={UserDashboard} authorizedFor="user" />} />
     </Routes>
   );
 }

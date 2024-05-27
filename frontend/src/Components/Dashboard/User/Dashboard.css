@@ -148,7 +148,7 @@ button {
   align-items: center;
   text-align: center;
   color: #605e5e;
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .edit-profile-button {
@@ -156,12 +156,16 @@ button {
   padding: 4px 16px;
   color: #fff;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
 }
 
-.no-progress-image {
-  width: 50%;
+#progress .no-progress-image {
+  width: 20vh;
+  object-fit: cover;
+}
+#about__user .no-progress-image {
+  width: 75%;
   object-fit: cover;
 }
 

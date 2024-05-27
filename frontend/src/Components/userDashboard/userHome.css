@@ -61,17 +61,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   gap: 1rem;
   padding: 1rem;
+  padding-left: 2vw;
 }
 .welcome__text h3 {
-  font-size: 2vw;
+  font-size: 1.5vw;
   font-weight: 600;
 }
 .welcome__text p {
   width: 80%;
-  font-size: 1.2vw;
+  font-size: 1vw;
   font-weight: 500;
   opacity: 0.75;
 }
@@ -183,6 +184,7 @@
   height: 45%;
   position: relative;
   overflow: visible;
+  align-items: start;
 }
 #chart {
   grid-row: span 2 / auto;
@@ -230,7 +232,7 @@
 #chart .row-one-card-one-dashboard {
   padding: 0px;
   flex: 1;
-  width: 50%;
+  width: 75vh;
   height: 90%;
   border-radius: 0px;
   margin-left: 0px;
@@ -366,7 +368,7 @@
   width: 100%;
 }
 #about__user #about-img-div {
-  width: 50%;
+  width: 30vh;
   height: auto;
 }
 

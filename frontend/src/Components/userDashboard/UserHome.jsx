@@ -16,7 +16,8 @@ import ReactCalendar from "../Dashboard/dashComponents/Calendar";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { user, habitsList } from "../Dashboard/User/StaticDataUser";
 import noProgress from "../../assets/images/noProgress.png";
-import noUserDetails from "../../assets/images/noUserDetails.png";
+import noProgressCropped from "../../assets/images/noProgressCropped.png";
+import noUserDetailsCropped from "../../assets/images/noUserDetailsCropped.png";
 import noRemindersImage from "../../assets/images/noReminders.png";
 import ReminderList from "../Dashboard/User/ReminderList";
 import HabitReminderList from "../Dashboard/User/HabitReminderList";
@@ -397,7 +398,7 @@ const UserHome = () => {
                 ) : (
                   <div className="no-progress">
                     <img
-                      src={noProgress}
+                      src={noProgressCropped}
                       alt="no progress"
                       className="no-progress-image"
                     />{" "}
@@ -450,7 +451,7 @@ const UserHome = () => {
                 <div className="no-progress">
                   <div id="about-img-div">
                     <img
-                      src={noUserDetails}
+                      src={noUserDetailsCropped}
                       alt="no progress"
                       className="no-progress-image"
                     />
