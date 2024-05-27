@@ -326,7 +326,7 @@ button {
   justify-content: space-between;
 }
 
-.year-container {}
+/* .year-container {} */
 
 .year-container button {
   background-color: #efeeee;
@@ -503,7 +503,7 @@ background-color: #fff;
   text-align: center;
 }
 
-/* @media screen and (max-width:425px) {
+/* /* @media screen and (max-width:425px) {
   .right-card-two {
     margin-left: -382px;
   }
@@ -633,15 +633,15 @@ background-color: #fff;
     width: 404px;
   }
 } */
-/* 
-@media screen and (max-width : 335px) {}
+/*  */
+/* @media screen and (max-width : 335px) {} */
 
 @media screen and (min-width : 440px) and (max-width : 600px) {
   .right-card-two {
     margin-left: -382px;
   }
 
-  .card-center-details {}
+  /* .card-center-details {} */
 
   .right-card-one {
     margin-left: -1px;
@@ -717,7 +717,7 @@ background-color: #fff;
     margin-top: -65px;
   }
 
-  .card-body p {}
+  /* .card-body p {} */
 
   .img-container {
     width: 373px;
@@ -739,7 +739,7 @@ background-color: #fff;
 
 }
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1000px) {
   .right-side {
     margin-top: 678px;
     margin-left: -799px;
@@ -791,7 +791,7 @@ background-color: #fff;
     width: 684px;
   }
 
-  .row-one {}
+  /* .row-one {} */
 
   .row-one-card-one {
     margin-left: -111px;
@@ -805,6 +805,6 @@ background-color: #fff;
 
 }
 
-@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+/* @media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
   .right-side {}
-} */
+} */ 
