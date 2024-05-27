@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import SideBar from "../User/SideBar"
 import TargetList from '../User/CheckBoxTarget';
 import { RiCheckboxCircleLine } from "react-icons/ri";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import CircularProgressBar from '../User/ProgressBarForTarget';
 import './Target.css'
+import UserNav from '../../userDashboard/UserNav';
+import UserProfile from '../dashComponents/UserProfile';
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState('goal'); // Default to 'goal' being selected
   const handleItemClick = (item) => {
@@ -13,7 +14,8 @@ const Target = () => {
   };
   return (
    <div className="main-container-target">
-    <SideBar/>
+    <UserNav/>
+    <UserProfile/>
        <div className="add-page-container">
       <div className="dropdown">
         <button className="dropdown-button" onClick={() => handleItemClick('goal')}>

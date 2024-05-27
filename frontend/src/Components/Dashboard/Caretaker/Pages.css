@@ -257,22 +257,24 @@
   
 }
 .assign-heading{
-  margin-top: 10px;
+  margin-top: 36px;
   margin-bottom: 10px;
   margin-left: 50px;
   margin-right: 50px;
   background-color: #6a58dc;
   color: white;
-  padding:15px 5px 15px 5px ;
+  padding: 26px 10px 25px 10px;
   border-radius: 30px;
+  
 }
 .assign-main{
   display: flex;
-  justify-content:space-evenly;
+  justify-content:center;
 
 }
 .assign-heading h5{
   margin-left: 20px;
+  font-size: 23px;
 }
 .Assign_pages input{
   width: 420px;

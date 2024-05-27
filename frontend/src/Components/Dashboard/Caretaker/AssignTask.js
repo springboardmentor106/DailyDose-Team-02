@@ -10,14 +10,14 @@ const AssignTask = () => {
             <UserNav/>
         </div>
         <CareProfile/>
-        <div className="Assign_pages">
+        <div className="Assign_pages" style={{fontSize:"15px"}}>
         <div className='assign-heading'>
             <h5><strong>Assign Task</strong></h5>
         </div>
         <div className="assign-main">
         <div className="assign-left">
-        <label for="exampleFormControlInput1" class="form-label">Select User</label>
-            <div class="input-group">
+        <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Select User</label>
+            <div class="input-group" style={{marginBottom:"15px"}}>
             <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                 <option selected>Select User</option>
                 {profileinfo.map((profile,index)=>(
@@ -27,34 +27,41 @@ const AssignTask = () => {
             </select>
             </div>
             <div>
-            <label for="exampleFormControlInput1" class="form-label">Date</label>
-            <input type="date" className='form-control'/>
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Date</label>
+            <input type="date" className='form-control' style={{marginBottom:"18px"}}/>
             </div>
             <div>
-            <label for="exampleFormControlInput1" class="form-label">Categogry</label>
-            <input type="text" className='form-control' />
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Category</label>
+            <input type="text" className='form-control' style={{marginBottom:"18px"}}/>
+            </div>
+            <div>
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Discription</label>
+            <input type="text" className='form-control' style={{marginBottom:"18px"}}/>
+            <input type="text" className='form-control' style={{marginBottom:"18px"}}/>
             </div>
             
         </div>
         <div className='assign-right'>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="enter the title"/>
+            <div >
+                <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Title</label>
+                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="enter the title" style={{marginBottom:"15px"}}/>
             </div>
             <div>
-            <label for="exampleFormControlInput1" class="form-label">Start Date</label>
-            <input type="date" className='form-control'/>
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>Start Date</label>
+            <input type="date" className='form-control' style={{marginBottom:"18px"}}/>
             </div>
             <div>
-            <label for="exampleFormControlInput1" class="form-label">End Date</label>
-            <input type="date" className='form-control'/>
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px"}}>End Date</label>
+            <input type="date" className='form-control' style={{marginBottom:"18px"}}/>
+            </div>
+            <div>
+                
+            <label for="exampleFormControlInput1" class="form-label" style={{fontSize:"18px",color:"white"}}>.</label>
+            <input type="text" className='form-control' style={{marginBottom:"18px"}} />
+            <input type="text" className='form-control' style={{marginBottom:"18px"}} />
             </div>
         </div>
         </div>
-        <div id='textarea'>
-            <label for="exampleFormControlInput1" class="form-label">Descripton</label>
-            <textarea name="add Description" id=""></textarea>
-            </div>
         </div>
     </div>
   )

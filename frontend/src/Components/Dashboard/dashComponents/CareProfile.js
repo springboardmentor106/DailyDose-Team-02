@@ -6,6 +6,7 @@ const CareProfile = () => {
   const handleLogout = () => {
     localStorage.clear()
     navigate("/login")
+    window.location.reload()
   }
   
   return (
