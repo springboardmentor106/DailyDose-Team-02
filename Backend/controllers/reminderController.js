@@ -74,10 +74,6 @@ export const getReminders = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "role not captured" });
         }
 
-        // if (role !== 'user') {
-        //     return res.status(403).json({ status: "failed", message: "Only users have access" });
-        // }
-
         const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId });
         if (!user) {
             return res.status(404).json({ status: "failed", message: "User not found" });
