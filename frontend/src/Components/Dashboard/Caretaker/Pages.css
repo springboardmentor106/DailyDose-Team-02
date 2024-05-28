@@ -97,8 +97,12 @@
   font-size: 12px;
 }
 #ana-card-body h6 {
-  font-size: 20px;
+  font-size: 1em;
 }
+#ana-card-body p{
+  font-size: 0.8em;
+}
+
 #ana-card-body {
   width: 100%;
   gap: 0px;

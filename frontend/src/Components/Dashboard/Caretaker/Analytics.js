@@ -1,18 +1,27 @@
-import React from 'react'
-import Chart from '../dashComponents/Chart'
-import CircularProgressBar from '../dashComponents/ProgressBar'
-import './Pages.css'
-import Calendar from '../dashComponents/Calendar'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import ReminderList from '../User/ReminderList';
-import profilepic from "../../../assets/images/profilepic.png"
-import UserNav from '../../userDashboard/UserNav'
-import { AiFillSliders } from "react-icons/ai";
-import { profileinfo } from './StaticDataCare'
-import { reminders } from './StaticDataCare'
-import Slider from "react-slick";
-import CareProfile from "../dashComponents/CareProfile"
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import "./Pages.css";
+import profilepic from "../../../assets/images/profilepic.png";
+import UserNav from "../../userDashboard/UserNav";
+import { profileinfo } from "./StaticDataCare";
+import { reminders } from "./StaticDataCare";
+import "../../userDashboard/userHome.css";
+import { IoOptionsOutline } from "react-icons/io5";
+import Chart from "../dashComponents/Chart";
+import CircularProgressBar from "../dashComponents/ProgressBar";
+import ReactCalendar from "../dashComponents/Calendar";
+import { IoIosArrowDropdown } from "react-icons/io";
+import { user, habitsList } from "../User/StaticDataUser";
+import noProgressCropped from "../../../assets/images/noProgressCropped.png";
+import noUserDetailsCropped from "../../../assets/images/noUserDetailsCropped.png";
+import noRemindersImage from "../../../assets/images/noReminders.png";
+import ReminderList from "../User/ReminderList";
+import HabitReminderList from "../User/HabitReminderList";
+import GoalReminderList from "../User/GoalReminderList";
+import UserProfile from "../dashComponents/UserProfile";
+
 const Analytics = () => {
   var settings = {
     dots: false,
@@ -21,164 +30,435 @@ const Analytics = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
-  return (
-      <div className="ana-main" >
-        <div className="nav-bar">
-          <UserNav/>
-        </div>
-        <CareProfile/>
-        <div className="Analytics-pages">
-        <div className="ana-left-side">
-        
-          <div className="ana-user">
-          {/* <Slider {...settings}> */}
-            {profileinfo.map((profile,index)=>(
-              <div className="card" key={index}><div className="card-body" id="ana-card-body">
-                <img src={profilepic} alt="" />
-                <h6><strong>{profile.name}</strong></h6>
-                <p>{profile.email}</p>
-                <p>Age: {profile.age}</p>
-                <p>Blood: {profile.blood}</p>
-              </div></div>
-            ))}
-            {/* </Slider> */}
-          </div>
-          {/* <div>
-            <Cardlist profileinfo={profileinfo}/>
-          </div> */}
-          
-          <div className="ana-chart">
-            <div className="card"><div className='card-body'>
-              <div id="ana-bargraph"><Chart/></div>
-            <div  className="btn-group">
-              <button  className="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthy</button>
-              <ul  className="dropdown-menu">
-                <li><a  className="dropdown-item" href="#">Monthly</a></li>
-                <li><a  className="dropdown-item" href="#">Weekly</a></li>
-              </ul>
-            </div>
-            </div></div>
-          </div>
-          <div className="row-three" id="ana-progress">
-        <div className="row-three-card">
-          <h5 id='progres'><strong>Progress</strong></h5>
-          <div className="box-left-top">
-              <div><CircularProgressBar value={55} /> </div> <br />
-            </div>
-            <div className="Progress-details-container">
-              <div className="one-pro-detail">
-              <div className="cirlce-pro-one"></div>
-             <div className="pro-text">
-             55%
-            Completed
-             </div>
-              </div>
-              <div className="second-pro-detail">
-              <div className="cirlce-pro-two"></div>
-              <div className="pro-text">
-             25%
-             <br />
-             In process
-             </div>
-              </div>
-              <div className="third-pro-detail">
-              <div className="cirlce-pro-three"></div>
-              <div className="pro-text">
-             10%
-             <br />
-             In process
-             </div>
-              </div>
-            </div>
-        </div>
-        <div className="row-three-card">
-          <h5 id='about'><strong>About User</strong></h5>
-          <div className="row-three-dtails-container">
-          <div className="row-three-details-container-row-first">
-          <div className="row-three-detail-first">
-             <h7><strong>Disease</strong></h7>
-             <p>Blood pressure</p>
-             <p>Cholestrol</p>
-           </div>
-           <div className="row-three-detail-second">
-           <h7><strong>Allergy</strong></h7>
-           <p>Dairy products</p>
-           <p>Dust mites</p>
-           </div>
-          </div>
-          <div className="row-three-details-container-row-second">
-          <div className="row-three-detail-first">
-             <h7><strong>Disease</strong></h7>
-             <p>Blood pressure</p>
-             <p>Cholestrol</p>
-           </div>
-           <div className="row-three-detail-second">
-           <h7><strong>Allergy</strong></h7>
-           <p>Dairy products</p>
-           <p>Dust mites</p>
-           </div>
-          </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div className="ana-right-side">
-        <div className="ana-right-card-one">
-          <Calendar/>
-        </div>
-        
-        <div className="ana-right-card-two">
-          
-          {/* <ul className="nav nav-underline" id="ana-select">
-            <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">Goal</a>
-            </li>
-          <li className="nav-item">
-    <a className="nav-link" href="#">Reminder</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="#">Goal</a>
-  </li>
-  
-  <li className="nav-item">
-    <a className="nav-link " ><AiFillSliders /></a>
-  </li>
-</ul> */}
-        <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li className="nav-item" role="presentation">
-    <button className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Goal</button>
-  </li>
-  <li className="nav-item" role="presentation">
-    <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reminder</button>
-  </li>
-  <li className="nav-item" role="presentation">
-    <button className="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Habit</button>
-  </li>
-  <li className="nav-item" role="presentation">
-    <button className="nav-link" id="pills-disabl-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false"><AiFillSliders /></button>
-  </li>
-</ul>
-<div className="tab-content" id="pills-tabContent">
-  <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0"><div className="ana-reminder">
-          <ReminderList reminders={reminders} />
-          </div></div>
-  <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0"><div className="ana-reminder">
-          <ReminderList reminders={reminders} />
-          </div></div>
-  <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0"><div className="ana-reminder">
-          <ReminderList reminders={reminders} />
-          </div></div>
-  <div className="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
-</div>
-          {/* <div className="ana-reminder">
-          <ReminderList reminders={reminders} />
-          </div> */}
-        
-        </div>
-          </div>
-        </div>
-        </div>
-  )
-}
 
-export default Analytics
+  const [selectedBox, setSelectedBox] = useState(1);
+  const [reminders, setReminders] = useState(null);
+  const [goals, setGoals] = useState(null);
+  const [habits, setHabits] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
+  const [goalProgress, setGoalProgress] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLinkClick = (boxNumber) => {
+    setSelectedBox(boxNumber);
+  };
+  const getUserReminders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        Constants.BASE_URL + "/api/reminders/get-reminders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.status === "success") {
+        data.reminders ? setReminders(data.reminders) : setReminders(null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  const getUserGoals = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(
+        Constants.BASE_URL + "/api/goals/getTodayGoals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({ caretakerId: caretakerId }),
+        }
+      );
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.status === "success") {
+        data.goals ? setGoals(data.goals) : setGoals(null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  const getUserHabits = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + "/api/habits", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
+      const data = await response.json();
+      if (data.status === "success") {
+        data.habits ? setHabits(data.habits) : setHabits(null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  const getGoalProgress = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(
+        Constants.BASE_URL + "/api/goals/daily-stats",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({ caretakerId: caretakerId }),
+        }
+      );
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        const completePercent = parseFloat(data.completePercent);
+        const toStartPercent = parseFloat(data.toStartPercent);
+        setGoalProgress({
+          completed: isNaN(completePercent) ? 0 : completePercent,
+          toStart: isNaN(toStartPercent) ? 0 : toStartPercent,
+        });
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+
+  const getUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + "/api/user/profile", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
+      const data = await response.json();
+      if (data.status === "success") {
+        data.user ? setUserDetails(data.user) : setUserDetails(null);
+        localStorage.setItem("caretakerId", data.user.caretaker);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserReminders();
+      getUserGoals();
+      getUserHabits();
+      getUserDetails();
+      getGoalProgress();
+      setRefresh(false);
+    }
+  }, [refresh === true]);
+  return (
+    <>
+      <div className="user__body">
+        <UserNav />
+        <UserProfile />
+        <div className="main__content">
+          <div id="user__welcome">
+              {profileinfo.map((profile, index) => (
+                <div className="care-profile-card" key={index} id="ana-card-body">
+                  <div  id="img-body">
+                    <img src={profilepic} alt="" />
+                  </div>
+                    <h6>
+                      <strong>{profile.name}</strong>
+                    </h6>
+                    <p>{profile.email}</p>
+                    <p>Age: {profile.age}</p>
+                    <p>Blood: {profile.blood}</p>
+                </div>
+              ))}
+          </div>
+          <div id="right-pane">
+            <div className="boxes" id="calender">
+              <div id="calender-container">
+                <ReactCalendar />
+              </div>
+            </div>
+
+            <div className="boxes" id="tasks">
+              <div id="user-mini-nav">
+                <div className="card-center-details-links">
+                  <button
+                    onClick={() => handleLinkClick(1)}
+                    className={selectedBox === 1 ? "active" : ""}>
+                    {" "}
+                    Reminder
+                  </button>
+                  <button
+                    onClick={() => handleLinkClick(2)}
+                    className={selectedBox === 2 ? "active" : ""}>
+                    Goal
+                  </button>
+                  <button
+                    onClick={() => handleLinkClick(3)}
+                    className={selectedBox === 3 ? "active" : ""}>
+                    Habit
+                  </button>
+                </div>
+                <div className="des-option-icon">
+                  <IoOptionsOutline />
+                </div>
+              </div>
+              {selectedBox === 1 && (
+                <div>
+                  <div className="right-card-two">
+                    {reminders && reminders.length ? (
+                      <ReminderList
+                        remindersList={reminders}
+                        setRefresh={setRefresh}
+                      />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some reminders to stay on top of
+                          your tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {selectedBox === 2 && (
+                <div>
+                  <div className="right-card-two">
+                    {goals && goals.length ? (
+                      <GoalReminderList
+                        goalsList={goals}
+                        setRefresh={setRefresh}
+                      />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some goals to stay on top of your
+                          tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {selectedBox === 3 && (
+                <div>
+                  <div className="right-card-two">
+                    {habits && habits.length ? (
+                      <HabitReminderList habitsList={habits} />
+                    ) : (
+                      <div className="no-reminders-container">
+                        <img
+                          src={noRemindersImage}
+                          alt="no reminders"
+                          className="no-reminders-image"
+                        />
+                        <div>
+                          Don't forget to add some habits to stay on top of your
+                          tasks!
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="boxes" id="chart">
+            <div className="chart-heading">
+              <h5>
+                <strong>Goal Progress</strong>
+              </h5>
+              <div className="year-container">
+                <button>year</button>
+                <div id="year-button-container">
+                  <IoIosArrowDropdown />
+                </div>
+              </div>
+            </div>
+            <div className="row-one-card-one-dashboard">
+              <Chart setRefresh={setRefresh} />
+            </div>
+          </div>
+          <div id="bottom-pane">
+            <div className="boxes" id="progress">
+              <div className="row-three-card">
+                <h5>
+                  <strong>Progress</strong>
+                </h5>
+                {goalProgress !== null && goals.length ? (
+                  <div className="row-three-content">
+                    <div className="box-left-top">
+                      <div id="CircularProgressBar">
+                        <CircularProgressBar
+                          value={parseFloat(goalProgress.completed) || 0}
+                        />{" "}
+                      </div>{" "}
+                      <br />
+                    </div>
+                    <div className="Progress-details-container">
+                      <div className="pro-detail">
+                        <div className="cirlce-pro-one completed"></div>
+                        <div className="pro-text">
+                          <div className="pro-percentage">
+                            {goalProgress.completed}%
+                          </div>{" "}
+                          completed
+                        </div>
+                      </div>
+
+                      <div className="pro-detail">
+                        <div className="cirlce-pro-one"></div>
+                        <div className="pro-text">
+                          <div className="pro-percentage">
+                            {goalProgress.toStart}%
+                          </div>
+                          to start
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="no-progress">
+                    <img
+                      src={noProgressCropped}
+                      alt="no progress"
+                      className="no-progress-image"
+                    />{" "}
+                    Progress will appear here when you complete the tasks in
+                    time
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="boxes" id="about__user">
+              <h5>
+                <strong>About User</strong>
+              </h5>
+              {user.details ? (
+                <div className="row-three-dtails-container">
+                  <div className="row-three-details-container-row-first">
+                    <div className="row-three-detail-first">
+                      <h7>
+                        <strong>Disease</strong>
+                      </h7>
+                      <p>Blood pressure</p>
+                      <p>Cholesterol</p> br
+                    </div>
+                    <div className="row-three-detail-second">
+                      <h7>
+                        <strong>Allergy</strong>
+                      </h7>
+                      <p>Dairy products</p>
+                      <p>Dust mites</p>
+                    </div>
+                  </div>
+                  <div className="row-three-details-container-row-second">
+                    <div className="row-three-detail-first">
+                      <h7>
+                        <strong>Disease</strong>
+                      </h7>
+                      <p>Blood pressure</p>
+                      <p>Cholestrol</p>
+                    </div>
+                    <div className="row-three-detail-second">
+                      <h7>
+                        <strong>Allergy</strong>
+                      </h7>
+                      <p>Dairy products</p>
+                      <p>Dust mites</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="no-progress">
+                  <div id="about-img-div">
+                    <img
+                      src={noUserDetailsCropped}
+                      alt="no progress"
+                      className="no-progress-image"
+                    />
+                  </div>
+                  <button className="edit-profile-button">Edit profile</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Analytics;

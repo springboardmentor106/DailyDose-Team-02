@@ -458,7 +458,8 @@ button {
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin-top: -28px;
+  /* margin-top: -28px; */
+  gap: 2vw;
 }
 
 .reminder-item {
@@ -468,7 +469,7 @@ button {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ccc;
-  margin-top: 39px;
+  /* margin-top: 39px; */
 }
 
 .reminder-item div {

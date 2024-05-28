@@ -60,7 +60,7 @@ function Routing() {
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="*" element={<Error404 />} />
 
-      <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} authorizedFor="user" />} />
+      {/* <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} authorizedFor="user" />} /> */}
       <Route path="/add" element={<ProtectedRoute Component={Add} authorizedFor="user" />} />
       <Route path="/target" element={<ProtectedRoute Component={Target} authorizedFor="user" />} />
 

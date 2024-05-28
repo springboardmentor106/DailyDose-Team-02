@@ -49,7 +49,7 @@ const Login = () => {
     const token = localStorage.getItem("token")
     if (token) {
       const role = localStorage.getItem("role")
-      role === "user" ? navigate("/dashboard") : navigate("/care-dashboard")
+      role === "user" ? navigate("/user-dash") : navigate("/care-dashboard")
     }
     return () => {
       setEmail("");
