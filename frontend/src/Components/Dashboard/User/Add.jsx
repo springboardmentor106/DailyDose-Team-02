@@ -5,7 +5,7 @@ import './Add.css'
 import { toast } from 'react-toastify';
 import Constants from '../../../constants';
 import UserNav from "../../userDashboard/UserNav";
-
+import UserProfile from '../dashComponents/UserProfile';
 
 const Add = () => {
   const [selectedItem, setSelectedItem] = useState('goal');
@@ -158,6 +158,7 @@ const Add = () => {
   return (
     <div className="main-container">
       <UserNav />
+      <UserProfile/>
       <div className="add-page-container">
         <div className='add-container'>
           <div className='add-heading' onClick={() => handleItemClick('goal')}>Add goals</div>

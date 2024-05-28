@@ -1,7 +1,7 @@
 .user__body {
   width: 100vw;
   height: 100vh;
-  background-color: #eaeef6;
+  background-color: white;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -13,7 +13,7 @@
   height: 95%;
   border-radius: 1rem;
   display: grid;
-  background-color: #eaeef6;
+  background-color: white;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(9, 1fr);
   gap: 1rem;
@@ -34,10 +34,10 @@
   overflow: hidden;
 }
 
-.main__content .boxes:hover {
-  /* background-color: #7192d4;
-  color: #fff; */
-}
+/* .main__content .boxes:hover {
+  background-color: #7192d4;
+  color: #fff;
+} */
 
 #user__welcome {
   display: flex;
@@ -190,8 +190,8 @@
   justify-content: center;
 }
 
-#calender-container {
-}
+/* #calender-container {
+} */
 
 #calender-container > div {
   padding-top: 0;
@@ -458,9 +458,9 @@
   #about__user #about-img-div {
     width: 35vh;
   }
-  .welcome__img__container {
-    /* bottom: -2vh; */
-  }
+  /* .welcome__img__container {
+    bottom: -2vh;
+  } */
   #chart .year-container button {
     height: 25px;
   }
