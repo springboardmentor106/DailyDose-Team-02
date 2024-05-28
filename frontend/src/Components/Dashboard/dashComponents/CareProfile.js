@@ -23,8 +23,9 @@ const CareProfile = () => {
             style={{
               backgroundColor: "#6a58dc",
               width: "fit-content",
-              marginTop: "140%",
-              marginLeft: "-130%",
+              bottom: "3vh",
+              left: "110px",
+              position: "fixed"
             }}>
             <div
               className="modal-body"
@@ -39,7 +40,7 @@ const CareProfile = () => {
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop1"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" }}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
                   Edit Profile
                 </button>
               </div>
@@ -49,7 +50,7 @@ const CareProfile = () => {
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop2"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" }}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
                   Setting
                 </button>
               </div>
@@ -59,7 +60,7 @@ const CareProfile = () => {
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop3"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" }}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
                   Notification
                 </button>
               </div>
@@ -67,7 +68,7 @@ const CareProfile = () => {
                 <button
                   type="button"
                   class="btn"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" }}
+                  style={{ backgroundColor: "#e0dcf8", width: "100%" , marginBottom:"3px"}}
                   onClick={() => handleLogout()}>
                   Logout
                 </button>

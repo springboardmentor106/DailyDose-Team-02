@@ -6,6 +6,7 @@ import { profileinfo } from './StaticDataCare'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../../constants'
+import CareProfile from '../dashComponents/CareProfile';
 const AssignTask = () => {
     const navigate = useNavigate()
     const [userDetails, setUserDetails] = useState(null)
@@ -125,11 +126,12 @@ const AssignTask = () => {
             <div className="nav-bar">
                 <UserNav />
             </div>
+            <CareProfile/>
             <div className="add-page-container">
                 <div className='add-heading' >Add goals</div>
                 <div className='add-content-container'>
 
-                    <div className='two-input-container'>
+                    <div className='two-input-container' style={{width:"99%",justifyContent:"center"}}>
                         <select class="form-select" id="inputGroupSelect04" value={details.selectedUser} onChange={(e) => onAddDetail("selectedUser", e.target.value)} aria-label="Example select with button addon">
                             <option selected>Select User</option>
                             {userDetails && userDetails?.map((profile, index) => (
@@ -143,7 +145,7 @@ const AssignTask = () => {
                         </div>
 
                     </div>
-                    <div className='two-input-container'>
+                    <div className='two-input-container' style={{width:"99%",flexDirection:"column"}}>
                         <div className='input-container'>
                             <div className='input-label'>Start Date</div>
                             <input type="date" className='add-input' value={details.goalStartDate || ""} onChange={(e) => onAddDetail("goalStartDate", e.target.value)} />
