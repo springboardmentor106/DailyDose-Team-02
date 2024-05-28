@@ -1,7 +1,7 @@
 import Caretaker from '../models/caretakerModel.js';
 import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
-
+import sendNotification from './sendNotification.js';
 // All routes - validate uuid from jwt token and match with uuid to create goal
 const getTodayGoals = async ({ userId, caretakerId }) => {
     try {
@@ -48,7 +48,16 @@ export const createGoal = async (req, res) => {
         if (!savedUser) {
             return res.status(400).json({ status: "failed", message: "Error while updating the user goal try again!" });
         }
+        // send notification to the user
+        const sendNotificationResult = await sendNotification({
+            title: "New goal created",
+            description: "goal created: " + req.body.title,
+            userId: role === "user" ? userId : seniorCitizenId
+        })
 
+        if (!sendNotificationResult) {
+            console.log("notification not sent when created goal", sendNotificationResult)
+        }
         return res.status(200).json({ status: "success", message: 'Goal Created Successfully' });
     } catch (error) {
         res.status(400).json({ status: "failed", message: error.message });

@@ -1,7 +1,7 @@
 .user__body {
   width: 100vw;
   height: 100vh;
-  background-color: #eaeef6;
+  /* background-color: #eaeef6; */
   display: flex;
   justify-content: end;
   align-items: center;
@@ -22,7 +22,7 @@
   height: 95%;
   border-radius: 1rem;
   display: grid;
-  background-color: #eaeef6;
+  /* background-color: #eaeef6; */
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(9, 1fr);
   gap: 1rem;
@@ -54,6 +54,7 @@
   grid-column: span 4 / auto;
   grid-row: span 2 / auto;
 }
+
 #welcome {
   width: 58%;
   height: 100%;
@@ -65,6 +66,7 @@
   position: relative;
   background-color: #6a58dc20;
 }
+
 .welcome__text {
   width: 60%;
   height: 100%;
@@ -76,16 +78,19 @@
   padding: 1rem;
   padding-left: 2vw;
 }
+
 .welcome__text h3 {
   font-size: 1.5vw;
   font-weight: 600;
 }
+
 .welcome__text p {
   width: 80%;
   font-size: 1vw;
   font-weight: 500;
   opacity: 0.75;
 }
+
 .welcome__img__container {
   width: 35%;
   height: 130%;
@@ -100,12 +105,14 @@
   bottom: 0px;
   right: 0px;
 }
+
 .welcome__img__container img {
   width: 100%;
   height: 85%;
   object-fit: cover;
   border-radius: 1rem;
 }
+
 #profile {
   width: 40%;
   height: 100%;
@@ -117,12 +124,14 @@
   background-color: #6a58dc20;
   flex-direction: column;
 }
-#profile h5{
+
+#profile h5 {
   font-size: 1.2vw;
   font-weight: 600;
   text-align: left;
   align-self: start;
 }
+
 .card-user {
   /* width: 100%;
   height: 100%; */
@@ -132,6 +141,7 @@
   align-items: center;
   /* background-color: #fff; */
 }
+
 .card-profile {
   max-width: 200px;
   max-height: 200px;
@@ -142,12 +152,14 @@
   border-radius: 50%;
   overflow: hidden;
 }
+
 #profile .card-profile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
+
 .card-body {
   /* width: 70%;
   height: 100%; */
@@ -158,6 +170,7 @@
   gap: 0.5rem;
   padding: 1rem;
 }
+
 .home-col-two .card-body {
   flex: 1 1;
   display: flex;
@@ -167,10 +180,12 @@
   padding: 1rem;
   align-items: start;
 }
+
 .card-body h6 {
   font-size: 1vw;
   font-weight: 600;
 }
+
 .card-body p {
   font-size: 0.75vw;
   font-weight: 500;
@@ -187,32 +202,37 @@
   background-color: #6a58dc20;
   border-radius: 1rem 0 0 1rem;
   margin-left: 2vw;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 #calender {
   width: 85%;
-  height: 45%;
+  height: fit-content;
+  min-height: 45%;
   display: flex;
   align-items: start;
-  gap: 1vh;
+  /* gap: 1vh; */
   overflow: hidden;
   justify-content: center;
+  margin-bottom: 10%
 }
 
-#calender-container {
-}
+#calender-container {}
 
-#calender-container > div {
+#calender-container>div {
   padding-top: 0;
 }
 
 #tasks {
   width: 85%;
-  height: 45%;
+  /* height: 45%; */
+  min-height: 40%;
   position: relative;
   overflow: visible;
   align-items: start;
 }
+
 #chart {
   grid-row: span 4 / auto;
   grid-column: span 4 / auto;
@@ -221,6 +241,7 @@
   justify-content: start;
   /* gap: 1vh; */
 }
+
 #chart .chart-heading {
   width: 100%;
   height: auto;
@@ -229,6 +250,7 @@
   align-items: center;
   padding: 0.5vh 1vw;
 }
+
 #chart h5,
 #progress h5,
 #about__user h5 {
@@ -236,16 +258,19 @@
   font-weight: 600;
   color: #000;
 }
+
 #chart .year-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
 }
+
 #chart #year-button-container {
   margin-top: 0;
   margin-left: 0;
 }
+
 #chart .year-container button {
   width: 6vw;
   height: 4vh;
@@ -256,6 +281,7 @@
   font-weight: 600;
   cursor: pointer;
 }
+
 #chart .row-one-card-one-dashboard {
   padding: 0px;
   flex: 1;
@@ -267,12 +293,15 @@
   justify-content: center;
   align-items: center;
 }
-#chart .row-one-card-one-dashboard .App{
+
+#chart .row-one-card-one-dashboard .App {
   width: 80%;
 }
+
 #chart .no-bar-graph-data-text {
   font-size: 1vw;
 }
+
 #reminder {
   grid-row: span 2 / auto;
 }
@@ -302,6 +331,7 @@
   align-items: center;
   padding: 0 1vw;
 }
+
 .progress-details-container .progress-detail {
   display: flex;
   align-items: center;
@@ -331,6 +361,7 @@
   margin-left: 0;
   margin-top: 0;
 }
+
 #progress #CircularProgressBar div {
   width: 5vw !important;
   height: 5vw !important;
@@ -359,18 +390,18 @@
   padding: 1vw;
   align-items: start;
   justify-content: start;
-  background: linear-gradient(
-    180deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(216, 211, 248, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(216, 211, 248, 1) 0%,
+      rgba(255, 255, 255, 1) 100%);
 }
+
 #about__user h3 {
   position: absolute;
   top: 2%;
   font-size: 2rem;
 }
+
 #about__user .disease__info {
   width: 100%;
   height: auto;
@@ -382,6 +413,7 @@
   margin-top: 1vw;
   /* border: 1px solid red; */
 }
+
 #about__user .disease__info .user-disease {
   width: 50%;
   height: 100%;
@@ -391,21 +423,26 @@
   /* gap: 1vw; */
   align-items: center;
 }
+
 .user-disease:nth-last-child(1) {
   border-left: 1px solid gray;
 }
+
 #about__user .disease__info .user-disease h6 {
   font-size: 1.1rem;
   font-weight: 600;
 }
+
 #about__user .disease__info .user-disease p {
   font-size: 0.75rem;
   font-weight: 500;
   opacity: 0.75;
 }
+
 #about__user .no-progress {
   width: 100%;
 }
+
 #about__user #about-img-div {
   width: 30vh;
   height: auto;
@@ -428,7 +465,6 @@
 }
 
 #tasks .right-card-two {
-  padding: 2vw;
   width: 100%;
   background-color: white;
   border-radius: 0;
@@ -453,19 +489,24 @@
     margin-left: 0;
     left: 1vw;
   }
+
   .row-three-card {
     margin-left: 0px;
     margin-right: 0px;
   }
+
   #chart .no-bar-graph-data-text {
     font-size: 1vw;
   }
+
   #about__user #about-img-div {
     width: 35vh;
   }
+
   .welcome__img__container {
     /* bottom: -2vh; */
   }
+
   #chart .year-container button {
     height: 25px;
   }
@@ -480,7 +521,7 @@
   .user__body {
     width: 100vw;
     height: 100vh;
-    background-color: #eaeef6;
+    /* background-color: #eaeef6; */
     display: flex;
     justify-content: center;
     align-items: start;
@@ -512,9 +553,11 @@
     justify-content: start;
     align-items: center;
   }
+
   .welcome__text h3 {
     font-size: 1.2rem;
   }
+
   .welcome__text p {
     font-size: 0.75rem;
     display: initial;
@@ -523,16 +566,19 @@
   #profile {
     display: none;
   }
+
   #chart {
     grid-column: span 6 / auto;
     grid-row: span 1 / auto;
     order: 2;
   }
+
   #bottom-pane {
     grid-column: span 6 / auto;
     grid-row: span 1 / auto;
     order: 3;
   }
+
   #progress {
     width: 50%;
     height: 100%;
@@ -549,6 +595,7 @@
     justify-content: space-between;
     align-items: center;
   }
+
   .progress-details-container .progress-detail {
     gap: 0.25rem;
   }
@@ -565,6 +612,7 @@
   #about__user .disease__info .user-disease h6 {
     font-size: 0.75rem;
   }
+
   #about__user .disease__info .user-disease p {
     font-size: 0.45rem;
   }
@@ -580,54 +628,67 @@
     grid-row: span 1 / auto;
     order: 4;
     flex-direction: row;
+    box-sizing: border-box;
   }
+
   #calender {
     width: 45%;
     height: 100%;
   }
+
   #tasks {
     width: 45%;
     height: 100%;
   }
+
   #chart .year-container button {
     height: 15px;
     width: 12vw;
     font-size: 1.5vw;
   }
+
   #chart h5,
   #progress h5,
   #about__user h5 {
     font-size: 3vw;
     padding-left: 1vw;
   }
+
   #chart .row-one-card-one-dashboard {
     width: 90%;
   }
+
   #chart .no-bar-graph-data-text {
     font-size: 2vw;
   }
+
   #progress #CircularProgressBar div {
     width: 16vw !important;
     height: 16vw !important;
   }
+
   .cirlce-pro-one {
     width: 8px;
     height: 8px;
     border-radius: 50px;
     /* background-color: #fff; */
   }
+
   .pro-percetage {
     font-size: 12px;
   }
+
   #progress .pro-text {
     font-size: 1.75vw;
   }
+
   .edit-profile-button {
     padding: 2px 10px;
     border-radius: 8px;
     font-size: 10px;
     font-weight: 600;
   }
+
   .no-progress-image {
     width: 85%;
     object-fit: cover;
@@ -636,16 +697,19 @@
   #calender {
     width: 54%;
   }
+
   .css-1rtg91x-MuiDateCalendar-root {
     width: 185px !important;
     height: 285px !important;
   }
+
   .css-1aqny2q-MuiPickersCalendarHeader-root {
     margin-top: 8px !important;
     margin-bottom: 0px !important;
     padding-left: 10px !important;
     padding-right: 0px !important;
   }
+
   .css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
     margin: 0 !important;
 
@@ -654,12 +718,14 @@
     height: 30px !important;
     margin: 0 2px !important;
   }
+
   .css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root {
     width: 32px !important;
     height: 32px !important;
 
     /* margin: 0 2px; */
   }
+
   .css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
     font-size: 13px !important;
   }
@@ -667,13 +733,16 @@
   #tasks .no-reminders-container {
     font-size: 2vw;
   }
+
   .no-reminders-image {
     width: 100%;
   }
+
   #user-mini-nav {
     position: absolute;
     top: 0;
   }
+
   #user-mini-nav .card-center-details-links button {
     font-size: 8px !important;
   }

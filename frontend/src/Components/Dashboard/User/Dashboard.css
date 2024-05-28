@@ -456,14 +456,17 @@ button {
 
 .reminder-list {
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
   flex: 1;
+  width:100%;
   flex-direction: column;
   margin-top: -28px;
 }
 
 .reminder-item {
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   width: 100%;
   justify-content: space-between;
   align-items: center;
