@@ -230,9 +230,9 @@ button {
   align-items: center;
 }
 
-.des-option-icon {
-  /* margin-left: 75px; */
-}
+/* .des-option-icon {
+  margin-left: 75px;
+} */
 
 .Additional-row-one-das {
   display: flex;
@@ -321,10 +321,10 @@ button {
   height: 240px;
 }
 
-.box-left-top {
+/* .box-left-top {
   margin-top: 10px;
-  /* margin-left: 118px; */
-}
+  margin-left: 118px;
+} */
 
 .row-one-chart {
   margin-top: 16px;
@@ -340,8 +340,8 @@ button {
   justify-content: space-between;
 }
 
-.year-container {
-}
+/* .year-container {
+} */
 
 .year-container button {
   background-color: #efeeee;
@@ -522,8 +522,8 @@ button {
     margin-left: -382px;
   }
 
-  .card-center-details {
-  }
+  /* .card-center-details {
+  } */
 
   .right-card-one {
     margin-left: -1px;
@@ -537,9 +537,9 @@ button {
     margin-left: -323px;
   }
 
-  .card-center-details-links {
-    /* margin-left: 424px; */
-  }
+  /* .card-center-details-links {
+    margin-left: 424px;
+  } */
 
   .row-three {
     margin-top: 24px;
@@ -597,8 +597,8 @@ button {
     margin-top: -65px;
   }
 
-  .card-body p {
-  }
+  /* .card-body p {
+  } */
 
   .img-container {
     width: 373px;
@@ -610,9 +610,9 @@ button {
     margin-left: 16px;
   }
 
-  .chart-heading strong {
-    /* font-size: 39px; */
-  }
+  /* .chart-heading strong {
+    font-size: 39px;
+  } */
 
   .dashboard {
     margin-left: -10px;
@@ -655,8 +655,8 @@ button {
     margin-left: -382px;
   }
 
-  .card-center-details {
-  }
+  /* .card-center-details {
+  } */
 
   .right-card-one {
     margin-left: -1px;
@@ -730,8 +730,8 @@ button {
     margin-top: -65px;
   }
 
-  .card-body p {
-  }
+  /* .card-body p {
+  } */
 
   .img-container {
     width: 373px;
@@ -803,8 +803,8 @@ button {
     width: 684px;
   }
 
-  .row-one {
-  }
+  /* .row-one {
+  } */
 
   .row-one-card-one {
     margin-left: -111px;
