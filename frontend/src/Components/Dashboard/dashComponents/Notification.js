@@ -38,6 +38,13 @@ const Notification = () => {
     }
   };
 
+  const handleClickNotification = () => {
+    const role = localStorage.getItem("role");
+    if (role === "user") {
+      navigate("/target")
+    }
+  }
+
   useEffect(() => {
     getAllNotifications()
   }, [])
@@ -58,8 +65,8 @@ const Notification = () => {
                     <div className="card-title" style={{ backgroundColor: "white", color: "black", marginLeft: "10px", fontSize: "20px" }}>{notification.title || "New notification"}</div>
                     <div className="card-body" style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", width: "100%" }}>
                       <div style={{ marginTop: "6px" }}>{notification.description || "New Notification"}</div>
-                      <div><button className='btn btn-sm' style={{ backgroundColor: "#6a58dc", color: "white" }}>{notification.belongTo}</button></div>
                     </div>
+                    <div style={{alignSelf:"flex-end"}}><button className='btn btn-sm' style={{ backgroundColor: "#6a58dc", color: "white" }} onClick={() => handleClickNotification(notification.belongTo)}>go to {notification.belongTo}</button></div>
                   </div>
                 </div>
               )

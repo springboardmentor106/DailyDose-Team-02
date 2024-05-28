@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import TargetList from "../User/CheckBoxTarget";
 import { RiCheckboxCircleLine } from "react-icons/ri";
@@ -8,11 +8,110 @@ import "./Target.css";
 import UserNav from "../../userDashboard/UserNav";
 import UserProfile from "../dashComponents/UserProfile";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import Constants from "../../../constants";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState("goal"); // Default to 'goal' being selected
+  const [goals, setGoals] = useState(null)
+  const [reminders, setReminders] = useState(null)
+  const [habits, setHabits] = useState(null)
+  const navigate = useNavigate()
+  const getUserReminders = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/reminders/get-reminders', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      console.log(data)
+      if (data.status === "success") {
+        data.reminders ? setReminders(data.reminders) : setReminders(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
+  const getUserGoals = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const caretakerId = localStorage.getItem("caretakerId")
+      const response = await fetch(Constants.BASE_URL + '/api/goals/getTodayGoals', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+        , body: JSON.stringify({ caretakerId: caretakerId })
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      console.log(data)
+      if (data.status === "success") {
+        data.goals ? setGoals(data.goals) : setGoals(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
+  const getUserHabits = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(Constants.BASE_URL + '/api/habits', {
+        method: "GET",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear()
+      }
+      const data = await response.json()
+      if (data.status === "success") {
+        data.habits ? setHabits(data.habits) : setHabits(null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+      toast.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getUserGoals()
+    getUserHabits()
+    getUserReminders()
+  },[])
+  
   const handleItemClick = (item) => {
     setSelectedItem(item === selectedItem ? null : item);
   };
+
   return (
     <div className="main-container-target">
       <UserNav />

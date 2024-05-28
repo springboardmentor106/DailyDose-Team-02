@@ -36,6 +36,10 @@ const reminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    completedToday: {
+        type: Boolean,
+        default: false
+    },
     timeFrequency: {
         type: Number,
         default: 1

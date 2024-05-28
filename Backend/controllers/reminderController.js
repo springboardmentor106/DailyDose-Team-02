@@ -158,7 +158,6 @@ export const updateReminder = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "Reminder not found" });
         }
 
-
         return res.json({ status: "success", message: "Reminder updated" });
     } catch (error) {
         console.log(error)
