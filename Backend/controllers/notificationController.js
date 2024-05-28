@@ -3,7 +3,7 @@ import Notification from "../models/notificationModel.js"; // Replace with actua
 export const createNotification = async (req, res) => {
     try {
         // const { userId, role } = req;
-        const { title, description, userId } = req.body;
+        const { title, description, userId, belongTo } = req.body;
         if (!userId) {
             return res.status(400).json({ status: "failed", message: "UUID not captured" });
         }
@@ -11,6 +11,7 @@ export const createNotification = async (req, res) => {
         const newNotification = {
             title: title,
             description: description,
+            belongTo: belongTo
         };
 
         const result = await Notification.findOneAndUpdate(
@@ -36,13 +37,9 @@ export const getAllNotifications = async (req, res) => {
             return res.status(400).json({ status: "failed", message: "UUID not captured" });
         }
 
-        const result = await Notification.find({ userId: userId })
+        const result = await Notification.findOne({ userId: userId })
 
-        if (!result) {
-            return res.status(400).json({ status: "failed", message: "Error while updating the notifications." })
-        }
-
-        return res.status(200).json({ status: "success", notifications: result, });
+        return res.status(200).json({ status: "success", notifications:result? result.notification : [] });
     } catch (err) {
         return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
     }

@@ -44,6 +44,9 @@ const reminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    lastSentNotification: {
+        type: Date
+    },
     createdAt: {
         type: Date,
         default: Date.now

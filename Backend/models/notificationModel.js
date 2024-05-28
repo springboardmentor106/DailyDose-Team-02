@@ -14,6 +14,10 @@ const notificationDetailSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    belongTo: {
+        type: String,
+        required: true
+    },
     actionTaken: {
         type: Boolean,
         default: false
