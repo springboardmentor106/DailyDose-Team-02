@@ -62,6 +62,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    goalProgress: {
+      type: String,
+      default: 0
+    },
     habits: [String]
   },
   { timestamps: true }

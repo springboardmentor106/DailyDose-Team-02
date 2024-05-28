@@ -118,8 +118,8 @@ const Add = () => {
       } else {
         toast.success(data.message)
         setDetails({})
-        selectedCategoriesList(null)
-        setGoalSelectedCategoriesList(null)
+        // selectedCategoriesList([])
+        // setGoalSelectedCategoriesList([])
       }
     } catch (err) {
       toast.error("Error:" + err)

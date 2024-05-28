@@ -36,6 +36,10 @@ const reminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    completedToday: {
+        type: Boolean,
+        default: false
+    },
     timeFrequency: {
         type: Number,
         default: 1
@@ -43,6 +47,9 @@ const reminderSchema = new mongoose.Schema({
     pushNotification: {
         type: Boolean,
         default: false
+    },
+    lastSentNotification: {
+        type: Date
     },
     createdAt: {
         type: Date,

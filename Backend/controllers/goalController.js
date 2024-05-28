@@ -1,7 +1,7 @@
 import Caretaker from '../models/caretakerModel.js';
 import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
-
+import sendNotification from './sendNotification.js';
 // All routes - validate uuid from jwt token and match with uuid to create goal
 const getTodayGoals = async ({ userId, caretakerId }) => {
     try {
@@ -48,7 +48,17 @@ export const createGoal = async (req, res) => {
         if (!savedUser) {
             return res.status(400).json({ status: "failed", message: "Error while updating the user goal try again!" });
         }
+        // send notification to the user
+        const sendNotificationResult = await sendNotification({
+            title: `New Goal Set! by ${role === "user" ? "you" : "caretaker"}`,
+            description: "A new challenge awaits! Your goal is now set. Stay focused and make it happen " + req.body.title,
+            userId: role === "user" ? userId : seniorCitizenId,
+            belongTo: "goal"
+        })
 
+        if (!sendNotificationResult) {
+            console.log("notification not sent when created goal", sendNotificationResult)
+        }
         return res.status(200).json({ status: "success", message: 'Goal Created Successfully' });
     } catch (error) {
         res.status(400).json({ status: "failed", message: error.message });
@@ -151,7 +161,19 @@ export const updateGoal = async (req, res) => {
         Object.assign(goal, body);
 
         const updatedGoal = await goal.save();
+        if (completedToday) {
+            // send notification to the user
+            const sendNotificationResult = await sendNotification({
+                title: "Congratulations on Completing Your Goal!",
+                description: "You've successfully achieved your target! Keep up the great work and continue reaching for new heights. ",
+                userId: userId,
+                belongTo: "goal"
+            })
 
+            if (!sendNotificationResult) {
+                console.log("notification not sent when created goal", sendNotificationResult)
+            }
+        }
         return res.status(200).json({ status: "success", message: 'Goal Updated Successfully', goal: updatedGoal });
     } catch (error) {
         console.error('Error updating goal:', error);
@@ -462,6 +484,39 @@ export const getDailyGoalProgress = async (req, res) => {
         const completedGoals = updatedGoals.filter(goal => goal.completedToday);
         const completedGoalsLength = completedGoals.length;
         const completePercent = updatedGoals.length > 0 ? (completedGoalsLength / updatedGoals.length) * 100 : 0;
+        const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId })
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "user not found" })
+        }
+        // send notification
+        if (todaysGoals.length > 0 && user.goalProgress != String(completePercent.toFixed(2))) {
+            let title = null;
+            let description = null;
+            if (parseFloat(user.goalProgress < completePercent)) {
+                title = "Great job!"
+                description = `You are getting there.You have completed ${completePercent.toFixed(2)} of your goals today.`
+            }
+            if (completePercent < 1) {
+                title = "Ready to Make Progress Today?"
+                description = `Let's get started on your goals!`
+            }
+
+            if (title) {
+                // send notification to the user
+                const sendNotificationResult = await sendNotification({
+                    title: title,
+                    description: description,
+                    userId: userId,
+                    belongTo: "reminder"
+                })
+
+                if (!sendNotificationResult) {
+                    console.log("notification not sent when created goal", sendNotificationResult)
+                }
+            }
+            user.goalProgress = completePercent.toFixed(2)
+            user.save()
+        }
 
         return res.status(200).json({
             status: "success",
@@ -473,6 +528,6 @@ export const getDailyGoalProgress = async (req, res) => {
 
     } catch (error) {
         console.error('Error fetching daily goal progress:', error);
-        res.status(500).json({ status: "error", message: "Failed to get daily goal progress" });
+        res.status(500).json({ status: "error", message: "Failed to get daily goal progress" + error });
     }
 };

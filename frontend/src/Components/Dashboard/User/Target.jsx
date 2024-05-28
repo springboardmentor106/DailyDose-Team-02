@@ -8,11 +8,15 @@ import './Target.css'
 import UserNav from '../../userDashboard/UserNav';
 import UserProfile from '../dashComponents/UserProfile';
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import Constants from "../../../constants";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Target = () => {
   const [selectedItem, setSelectedItem] = useState('goal'); // Default to 'goal' being selected
   const handleItemClick = (item) => {
     setSelectedItem(item === selectedItem ? null : item);
   };
+
   return (
    <div className="main-container-target">
     <UserNav/>

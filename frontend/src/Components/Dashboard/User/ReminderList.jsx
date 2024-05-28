@@ -39,7 +39,7 @@ const ReminderList = ({ remindersList, setRefresh }) => {
   }, [remindersList])
 
   return (
-    <div className="main">
+    <div className="reminders-list-container">
       <div className="reminder-list">
         {reminders &&
           reminders?.length ? reminders.map((reminder) => (

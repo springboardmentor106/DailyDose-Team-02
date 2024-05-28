@@ -205,12 +205,12 @@ const UserHome = () => {
     }
   }, [refresh === true]);
 
-  useEffect(() => {}, [reminders, goals]);
+  useEffect(() => { }, [reminders, goals]);
   return (
     <>
       <div className="user__body">
         <UserNav />
-        <UserProfile/>
+        <UserProfile />
         <div className="main__content">
           <div id="user__welcome">
             <div className="boxes" id="welcome">
@@ -223,7 +223,7 @@ const UserHome = () => {
               </div>
             </div>
             <div className="boxes" id="profile">
-            <h5><strong>About User</strong></h5>
+              <h5><strong>About User</strong></h5>
               {userDetails && (
                 <div className="card-user">
                   <div className="card-profile">
@@ -274,33 +274,31 @@ const UserHome = () => {
                 </div>
               </div>
               {selectedBox === 1 && (
-                <div>
-                  <div className="right-card-two">
-                    {reminders && reminders.length ? (
-                      <ReminderList
-                        remindersList={reminders}
-                        setRefresh={setRefresh}
+                <div className="right-card-two">
+                  {reminders && reminders?.length ? (
+                    <ReminderList
+                      remindersList={reminders}
+                      setRefresh={setRefresh}
+                    />
+                  ) : (
+                    <div className="no-reminders-container">
+                      <img
+                        src={noRemindersImage}
+                        alt="no reminders"
+                        className="no-reminders-image"
                       />
-                    ) : (
-                      <div className="no-reminders-container">
-                        <img
-                          src={noRemindersImage}
-                          alt="no reminders"
-                          className="no-reminders-image"
-                        />
-                        <div>
-                          Don't forget to add some reminders to stay on top of
-                          your tasks!
-                        </div>
+                      <div>
+                        Don't forget to add some reminders to stay on top of
+                        your tasks!
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               )}
               {selectedBox === 2 && (
                 <div>
                   <div className="right-card-two">
-                    {goals && goals.length ? (
+                    {goals && goals?.length ? (
                       <GoalReminderList
                         goalsList={goals}
                         setRefresh={setRefresh}
@@ -324,7 +322,7 @@ const UserHome = () => {
               {selectedBox === 3 && (
                 <div>
                   <div className="right-card-two">
-                    {habits && habits.length ? (
+                    {habits && habits?.length ? (
                       <HabitReminderList habitsList={habits} />
                     ) : (
                       <div className="no-reminders-container">
@@ -366,7 +364,7 @@ const UserHome = () => {
                 <h5>
                   <strong>Progress</strong>
                 </h5>
-                {goalProgress !== null && goals.length ? (
+                {goalProgress !== null && goals?.length ? (
                   <div className="row-three-content">
                     <div className="box-left-top">
                       <div id="CircularProgressBar">
@@ -381,7 +379,7 @@ const UserHome = () => {
                         <div className="cirlce-pro-one completed"></div>
                         <div className="pro-text">
                           <div className="pro-percentage">
-                          {goalProgress.completed}%
+                            {goalProgress.completed}%
                           </div>{" "}
                           completed
                         </div>
