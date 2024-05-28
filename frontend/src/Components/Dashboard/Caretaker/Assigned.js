@@ -52,12 +52,12 @@ const Assigned = ({ assignedUserDetails }) => {
                     </div></div>
                   </div>
                 </div>
-                <div className="home-col-three">
+                <div className="home-col-two">
                   <div className="card"><div className="card-body">
                     <Table data={assignedUser.reminders} type="Reminders" />
                   </div></div>
                 </div>
-                <div className="home-col-four">
+                <div className="home-col-two">
                   <div className="card"><div className="card-body">
                     <Table data={assignedUser.goals} type="Goals" />
                   </div></div>
