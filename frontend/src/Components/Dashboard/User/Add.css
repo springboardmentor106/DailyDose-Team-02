@@ -1,27 +1,25 @@
-/* .add-page-container {
-    width: 1100px;
-    height: 710px;
-    margin-top: 36px;
-    margin-left: 35px;
-  } */
+
 
   .main-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100vw;
     /* flex: 1 1; */
     height: 100vh;
 }
 
-.add-page-container {
-  /* margin-left: 125px; */
-  width: 50%;
-  margin-top: 5vh;
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
+  .add-page-container {
+    margin-left: 125px;
+    width: 90%;
+    min-height: 100vh;
+    padding-top: 6vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding-right: 2vw;
 }
+
 
 .add-heading {
   background-color: #6A58DC;
@@ -34,6 +32,9 @@
 
 .add-content-container {
   padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }
 
 .add-container {
@@ -103,6 +104,7 @@
   color: white;
   border-radius: 12px;
   font-weight: 600;
+  margin-top: 1vh;
 }
 
 .add-save-button-row{
@@ -110,123 +112,4 @@
     display: flex;
     justify-content: flex-end;
 }
-/* .dropdown-container-left{
-    margin-left: 41px;
-}
-  .dropdown {
-    margin-bottom: 15px;
-    margin-left: 103px;
-  }
-  .dropdown-button {
-    width: 1075px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background-color: #6A58DC;
-    cursor: pointer;
-  }
-  .dropdown-content {
-    padding: 8px;
-    display: flex;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 30px;
-    width: 1075px;
-  }
-  .btn{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
-   #heading{
-    color: white;
-    text-align: left;
-    margin-left: 10px;
-}
-#right-input{
-    width: 450px;
-    height: 125px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-#right-input-two{
-  width: 450px;
-  height: 240px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-.dropdown-container-right{
-  margin-left: 36px;
-}
-  label {
-    display: block;
-    font-weight: 400;
-    margin-top: 10px;
-    font-size: 26px;
-    font-weight: 10px;
-  }
-  input {
-    width: 450px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  textarea {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
-  #saow{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
-  #down-row-feild{
-    width: 300px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  #End-date-input input{
-    margin-top: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
-  #End-date-input {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
-#catogry-inputs {
-  margin-top: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-.catogry-feilds-right{
-  margin-top: 47px;
-}
-#Schedule-lable{
-  margin-top: 10px;
-  margin-top: 21px;
-  font-size: 26px;
-  margin-left: 10px;
-  font-weight: 400;
-  margin-bottom: 6px;
-} */
 
-@media screen and (max-width: 425px){
-  .add-page-container {
-    width: 95%;
-    margin-top: -85px;
-}
-.add-heading {
-  font-size: 15px;
-  font-weight: 400;
-  padding: 7px 30px;
-}
-.add-content-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
-}
-.input-label {
-  font-size: 12px;
-  color: black;
-  font-weight: 600;
-}
-.add-input {
-  font-size: 12px;
-}
-}

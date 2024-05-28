@@ -8,7 +8,7 @@
 }
 
 .main__content {
-  width: 90%;
+  /* width: 90%;
   margin-right: 1vw;
   height: 95%;
   border-radius: 1rem;
@@ -16,7 +16,17 @@
   background-color: #eaeef6;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
+  gap: 1rem; */
+  width: 93%;
+  margin-right: 0vw;
+  height: 95%;
+  border-radius: 1rem;
+  display: grid;
+  background-color: #eaeef6;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(9, 1fr);
   gap: 1rem;
+  margin-left: 5vw;
 }
 
 .main__content .boxes {
@@ -77,8 +87,8 @@
   opacity: 0.75;
 }
 .welcome__img__container {
-  width: 45%;
-  height: 100%;
+  width: 35%;
+  height: 130%;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -105,6 +115,13 @@
   padding: 1rem;
   color: #000;
   background-color: #6a58dc20;
+  flex-direction: column;
+}
+#profile h5{
+  font-size: 1.2vw;
+  font-weight: 600;
+  text-align: left;
+  align-self: start;
 }
 .card-user {
   /* width: 100%;
@@ -141,6 +158,15 @@
   gap: 0.5rem;
   padding: 1rem;
 }
+.home-col-two .card-body {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  align-items: start;
+}
 .card-body h6 {
   font-size: 1vw;
   font-weight: 600;
@@ -152,14 +178,15 @@
 }
 
 #right-pane {
-  grid-row: span 6 / auto;
+  grid-row: span 9 / auto;
   grid-column: span 2 / auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
   background-color: #6a58dc20;
-  border-radius: 1rem;
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 2vw;
 }
 
 #calender {
@@ -187,7 +214,7 @@
   align-items: start;
 }
 #chart {
-  grid-row: span 2 / auto;
+  grid-row: span 4 / auto;
   grid-column: span 4 / auto;
   display: flex;
   flex-direction: column;
@@ -232,10 +259,16 @@
 #chart .row-one-card-one-dashboard {
   padding: 0px;
   flex: 1;
-  width: 75vh;
+  width: 100%;
   height: 90%;
   border-radius: 0px;
   margin-left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#chart .row-one-card-one-dashboard .App{
+  width: 80%;
 }
 #chart .no-bar-graph-data-text {
   font-size: 1vw;
@@ -246,7 +279,7 @@
 
 #bottom-pane {
   grid-column: span 4 / auto;
-  grid-row: span 2 / auto;
+  grid-row: span 3 / auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -326,7 +359,12 @@
   padding: 1vw;
   align-items: start;
   justify-content: start;
-  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(216, 211, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(216, 211, 248, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 #about__user h3 {
   position: absolute;
@@ -387,8 +425,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1vw;
-  background-color: #7192d4;
-  border-radius: 1rem;
 }
 
 #tasks .right-card-two {
@@ -396,7 +432,7 @@
   width: 100%;
   background-color: white;
   border-radius: 0;
-  margin-top: 0;
+  margin-top: 2vh;
   box-shadow: initial;
   margin-left: 0;
 }
@@ -425,7 +461,7 @@
     font-size: 1vw;
   }
   #about__user #about-img-div {
-    width: 80%;
+    width: 35vh;
   }
   .welcome__img__container {
     /* bottom: -2vh; */
@@ -433,6 +469,11 @@
   #chart .year-container button {
     height: 25px;
   }
+}
+
+.home-row-one .card-body div:nth-child(2) div {
+  width: 100px !important;
+  height: 100px !important;
 }
 
 @media (max-width: 425px) {
@@ -633,9 +674,10 @@
     position: absolute;
     top: 0;
   }
-  .card-center-details-links button {
-    font-size: 8px;
+  #user-mini-nav .card-center-details-links button {
+    font-size: 8px !important;
   }
+
   .des-option-icon {
     padding-right: 5px;
   }

@@ -7,7 +7,6 @@ import profilepic from "../../../assets/images/profilepic.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Constants from "../../../constants";
-import { UnAssignedUser } from "./StaticDataCare";
 
 const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -108,15 +107,15 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                               <strong>Goal progress</strong>
                             </div>
                             <div>
-                              <CircularProgressBar
+                              {unassign.goals.length ? <CircularProgressBar
                                 value={unassign.progress.complete || 0}
                               />
-                            </div>
+                             : <div>No goals yet. rogress will be updated when you complete your goals.</div>}</div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="home-col-three">
+                    <div className="home-col-two">
                       <div className="card">
                         <div className="card-body">
                           <Table
@@ -126,7 +125,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="home-col-four">
+                    <div className="home-col-two">
                       <div className="card">
                         <div className="card-body">
                           <Table reminders={unassign.goals} type="Goals" />

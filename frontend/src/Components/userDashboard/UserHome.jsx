@@ -8,20 +8,19 @@ import welcome from "../../assets/images/UserCrop.png";
 import profilePic from "../../assets/images/profilepic.png";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoOptionsOutline } from "react-icons/io5";
-import { profileinfo } from "../Dashboard/User/StaticDataUser";
-import { reminders } from "../Dashboard/User/StaticDataUser";
 import Chart from "../Dashboard/dashComponents/Chart";
 import CircularProgressBar from "../Dashboard/dashComponents/ProgressBar";
 import ReactCalendar from "../Dashboard/dashComponents/Calendar";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { user, habitsList } from "../Dashboard/User/StaticDataUser";
-import noProgress from "../../assets/images/noProgress.png";
 import noProgressCropped from "../../assets/images/noProgressCropped.png";
 import noUserDetailsCropped from "../../assets/images/noUserDetailsCropped.png";
 import noRemindersImage from "../../assets/images/noReminders.png";
 import ReminderList from "../Dashboard/User/ReminderList";
 import HabitReminderList from "../Dashboard/User/HabitReminderList";
 import GoalReminderList from "../Dashboard/User/GoalReminderList";
+import UserProfile from '../Dashboard/dashComponents/UserProfile';
+import { RiFontSize } from "react-icons/ri";
 
 const UserHome = () => {
   const [selectedBox, setSelectedBox] = useState(1);
@@ -211,6 +210,7 @@ const UserHome = () => {
     <>
       <div className="user__body">
         <UserNav />
+        <UserProfile/>
         <div className="main__content">
           <div id="user__welcome">
             <div className="boxes" id="welcome">
@@ -223,6 +223,7 @@ const UserHome = () => {
               </div>
             </div>
             <div className="boxes" id="profile">
+            <h5><strong>About User</strong></h5>
               {userDetails && (
                 <div className="card-user">
                   <div className="card-profile">
@@ -253,7 +254,7 @@ const UserHome = () => {
                 <div className="card-center-details-links">
                   <button
                     onClick={() => handleLinkClick(1)}
-                    className={selectedBox === 1 ? "active" : ""}>
+                    className={selectedBox === 1 ? "active" : ""} >
                     {" "}
                     Reminder
                   </button>

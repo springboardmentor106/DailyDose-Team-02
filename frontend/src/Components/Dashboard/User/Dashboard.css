@@ -43,9 +43,9 @@ button {
   display: flex;
 }
 
-.active {
+/* .active {
   text-decoration: underline;
-}
+} */
 
 .img-container {
   width: 244px;
