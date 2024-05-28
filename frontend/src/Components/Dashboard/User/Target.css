@@ -24,7 +24,7 @@
       height: 44px;
       background-color: #E0DCF8;
       border-radius: 10px;
-      margin-top: 10px;
+      margin-top: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -71,7 +71,7 @@
   } 
   .dropdown {
     border: 1px solid black;
-    width: 1069px;
+    width: 1093px;
     border-radius: 18px;
     padding: 20px;
   }
