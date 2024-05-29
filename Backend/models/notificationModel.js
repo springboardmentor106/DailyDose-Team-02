@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
+
 const notificationDetailSchema = mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-        min: 1
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(), // Automatically generate ObjectId
+        required: true
     },
     title: {
         type: String,
@@ -22,7 +23,8 @@ const notificationDetailSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-})
+});
+
 const notificationSchema = mongoose.Schema({
     uuid: {
         type: String,
@@ -40,6 +42,6 @@ const notificationSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     }
-
 });
+
 export default mongoose.model("Notification", notificationSchema);

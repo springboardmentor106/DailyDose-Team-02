@@ -38,10 +38,42 @@ const Notification = () => {
     }
   };
 
-  const handleClickNotification = () => {
+  const updateNotification = async (notificationId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + '/api/notifications', {
+        method: "PATCH",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify({ notificationId: notificationId })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        navigate("/target")
+        getAllNotifications()
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+
+  const handleClickNotification = async (notificationId) => {
     const role = localStorage.getItem("role");
     if (role === "user") {
-      navigate("/target")
+
+      const notificationUpdate = await updateNotification(notificationId)
     }
   }
 
@@ -58,7 +90,7 @@ const Notification = () => {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body" >
-            {notifications && notifications.length ? notifications.map((notification) => {
+            {notifications && notifications.notification?.length ? notifications.notification.reverse().map((notification) => {
               return (
                 <div className='notify-body' style={{ marginBottom: "10px" }}>
                   <div className="card" style={{ borderRadius: "25px", padding: "10px" }}>
@@ -66,7 +98,7 @@ const Notification = () => {
                     <div className="card-body" style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", width: "100%" }}>
                       <div style={{ marginTop: "6px" }}>{notification.description || "New Notification"}</div>
                     </div>
-                    <div style={{alignSelf:"flex-end"}}><button className='btn btn-sm' style={{ backgroundColor: "#6a58dc", color: "white" }} onClick={() => handleClickNotification(notification.belongTo)}>go to {notification.belongTo}</button></div>
+                    {!notification.actionTaken && notification.belongTo !== "quote" && <div style={{ alignSelf: "flex-end" }}><button className='btn btn-sm' style={{ backgroundColor: "#6a58dc", color: "white" }} onClick={() => handleClickNotification(notification._id)}>go to {notification.belongTo}</button></div>}
                   </div>
                 </div>
               )

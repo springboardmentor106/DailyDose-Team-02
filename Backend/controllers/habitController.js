@@ -58,9 +58,9 @@ export const getHabits = async (req, res) => {
         }
 
         const user = await User.findOne({ uuid: userId })
-        if (!user) {
-            return res.status(404).json({ status: "failed", message: "User not found" });
-        }
+        // if (!user) {
+        //     return res.status(404).json({ status: "failed", message: "User not found" });
+        // }
 
         let habits = [];
         let habitLength = user.habits.length

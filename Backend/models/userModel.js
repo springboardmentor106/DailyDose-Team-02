@@ -66,6 +66,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 0
     },
+    hitProgressNotificationLastSent: {
+      type: Date,
+      default: () => new Date(Date.now() - 24 * 60 * 60 * 1000)
+    },
+    dailyQuoteSent: {
+      type: Date,
+      default: () => new Date(Date.now() - 24 * 60 * 60 * 1000)
+    },
     habits: [String]
   },
   { timestamps: true }

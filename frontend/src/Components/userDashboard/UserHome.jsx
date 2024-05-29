@@ -29,6 +29,7 @@ const UserHome = () => {
   const [habits, setHabits] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [goalProgress, setGoalProgress] = useState(null);
+  const [chartData, setChartData] = useState(null)
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -193,6 +194,34 @@ const UserHome = () => {
     }
   };
 
+  const getChartData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + "/api/goals/monthly-stats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({ year: 2024 })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
+      const data = await response.json();
+      if (data.status === "success") {
+        setChartData(data.monthsData)
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -201,6 +230,7 @@ const UserHome = () => {
       getUserHabits();
       getUserDetails();
       getGoalProgress();
+      getChartData()
       setRefresh(false);
     }
   }, [refresh === true]);
@@ -355,7 +385,7 @@ const UserHome = () => {
               </div>
             </div>
             <div className="row-one-card-one-dashboard">
-              <Chart setRefresh={setRefresh} />
+              <Chart chartData={chartData} />
             </div>
           </div>
           <div id="bottom-pane">

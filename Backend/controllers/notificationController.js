@@ -39,8 +39,40 @@ export const getAllNotifications = async (req, res) => {
 
         const result = await Notification.findOne({ userId: userId })
 
-        return res.status(200).json({ status: "success", notifications:result? result.notification : [] });
+        return res.status(200).json({ status: "success", notifications: result ? result : {} });
     } catch (err) {
         return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
+    }
+};
+
+export const updateNotification = async (req, res) => {
+    try {
+        const { userId } = req;
+        const { notificationId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ status: "failed", message: "UUID not captured" });
+        }
+
+        if (!notificationId) {
+            return res.status(400).json({ status: "failed", message: "notification id not found" });
+        }
+
+        const notificationDoc = await Notification.findOne({ userId: userId });
+        if (!notificationDoc) {
+            return res.status(404).json({ status: "failed", message: "notification not found" });
+        }
+
+        const notificationIndex = notificationDoc.notification.findIndex(n => n._id.toString() === notificationId);
+        if (notificationIndex === -1) {
+            return res.status(404).json({ status: "failed", message: "notification id not found in notifications" });
+        }
+
+        notificationDoc.notification[notificationIndex].actionTaken = true;
+        await notificationDoc.save();
+
+        return res.status(200).json({ status: "success", message: "notification updated successfully" });
+    } catch (err) {
+        return res.status(500).json({ status: "failed", message: "Internal server error: " + err.message });
     }
 };
