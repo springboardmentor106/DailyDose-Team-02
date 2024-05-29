@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import SideBar from "../User/SideBar"
 import { RxCross2 } from "react-icons/rx";
 import './Add.css'
 import { toast } from 'react-toastify';
@@ -118,8 +117,8 @@ const Add = () => {
       } else {
         toast.success(data.message)
         setDetails({})
-        selectedCategoriesList(null)
-        setGoalSelectedCategoriesList(null)
+        // selectedCategoriesList([])
+        // setGoalSelectedCategoriesList([])
       }
     } catch (err) {
       toast.error("Error:" + err)

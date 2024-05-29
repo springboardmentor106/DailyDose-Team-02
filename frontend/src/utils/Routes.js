@@ -60,14 +60,13 @@ function Routing() {
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="*" element={<Error404 />} />
 
-      {/* <Route path="/dashboard" element={<ProtectedRoute Component={Dashboard} authorizedFor="user" />} /> */}
+      <Route path="/user-dash" element={<ProtectedRoute Component={UserDashboard} authorizedFor="user" />} />
       <Route path="/add" element={<ProtectedRoute Component={Add} authorizedFor="user" />} />
       <Route path="/target" element={<ProtectedRoute Component={Target} authorizedFor="user" />} />
 
       <Route path="/care-dashboard" element={<ProtectedRoute Component={HomePage} authorizedFor="caretaker" />} />
       <Route path="/care-add" element={<ProtectedRoute Component={AssignTask} authorizedFor="caretaker" />} />
       <Route path="/care-analytics" element={<ProtectedRoute Component={Analytics} authorizedFor="caretaker" />} />
-      <Route path="/user-dash" element={<ProtectedRoute Component={UserDashboard} authorizedFor="user" />} />
       <Route path="/Notification" element={<Notification />} />
     </Routes>
   );

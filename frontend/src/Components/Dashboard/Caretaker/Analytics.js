@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Constants from "../../../constants";
 import "./Pages.css";
 import profilepic from "../../../assets/images/profilepic.png";
 import UserNav from "../../userDashboard/UserNav";
@@ -43,6 +43,7 @@ const Analytics = () => {
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
   };
+
   const getUserReminders = async () => {
     try {
       const token = localStorage.getItem("token");

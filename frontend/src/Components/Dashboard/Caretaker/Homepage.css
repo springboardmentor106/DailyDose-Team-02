@@ -29,11 +29,10 @@
   /* height: 30vh; */
 }
 #card1 {
-  height: 180px;
-  /* width: 40%; */
-  /* height: 30vh; */
-  width: 400px;
+  width: 40%;
+  height: 30vh;
   background-color: #dad4f7;
+  max-height: 180px;
   border-radius: 30px;
   /* margin: 5px; */
   box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
@@ -41,7 +40,7 @@
   overflow: hidden;
 }
 #heading div:nth-child(1) {
-  width: 70%;
+  width: 55%;
 }
 #heading div:nth-child(1) h3 {
   font-size: 1.5rem;
@@ -49,7 +48,7 @@
 #card2 {
   max-height: 180px;
   width: 30%;
-  max-width: 300px;
+  /* max-width: 300px; */
   height: 30vh;
   background-color: #cdc8f5;
   border-radius: 30px;
@@ -75,6 +74,11 @@
     -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
+#card3 > p{
+  font-size: 1rem;
+  text-align: center;
+  margin: auto;
+}
 #heading {
   /* display: flex; */
   /* margin-top: 3px; */
@@ -94,6 +98,7 @@
   font: bolder;
   color: white;
   padding: 3px;
+  margin-bottom: 0;
 }
 .card-title h6 {
   padding: 2px 1rem;
@@ -149,10 +154,11 @@
   justify-content: center;
 }
 .imgconatiner {
-  width: 60%;
-    position: absolute;
-    right: -40px;
-    bottom: 0;
+  width: 53%;
+  height: 100%;
+  position: absolute;
+  right: -40px;
+  bottom: 0;
 }
 #care-progress .card-body {
   width: 200px;
@@ -250,10 +256,10 @@
 }
 .home-row-one .card .card-body {
   display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    width: 100%;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
 }
 /* .card-body div div{
   width: 50px !important;
@@ -336,9 +342,10 @@
   justify-content: center;
   align-items: center;
   /* gap: 10px; */
+  overflow: overlay;
 }
 
-.ass-user-detail div:first-child{
+.ass-user-detail div:first-child {
   width: 30%;
 }
 
@@ -413,21 +420,21 @@
   gap: 10px;
 }
 
-#caretaker-action-btns{
+#caretaker-action-btns {
   display: flex;
   gap: 1vw;
   width: 15%;
 }
-#caretaker-action-btns button{
+#caretaker-action-btns button {
   width: 50%;
   font-size: 0.75em;
   font-weight: 600;
 }
 
-.model-content{ 
-    margin-top: 0 !important;
-    margin-left:0 !important;
-    position: absolute !important;
-    left: 0 !important;
-    bottom: 0 !important;
+.model-content {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
 }

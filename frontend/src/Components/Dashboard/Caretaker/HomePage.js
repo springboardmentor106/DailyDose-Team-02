@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.css"; // Import your CSS file for styling
-import Caretacker from "../../../assets/images/Caretacker.png"
+import Caretacker from "../../../assets/images/Caretacker.png";
 import UserNav from "../../userDashboard/UserNav";
 import Assigned from "./Assigned";
 import CareAdd from "./CareAdd";
@@ -8,6 +8,7 @@ import Constants from "../../../constants";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CareProfile from "../dashComponents/CareProfile";
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
@@ -44,16 +45,19 @@ const HomePage = () => {
 
   const getUserGoals = async (userId) => {
     try {
-      const token = localStorage.getItem("token")
-      const caretakerId = localStorage.getItem("caretakerId")
-      const response = await fetch(Constants.BASE_URL + '/api/goals/getTodayGoals', {
-        method: "POST",
-        headers: {
-          'Content-Type': "application/json",
-          'Authorization': token
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(
+        Constants.BASE_URL + "/api/goals/getTodayGoals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({ seniorCitizenId: userId }),
         }
-        , body: JSON.stringify({ seniorCitizenId: userId })
-      })
+      );
 
       if (response.status === 401) {
         navigate("/login");
@@ -106,7 +110,7 @@ const HomePage = () => {
         navigate("/login");
         localStorage.clear();
       }
-      const data = await response.json()
+      const data = await response.json();
       if (data.status === "success") {
         return data.reminders ? data.reminders : null;
       } else {
@@ -219,7 +223,7 @@ const HomePage = () => {
             data.seniorArr
           );
           const finalArray = [];
-          data.seniorArr.forEach(user => {
+          data.seniorArr.forEach((user) => {
             const userUuid = user.uuid;
             const { firstname, lastname, age, gender, email } = user;
 
@@ -250,9 +254,9 @@ const HomePage = () => {
 
             finalArray.push(userDetails);
           });
-          console.log(finalArray)
-          setAssignedUserDetails(finalArray)
-          localStorage.setItem("assignedUsers", finalArray)
+          console.log(finalArray);
+          setAssignedUserDetails(finalArray);
+          localStorage.setItem("assignedUsers", finalArray);
         }
       } else {
         toast.error(data.message);
@@ -345,8 +349,8 @@ const HomePage = () => {
       getAssignedUserDetails();
       getUnassignedUserDetails();
     }
-    setRefresh(false)
-  }, [refresh === true])
+    setRefresh(false);
+  }, [refresh === true]);
 
   const calculateNumberOfUsersStartedGoals = () => {
     const usersCount =
@@ -366,9 +370,9 @@ const HomePage = () => {
       <div className="nav-bar">
         <UserNav />
       </div>
-      
-      <CareProfile/>
-      
+
+      <CareProfile />
+
       <div className="pages">
         <div className="header">
           <div className="card" id="card1">
@@ -408,14 +412,16 @@ const HomePage = () => {
               </div>
             </div>
           )}
-          { (
+          {
             <div className="card" id="card3">
               <div className="card-title">
                 <h6>User Update</h6>
               </div>
-              No of users started hitting their goals: {updateUserCount || 0}{" "}
+              <p>
+                No of users started hitting their goals: {updateUserCount || 0}{" "}
+              </p>
             </div>
-          )}
+          }
         </div>
 
         <div className="content">

@@ -78,19 +78,19 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                       </div>
                     </div>
                     <div id="caretaker-action-btns">
-                  <button
-                    type="button"
-                    className="btn btn-light btn-sm"
-                    id="getAssign">
-                    Get Assigned
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-light btn-sm"
-                    id="getAssign">
-                    Show More
-                  </button>
-                </div>
+                      <button
+                        type="button"
+                        className="btn btn-light btn-sm"
+                        id="getAssign">
+                        Get Assigned
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-light btn-sm"
+                        id="getAssign">
+                        Show More
+                      </button>
+                    </div>
                   </button>
                 </h2>
                 <div
@@ -107,10 +107,17 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                               <strong>Goal progress</strong>
                             </div>
                             <div>
-                              {unassign.goals.length ? <CircularProgressBar
-                                value={unassign.progress.complete || 0}
-                              />
-                             : <div>No goals yet. rogress will be updated when you complete your goals.</div>}</div>
+                              {unassign.goals.length ? (
+                                <CircularProgressBar
+                                  value={unassign.progress.complete || 0}
+                                />
+                              ) : (
+                                <div>
+                                  No goals yet. rogress will be updated when you
+                                  complete your goals.
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
