@@ -1,126 +1,164 @@
-
 /* .main-container-target{ */
 
-.main-container-target{
+.main-container-target {
   display: flex;
-  }
-  #user-target{
-    margin-left: 125px;
-    width: 44%;
-    margin-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-  }
-  .header-container{
-      width: 1053px;
-      height: 40px;
-      background-color: white;
-      border-radius: 10px;
-      background-color: #E0DCF8;
-  }
-  .details{
-      width: 1053px;
-      height: 44px;
-      background-color: #E0DCF8;
-      border-radius: 10px;
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-  #chaeck-icon{
-      position: relative;
-      height: 10px;
-      width: 17px;
-      top: 11px;
-      left: 28px;
-  }
-  .header-details-Task{
-      width: 55px;
-      position: relative;
-      left: 107px;
-      top: -8px;
-  }
-  .header-details-EndDate{
-      width: 112px;
-      position: relative;
-      left: 458px;
-      top: -25px;
-  }
-  .header-details-Status{
-      width: 112px;
-      position: relative;
-      left: 735px;
-      top: -51px;
-  }
-  .Progress-bar{
-      position: relative;
-      left: 397px;
-      top: 5px;
-  }
-  .end-date{
-      position: relative;
-      top: -23px;
-      left: -16px;
-  }
-  .dot{
-      position: relative;
-      left: 483px;
-      top: -40px;
-  } 
-  .dropdown {
-    border: 1px solid black;
-    width: 1093px;
-    border-radius: 18px;
-    padding: 20px;
-  }
-    .header-details-dots{
-      margin-left: 1002px;
-      margin-top: -75px;
-    }
+}
 
-  /*  CheckBox.css  */
+#user-target {
+  margin-left: 125px;
+  width: 44%;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
 
-  .checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 28px; 
-  }
-  .checkbox input[type="checkbox"] {
-    margin: 0; 
-    margin-left: -499px;
-    top: -64px;
-    position: relative;
-  }
-  .checkbox label {
-    font-size: 16px;
-    cursor: pointer;
-    margin: 0;
-    position: relative;
-    left: 39px;
-    top: -65px;
-    z-index: 9;
-    margin-bottom: -4px;
-  }
-  .status{
-    position: relative;
-    left: 646px;
-    top: -30px;
-    margin-bottom: -21px;
-    padding: 3px 8px; 
-    border-radius: 17px; 
-    font-weight: bold; 
-    text-align: center; 
-    font-size:smaller;
-  }
-  
-  .completed {
-    background-color: #2CDF8C; /* Green for completed */
-    bottom: 32px;
-  }
-  
-  .not-completed {
-    background-color: #F6B95E; /* Orange for not completed */
-    bottom: 31px;
-  }
+.header-container {
+  width: 1053px;
+  height: 40px;
+  background-color: white;
+  border-radius: 10px;
+  background-color: #E0DCF8;
+}
+
+.details {
+  width: 1053px;
+  height: 44px;
+  background-color: #E0DCF8;
+  border-radius: 10px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#chaeck-icon {
+  position: relative;
+  height: 10px;
+  width: 17px;
+  top: 11px;
+  left: 28px;
+}
+
+.header-details-Task {
+  width: 55px;
+  position: relative;
+  left: 107px;
+  top: -8px;
+}
+
+.header-details-Task-habit {
+  width: 55px;
+  position: relative;
+  left:16px;
+  top:8px;
+  /* left: 107px;
+  top: -8px; */
+}
+
+.header-details-EndDate {
+  width: 112px;
+  position: relative;
+  left: 458px;
+  top: -25px;
+}
+
+.header-details-Status {
+  width: 112px;
+  position: relative;
+  left: 735px;
+  top: -51px;
+}
+
+.Progress-bar {
+  position: relative;
+  left: 397px;
+  top: 5px;
+  min-height: 35px
+}
+
+.end-date {
+  position: relative;
+  top: -23px;
+  left: -16px;
+}
+
+.dot {
+  position: relative;
+  left: 483px;
+  top: -40px;
+}
+
+.dropdown {
+  border: 1px solid black;
+  width: 1093px;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.header-details-dots {
+  margin-left: 1002px;
+  margin-top: -75px;
+}
+
+/*  CheckBox.css  */
+.no-reminders {
+  align-self: center;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.habit{
+  margin-top:8px;
+  align-self: flex-start;
+  margin-left:16px;
+  font-size:16px
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin: 0;
+  margin-left: -499px;
+  top: -64px;
+  position: relative;
+}
+
+.checkbox label {
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+  left: 39px;
+  top: -65px;
+  z-index: 9;
+  margin-bottom: -4px;
+}
+
+.status {
+  position: relative;
+  left: 646px;
+  top: -25px;
+  margin-bottom: -21px;
+  padding: 3px 8px;
+  border-radius: 17px;
+  font-weight: bold;
+  text-align: center;
+  font-size: smaller;
+}
+
+.completed {
+  background-color: #2CDF8C;
+  /* Green for completed */
+  bottom: 32px;
+}
+
+.not-completed {
+  background-color: #F6B95E;
+  /* Orange for not completed */
+  bottom: 31px;
+}
