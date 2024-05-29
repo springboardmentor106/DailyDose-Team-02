@@ -1,3 +1,7 @@
+*{
+  user-select: none;
+}
+
 .user__body {
   width: 100vw;
   height: 100vh;
@@ -480,6 +484,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.reminder-list{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.type-container {
+  overflow: overlay;
 }
 
 @media (max-width: 1024px) {

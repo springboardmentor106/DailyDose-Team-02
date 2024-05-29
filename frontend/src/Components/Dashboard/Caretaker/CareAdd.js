@@ -81,7 +81,9 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                       <button
                         type="button"
                         className="btn btn-light btn-sm"
-                        id="getAssign">
+                        id="getAssign"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
                         Get Assigned
                       </button>
                       <button

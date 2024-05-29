@@ -484,7 +484,7 @@ reminder-list {
 
 .reminder-item div {
   flex: 1;
-  margin-left: 12px;
+  /* margin-left: 12px; */
 }
 
 .reminder-item button {
@@ -507,7 +507,7 @@ reminder-list {
 }
 
 .type-container {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   flex: 1;
   width: 100%;
 }
