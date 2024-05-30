@@ -65,9 +65,9 @@ export const getReminders = async (req, res) => {
         }
 
         const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId });
-        if (!user) {
-            return res.status(401).json({ status: "failed", message: "User not found" });
-        }
+        // if (!user) {
+        //     return res.status(401).json({ status: "failed", message: "User not found" });
+        // }
 
         const today = new Date();
         const dayOfWeek = today.toLocaleString('en-us', { weekday: 'long' }); // e.g., 'Monday'
