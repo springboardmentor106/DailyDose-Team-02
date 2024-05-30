@@ -537,6 +537,9 @@ export const getDailyGoalProgress = async (req, res) => {
                         belongTo: "quote"
                     })
 
+                    user.dailyQuoteSent = new Date()
+                    user.save()
+
                     if (!sendNotificationResult) {
                         console.log("notification not sent when created goal", sendNotificationResult)
                     }
