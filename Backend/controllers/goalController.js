@@ -1,8 +1,8 @@
-import Caretaker from "../models/caretakerModel.js";
-import GOAL from "../models/goalModel.js";
-import User from "../models/userModel.js";
-import sendNotification from "./sendNotification.js";
-import messages from "./messages.js";
+import Caretaker from '../models/caretakerModel.js';
+import GOAL from '../models/goalModel.js';
+import User from '../models/userModel.js';
+import sendNotification from './sendNotification.js';
+import messages from "./messages.js"
 // All routes - validate uuid from jwt token and match with uuid to create goal
 const getTodayGoals = async ({ userId, caretakerId }) => {
   try {
@@ -45,48 +45,31 @@ export const createGoal = async (req, res) => {
         .json({ status: "failed", message: "user not found" });
     }
 
-    const goal = new GOAL({
-      ...req.body,
-      createdBy: role,
-      createdById: userId,
-    });
-    const savedGoal = await goal.save();
-    if (!savedGoal) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Error while saving the new goal. try again!",
-      });
-    }
-    user.goals.push(goal.uuid);
-    const savedUser = await user.save();
-    if (!savedUser) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Error while updating the user goal try again!",
-      });
-    }
-    // send notification to the user
-    const sendNotificationResult = await sendNotification({
-      title: `New Goal Set! by ${role === "user" ? "you" : "caretaker"}`,
-      description:
-        "A new challenge awaits! Your goal is now set. Stay focused and make it happen " +
-        req.body.title,
-      userId: role === "user" ? userId : seniorCitizenId,
-      belongTo: "goal",
-    });
+        const goal = new GOAL({ ...req.body, createdBy: role, createdById: userId });
+        const savedGoal = await goal.save();
+        if (!savedGoal) {
+            return res.status(400).json({ status: "failed", message: 'Error while saving the new goal. try again!' });
+        }
+        user.goals.push(goal.uuid)
+        const savedUser = await user.save();
+        if (!savedUser) {
+            return res.status(400).json({ status: "failed", message: "Error while updating the user goal try again!" });
+        }
+        // send notification to the user
+        const sendNotificationResult = await sendNotification({
+            title: `New Goal Set! by ${role === "user" ? "you" : "caretaker"}`,
+            description: "A new challenge awaits! Your goal is now set. Stay focused and make it happen " + req.body.title,
+            userId: role === "user" ? userId : seniorCitizenId,
+            belongTo: "goal"
+        })
 
-    if (!sendNotificationResult) {
-      console.log(
-        "notification not sent when created goal",
-        sendNotificationResult
-      );
+        if (!sendNotificationResult) {
+            console.log("notification not sent when created goal", sendNotificationResult)
+        }
+        return res.status(200).json({ status: "success", message: 'Goal Created Successfully' });
+    } catch (error) {
+        res.status(400).json({ status: "failed", message: error.message });
     }
-    return res
-      .status(200)
-      .json({ status: "success", message: "Goal Created Successfully" });
-  } catch (error) {
-    res.status(400).json({ status: "failed", message: error.message });
-  }
 };
 
 export const getUserGoals = async (req, res) => {
@@ -222,34 +205,24 @@ export const updateGoal = async (req, res) => {
 
     const updatedGoal = await goal.save();
 
-    if (completedToday) {
-      // send notification to the user
-      const sendNotificationResult = await sendNotification({
-        title: "Congratulations on Completing Your Goal!",
-        description:
-          "You've successfully achieved your target! Keep up the great work and continue reaching for new heights. ",
-        userId: userId,
-        belongTo: "goal",
-      });
+        if (completedToday) {
+            // send notification to the user
+            const sendNotificationResult = await sendNotification({
+                title: "Congratulations on Completing Your Goal!",
+                description: "You've successfully achieved your target! Keep up the great work and continue reaching for new heights. ",
+                userId: userId,
+                belongTo: "goal"
+            })
 
-      if (!sendNotificationResult) {
-        console.log(
-          "notification not sent when created goal",
-          sendNotificationResult
-        );
-      }
+            if (!sendNotificationResult) {
+                console.log("notification not sent when created goal", sendNotificationResult)
+            }
+        }
+        return res.status(200).json({ status: "success", message: 'Goal Updated Successfully', goal: updatedGoal });
+    } catch (error) {
+        console.error('Error updating goal:', error);
+        res.status(500).json({ status: "error", message: "Failed to update goal" + error });
     }
-    return res.status(200).json({
-      status: "success",
-      message: "Goal Updated Successfully",
-      goal: updatedGoal,
-    });
-  } catch (error) {
-    console.error("Error updating goal:", error);
-    res
-      .status(500)
-      .json({ status: "error", message: "Failed to update goal" + error });
-  }
 };
 
 export const deleteGoal = async (req, res) => {
@@ -438,11 +411,15 @@ export const deleteAllGoal = async (req, res) => {
   }
 };
 export const getMonthlyGoalProgress = async (req, res) => {
-  try {
-    const { userId, role } = req;
-    let { seniorCitizenId, caretakerId, year } = req.body;
-    role === "user" ? (seniorCitizenId = userId) : (caretakerId = userId);
-    let seniorId, senior;
+    try {
+        const { userId, role } = req;
+        let { seniorCitizenId, caretakerId, year } = req.body;
+        role === "user" ? seniorCitizenId = userId : caretakerId = userId;
+        let seniorId, senior;
+
+        if (!year) {
+            return res.status(400).json({ status: "failed", message: "Year is required in the request body" });
+        }
 
     if (!year) {
       return res.status(400).json({
@@ -483,13 +460,12 @@ export const getMonthlyGoalProgress = async (req, res) => {
         .json({ status: "failed", message: "Unauthorized" });
     }
 
-    const currentYear = new Date().getFullYear();
-    const currentDate = new Date();
-    const monthsData = [];
+        const currentDate = new Date();
+        const monthsData = [];
 
-    for (let month = 0; month < 12; month++) {
-      const firstDayOfMonth = new Date(year, month, 1);
-      const lastDayOfMonth = new Date(year, month + 1, 0);
+        for (let month = 0; month < 12; month++) {
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
 
       const monthName = firstDayOfMonth.toLocaleString("default", {
         month: "long",
@@ -508,10 +484,9 @@ export const getMonthlyGoalProgress = async (req, res) => {
       let totalCompletedDays = 0;
       let totalSkippedDays = 0;
 
-      // updating the goal with completed days and skipped days
-      for (const goal of monthlyGoals) {
-        const startDate = new Date(goal.startDate);
-        const endDate = goal.endDate ? new Date(goal.endDate) : lastDayOfMonth;
+            for (const goal of monthlyGoals) {
+                const startDate = new Date(goal.startDate);
+                const endDate = goal.endDate ? new Date(goal.endDate) : lastDayOfMonth;
 
         const start = startDate < firstDayOfMonth ? firstDayOfMonth : startDate;
         const end = endDate > lastDayOfMonth ? lastDayOfMonth : endDate;
@@ -523,48 +498,33 @@ export const getMonthlyGoalProgress = async (req, res) => {
           return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
         }).length;
 
-        let skippedDaysInMonth = goal.skippedDays.filter((date) => {
-          const dateObj = new Date(date);
-          return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
-        }).length;
+                let skippedDaysInMonth = goal.skippedDays.filter(date => {
+                    const dateObj = new Date(date);
+                    return dateObj >= firstDayOfMonth && dateObj <= lastDayOfMonth;
+                }).length;
 
-        // updating the goal as completed
-        for (
-          let d = new Date(start);
-          d <= currentDate && d <= end;
-          d.setDate(d.getDate() + 1)
-        ) {
-          const dateStr = d.toISOString().split("T")[0];
+                for (let d = new Date(start); d <= currentDate && d <= end; d.setDate(d.getDate() + 1)) {
+                    const dateStr = d.toISOString().split('T')[0];
 
-          // Check if the date is within the goal period and if it's not already marked as completed or skipped
-          if (
-            !goal.completedDays.some(
-              (date) => new Date(date).toISOString().split("T")[0] === dateStr
-            ) &&
-            (!goal.skippedDays.some(
-              (date) => new Date(date).toISOString().split("T")[0] === dateStr
-            ) ||
-              !goal.skippedDays
-                .map((date) => date.toISOString().split("T")[0])
-                .includes(dateStr)) &&
-            d < currentDate
-          ) {
-            // Push the skipped day to the skippedDays list
-            goal.skippedDays.push(new Date(dateStr));
-            skippedDaysInMonth++;
-          }
-        }
+                    if (!goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === dateStr) &&
+                        (!goal.skippedDays.some(date => new Date(date).toISOString().split('T')[0] === dateStr) ||
+                            !goal.skippedDays.map(date => date.toISOString().split('T')[0]).includes(dateStr)) &&
+                        d < currentDate) {
+
+                        goal.skippedDays.push(new Date(dateStr));
+                        skippedDaysInMonth++;
+                    }
+                }
 
         await goal.save();
 
-        // Check if endDate < today and endDate is in skippedDays or completedDays
-        const today = new Date().toISOString().split("T")[0];
-        const goalEndDate = new Date(end).toISOString().split("T")[0];
-        if (goalEndDate < today) {
-          goal.completed = true;
-        }
+                const today = new Date().toISOString().split('T')[0];
+                const goalEndDate = new Date(end).toISOString().split('T')[0];
+                if (goalEndDate < today) {
+                    goal.completed = true;
+                }
 
-        await goal.save();
+                await goal.save();
 
         totalGoals += daysInMonth;
         totalCompletedDays += completedDaysInMonth;
@@ -585,21 +545,19 @@ export const getMonthlyGoalProgress = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      status: "success",
-      userId: seniorId,
-      role,
-      year,
-      monthsData,
-    });
-  } catch (error) {
-    console.error("Error fetching monthly goal progress:", error);
-    res.status(500).json({
-      status: "error",
-      message: "Failed to retrieve monthly goal progress",
-    });
-  }
+        return res.status(200).json({
+            status: "success",
+            userId: seniorId,
+            role,
+            year,
+            monthsData
+        });
+    } catch (error) {
+        console.error('Error fetching monthly goal progress:', error);
+        res.status(500).json({ status: "error", message: "Failed to retrieve monthly goal progress" });
+    }
 };
+
 
 export const getDailyGoalProgress = async (req, res) => {
   try {
@@ -664,107 +622,83 @@ export const getDailyGoalProgress = async (req, res) => {
       })
     );
 
-    const completedGoals = updatedGoals.filter((goal) => goal.completedToday);
-    const completedGoalsLength = completedGoals.length;
-    const completePercent =
-      updatedGoals.length > 0
-        ? (completedGoalsLength / updatedGoals.length) * 100
-        : 0;
-    const user = await User.findOne({
-      uuid: role === "user" ? userId : seniorCitizenId,
-    });
-    if (!user) {
-      return res
-        .status(404)
-        .json({ status: "failed", message: "user not found" });
-    }
-    // send notification
-    if (
-      todaysGoals.length > 0 &&
-      user.goalProgress != String(completePercent.toFixed(2))
-    ) {
-      let title = null;
-      let description = null;
-      if (parseFloat(user.goalProgress < completePercent)) {
-        title = "Great job!";
-        description = `You are getting there.You have completed ${completePercent.toFixed(
-          2
-        )} of your goals today.`;
-      }
-      if (completePercent < 1) {
-        const hitProgressNotificationLastSent = new Date(
-          user.hitProgressNotificationLastSent
-        );
-        if (
-          hitProgressNotificationLastSent.getFullYear() <=
-            new Date().getFullYear() &&
-          hitProgressNotificationLastSent.getMonth() <= new Date().getMonth() &&
-          hitProgressNotificationLastSent.getDate() < new Date().getDate()
-        ) {
-          title = "Ready to Make Progress Today?";
-          description = `Let's get started on your goals!`;
-
-          user.hitProgressNotificationLastSent = new Date();
-          await user.save();
+        const completedGoals = updatedGoals.filter(goal => goal.completedToday);
+        const completedGoalsLength = completedGoals.length;
+        const completePercent = updatedGoals.length > 0 ? (completedGoalsLength / updatedGoals.length) * 100 : 0;
+        const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId })
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "user not found" })
         }
-      }
+        // send notification
+        if (todaysGoals.length > 0 && user.goalProgress != String(completePercent.toFixed(2))) {
+            let title = null;
+            let description = null;
+            if (parseFloat(user.goalProgress < completePercent)) {
+                title = "Great job!"
+                description = `You are getting there.You have completed ${completePercent.toFixed(2)} of your goals today.`
+            }
+            if (completePercent < 1) {
+                const hitProgressNotificationLastSent = new Date(user.hitProgressNotificationLastSent)
+                if (hitProgressNotificationLastSent.getFullYear() <= new Date().getFullYear()
+                    && hitProgressNotificationLastSent.getMonth() <= new Date().getMonth()
+                    && hitProgressNotificationLastSent.getDate() < new Date().getDate()) {
+                    title = "Ready to Make Progress Today?"
+                    description = `Let's get started on your goals!`
 
-      if (title) {
-        // send notification to the user
-        const sendNotificationResult = await sendNotification({
-          title: title,
-          description: description,
-          userId: userId,
-          belongTo: "goal",
+                    user.hitProgressNotificationLastSent = new Date()
+                    await user.save()
+                }
+            }
+            // need to add per day you should only send one notification
+            if (title) {
+                // send notification to the user
+                const sendNotificationResult = await sendNotification({
+                    title: title,
+                    description: description,
+                    userId: userId,
+                    belongTo: "goal"
+                })
+
+                if (!sendNotificationResult) {
+                    console.log("notification not sent when created goal", sendNotificationResult)
+                }
+            }
+
+            if (role === "user") {
+
+                const dailyQuoteSent = new Date(user.dailyQuoteSent)
+                if (dailyQuoteSent.getFullYear() <= new Date().getFullYear()
+                    && dailyQuoteSent.getMonth() <= new Date().getMonth()
+                    && dailyQuoteSent.getDate() < new Date().getDate()) {
+                    const randomIndex = Math.floor(Math.random() * messages.length);
+                    // send notification to the user
+                    const sendNotificationResult = await sendNotification({
+                        title: `Daily quote`,
+                        description: messages[randomIndex],
+                        userId: userId,
+                        belongTo: "quote"
+                    })
+
+                    if (!sendNotificationResult) {
+                        console.log("notification not sent when created goal", sendNotificationResult)
+                    }
+                }
+
+            }
+            user.goalProgress = completePercent.toFixed(2)
+            user.save()
+        }
+
+        return res.status(200).json({
+            status: "success",
+            totalTodayGoals: updatedGoals,
+            completedGoalsLength,
+            completePercent: completePercent.toFixed(2),
+            toStartPercent: (100 - completePercent).toFixed(2)
         });
 
-        if (!sendNotificationResult) {
-          console.log(
-            "notification not sent when created goal",
-            sendNotificationResult
-          );
-        }
-      }
-      if (role === "user") {
-        const dailyQuoteSent = new Date(user.dailyQuoteSent);
-        if (
-          dailyQuoteSent.getFullYear() <= new Date().getFullYear() &&
-          dailyQuoteSent.getMonth() <= new Date().getMonth() &&
-          dailyQuoteSent.getDate() < new Date().getDate()
-        ) {
-          const randomIndex = Math.floor(Math.random() * messages.length);
-          // send notification to the user
-          const sendNotificationResult = await sendNotification({
-            title: `Daily quote`,
-            description: messages[randomIndex],
-            userId: userId,
-            belongTo: "quote",
-          });
-
-          if (!sendNotificationResult) {
-            console.log(
-              "notification not sent when created goal",
-              sendNotificationResult
-            );
-          }
-        }
-      }
-      user.goalProgress = completePercent.toFixed(2);
-      user.save();
+    } catch (error) {
+        console.error('Error fetching daily goal progress:', error);
+        res.status(500).json({ status: "error", message: "Failed to get daily goal progress" + error });
     }
-
-    return res.status(200).json({
-      status: "success",
-      totalTodayGoals: updatedGoals,
-      completedGoalsLength,
-      completePercent: completePercent.toFixed(2),
-      toStartPercent: (100 - completePercent).toFixed(2),
-    });
-  } catch (error) {
-    console.error("Error fetching daily goal progress:", error);
-    res.status(500).json({
-      status: "error",
-      message: "Failed to get daily goal progress" + error,
-    });
-  }
 };

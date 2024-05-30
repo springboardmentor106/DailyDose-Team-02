@@ -39,7 +39,7 @@ export const getAllNotifications = async (req, res) => {
 
         const result = await Notification.findOne({ userId: userId })
 
-        return res.status(200).json({ status: "success", notifications:result? result : {} });
+        return res.status(200).json({ status: "success", notifications: result ? result : {} });
     } catch (err) {
         return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
     }

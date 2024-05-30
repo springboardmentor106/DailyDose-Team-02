@@ -10,9 +10,16 @@ import Constants from "../../../constants";
 
 const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [buttonTest,setButtonText]=useState('Show More')
   const navigate = useNavigate();
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
+    if(activeIndex===index){
+      setButtonText('Show More')
+    }else{
+      setButtonText('Show Less')
+    }
+    
   };
 
   const assignUserToCaretaker = async (userId) => {
@@ -91,7 +98,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                         className="btn btn-light btn-sm"
                         id="getAssign"
                         onClick={() => toggleAccordion(index)}>
-                        Show More
+                        {buttonTest}
                       </button>
                     </div>
                   </button>

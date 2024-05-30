@@ -3,7 +3,7 @@ import { ResponsiveContainer, BarChart, Bar, YAxis, XAxis, Tooltip } from 'recha
 import noBarGraphDataImage from "../../../assets/images/noBarGraphData.png"
 
 const Chart = ({ chartData }) => {
-
+console.log(chartData)
   return (
     <div className='App'>
       {chartData ?

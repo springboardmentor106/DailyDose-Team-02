@@ -4,6 +4,7 @@ import UserProfile from '../dashComponents/UserProfile'
 import Constants from '../../../constants'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+
 const Notification = () => {
   const navigate = useNavigate()
 
@@ -85,6 +86,7 @@ const Notification = () => {
   return (
     <div className="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog model-lg modal-dialog-scrollable">
+      <div className="modal-dialog model-lg modal-dialog-scrollable">
         <div className="modal-content">
 
           <div class="modal-header" style={{ backgroundColor: "#6a58dc", color: 'white' }}>
@@ -110,7 +112,8 @@ const Notification = () => {
         </div>
       </div>
     </div>
+    </div>
   )
 }
 
-export default Notification
+export default Notification;

@@ -8,9 +8,14 @@ import { AssignedUser } from "./StaticDataCare";
 
 const Assigned = ({ assignedUserDetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);
-
+  const [buttonText,setButtonText]=useState('Show More')
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
+    if(activeIndex===index){
+      setButtonText('Show More')
+    }else{
+      setButtonText('Show Less')
+    }
   };
 
   return (
@@ -45,7 +50,7 @@ const Assigned = ({ assignedUserDetails }) => {
                     </div>
                   </div>
                   <button className="btn btn-light">
-                    <p>Show More</p>
+                    <p>{buttonText}</p>
                   </button>
                 </button>
               </h2>

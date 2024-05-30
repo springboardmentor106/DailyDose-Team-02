@@ -29,7 +29,7 @@ const UserHome = () => {
   const [habits, setHabits] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [goalProgress, setGoalProgress] = useState(null);
-  const [chartData, setChartData] = useState(null); 
+  const [chartData, setChartData] = useState(null)
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -230,17 +230,16 @@ const UserHome = () => {
       getUserHabits();
       getUserDetails();
       getGoalProgress();
-      getChartData();
       setRefresh(false);
     }
   }, [refresh === true]);
 
-  useEffect(() => {}, [reminders, goals]);
+  useEffect(() => { }, [reminders, goals]);
   return (
     <>
       <div className="user__body">
         <UserNav />
-        <UserProfile/>
+        <UserProfile />
         <div className="main__content">
           <div id="user__welcome">
             <div className="boxes" id="welcome">
@@ -253,7 +252,7 @@ const UserHome = () => {
               </div>
             </div>
             <div className="boxes" id="profile">
-            <h5><strong>About User</strong></h5>
+              <h5><strong>About User</strong></h5>
               {userDetails && (
                 <div className="card-user">
                   <div className="card-profile">
@@ -306,7 +305,7 @@ const UserHome = () => {
               {selectedBox === 1 && (
                 <div>
                   <div className="right-card-two">
-                    {reminders && reminders?.length ? (
+                    {reminders && reminders.length ? (
                       <ReminderList
                         remindersList={reminders}
                         setRefresh={setRefresh}
@@ -396,7 +395,7 @@ const UserHome = () => {
                 <h5>
                   <strong>Progress</strong>
                 </h5>
-                {goalProgress !== null && goals.length ? (
+                {goalProgress !== null && goals?.length ? (
                   <div className="row-three-content">
                     <div className="box-left-top">
                       <div id="CircularProgressBar">
@@ -411,7 +410,7 @@ const UserHome = () => {
                         <div className="cirlce-pro-one completed"></div>
                         <div className="pro-text">
                           <div className="pro-percentage">
-                          {goalProgress.completed}%
+                            {goalProgress.completed}%
                           </div>{" "}
                           completed
                         </div>
