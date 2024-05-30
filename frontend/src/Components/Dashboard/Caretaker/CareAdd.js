@@ -150,9 +150,16 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                       data-bs-target="#staticBackdrop" key={index}>
                       Click to assign
                     </button>
-                    <div
-                      className="modal fade"
-                      id="staticBackdrop" key={index}
+                  </div>
+                </div>
+              </div>
+            ))
+          : null}
+
+      </div>
+      {unAssignedUserDetails && unAssignedUserDetails.length > 0 ?unAssignedUserDetails.map((unassign, index)=>( 
+        <div className="modal fade"
+        id="staticBackdrop" key={index}
                       data-bs-backdrop="static"
                       data-bs-keyboard="false"
                       tabIndex="-1"
@@ -197,19 +204,15 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                               className="btn btn-primary"
                               onClick={() =>
                                 assignUserToCaretaker(unassign.uuid)
-                              }>
-                              Confirm
+                              }
+                              >Confirm
                             </button>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          : null}
-      </div>
+                    </div> 
+      )):null}
+      
     </div>
   );
 };

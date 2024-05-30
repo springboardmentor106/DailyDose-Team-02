@@ -58,10 +58,10 @@ const Analytics = () => {
         }
       );
 
-      // if (response.status === 401) {
-      //   navigate("/login");
-      //   localStorage.clear();
-      // }
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
       const data = await response.json();
       console.log(data);
       if (data.status === "success") {
@@ -91,10 +91,10 @@ const Analytics = () => {
         }
       );
 
-      // if (response.status === 401) {
-      //   navigate("/login");
-      //   localStorage.clear();
-      // }
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
       const data = await response.json();
       console.log(data);
       if (data.status === "success") {
@@ -119,10 +119,10 @@ const Analytics = () => {
         },
       });
 
-      // if (response.status === 401) {
-      //   navigate("/login");
-      //   localStorage.clear();
-      // }
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
       const data = await response.json();
       if (data.status === "success") {
         data.habits ? setHabits(data.habits) : setHabits(null);
@@ -151,11 +151,11 @@ const Analytics = () => {
         }
       );
 
-      // if (response.status === 401) {
-      //   navigate("/login");
-      //   localStorage.clear();
-      //   return; // Added return to exit function early
-      // }
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
 
       const data = await response.json();
       if (data.status === "success") {
@@ -185,10 +185,10 @@ const Analytics = () => {
         },
       });
 
-      // if (response.status === 401) {
-      //   navigate("/login");
-      //   localStorage.clear();
-      // }
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+      }
       const data = await response.json();
       if (data.status === "success") {
         data.user ? setUserDetails(data.user) : setUserDetails(null);
@@ -220,19 +220,19 @@ const Analytics = () => {
         <UserProfile />
         <div className="main__content">
           <div id="user__welcome">
-              {profileinfo.map((profile, index) => (
+              {getUserDetails && getUserDetails>0 ? getUserDetails.map((profile, index) => (
                 <div className="care-profile-card" key={index} id="ana-card-body">
                   <div  id="img-body">
                     <img src={profilepic} alt="" />
                   </div>
                     <h6>
-                      <strong>{profile.name}</strong>
+                      <strong>{profile.firstname}{profile.lastname}</strong>
                     </h6>
                     <p>{profile.email}</p>
-                    <p>Age: {profile.age}</p>
-                    <p>Blood: {profile.blood}</p>
+                    <p>Age: 30</p>
+                    <p>Blood: A+</p>
                 </div>
-              ))}
+              )):null}
           </div>
           <div id="right-pane">
             <div className="boxes" id="calender">
