@@ -161,7 +161,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
               </div>
             </div>
           ))
-          : <div>No unassigned users to display.</div>}
+          : null}
 
       </div>
       {unAssignedUserDetails && unAssignedUserDetails.length > 0 ? unAssignedUserDetails.map((unassign, index) => (
@@ -209,6 +209,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                 <button
                   type="button"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                   onClick={() =>
                     assignUserToCaretaker(unassign.uuid)
                   }
