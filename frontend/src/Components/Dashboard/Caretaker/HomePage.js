@@ -16,6 +16,7 @@ const HomePage = () => {
   const [assignedUserDetails, setAssignedUserDetails] = useState(null);
   const [unAssignedUserDetails, setUnassignedUserDetails] = useState(null);
   const [updateUserCount, setUpdateUserCount] = useState(null);
+  const [chartData, setChartData] = useState(null)
   const getUserDetails = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -222,23 +223,29 @@ const HomePage = () => {
           const assignedUserProgress = await getAssignedUserProgress(
             data.seniorArr
           );
+          console.log(assignedUserGoals)
           const finalArray = [];
           data.seniorArr.forEach((user) => {
             const userUuid = user.uuid;
+            console.log(user.uuid, typeof user.uuid)
             const { firstname, lastname, age, gender, email } = user;
 
-            const userGoals =
-              assignedUserGoals?.map((goal) =>
-                goal.uuid === userUuid ? goal.goals : null
-              ) || {};
-            const userReminders =
-              assignedUserReminders?.map((reminder) =>
-                reminder.uuid === userUuid ? reminder.reminders : null
-              ) || {};
-            const userProgress =
-              assignedUserProgress?.map((progress) =>
-                progress.uuid === userUuid ? progress.progress : null
-              ) || {};
+            // Get user goals
+            const userGoals = assignedUserGoals
+              ?.filter(goal => goal.uuid === userUuid)
+              .map(goal => goal.goals);
+
+
+            // Get user reminders
+            const userReminders = assignedUserReminders
+              ?.filter(reminder => reminder.uuid === userUuid)
+              .map(reminder => reminder.reminders);
+
+            // Get user progress
+            const userProgress = assignedUserProgress
+              ?.filter(progress => progress.uuid === userUuid)
+              .map(progress => progress.progress);
+
 
             const userDetails = {
               firstname,

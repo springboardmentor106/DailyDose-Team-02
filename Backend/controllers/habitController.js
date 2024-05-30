@@ -48,7 +48,7 @@ export const getHabits = async (req, res) => {
     try {
         const userId = req.userId;
         const role = req.role;
-
+        const { seniorCitizenId } = req.body
         if (!userId) {
             return res.status(404).json({ status: "failed", message: "uuid not captured" });
         }
@@ -57,11 +57,8 @@ export const getHabits = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "role not captured" });
         }
 
-        const user = await User.findOne({ uuid: userId })
-        // if (!user) {
-        //     return res.status(404).json({ status: "failed", message: "User not found" });
-        // }
-
+        const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId })
+    
         let habits = [];
         let habitLength = user.habits.length
 

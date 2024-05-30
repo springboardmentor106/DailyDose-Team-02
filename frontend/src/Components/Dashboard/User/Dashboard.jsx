@@ -185,6 +185,7 @@ const Dashboard = () => {
 
   const getMonthlyGoalProgress = async () => {
     try {
+      console.log("omggggg")
       const token = localStorage.getItem("token");
       const caretakerId = localStorage.getItem("caretakerId");
       const response = await fetch(Constants.BASE_URL + '/api/goals/monthly-stats', {
@@ -204,6 +205,7 @@ const Dashboard = () => {
 
       const data = await response.json();
       if (data.status === "success") {
+        console.log(data)
         setChartData(data.monthsData)
       } else {
         toast.error(data.message);
@@ -221,8 +223,8 @@ const Dashboard = () => {
       getUserGoals()
       getUserHabits()
       getUserDetails()
-      getGoalProgress()
       getMonthlyGoalProgress()
+      getGoalProgress()
       setRefresh(false)
     }
   }, [refresh === true])
@@ -233,7 +235,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <UserNav />
-      <UserProfile/>
+      <UserProfile />
       <div className="left-side">
         <div className="row-one">
           <div className="row-one-card-one">

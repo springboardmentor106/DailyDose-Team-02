@@ -9,7 +9,7 @@ const UserNav = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/login",{replace:true});
   };
 
   return (

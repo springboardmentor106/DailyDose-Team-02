@@ -194,33 +194,38 @@ const UserHome = () => {
     }
   };
 
-  const getChartData = async () => {
+  const getMonthlyGoalProgress = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(Constants.BASE_URL + "/api/goals/monthly-stats", {
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(Constants.BASE_URL + '/api/goals/monthly-stats', {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
+          'Content-Type': "application/json",
+          'Authorization': token
         },
-        body: JSON.stringify({ year: 2024 })
+        body: JSON.stringify({ caretakerId: caretakerId ,year:2024})
       });
 
       if (response.status === 401) {
         navigate("/login");
         localStorage.clear();
+        return; // Added return to exit function early
       }
+
       const data = await response.json();
       if (data.status === "success") {
+        console.log(data)
         setChartData(data.monthsData)
       } else {
         toast.error(data.message);
       }
     } catch (error) {
       console.log("error", error);
-      toast.error(error);
+      toast.error(error.message); // changed to error.message to properly display the error
     }
   };
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -230,6 +235,7 @@ const UserHome = () => {
       getUserHabits();
       getUserDetails();
       getGoalProgress();
+      getMonthlyGoalProgress()
       setRefresh(false);
     }
   }, [refresh === true]);
@@ -379,10 +385,10 @@ const UserHome = () => {
                 <strong>Goal Progress</strong>
               </h5>
               <div className="year-container">
-                <button>year</button>
-                <div id="year-button-container">
+                <button>year : 2024</button>
+                {/* <div id="year-button-container">
                   <IoIosArrowDropdown />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="row-one-card-one-dashboard">

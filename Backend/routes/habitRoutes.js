@@ -7,7 +7,7 @@ import { createHabitSchema, updateHabitSchema } from '../validations/userHabitVa
 const router = express.Router();
 
 router.post('/', validation(createHabitSchema), checkUserAuth, createHabit);
-router.get('/', checkUserAuth, getHabits);
+router.post('/get-habits', checkUserAuth, getHabits);
 router.patch('/update', validation(updateHabitSchema), checkUserAuth, updateHabit);
 router.delete('/delete', checkUserAuth, deleteHabit);
 

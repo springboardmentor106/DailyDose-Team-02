@@ -66,7 +66,7 @@ export const getReminders = async (req, res) => {
 
         const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId });
         if (!user) {
-            return res.status(401).json({ status: "failed", message: "User not found" });
+            return res.status(200).json({ status: "failed", message: "User not found" });
         }
 
         const today = new Date();

@@ -38,7 +38,10 @@ const Analytics = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [goalProgress, setGoalProgress] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const [chartData, setChartData] = useState(null)
   const navigate = useNavigate();
+  const [assignedUsers, setAssignedUsers] = useState(null)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   const handleLinkClick = (boxNumber) => {
     setSelectedBox(boxNumber);
@@ -47,6 +50,9 @@ const Analytics = () => {
   const getUserReminders = async () => {
     try {
       const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+      const caretakerId = localStorage.getItem("caretakerId")
+      const body = role === "user" ? { caretakerId: caretakerId } : { seniorCitizenId: selectedUser }
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
@@ -55,15 +61,15 @@ const Analytics = () => {
             "Content-Type": "application/json",
             Authorization: token,
           },
+          body: JSON.stringify(body)
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
-      console.log(data);
       if (data.status === "success") {
         data.reminders ? setReminders(data.reminders) : setReminders(null);
       } else {
@@ -78,7 +84,9 @@ const Analytics = () => {
   const getUserGoals = async () => {
     try {
       const token = localStorage.getItem("token");
+      const role = localStorage.getItem("token");
       const caretakerId = localStorage.getItem("caretakerId");
+      const body = role === "user" ? { caretakerId: caretakerId } : { seniorCitizenId: selectedUser }
       const response = await fetch(
         Constants.BASE_URL + "/api/goals/getTodayGoals",
         {
@@ -87,14 +95,14 @@ const Analytics = () => {
             "Content-Type": "application/json",
             Authorization: token,
           },
-          body: JSON.stringify({ caretakerId: caretakerId }),
+          body: JSON.stringify(body),
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       console.log(data);
       if (data.status === "success") {
@@ -111,18 +119,22 @@ const Analytics = () => {
   const getUserHabits = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(Constants.BASE_URL + "/api/habits", {
-        method: "GET",
+      const role = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const body = role === "user" ? null : { seniorCitizenId: selectedUser }
+      const response = await fetch(Constants.BASE_URL + "/api/habits/get-habits", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
+        body: JSON.stringify(body)
       });
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       if (data.status === "success") {
         data.habits ? setHabits(data.habits) : setHabits(null);
@@ -139,6 +151,9 @@ const Analytics = () => {
     try {
       const token = localStorage.getItem("token");
       const caretakerId = localStorage.getItem("caretakerId");
+      const role = localStorage.getItem("role");
+      const body = role === "user" ? { caretakerId: caretakerId } : { seniorCitizenId: selectedUser }
+
       const response = await fetch(
         Constants.BASE_URL + "/api/goals/daily-stats",
         {
@@ -147,15 +162,15 @@ const Analytics = () => {
             "Content-Type": "application/json",
             Authorization: token,
           },
-          body: JSON.stringify({ caretakerId: caretakerId }),
+          body: JSON.stringify(body),
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-        return; // Added return to exit function early
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      //   return; // Added return to exit function early
+      // }
 
       const data = await response.json();
       if (data.status === "success") {
@@ -185,14 +200,14 @@ const Analytics = () => {
         },
       });
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       if (data.status === "success") {
         data.user ? setUserDetails(data.user) : setUserDetails(null);
-        localStorage.setItem("caretakerId", data.user.caretaker);
+        localStorage.setItem("caretakerId", data.user.caretaker || null);
       } else {
         toast.error(data.message);
       }
@@ -202,16 +217,91 @@ const Analytics = () => {
     }
   };
 
+  const getChartData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const body = role === "user" ? { caretakerId: caretakerId, year: 2024 } : { seniorCitizenId: selectedUser, year: 2024 }
+      const response = await fetch(Constants.BASE_URL + "/api/goals/monthly-stats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(body)
+      });
+
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
+      const data = await response.json();
+      if (data.status === "success") {
+        data.monthsData ? setChartData(data.monthsData) : setChartData(null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  const getAssignedUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        Constants.BASE_URL + "/api/caretaker/senior-detail",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
+      const data = await response.json();
+      if (data.status === "success") {
+        if (data.seniorArr) {
+          setAssignedUsers(data.seniorArr)
+          setSelectedUser(data.seniorArr[0])
+        }
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error);
+    }
+  };
+
+  const handleSelectCard = (userId) => {
+    setSelectedUser(userId)
+    setRefresh(true)
+  }
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    // handleSelectCard(assignedUsers[0].uuid)
+  }, [assignedUsers && assignedUsers.length])
+
+  useEffect(() => {
+    console.log("Changed")
+    getUserGoals();
+    getAssignedUserDetails()
+    if (selectedUser) {
       getUserReminders();
       getUserGoals();
-      getUserHabits();
-      getUserDetails();
-      getGoalProgress();
-      setRefresh(false);
+      getUserHabits()
+      getGoalProgress()
+      getChartData()
     }
+    setRefresh(false)
   }, [refresh === true]);
   return (
     <>
@@ -220,19 +310,19 @@ const Analytics = () => {
         <UserProfile />
         <div className="main__content">
           <div id="user__welcome">
-              {profileinfo.map((profile, index) => (
-                <div className="care-profile-card" key={index} id="ana-card-body">
-                  <div  id="img-body">
-                    <img src={profilepic} alt="" />
-                  </div>
-                    <h6>
-                      <strong>{profile.name}{profile.lastname}</strong>
-                    </h6>
-                    <p>{profile.email}</p>
-                    <p>Age: 30</p>
-                    <p>Blood: A+</p>
+            {assignedUsers && assignedUsers.map((profile, index) => (
+              <div className="care-profile-card" key={index} id="ana-card-body" onClick={() => handleSelectCard(profile.uuid)}>
+                <div id="img-body">
+                  <img src={profilepic} alt="" />
                 </div>
-              ))}
+                <h6>
+                  <strong>{profile.firstname}{profile.lastname}</strong>
+                </h6>
+                <p>{profile.email}</p>
+                <p>Gender: {profile.gender}</p>
+                <p>Age: {profile.age}</p>
+              </div>
+            ))}
           </div>
           <div id="right-pane">
             <div className="boxes" id="calender">
@@ -349,7 +439,7 @@ const Analytics = () => {
               </div>
             </div>
             <div className="row-one-card-one-dashboard">
-              <Chart setRefresh={setRefresh} />
+              <Chart chartData={chartData} />
             </div>
           </div>
           <div id="bottom-pane">

@@ -1,4 +1,4 @@
-*{
+* {
   user-select: none;
 }
 
@@ -48,6 +48,10 @@
   justify-content: space-between;
   grid-column: span 4 / auto;
   grid-row: span 2 / auto;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
 }
 
 #welcome {
@@ -120,6 +124,7 @@
   flex-direction: column;
   /* border: 1px solid red; */
 }
+
 #profile h5 {
   font-size: 1.2vw;
   font-weight: 600;
@@ -271,7 +276,7 @@
 }
 
 #chart .year-container button {
-  width: 6vw;
+  width: 130px;
   height: 4vh;
   border: none;
   background-color: #7192d4;
@@ -292,6 +297,7 @@
   justify-content: center;
   align-items: center;
 }
+
 #chart .row-one-card-one-dashboard .App {
   width: 80%;
 }
@@ -482,15 +488,15 @@
   max-height: 60%;
 }
 
-#tasks > div:last-child {
+#tasks>div:last-child {
   width: 100%;
   height: 100%;
   overflow: overlay;
 }
 
-#user__welcome > .care-profile-card {
+#user__welcome>.care-profile-card {
   display: flex;
-  width: 22%;
+  min-width: 200px;
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -498,9 +504,11 @@
   background-image: linear-gradient(#d3cbf7, white);
   transition: 0.5s;
   border-radius: 1vw;
+  margin-right: 10px;
+  margin-left: 10px
 }
 
-#user__welcome > .care-profile-card:hover {
+#user__welcome>.care-profile-card:hover {
   transform: scale(1.05);
   z-index: 2;
   background-image: linear-gradient(#ada0f8, #f0eef9);
@@ -521,7 +529,7 @@
   object-fit: cover;
 }
 
-.reminder-list{
+.reminder-list {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -551,6 +559,7 @@
   #about__user #about-img-div {
     width: 35vh;
   }
+
   /* .welcome__img__container {
     bottom: -2vh;
   } */
