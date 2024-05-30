@@ -220,19 +220,19 @@ const Analytics = () => {
         <UserProfile />
         <div className="main__content">
           <div id="user__welcome">
-              {getUserDetails && getUserDetails>0 ? getUserDetails.map((profile, index) => (
+              {profileinfo.map((profile, index) => (
                 <div className="care-profile-card" key={index} id="ana-card-body">
                   <div  id="img-body">
                     <img src={profilepic} alt="" />
                   </div>
                     <h6>
-                      <strong>{profile.firstname}{profile.lastname}</strong>
+                      <strong>{profile.name}{profile.lastname}</strong>
                     </h6>
                     <p>{profile.email}</p>
                     <p>Age: 30</p>
                     <p>Blood: A+</p>
                 </div>
-              )):null}
+              ))}
           </div>
           <div id="right-pane">
             <div className="boxes" id="calender">
