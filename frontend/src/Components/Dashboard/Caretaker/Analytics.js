@@ -58,10 +58,10 @@ const Analytics = () => {
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       console.log(data);
       if (data.status === "success") {
@@ -91,10 +91,10 @@ const Analytics = () => {
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       console.log(data);
       if (data.status === "success") {
@@ -119,10 +119,10 @@ const Analytics = () => {
         },
       });
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       if (data.status === "success") {
         data.habits ? setHabits(data.habits) : setHabits(null);
@@ -151,11 +151,11 @@ const Analytics = () => {
         }
       );
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-        return; // Added return to exit function early
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      //   return; // Added return to exit function early
+      // }
 
       const data = await response.json();
       if (data.status === "success") {
@@ -185,10 +185,10 @@ const Analytics = () => {
         },
       });
 
-      if (response.status === 401) {
-        navigate("/login");
-        localStorage.clear();
-      }
+      // if (response.status === 401) {
+      //   navigate("/login");
+      //   localStorage.clear();
+      // }
       const data = await response.json();
       if (data.status === "success") {
         data.user ? setUserDetails(data.user) : setUserDetails(null);

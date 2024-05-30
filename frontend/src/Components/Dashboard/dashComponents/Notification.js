@@ -53,6 +53,7 @@ const Notification = () => {
       if (response.status === 401) {
         navigate("/login");
         localStorage.clear();
+        window.location.reload()
         return; // Added return to exit function early
       }
 
@@ -60,6 +61,7 @@ const Notification = () => {
       if (data.status === "success") {
         navigate("/target")
         getAllNotifications()
+        window.location.reload()
       } else {
         toast.error(data.message);
       }

@@ -147,12 +147,12 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                       type="button"
                       className="btn btn-secondary"
                       data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop">
+                      data-bs-target="#staticBackdrop" key={index}>
                       Click to assign
                     </button>
                     <div
                       className="modal fade"
-                      id="staticBackdrop"
+                      id="staticBackdrop" key={index}
                       data-bs-backdrop="static"
                       data-bs-keyboard="false"
                       tabIndex="-1"
