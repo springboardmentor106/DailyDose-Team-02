@@ -1,4 +1,4 @@
-import Notification from "../models/notificationModel.js"; // Replace with actual path to your model
+import Notification from "../models/notificationModel.js";
 
 export const createNotification = async (req, res) => {
     try {

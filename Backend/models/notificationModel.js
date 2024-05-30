@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
 
-const notificationDetailSchema = mongoose.Schema({
+const notificationDetailSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         default: () => new mongoose.Types.ObjectId(), // Automatically generate ObjectId
@@ -23,16 +23,21 @@ const notificationDetailSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-});
-
-const notificationSchema = mongoose.Schema({
+}, { timestamps: true });
+const notificationSchema = new mongoose.Schema({
     uuid: {
         type: String,
         default: uuidv4
     },
     userId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference to User model
         required: true
+    },
+    caretakerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference to User model for caretakers
+        default: null
     },
     notification: {
         type: [notificationDetailSchema],
@@ -42,6 +47,6 @@ const notificationSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     }
-});
+}, { timestamps: true }); 
 
 export default mongoose.model("Notification", notificationSchema);
