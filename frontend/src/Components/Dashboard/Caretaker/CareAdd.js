@@ -57,7 +57,7 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                   <button
                     className="accordion-button"
                     type="button"
-                    onClick={() => toggleAccordion(index)}
+                    // onClick={() => toggleAccordion(index)}
                     aria-expanded={activeIndex === index}
                     aria-controls={`panelsStayOpen-collapse-${index}`}>
                     <div className="ass-user-detail">
@@ -83,13 +83,14 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                         className="btn btn-light btn-sm"
                         id="getAssign"
                         data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
+                        data-bs-target="#staticBackdrop" key={index}>
                         Get Assigned
                       </button>
                       <button
                         type="button"
                         className="btn btn-light btn-sm"
-                        id="getAssign">
+                        id="getAssign"
+                        onClick={() => toggleAccordion(index)}>
                         Show More
                       </button>
                     </div>
