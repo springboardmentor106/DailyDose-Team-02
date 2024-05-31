@@ -14,12 +14,6 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
   const navigate = useNavigate();
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
-    if (activeIndex === index) {
-      setButtonText('Show More')
-    } else {
-      setButtonText('Show Less')
-    }
-
   };
 
   const assignUserToCaretaker = async (userId) => {
@@ -96,9 +90,9 @@ const CareAdd = ({ unAssignedUserDetails, setRefresh }) => {
                     <button
                       type="button"
                       className="btn btn-light btn-sm"
-                      id="getAssign"
+                      id="getAssign" key={index}
                       onClick={() => toggleAccordion(index)}>
-                      {buttonTest}
+                      {activeIndex===index ? "Show Less" : "Show More"}
                     </button>
                   </div>
                 </button>

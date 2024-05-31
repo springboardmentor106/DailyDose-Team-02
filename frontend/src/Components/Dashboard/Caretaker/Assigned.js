@@ -11,11 +11,6 @@ const Assigned = ({ assignedUserDetails }) => {
   const [buttonText,setButtonText]=useState('Show More')
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
-    if(activeIndex===index){
-      setButtonText('Show More')
-    }else{
-      setButtonText('Show Less')
-    }
   };
 
   return (
@@ -50,7 +45,7 @@ const Assigned = ({ assignedUserDetails }) => {
                     </div>
                   </div>
                   <button className="btn btn-light">
-                    <p>{buttonText}</p>
+                    <p>{activeIndex===index ? "Show Less" : "Show More"}</p>
                   </button>
                 </button>
               </h2>

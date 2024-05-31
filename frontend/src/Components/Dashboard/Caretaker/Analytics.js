@@ -20,7 +20,7 @@ import noRemindersImage from "../../../assets/images/noReminders.png";
 import ReminderList from "../User/ReminderList";
 import HabitReminderList from "../User/HabitReminderList";
 import GoalReminderList from "../User/GoalReminderList";
-import UserProfile from "../dashComponents/UserProfile";
+import CareProfile from "../dashComponents/CareProfile";
 
 const Analytics = () => {
   var settings = {
@@ -307,7 +307,7 @@ const Analytics = () => {
     <>
       <div className="user__body">
         <UserNav />
-        <UserProfile />
+        <CareProfile />
         <div className="main__content">
           <div id="user__welcome">
             {assignedUsers && assignedUsers.map((profile, index) => (
