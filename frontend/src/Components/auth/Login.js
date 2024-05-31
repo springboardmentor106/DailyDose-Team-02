@@ -32,9 +32,9 @@ const Login = () => {
       localStorage.setItem("role", role)
       setTimeout(() => {
         if (role === "user") {
-          navigate("/user-home", { replace: true })
+          navigate("/user-dash", { replace: true })
         } else {
-          navigate("/caretaker/dashboard", { replace: true })
+          navigate("/care-dashboard", { replace: true })
         }
       }, 1500);
     } else {
@@ -46,6 +46,11 @@ const Login = () => {
   };
   // reset the state values when the component is unmounted
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      const role = localStorage.getItem("role")
+      role === "user" ? navigate("/user-dash") : navigate("/care-dashboard")
+    }
     return () => {
       setEmail("");
       setPassword("");
@@ -72,7 +77,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -83,7 +88,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="form-control"
+              className="form-control2"
               required
             />
           </div>
@@ -94,7 +99,7 @@ const Login = () => {
               name="role"
               onChange={(e) => setRole(e.target.value)}
               value={role}
-              className="form-control">
+              className="form-control2">
               <option value="" disabled>
                 Login as
               </option>
@@ -103,10 +108,10 @@ const Login = () => {
             </select>
           </div>
 
-          <div className="remember-forgot">
-            <div className="remember-me">
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember"> Remember me</label>
+          <div className="forgot-remember-container">
+            <div className="remember-me-container">
+              <input type="checkbox" id="remember-me-checkbox" />
+              <div id="remember-me-text">Remember me</div>
             </div>
             <div className="forgot">
               <Link to="/reset">Forgot password?</Link>

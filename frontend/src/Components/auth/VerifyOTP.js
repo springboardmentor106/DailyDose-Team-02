@@ -16,8 +16,15 @@ const VerifyOTP = () => {
     // Combine user data and OTP into a single object
     let payload;
     if (flow === "register") {
+      console.log(formData)
       payload = {
-        ...formData,
+        age: formData.age,
+        email: formData.email,
+        firstname: formData.firstname,
+        gender: formData.gender,
+        lastname: formData.lastname,
+        password: formData.password,
+        role: formData.role,
         enteredOtp: otpValue
       };
     } else {
@@ -41,15 +48,16 @@ const VerifyOTP = () => {
             toast.success("Registered successfully!!");
             console.log("api successful", data);
             localStorage.setItem("token", data.token)
-            localStorage.setItem("role", role)
+            localStorage.setItem("role", formData.role ||role)
           } else {
             toast.info("OTP verified successfully.  Update your password.");
           }
           setTimeout(() => {
             if (flow === "register") {
-              navigate("/user-home", { replace: true });
+              navigate(formData.role  === "user" ? "/user-dash" : "/care-dashboard", { replace: true });
             } else {
-              navigate("/update-password", { state: { email: email, role: role } });
+              console.log(role)
+              navigate("/update-password", { state: { email: email, role: formData && formData.role ? formData.role : role} });
             }
           }, 1500);
           // OTP is correct and user is registered

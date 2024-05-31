@@ -1,5 +1,4 @@
 import React from 'react';
-import './User.css';
 const TargetCheckbox = ({ target, onToggle }) => {
   const handleCheckboxChange = () => {
     const newCompleted = !target.completed; // Toggle the completed status
@@ -37,6 +36,7 @@ const TargetList = () => {
       target.id === targetId ? { ...target, completed } : target
     );
     setTargets(updatedTargets);
+
   };
   const gardeningTasks = targets.filter(target => target.name === 'Gardening');
   return (

@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Reminder from '../User/Reminder';
-import './User.css'
+import { toast } from 'react-toastify';
+import Constants from '../../../constants';
+const ReminderList = ({ remindersList, setRefresh }) => {
+  const [reminders, setReminders] = useState(remindersList || null);
+  const handleCheckChange = async (changedReminder) => {
+    try {
+      const url = Constants.BASE_URL + "/api/reminders/update"
+      const token = localStorage.getItem("token")
+      const payload = {
+        reminderId: changedReminder.uuid,
+        completedToday: !changedReminder.completedToday
+      }
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Authorization": token,
+          'Content-Type': "application/json",
+        },
+        body:JSON.stringify(payload)
+      })
 
-const ReminderList = () => {
-  const [reminders, setReminders] = useState([
-    { id: 1, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 2, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 3, date: '10:05 PM', type: 'Gardening', checked: true },
-    { id: 4, date: '10:05 PM', type: 'Gardening', checked: true },
-    // Add more reminders as needed
-  ]);
-  const handleCheckChange = (changedReminder) => {
-    const updatedReminders = reminders.map((reminder) =>
-      reminder.id === changedReminder.id
-        ? { ...reminder, checked: !reminder.checked }
-        : reminder
-    );
-    setReminders(updatedReminders);
+      const data = await response.json()
+      if (data.success === "false") {
+        toast.warn(data.message)
+      } else {
+        setRefresh(true)
+        toast.success(data.message)
+      }
+    } catch (err) {
+      console.log(err)
+      toast.error("Error:" + err)
+    }
   };
-  const handleDelete = (reminderToDelete) => {
-    const updatedReminders = reminders.filter(
-      (reminder) => reminder.id !== reminderToDelete.id
-    );
-    setReminders(updatedReminders);
-  };
+
+  useEffect(() => {
+    setReminders(remindersList)
+  }, [remindersList])
+
   return (
-    <div className="main">
-    <div className="reminder-list">
-      {reminders.map((reminder) => (
-        <Reminder
-          key={reminder.id}
-          reminder={reminder}
-          onCheckChange={handleCheckChange}
-          onDelete={handleDelete}
-        />
-      ))}
+    <div className="reminders-list-container">
+      <div className="reminder-list">
+        {reminders &&
+          reminders?.length ? reminders.map((reminder) => (
+            <Reminder
+              key={reminder.uuid}
+              reminder={reminder}
+              onCheckChange={handleCheckChange}
+            />
+          )) : <div>no reminders</div>
+        }
+      </div>
     </div>
-    </div>
-  );
+  )
 };
 export default ReminderList;

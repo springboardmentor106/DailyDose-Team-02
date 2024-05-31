@@ -88,7 +88,7 @@ const UpdatePassword = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="New Password"
-              className="form-control"
+              className="form-control2"
               name="password"
             />
           </div>
@@ -98,7 +98,7 @@ const UpdatePassword = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm New Password"
-              className="form-control"
+              className="form-control2"
             />
           </div>
 

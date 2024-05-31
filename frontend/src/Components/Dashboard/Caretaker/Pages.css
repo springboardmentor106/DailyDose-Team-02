@@ -1,243 +1,345 @@
-*{
-    
-    margin: 2px;
-    
+/* Please do not give any universal styling */
+* {
+  /* margin: 1px;     */
 }
-
-.nav-bar{
-  
-  position:relative;
+.nav-bar {
+  position: relative;
   z-index: 999;
 }
 /* --------------------Design for Analytics----------------  */
 
-.main{
-    display: flex;
-    color:black;
-    margin: 2px;
+.main {
+  display: flex;
+  color: black;
+  margin: 2px;
+  width: 100%;
 }
-.Analytics-pages{
+.ana-main {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.Analytics-pages {
   padding-left: 110px;
   display: flex;
+  width: 100%;
+  min-height: 95vh;
+  align-items: start;
 }
-.ana-left-side{
-    margin: 4px;
-    flex:60;
+.ana-left-side {
+  margin: 6px 15px 6px 6px;
+  width: 63%;
+  height: 100%;
 }
-.ana-right-side{
-    margin: 4px;
-    flex: 40;
+.ana-right-side {
+  background-color: #ebe8fd;
+  width: 35%;
+  padding: 26px 26px 40px 26px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  border-radius: 51px 0px 0px 51px;
 }
-.user{
-    display: flex;
-    justify-content: space-around;
+.btn-group {
+  height: 27px;
 }
-.user .card{
-    margin: 4px;
-    border-radius: 30px;
-    width: 200px; height: 180px;
-    background-image: linear-gradient(#d3cbf7,white);
+.ana-right-card-one {
+  padding: 0px;
+  height: 344px;
+  width: 332px;
+  border-radius: 45px;
+  margin-top: -13px;
+  background-color: white;
+  padding-top: 5px;
 }
-.user .card img{
-  width: 60px; height: 60px;
+.ana-right-card-two {
+  flex: 1;
+  padding: 14px;
+  margin-top: 15px;
+  display: grid;
+}
+.ana-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 1vw;
+}
+.ana-reminder {
+  background-color: white;
+  border-radius: 15px;
+  height: 300px;
+  padding-top: 24px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
+    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+}
+.ana-user .card {
+  /* margin: 4px;  */
+  border-radius: 30px;
+  width: 25%;
+  height: 25%;
+  min-width: 178px;
+  min-height: 166px;
+  background-image: linear-gradient(#d3cbf7, white);
+  transition: 0.5s;
+}
+.ana-user .card:hover {
+  transform: scale(1.05);
+  z-index: 2;
+  background-image: linear-gradient(#ada0f8, #f0eef9);
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
+    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+}
+.card #ana-card-body img {
+  width: 58px;
+  height: 59px;
   border-radius: 100%;
 }
-.user .card p{
+.ana-user .card #ana-card-body p {
   font-size: 12px;
 }
-.chart{
-    margin-top:5px ;
-    
+#ana-card-body h6 {
+  font-size: 1em;
 }
-.aboutuser{
-    display: flex;
-    justify-content: space-around;
+#ana-card-body p{
+  font-size: 0.8em;
 }
 
-.aboutuser  .card {
-  background-image: linear-gradient(#d3cbf7,white);
-    margin: 3px;
-    border-radius:10px ;
-    width: 400px;height: 200px;
-}
-
-.aboutuser .about .card{
-  background-image: linear-gradient(#d3cbf7,white);
-    margin: 3px;
-    border-radius:10px ;
-    width: 400px; height: 200px;
-}
-.circle-progress{
-  display: flex;
-  justify-content: center;
-}
-.ana-left-side .chart .card{
-  background: white;
-  border-radius: 10px;
+#ana-card-body {
+  width: 100%;
+  gap: 0px;
   align-items: center;
 }
-/* --------------css of Home page------------------- */
-
-.main1{
-  display: flex;
-  color:black; margin: 2px;
+.ana-chart {
+  margin-top: 8px;
+  width: 100%;
+  height: 40%;
 }
-.main1 .pages{
+.ana-chart .card-body {
+  width: 100%;
+  justify-content: space-between;
+  align-content: space-around;
+  flex-direction: row;
+}
+.ana-chart .card {
+  border-radius: 21px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
+    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+}
+
+.ana-left-side .chart .card {
+  background: white;
+  border-radius: 21px;
+  align-items: center;
+  width: 800px;
+  box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
+    -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+}
+.ana-left-side .chart .card .card-body {
+  margin: 5px;
+}
+#ana-select {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.ana-right-card-two .nav {
+  background-color: #ebe8fd;
+}
+
+#ana-progress {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 35%;
+  min-height: 200px;
+}
+
+#ana-progress .box-left-top {
+  margin-top: 10px;
+  /* margin-left: 118px; */
+  /* text-align: center; */
+  margin: 0 auto;
+  width: 100px;
+}
+
+.Progress-details-container div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.55vw;
+}
+
+#ana-progress .row-three-card{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+
+}
+/* --------Responsive ness of .Analytics-pages-------- */
+
+@media screen and (max-width: 425px) {
+  .ana-main {
+    width: 100%;
+  }
+  .Analytics-pages {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 2px;
+    display: grid;
+  }
+  .ana-right-side {
+    margin-top: 20px;
+    display: flex;
+  }
+  .ana-user {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .ana-left-side .ana-user .card {
+    width: 98px;
+    height: 104px;
+    border-radius: 20px;
+  }
+  .ana-user #ana-card-body {
+    padding: 8px;
+    gap: 0px;
+    width: 100%;
+    margin-top: 0px;
+  }
+  .ana-user .card #ana-card-body img {
+    width: 40px;
+    height: 40px;
+  }
+  .ana-user .card #ana-card-body strong {
+    font-size: 13px;
+  }
+  .ana-user .card #ana-card-body p {
+    font-size: 8px;
+  }
+  #ana-select {
+    display: flex;
+    justify-content: space-around;
+  }
+  .ana-right-card-two {
+    border-radius: 30px;
+    margin-left: 24px;
+    margin-top: -10px;
+  }
+  .ana-right-card-one {
+    margin-top: 10px;
+  }
+  .ana-chart .card-body {
+    width: 100%;
+    height: 280px;
+  }
+  #ana-bargraph {
+    margin-top: 89px;
+    margin-left: -49px;
+  }
+  .ana-chart .btn-group {
+    display: none;
+  }
+  .ana-chart .card {
+    border: 20px;
+    width: 49.5vh;
+    height: 200px;
+    box-shadow: 1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15),
+      -1.95px -1.95px 2.6px rgba(0, 0, 0, 0.15);
+  }
+  #ana-progress {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: -6px;
+  }
+  #ana-progress .row-three-card {
+    height: 241px;
+    width: 100%;
+  }
+  .ana-right-side {
+    display: grid;
+    justify-content: space-around;
+    width: 92%;
+  }
+  #ana-progress .box-left-top {
+    margin-left: 35px;
+  }
+  #ana-progress #about {
+    margin-left: 25px;
+  }
+  #ana-progress .Progress-details-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+  #ana-progress .third-pro-detail {
+    display: none;
+  }
+  .ana-right-card-one {
+    padding-left: 31px;
+    width: 371px;
+  }
+  .ana-right-card-two {
+    margin-top: 30px;
+    margin-left: 5px;
+  }
+}
+/* @media screen and (max-width:1352px) and (min-width:1000px) {
+  .ana-main{
+    width: 97%;
+  }
+  .Analytics-pages{
+    display: grid;
+    justify-content: space-around;
+    width: 97%;
+  }
+  .ana-right-side{
+    display:flex;
+    justify-content: space-around;
+  }
+  .ana-right-card-two{
+    margin-top: -24px;
+  }
+  .ana-right-card-one{
+    margin-top: 10px;
+  }
+  .nav-bar{
+    top:74%
+  }
+} */
+
+/* ------------Assign Task ---------------*/
+.Assign_pages {
   padding-left: 110px;
 }
-.header {
-  display: flex;
-}
-#card1{
-  flex: 50; background-color:#c1e2f9 ; border-radius: 20px;
-  margin: 0;
-}
-#card2{
-  flex: 30; background-color: #cdc8f5; border-radius: 20px;
-}
-#card3{
-  flex: 20; background-color: #cdc8f5; border-radius: 20px;
-}
-#heading{
-  display: flex;
-  margin: 0;
-  color: black;
-}
-#heading img{
-  height: 150px;
-  width: 250px;
-}
-.card-title{
-  background-color: #6a58dc;
-  font: bolder;
-  color: white;
-  padding: 3px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-.card-title h6{
-  padding: 2px;
-}
-#profile{
-  display: flex;
-}
-#profile img{
-  width: 100px; height:100px;
-  border-radius: 100%;
-}
-.accordion-body{
-  display: flex;
-  justify-content: space-around;
-  
-}
-.imgconatiner{
-  width: 300px;
-}
-#progress .card-body{
-  width: 200px;
- }
-.accordion-button{
-  display: flex;
-  justify-content:space-evenly;
+.assign-heading {
+  margin-top: 36px;
+  margin-bottom: 10px;
+  margin-left: 50px;
   margin-right: 50px;
-  font-size: 15px;
+  background-color: #6a58dc;
+  color: white;
+  padding: 26px 10px 25px 10px;
+  border-radius: 30px;
 }
-.acc-img img{
-  width: 40px; height: 40px;
-  border-radius: 100%;
-}
-#getAssign{
-  align-content: flex-end;
-}
-#toAssign{
+.assign-main {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
 }
-.sidebar {
-    background-color: #6a58dc;
-    width: 50px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    border-radius: 20px;
+.assign-heading h5 {
+  margin-left: 20px;
+  font-size: 23px;
 }
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-  }
-  .icon {
-    margin-right: 5px;
-    
-  }
-  .line{
-    margin: 20px;
-    
-  }
-  .line h2{
-    font-weight:700 ;
-  }
-
-
-  
-  /* -----------design of sidebar----------- */
-  .wrapper{
-    
-    margin: 2px;
+.Assign_pages input {
+  width: 420px;
 }
-
-.sidebar{
-    background: #6a58dc;
-    color: #fff;
-    height: 600px;
-    width: 0px;
-    transition: all 0.5s;
+.Assign_pages #textarea {
+  margin-left: 130px;
 }
-.top_section{
-    display: flex;
-    align-items:center;
-    padding:20px 15px;
+.Assign_pages #textarea textarea {
+  width: 990px;
+  height: 100px;
 }
-.logo{
-    font-size: 30px;
-}
-.bars{
-    display: flex;
-    font-size: 25px;
-    margin-left: 30px;
-}
-.link{
-    display: flex;
-    color: #fff;
-    padding: 10px 15px;
-    gap: 15px;
-    transition: all 0.5s ease ;
-}
-.link:hover{
-    background:white;
-    border-radius: 5px;
-    color: #000;
-    transition: all 0.5s ease;
-}
-.active{
-    background: white;
-    border-left-color: #6a58dc;
-    border-left-width: 1px;
-    border-radius: 5px;
-    color: #000;
-}
-.icon, .link_text{
-    font-size: 20px;
-}
-  
-  
-  
-  
-  
-  
-  
-  

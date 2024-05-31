@@ -1,23 +1,21 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { RiDeleteBinLine } from "react-icons/ri";
-const Reminder = ({ reminder, onCheckChange, onDelete }) => {
-const { date, type, checked } = reminder;
+const Reminder = ({ reminder, onCheckChange }) => {
+  const {  title, completedToday, startTime } = reminder || {};
+ 
   return (
     <div className="reminder-item">
-      <div id='datepicker'>{date}</div>
+      <div id='datepicker'>{startTime} {startTime.split(':')[0] > 12 ? "pm" : "am"} </div>
       <div className="type-container">
-      <div>{type}</div>
+        <div>{title}</div>
       </div>
       <div>
         <input
           type="checkbox"
-          checked={checked}
+          checked={completedToday}
           onChange={() => onCheckChange(reminder)}
           id='check'
         />
-      </div>
-      <div>
-        <button onClick={() => onDelete(reminder)}><RiDeleteBinLine /></button>
       </div>
     </div>
   );

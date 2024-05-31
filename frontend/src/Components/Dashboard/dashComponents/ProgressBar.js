@@ -1,3 +1,4 @@
+import { CardContent } from '@mui/material';
 import React from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -11,7 +12,7 @@ const ProgressBar = ({ value }) => {
         styles={buildStyles({
           textSize: '16px',
           textFont: 'bold',
-          pathColor: `rgb(100,85,198, ${value / 100})`,
+          pathColor: `#6455C6`,
           textColor: '#1f165c',
           trailColor: 'white',
         })}
