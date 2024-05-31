@@ -1,3 +1,4 @@
+import Caretaker from '../models/caretakerModel.js';
 import REMINDER from '../models/reminderModel.js';
 import User from '../models/userModel.js';
 import sendNotification from './sendNotification.js';
@@ -201,4 +202,165 @@ export const deleteReminder = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 
+};
+
+
+export const getMonthlyReminderStat = async (req, res) => {
+    try {
+        const { userId, role } = req;
+        if (!userId || !role) {
+            return res.status(400).json({ status: "failed", message: "error capturing UserID, role" });
+        }
+
+        const { seniorCitizenId, year } = req.body;
+        if (!year) {
+            return res.status(400).json({ status: "failed", message: "Year is required in the request body" });
+        }
+
+        let seniorId;
+        if (role === 'user') {
+            seniorId = userId;
+        } else if (role === 'caretaker') {
+            seniorId = seniorCitizenId;
+            const caretaker = await Caretaker.findOne({ uuid: userId });
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+            const senior = await User.findById(seniorId);
+            if (!senior) {
+                return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
+            }
+        } else {
+            return res.status(403).json({ status: "failed", message: "Unauthorized" });
+        }
+
+        const monthsData = [];
+
+        for (let month = 0; month < 12; month++) {
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+
+            const monthName = firstDayOfMonth.toLocaleString('default', { month: 'long' });
+
+            const reminders = await REMINDER.find({
+                userId: seniorId,
+                startDate: { $lte: lastDayOfMonth },
+                $or: [
+                    { endDate: { $exists: false } },
+                    { endDate: { $gte: firstDayOfMonth } }
+                ]
+            });
+
+            let totalReminder = 0;
+            let totalCompletedDays = 0;
+            let totalSkippedDays = 0;
+
+            for (const reminder of reminders) {
+                const start = reminder.startDate < firstDayOfMonth ? firstDayOfMonth : reminder.startDate;
+                const end = reminder.endDate ? (reminder.endDate > lastDayOfMonth ? lastDayOfMonth : reminder.endDate) : lastDayOfMonth;
+
+                const daysInMonth = (end - start) / (1000 * 60 * 60 * 24) + 1;
+
+                totalReminder += daysInMonth;
+                if (reminder.completed) {
+                    totalCompletedDays += daysInMonth;
+                } else {
+                    totalSkippedDays += daysInMonth;
+                }
+            }
+
+            const completePercentage = totalReminder > 0 ? (totalCompletedDays / totalReminder) * 100 : 0;
+
+            monthsData.push({
+                month: monthName,
+                totalReminder,
+                completedDays: totalCompletedDays,
+                skippedDays: totalSkippedDays,
+                completePercentage: parseFloat(completePercentage.toFixed(2))
+            });
+        }
+
+        return res.status(200).json({
+            status: "success",
+            userId: seniorId,
+            role,
+            year,
+            monthsData
+        });
+    } catch (error) {
+        console.error('Error fetching monthly reminder stats:', error);
+        res.status(500).json({ status: "error", message: "Failed to retrieve monthly reminder stats" });
+    }
+};
+
+
+
+export const getDailyReminderProgress = async (req, res) => {
+    try {
+        const { userId, role } = req;
+        if (!userId || !role) {
+            return res.status(400).json({ status: "failed", message: "error capturing UserID, role" });
+        }
+
+        const { seniorCitizenId } = req.body;
+
+        let seniorId;
+        if (role === 'user') {
+            seniorId = userId;
+        } else if (role === 'caretaker') {
+            seniorId = seniorCitizenId;
+            const caretaker = await Caretaker.findOne({ uuid: userId });
+            if (!caretaker) {
+                return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
+            }
+            const senior = await User.findById(seniorId);
+            if (!senior) {
+                return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
+            }
+        } else {
+            return res.status(403).json({ status: "failed", message: "Unauthorized" });
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+
+        const todaysReminders = await REMINDER.find({
+            userId: seniorId,
+            startDate: { $lte: tomorrow },
+            $or: [
+                { endDate: { $exists: false } },
+                { endDate: { $gte: today } }
+            ]
+        });
+
+        const updatedReminders = await Promise.all(todaysReminders.map(async (reminder) => {
+            const reminderEndDate = reminder.endDate ? new Date(reminder.endDate) : null;
+            if (reminderEndDate && reminderEndDate < today) {
+                reminder.completed = true;
+            }
+            await reminder.save();
+            return reminder;
+        }));
+
+        const completedReminders = updatedReminders.filter(reminder => reminder.completedToday);
+        const completedRemindersLength = completedReminders.length;
+        const completePercent = updatedReminders.length > 0 ? (completedRemindersLength / updatedReminders.length) * 100 : 0;
+
+        if (!seniorId) {
+            return res.status(404).json({ status: "failed", message: "Senior not found" });
+        }
+
+        return res.status(200).json({
+            status: "success",
+            totalTodayReminders: updatedReminders,
+            completedRemindersLength,
+            completePercent: completePercent.toFixed(2),
+            toStartPercent: (100 - completePercent).toFixed(2)
+        });
+    } catch (error) {
+        console.error('Error fetching daily reminder progress:', error);
+        return res.status(500).json({ status: "error", message: "Failed to get daily reminder progress" });
+    }
 };
