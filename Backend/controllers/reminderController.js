@@ -1,6 +1,9 @@
 import REMINDER from '../models/reminderModel.js';
 import User from '../models/userModel.js';
 import sendNotification from './sendNotification.js';
+import { createCaretakerNotification } from '../controllers/caretakerNotificationController.js';
+import Reminder from '../models/reminderModel.js';
+
 export const createReminder = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -201,4 +204,67 @@ export const deleteReminder = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 
+};
+
+
+// Function to start a reminder
+export const startReminder = async (req, res) => {
+    try {
+        const { userId, reminderId } = req.body;
+
+        // Logic to start the reminder...
+        const reminder = await Reminder.findById(reminderId);
+        if (!reminder) {
+            return res.status(404).json({ status: "failed", message: "Reminder not found" });
+        }
+
+        reminder.started = true;
+        await reminder.save();
+
+        // Create a notification for the caretaker
+        await createCaretakerNotification({
+            body: {
+                title: 'New Reminder Started',
+                description: 'The user has started a new reminder.',
+                userId: userId,
+                belongTo: 'reminder',
+                eventType: 'reminder_started'
+            }
+        }, res);
+
+        return res.status(200).json({ status: "success", message: "Reminder started successfully" });
+    } catch (err) {
+        return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
+    }
+};
+
+// Function to complete a reminder
+export const completeReminder = async (req, res) => {
+    try {
+        const { userId, reminderId } = req.body;
+
+        // Logic to complete the reminder...
+        const reminder = await Reminder.findById(reminderId);
+        if (!reminder) {
+            return res.status(404).json({ status: "failed", message: "Reminder not found" });
+        }
+
+        reminder.completed = true;
+        await reminder.save();
+
+        // Create a notification for the caretaker
+        await createCaretakerNotification({
+            body: {
+                title: 'Reminder Completed',
+                description: 'The user has completed a reminder.',
+                userId: userId,
+                belongTo: 'reminder',
+                eventType: 'reminder_completed'
+            }
+        }, res);
+
+        return res.status(200).json({ status: "success", message: "Reminder completed successfully" });
+    } catch (err) {
+        return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
+    }
 };

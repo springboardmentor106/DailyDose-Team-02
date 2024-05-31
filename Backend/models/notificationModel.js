@@ -4,8 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const notificationDetailSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
-        default: () => new mongoose.Types.ObjectId(), // Automatically generate ObjectId
-        required: true
+        default: () => new mongoose.Types.ObjectId(),
     },
     title: {
         type: String,
@@ -23,7 +22,8 @@ const notificationDetailSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     }
-}, { timestamps: true });
+}, { timestamps: true }); 
+
 const notificationSchema = new mongoose.Schema({
     uuid: {
         type: String,

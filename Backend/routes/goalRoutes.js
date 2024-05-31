@@ -11,6 +11,8 @@ import {
 import { validation } from '../middlewares/validationMiddleware.js';
 import { createGoalSchema, updateGoalSchema } from '../validations/userGoalValidation.js';
 import checkUserAuth from '../middlewares/authMiddleware.js';
+import { startGoal, completeGoal } from '../controllers/goalController.js';
+
 
 const router = express.Router();
 
@@ -22,6 +24,9 @@ router.post('/monthly-stats', checkUserAuth, getMonthlyGoalProgress)
 router.post('/daily-stats', checkUserAuth, getDailyGoalProgress)
 router.delete('/delete-all', checkUserAuth, deleteAllGoal)
 
+
+router.post('/start-goal', checkUserAuth, startGoal);
+router.post('/complete-goal', checkUserAuth, completeGoal);
 
 // router.post('/goals', checkUserAuth, validateUserOrCaretaker, createGoal);
 // router.get('/goals', checkUserAuth, validateUserOrCaretaker, getGoals);

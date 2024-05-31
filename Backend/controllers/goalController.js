@@ -3,6 +3,9 @@ import GOAL from '../models/goalModel.js';
 import User from '../models/userModel.js';
 import sendNotification from './sendNotification.js';
 import messages from "./messages.js"
+import { createCaretakerNotification } from '../controllers/caretakerNotificationController.js';
+import Goal from '../models/goalModel.js'; 
+
 // All routes - validate uuid from jwt token and match with uuid to create goal
 const getTodayGoals = async ({ userId, caretakerId }) => {
     try {
@@ -558,5 +561,68 @@ export const getDailyGoalProgress = async (req, res) => {
     } catch (error) {
         console.error('Error fetching daily goal progress:', error);
         res.status(500).json({ status: "error", message: "Failed to get daily goal progress" + error });
+    }
+};
+
+
+// Function to start a goal
+export const startGoal = async (req, res) => {
+    try {
+        const { userId, goalId } = req.body;
+
+        // Logic to start the goal...
+        const goal = await Goal.findById(goalId);
+        if (!goal) {
+            return res.status(404).json({ status: "failed", message: "Goal not found" });
+        }
+
+        goal.started = true;
+        await goal.save();
+
+        // Create a notification for the caretaker
+        await createCaretakerNotification({
+            body: {
+                title: 'New Goal Started',
+                description: 'The user has started a new goal.',
+                userId: userId,
+                belongTo: 'goal',
+                eventType: 'goal_started'
+            }
+        }, res);
+
+        return res.status(200).json({ status: "success", message: "Goal started successfully" });
+    } catch (err) {
+        return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
+    }
+};
+
+// Function to complete a goal
+export const completeGoal = async (req, res) => {
+    try {
+        const { userId, goalId } = req.body;
+
+        // Logic to complete the goal...
+        const goal = await Goal.findById(goalId);
+        if (!goal) {
+            return res.status(404).json({ status: "failed", message: "Goal not found" });
+        }
+
+        goal.completed = true;
+        await goal.save();
+
+        // Create a notification for the caretaker
+        await createCaretakerNotification({
+            body: {
+                title: 'Goal Completed',
+                description: 'The user has completed a goal.',
+                userId: userId,
+                belongTo: 'goal',
+                eventType: 'goal_completed'
+            }
+        }, res);
+
+        return res.status(200).json({ status: "success", message: "Goal completed successfully" });
+    } catch (err) {
+        return res.status(500).json({ status: "failed", message: "Internal server error: " + err });
     }
 };

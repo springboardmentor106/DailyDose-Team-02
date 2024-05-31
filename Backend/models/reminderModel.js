@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
+
 const reminderSchema = new mongoose.Schema({
     uuid: {
         type: String,
@@ -55,7 +56,21 @@ const reminderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, { timestamps: true })
+}, { timestamps: true });
+
+// Method to start a reminder
+reminderSchema.methods.startReminder = async function() {
+    this.started = true;
+    await this.save();
+    return this;
+};
+
+// Method to complete a reminder
+reminderSchema.methods.completeReminder = async function() {
+    this.completed = true;
+    await this.save();
+    return this;
+};
 
 const REMINDER = mongoose.model('REMINDER', reminderSchema);
 

@@ -1,21 +1,34 @@
 import Notification from "../models/notificationModel.js";
+import User from "../models/userModel.js";
 
 // Create or update a notification for caretaker
 export const createCaretakerNotification = async (req, res) => {
     try {
-        const { title, description, userId, belongTo } = req.body;
+        const { title, description, userId, belongTo, eventType } = req.body;
         if (!userId) {
             return res.status(400).json({ status: "failed", message: "UUID not captured" });
+        }
+
+        // Find the user to get the caretakerId
+        const user = await User.findById(userId).populate('caretakerId');
+        if (!user) {
+            return res.status(404).json({ status: "failed", message: "User not found" });
+        }
+
+        const caretakerId = user.caretakerId;
+        if (!caretakerId) {
+            return res.status(404).json({ status: "failed", message: "Caretaker not assigned to this user" });
         }
 
         const newNotification = {
             title: title,
             description: description,
-            belongTo: belongTo
+            belongTo: belongTo,
+            eventType: eventType // e.g., 'goal_started', 'goal_completed', 'reminder_started', 'reminder_completed'
         };
 
         const result = await Notification.findOneAndUpdate(
-            { userId: userId },
+            { userId: caretakerId },
             { $push: { notification: newNotification } },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );

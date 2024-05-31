@@ -17,7 +17,7 @@ const goalSchema = new mongoose.Schema({
     },
     dayFrequency: {
         type: [String],
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily',  'Today'],
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Daily', 'Today'],
         default: ['Daily']
     },
     endDate: {
@@ -37,9 +37,11 @@ const goalSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
+        required: true
     },
     createdById: {
         type: String,
+        required: true
     },
     completedDays: {
         type: [Date],
@@ -52,6 +54,15 @@ const goalSchema = new mongoose.Schema({
     lastUpdated: {
         type: Date,
         default: new Date()
+    },
+    belongTo: {
+        type: String,
+        default: 'goal'
+    },
+    eventType: {
+        type: String,
+        enum: ['goal_started', 'goal_completed'],
+        default: 'goal_started'
     }
 }, { timestamps: true });
 
