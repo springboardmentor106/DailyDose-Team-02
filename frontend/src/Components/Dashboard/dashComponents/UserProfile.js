@@ -125,7 +125,7 @@ const UserProfile = () => {
                 <div className="profile-left">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Name
+                      First Name
                     </label>
                     <input type="text" class="form-control" />
                   </div>
@@ -157,7 +157,7 @@ const UserProfile = () => {
                 <div className="profile-right">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Disease
+                      Last Name
                     </label>
                     <input type="text" class="form-control" />
                   </div>
@@ -169,13 +169,13 @@ const UserProfile = () => {
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Surgical History
+                      Disease
                     </label>
                     <input type="text" class="form-control" />
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Genetic Disorder
+                    Surgical History
                     </label>
                     <input type="text" class="form-control" />
                   </div>
