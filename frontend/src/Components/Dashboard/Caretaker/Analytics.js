@@ -432,10 +432,10 @@ const Analytics = () => {
                 <strong>Goal Progress</strong>
               </h5>
               <div className="year-container">
-                <button>year</button>
-                <div id="year-button-container">
-                  <IoIosArrowDropdown />
-                </div>
+              <select class="form-select" aria-label="Default select example">
+                <option value="1">Goal</option>
+                <option value="2">Reminder</option>
+              </select>
               </div>
             </div>
             <div className="row-one-card-one-dashboard">
