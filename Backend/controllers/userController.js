@@ -249,11 +249,16 @@ export const updateUser = async (req, res) => {
 
         let user;
         let updateUser;
-        if (role !== "caretaker") {
-            user = await User.findOne({ uuid: userId });
+        if (role === "user") {
+            user = await User.findOne({ uuid: userId });            
+            // console.log(user)
+
             if (!user) {
                 return res.status(400).json({ status: "failed", message: "Email not found" });
             }
+
+            // body.allergies = user.allergies.concat(body.allergies)
+            // body.diseases = user.diseases.concat(body.diseases)
 
             updateUser = await User.findByIdAndUpdate(user._id, body, { new: true })
 
@@ -262,9 +267,14 @@ export const updateUser = async (req, res) => {
             }
         } else {
             user = await Caretaker.findOne({ uuid: userId });
+            // console.log(user)
+
             if (!user) {
                 return res.status(400).json({ status: "failed", message: "Email not found" });
             }
+
+            // body.allergies = user.allergies.concat(body.allergies)
+            // body.diseases = user.diseases.concat(body.diseases)
 
             updateUser = await Caretaker.findByIdAndUpdate(user._id, body, { new: true })
 

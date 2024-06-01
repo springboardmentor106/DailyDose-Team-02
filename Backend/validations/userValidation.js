@@ -23,6 +23,8 @@ export const userRegistrationSchema = Joi.object({
     pincode: Joi.number(),
     reminders: Joi.array().items(Joi.string()),
     goals: Joi.array().items(Joi.string()),
+    allergies: Joi.array().items(Joi.string()),
+    diseases: Joi.array().items(Joi.string()),
 }).options({ abortEarly: false });
 
 export const updateUserSchema = Joi.object({
@@ -34,6 +36,8 @@ export const updateUserSchema = Joi.object({
     address: Joi.string(),
     country: Joi.string(),
     pincode: Joi.number(),
+    allergies: Joi.array().items(Joi.string()),
+    diseases: Joi.array().items(Joi.string()),
 }).options({ abortEarly: false });
 
 export const userLoginSchema = Joi.object({

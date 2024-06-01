@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
-// import { boolean } from 'joi';
 
 const userSchema = new mongoose.Schema(
   {
@@ -74,11 +72,21 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: () => new Date(Date.now() - 24 * 60 * 60 * 1000)
     },
-    habits: [String]
+    habits: {
+      type: [String],
+      default: []
+    },
+    allergies: {
+      type: [String],
+      default: []
+    },
+    diseases: {
+      type: [String],
+      default: []
+    }
   },
   { timestamps: true }
 )
 
 const User = mongoose.model("User", userSchema);
-
 export default User;
