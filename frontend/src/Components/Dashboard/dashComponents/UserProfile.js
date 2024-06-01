@@ -1,13 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Notification from "../dashComponents/Notification";
+import Constants from "../../../constants";
+import { toast } from "react-toastify";
 const UserProfile = () => {
+  const [formData,setFormData]=useState({
+    firstname:"",
+    lastname:"",
+    email:"",
+    phoneno:"",
+    age:"",
+    location:"",
+    disease:"",
+    allergy:""
+  });
+
+  const handleSumit=(e)=>{
+    e.preventDefault();
+    console.log(formData);
+  }
+
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
     window.location.reload()
   };
+
+  const [userDetail,setUserDetail]=useState(null);
+  const getUserDetail=async()=>{
+    try{
+      const token=localStorage.getItem("token");
+      const response= await fetch(Constants.BASE_URL+'/api/user/profile',{
+        method:'GET',
+        headers:{
+          'Content-Type': "application/json",
+          'Authorization': token
+        }
+      })
+      if(response.status===401){
+        navigate('/login');
+        localStorage.clear()
+      }
+      const data=await response.json();
+      if(data.status==='success'){
+        // console.log("ho gya");
+        data.user ? setUserDetail(data.user) : setUserDetail(null)
+        localStorage.setItem("caretakerId", data.user.caretaker)
+      }
+      else{
+        toast.error(data.message)
+      }
+    }
+    catch(error){
+      console.log(error);
+      toast.error(error);
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      getUserDetail()
+    }
+  })
   return (
     <div>
       <div
@@ -99,6 +155,7 @@ const UserProfile = () => {
                 data-bs-dismiss="modal"
                 aria-label="Close"></button>
             </div>
+            <form onSubmit={handleSumit}>
             <div className="modal-body">
               <div
                 className="profile-header"
@@ -111,9 +168,11 @@ const UserProfile = () => {
                     background: "#9186d9",
                     marginTop: "-20%",
                   }}></div>
+                {userDetail && 
                 <div>
-                  <strong>Username</strong> <p>username@gmail.com</p>
+                  <strong>{userDetail.firstname} {userDetail.lastname}</strong> <p>{userDetail.email}</p>
                 </div>
+                }
               </div>
               <div
                 className="profile-body"
@@ -127,31 +186,25 @@ const UserProfile = () => {
                     <label for="exampleInputEmail1" class="form-label">
                       First Name
                     </label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="firstname" value={formData.firstname} onChange={(e)=> setFormData({...formData, firstname: e.target.value})}/>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
                       Email
                     </label>
-                    <input type="email" class="form-control" />
+                    <input type="email" class="form-control" name="lastname" value={formData.email} onChange={(e)=>setFormData({...formData,email: e.target.value})}/>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Phone no
+                      Age
                     </label>
-                    <input type="text" class="form-control" />
+                    <input type="number" class="form-control" name="age" value={formData.age} onChange={(e)=>setFormData({...formData,age: e.target.value})}/>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Date of birth
+                      Disease
                     </label>
-                    <input type="date" class="form-control" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Address
-                    </label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="disease" value={formData.disease} onChange={(e)=>setFormData({...formData,disease: e.target.value})}/>
                   </div>
                 </div>
                 <div className="profile-right">
@@ -159,34 +212,29 @@ const UserProfile = () => {
                     <label for="exampleInputEmail1" class="form-label">
                       Last Name
                     </label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="lastname" value={formData.lastname} onChange={(e)=>setFormData({...formData,lastname: e.target.value})}  />
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Allergy
+                      Phone Number
                     </label>
-                    <input type="text" class="form-control" />
+                    <input type="number" class="form-control" name="phoneno" value={formData.phoneno} onChange={(e)=>setFormData({...formData,phoneno: e.target.value})} />
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Disease
+                      Location
                     </label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="location" value={formData.location} onChange={(e)=>setFormData({...formData,location: e.target.value})}/>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                    Surgical History
+                    Allergy
                     </label>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Discription
-                    </label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="allergy" value={formData.allergy} onChange={(e)=>setFormData({...formData,allergy: e.target.value})}/>
                   </div>
                 </div>
               </div>
+              
             </div>
             <div className="modal-footer">
               <button
@@ -195,10 +243,11 @@ const UserProfile = () => {
                 data-bs-dismiss="modal">
                 Cancel
               </button>
-              <button type="button" className="btn btn-primary btn-sm">
+              <button type="submit" className="btn btn-primary btn-sm">
                 Save
               </button>
             </div>
+            </form>
           </div>
         </div>
       </div>
