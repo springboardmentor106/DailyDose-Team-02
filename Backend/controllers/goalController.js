@@ -140,7 +140,7 @@ export const updateGoal = async (req, res) => {
 
         if (completedToday) {
             // Mark today's goal as completed
-            if (!goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === totalTodayGoals)) {
+            if (!goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === today)) {
                 goal.completedDays.push(today);
             }
             // Remove today from skippedDays if it exists

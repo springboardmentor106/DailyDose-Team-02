@@ -37,6 +37,7 @@ const goalSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
+        // enum: ['user', 'caretaker'],
     },
     createdById: {
         type: String,
