@@ -14,7 +14,9 @@ export const createReminderSchema = Joi.object({
     completed: Joi.boolean().default(false),
     completedToday: Joi.boolean().default(false),
     timeFrequency: Joi.number().integer().min(1).default(1),
-    pushNotification: Joi.boolean().default(false)
+    pushNotification: Joi.boolean().default(false),
+    createdBy: Joi.string(),
+    createdById: Joi.string()
 }).options({ abortEarly: false });
 
 export const updateReminderSchema = Joi.object({
