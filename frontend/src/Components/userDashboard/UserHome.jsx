@@ -266,7 +266,7 @@ const UserHome = () => {
                   </div>
                   <div className="card-body">
                     <h6>
-                      <strong>{userDetails.firstname[0]}</strong>
+                      <strong>{userDetails.firstname} {userDetails.lastname}</strong>
                     </h6>
                     <p>Age: {userDetails.age}</p>
                     <p>
@@ -382,13 +382,13 @@ const UserHome = () => {
           <div className="boxes" id="chart">
             <div className="chart-heading">
               <h5>
-                <strong>Goal Progress</strong>
+                <strong>Goal Progress 2024</strong> 
               </h5>
               <div className="year-container">
-                <button>year : 2024</button>
-                {/* <div id="year-button-container">
-                  <IoIosArrowDropdown />
-                </div> */}
+              <select class="form-select" aria-label="Default select example">
+                <option value="1">Goal</option>
+                <option value="2">Reminder</option>
+              </select>
               </div>
             </div>
             <div className="row-one-card-one-dashboard">

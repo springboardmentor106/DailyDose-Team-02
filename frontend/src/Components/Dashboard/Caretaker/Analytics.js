@@ -429,7 +429,7 @@ const Analytics = () => {
           <div className="boxes" id="chart">
             <div className="chart-heading">
               <h5>
-                <strong>Goal Progress</strong>
+                <strong>Goal Progress 2024</strong>
               </h5>
               <div className="year-container">
               <select class="form-select" aria-label="Default select example">

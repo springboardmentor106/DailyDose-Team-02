@@ -252,7 +252,7 @@ const Dashboard = () => {
           {userDetails &&
             <div className="row-one-card-two">
               <div className="circle-das">
-                {userDetails.firstname[0]}
+                {/* {userDetails.firstname[0]} */}
               </div>
               <div className="details-das">
 

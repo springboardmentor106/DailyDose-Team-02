@@ -10,7 +10,7 @@ const UserProfile = () => {
     email:"",
     phoneno:"",
     age:"",
-    location:"",
+    gender:"",
     disease:"",
     allergy:""
   });
@@ -18,6 +18,7 @@ const UserProfile = () => {
   const handleSumit=(e)=>{
     e.preventDefault();
     console.log(formData);
+    updateUserDetail();
   }
 
   const navigate = useNavigate();
@@ -56,6 +57,34 @@ const UserProfile = () => {
       console.log(error);
       toast.error(error);
     }
+  }
+
+  const updateUserDetail=async()=>{
+    try{
+      const token = localStorage.getItem("token");
+      const response= await fetch(Constants.BASE_URL+"/api/user/update-profile",{
+        method:'PATCH',
+        headers:{
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body:JSON.stringify({firstname:formData.firstname,lastname: formData.lastname, age:formData.age, gender:formData.gender})
+      })
+      if(response.status===400){
+        toast.error(response.message);
+      }
+      const data= await response.json();
+      if(data.status==='success'){
+        toast.success(data.message)
+      }
+      else{
+        toast.error(data.message)
+      }
+    }
+    catch(error){
+      toast.error(error);
+    }
+    
   }
 
   useEffect(() => {
@@ -222,9 +251,14 @@ const UserProfile = () => {
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
-                      Location
+                      Gender
                     </label>
-                    <input type="text" class="form-control" name="location" value={formData.location} onChange={(e)=>setFormData({...formData,location: e.target.value})}/>
+                    <select class="form-select" aria-label="Default select example" name="gender" value={formData.gender} onChange={(e)=>setFormData({...formData,gender: e.target.value})}>
+                      <option selected>Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">
@@ -243,7 +277,7 @@ const UserProfile = () => {
                 data-bs-dismiss="modal">
                 Cancel
               </button>
-              <button type="submit" className="btn btn-primary btn-sm">
+              <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal">
                 Save
               </button>
             </div>
