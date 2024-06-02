@@ -254,14 +254,14 @@ export const deleteAllGoal = async (req, res) => {
                 try {
                     const deleteGoal = await GOAL.findOneAndDelete({ uuid: user.goals[i] });
                     if (!deleteGoal) {
-                        return res.json({ status: "failed", message: 'Error while deleting goal please try again' });
+                        return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' });
                     }
                 } catch (error) {
-                    return res.json({ status: "failed", message: 'Error while deleting goal please try again' + error });
+                    return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' + error });
                 }
             }
 
-            return res.json({ status: "success", message: 'All Goal deleted successfully' });
+            return res.status(200).json({ status: "success", message: 'All Goal deleted successfully' });
 
         } else if (role === 'caretaker') {
             const caretaker = await Caretaker.findOne({ uuid: userId })
@@ -295,11 +295,11 @@ export const deleteAllGoal = async (req, res) => {
             for (let i = 0; i < goalsLength; i++) {
                 const deleteGoal = await GOAL.findOneAndDelete({ uuid: user.goals[i] });
                 if (!deleteGoal) {
-                    return res.json({ status: "failed", message: 'Error while deleting goal please try again' });
+                    return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' });
                 }
             }
 
-            return res.json({ status: "success", message: 'All Goal deleted successfully' });
+            return res.status(404).json({ status: "success", message: 'All Goal deleted successfully' });
 
         } else {
             return res.status(403).json({ status: "failed", message: "Unauthorized" });
