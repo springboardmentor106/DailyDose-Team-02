@@ -169,12 +169,7 @@ export const updateGoal = async (req, res) => {
 
         if (completedToday) {
             // Mark today's goal as completed
-            if (
-                !goal.completedDays.some(
-                    (date) =>
-                        new Date(date).toISOString().split("T")[0] === totalTodayGoals
-                )
-            ) {
+            if (!goal.completedDays.some(date => new Date(date).toISOString().split('T')[0] === today)) {
                 goal.completedDays.push(today);
             }
             // Remove today from skippedDays if it exists
@@ -326,25 +321,17 @@ export const deleteAllGoal = async (req, res) => {
                         uuid: user.goals[i],
                     });
                     if (!deleteGoal) {
-                        return res.json({
-                            status: "failed",
-                            message: "Error while deleting goal please try again",
-                        });
+                        return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' });
                     }
                 } catch (error) {
-                    return res.json({
-                        status: "failed",
-                        message: "Error while deleting goal please try again" + error,
-                    });
+                    return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' + error });
                 }
             }
 
-            return res.json({
-                status: "success",
-                message: "All Goal deleted successfully",
-            });
-        } else if (role === "caretaker") {
-            const caretaker = await Caretaker.findOne({ uuid: userId });
+            return res.status(200).json({ status: "success", message: 'All Goal deleted successfully' });
+
+        } else if (role === 'caretaker') {
+            const caretaker = await Caretaker.findOne({ uuid: userId })
 
             if (!caretaker) {
                 return res.status(404).json({
@@ -392,17 +379,12 @@ export const deleteAllGoal = async (req, res) => {
             for (let i = 0; i < goalsLength; i++) {
                 const deleteGoal = await GOAL.findOneAndDelete({ uuid: user.goals[i] });
                 if (!deleteGoal) {
-                    return res.json({
-                        status: "failed",
-                        message: "Error while deleting goal please try again",
-                    });
+                    return res.status(404).json({ status: "failed", message: 'Error while deleting goal please try again' });
                 }
             }
 
-            return res.json({
-                status: "success",
-                message: "All Goal deleted successfully",
-            });
+            return res.status(404).json({ status: "success", message: 'All Goal deleted successfully' });
+
         } else {
             return res
                 .status(403)

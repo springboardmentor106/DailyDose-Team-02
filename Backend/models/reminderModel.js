@@ -49,6 +49,21 @@ const reminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    createdBy: {
+        type: String,
+        // enum: ['user', 'caretaker'],
+    },
+    createdById: {
+        type: String,
+    },
+    completedDays: {
+        type: [Date],
+        default: []
+    },
+    skippedDays: {
+        type: [Date],
+        default: []
+    },
     lastSentNotification: {
         type: Date
     },

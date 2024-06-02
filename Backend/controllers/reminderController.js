@@ -2,6 +2,7 @@ import Caretaker from '../models/caretakerModel.js';
 import REMINDER from '../models/reminderModel.js';
 import User from '../models/userModel.js';
 import sendNotification from './sendNotification.js';
+
 export const createReminder = async (req, res) => {
     try {
         const { userId, role } = req;
@@ -354,7 +355,7 @@ export const getDailyReminderProgress = async (req, res) => {
 
         return res.status(200).json({
             status: "success",
-            totalTodayReminders: updatedReminders,
+            // totalTodayReminders: updatedReminders,
             completedRemindersLength,
             completePercent: completePercent.toFixed(2),
             toStartPercent: (100 - completePercent).toFixed(2)
