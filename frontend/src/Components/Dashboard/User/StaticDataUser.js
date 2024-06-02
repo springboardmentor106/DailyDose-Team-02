@@ -2,7 +2,8 @@
 const profileinfo = [
     {  name: "Mrs. User XYZ", 
        age: 57, 
-       location: "Delhi, India" }
+       location: "Delhi, India" 
+      }
   ];
   /* user - reminder list static data for userdashboard */
   const reminders = [
