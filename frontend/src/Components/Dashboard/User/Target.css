@@ -48,8 +48,8 @@
 .header-details-Task-habit {
   width: 55px;
   position: relative;
-  left: 16px;
-  top: 8px;
+  left:16px;
+  top:8px;
   /* left: 107px;
   top: -8px; */
 }
@@ -71,7 +71,7 @@
 .Progress-bar {
   position: relative;
   left: 397px;
-  top: 5px;
+  top: 135px;
   min-height: 35px
 }
 
@@ -103,14 +103,14 @@
 .no-reminders {
   align-self: center;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
-.habit {
-  margin-top: 8px;
+.habit{
+  margin-top:8px;
   align-self: flex-start;
-  margin-left: 16px;
-  font-size: 16px
+  margin-left:16px;
+  font-size:16px
 }
 
 .checkbox {
@@ -122,7 +122,7 @@
 .checkbox input[type="checkbox"] {
   margin: 0;
   margin-left: -499px;
-  top: -64px;
+  top: -44px;
   position: relative;
 }
 
@@ -132,7 +132,7 @@
   margin: 0;
   position: relative;
   left: 39px;
-  top: -65px;
+  top: -45px;
   z-index: 9;
   margin-bottom: -4px;
 }

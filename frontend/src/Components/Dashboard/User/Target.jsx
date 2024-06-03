@@ -242,7 +242,7 @@ const Target = () => {
                       <h5>Status</h5>
                     </div>
                     <div className="header-details-dots">
-                      <PiDotsThreeOutlineFill />
+                      {/* <PiDotsThreeOutlineFill /> */}
                     </div>
                   </div>
                 ) : (
@@ -258,7 +258,7 @@ const Target = () => {
                         </strong>
                       </div>
                       <div className="dot">
-                        <PiDotsThreeOutlineVerticalBold />
+                        {/* <PiDotsThreeOutlineVerticalBold /> */}
                       </div>
                       {goals &&
                         goals.map((goal) => {
@@ -305,7 +305,7 @@ const Target = () => {
                       <h5>Status</h5>
                     </div>
                     <div className="header-details-dots">
-                      <PiDotsThreeOutlineFill />
+                      {/* <PiDotsThreeOutlineFill /> */}
                     </div>
                   </div>
                 ) : (
@@ -321,7 +321,7 @@ const Target = () => {
                         </strong>
                       </div>
                       <div className="dot">
-                        <PiDotsThreeOutlineVerticalBold />
+                        {/* <PiDotsThreeOutlineVerticalBold /> */}
                       </div>
                       {reminders &&
                         reminders.map((reminder) => {
