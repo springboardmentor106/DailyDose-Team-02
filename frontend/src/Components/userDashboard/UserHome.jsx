@@ -301,7 +301,7 @@ const UserHome = () => {
               </div>
             </div>
             <div className="boxes" id="profile">
-              <h5><strong>About User</strong></h5>
+              <h5><strong>Profile</strong></h5>
               {userDetails && (
                 <div className="card-user">
                   <div className="card-profile">

@@ -4,18 +4,18 @@ import Notification from "../dashComponents/Notification";
 import Constants from "../../../constants";
 import { toast } from "react-toastify";
 const UserProfile = () => {
-  const [formData,setFormData]=useState({
-    firstname:"",
-    lastname:"",
-    email:"",
-    phoneno:"",
-    age:"",
-    gender:"",
-    disease:"",
-    allergy:""
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phoneno: "",
+    age: "",
+    gender: "",
+    disease: "",
+    allergy: ""
   });
 
-  const handleSumit=(e)=>{
+  const handleSumit = (e) => {
     e.preventDefault();
     console.log(formData);
     updateUserDetail();
@@ -28,63 +28,82 @@ const UserProfile = () => {
     window.location.reload()
   };
 
-  const [userDetail,setUserDetail]=useState(null);
-  const getUserDetail=async()=>{
-    try{
-      const token=localStorage.getItem("token");
-      const response= await fetch(Constants.BASE_URL+'/api/user/profile',{
-        method:'GET',
-        headers:{
+  const [userDetail, setUserDetail] = useState(null);
+  const getUserDetail = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + '/api/user/profile', {
+        method: 'GET',
+        headers: {
           'Content-Type': "application/json",
           'Authorization': token
         }
       })
-      if(response.status===401){
+      if (response.status === 401) {
         navigate('/login');
         localStorage.clear()
       }
-      const data=await response.json();
-      if(data.status==='success'){
+      const data = await response.json();
+      if (data.status === 'success') {
         // console.log("ho gya");
         data.user ? setUserDetail(data.user) : setUserDetail(null)
+        setFormData({
+          firstname: data.user.firstname || "",
+          lastname: data.user.lastname || "",
+          email: data.user.email || "",
+          phoneno: data.user.phoneno || "",
+          age: data.user.age || "",
+          gender: data.user.gender || "",
+          disease: data.user.diseases || "",
+          allergy: data.user.allergies || ""
+        })
         localStorage.setItem("caretakerId", data.user.caretaker)
       }
-      else{
+      else {
         toast.error(data.message)
       }
     }
-    catch(error){
+    catch (error) {
       console.log(error);
       toast.error(error);
     }
   }
 
-  const updateUserDetail=async()=>{
-    try{
+  const updateUserDetail = async () => {
+    try {
       const token = localStorage.getItem("token");
-      const response= await fetch(Constants.BASE_URL+"/api/user/update-profile",{
-        method:'PATCH',
-        headers:{
+      const body = {
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        age: formData.age,
+        gender: formData.gender,
+        diseases: formData.disease != "" ? formData.disease.split(",") : [],
+        allergies: formData.allergy != "" ? formData.allergy.split(",") : []
+      }
+      console.log(formData, body )
+      const response = await fetch(Constants.BASE_URL + "/api/user/update-profile", {
+        method: 'PATCH',
+        headers: {
           'Content-Type': "application/json",
           'Authorization': token
         },
-        body:JSON.stringify({firstname:formData.firstname,lastname: formData.lastname, age:formData.age, gender:formData.gender})
+        body: JSON.stringify(body)
       })
-      if(response.status===400){
+      if (response.status === 400) {
         toast.error(response.message);
       }
-      const data= await response.json();
-      if(data.status==='success'){
+      const data = await response.json();
+      if (data.status === 'success') {
         toast.success(data.message)
       }
-      else{
+      else {
         toast.error(data.message)
       }
     }
-    catch(error){
+    catch (error) {
       toast.error(error);
     }
-    
+
   }
 
   useEffect(() => {
@@ -92,7 +111,7 @@ const UserProfile = () => {
     if (token) {
       getUserDetail()
     }
-  },[])
+  }, [])
   return (
     <div>
       <div
@@ -124,11 +143,11 @@ const UserProfile = () => {
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop1"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" ,marginBottom:"3px"}}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%", marginBottom: "3px" }}>
                   Edit Profile
                 </button>
               </div>
-              <div>
+              {/* <div>
                 <button
                   type="button"
                   class="btn"
@@ -137,14 +156,14 @@ const UserProfile = () => {
                   style={{ backgroundColor: "#e0dcf8", width: "100%" ,marginBottom:"3px"}}>
                   Setting
                 </button>
-              </div>
+              </div> */}
               <div>
                 <button
                   type="button"
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop3"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%", marginBottom: "3px" }}>
                   Notification
                 </button>
               </div>
@@ -185,102 +204,102 @@ const UserProfile = () => {
                 aria-label="Close"></button>
             </div>
             <form onSubmit={handleSumit}>
-            <div className="modal-body">
-              <div
-                className="profile-header"
-                style={{ display: "flex", justifyContent: "flex-start" }}>
+              <div className="modal-body">
                 <div
+                  className="profile-header"
+                  style={{ display: "flex", justifyContent: "flex-start" }}>
+                  <div
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "100%",
+                      background: "#9186d9",
+                      marginTop: "-20%",
+                    }}></div>
+                  {userDetail &&
+                    <div>
+                      <strong>{userDetail.firstname} {userDetail.lastname}</strong> <p>{userDetail.email}</p>
+                    </div>
+                  }
+                </div>
+                <div
+                  className="profile-body"
                   style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "100%",
-                    background: "#9186d9",
-                    marginTop: "-20%",
-                  }}></div>
-                {userDetail && 
-                <div>
-                  <strong>{userDetail.firstname} {userDetail.lastname}</strong> <p>{userDetail.email}</p>
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                  }}>
+                  <div className="profile-left">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        First Name
+                      </label>
+                      <input type="text" class="form-control" name="firstname" value={formData.firstname} onChange={(e) => setFormData({ ...formData, firstname: e.target.value })} />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Email
+                      </label>
+                      <input type="email" class="form-control" name="lastname" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Age
+                      </label>
+                      <input type="number" class="form-control" name="age" value={formData.age} onChange={(e) => setFormData({ ...formData, age: e.target.value })} />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Disease
+                      </label>
+                      <input type="text" class="form-control" name="disease" value={formData.disease} onChange={(e) => setFormData({ ...formData, disease: e.target.value })} />
+                    </div>
+                  </div>
+                  <div className="profile-right">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Last Name
+                      </label>
+                      <input type="text" class="form-control" name="lastname" value={formData.lastname} onChange={(e) => setFormData({ ...formData, lastname: e.target.value })} />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Phone Number
+                      </label>
+                      <input type="number" class="form-control" name="phoneno" value={formData.phoneno} onChange={(e) => setFormData({ ...formData, phoneno: e.target.value })} />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Gender
+                      </label>
+                      <select class="form-select" aria-label="Default select example" name="gender" value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value })}>
+                        <option selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">
+                        Allergy
+                      </label>
+                      <input type="text" class="form-control" name="allergy" value={formData.allergy} onChange={(e) => setFormData({ ...formData, allergy: e.target.value })} />
+                    </div>
+                  </div>
                 </div>
-                }
+
               </div>
-              <div
-                className="profile-body"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                }}>
-                <div className="profile-left">
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      First Name
-                    </label>
-                    <input type="text" class="form-control" name="firstname" value={formData.firstname} onChange={(e)=> setFormData({...formData, firstname: e.target.value})}/>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Email
-                    </label>
-                    <input type="email" class="form-control" name="lastname" value={formData.email} onChange={(e)=>setFormData({...formData,email: e.target.value})}/>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Age
-                    </label>
-                    <input type="number" class="form-control" name="age" value={formData.age} onChange={(e)=>setFormData({...formData,age: e.target.value})}/>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Disease
-                    </label>
-                    <input type="text" class="form-control" name="disease" value={formData.disease} onChange={(e)=>setFormData({...formData,disease: e.target.value})}/>
-                  </div>
-                </div>
-                <div className="profile-right">
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Last Name
-                    </label>
-                    <input type="text" class="form-control" name="lastname" value={formData.lastname} onChange={(e)=>setFormData({...formData,lastname: e.target.value})}  />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Phone Number
-                    </label>
-                    <input type="number" class="form-control" name="phoneno" value={formData.phoneno} onChange={(e)=>setFormData({...formData,phoneno: e.target.value})} />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Gender
-                    </label>
-                    <select class="form-select" aria-label="Default select example" name="gender" value={formData.gender} onChange={(e)=>setFormData({...formData,gender: e.target.value})}>
-                      <option selected>Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                    Allergy
-                    </label>
-                    <input type="text" class="form-control" name="allergy" value={formData.allergy} onChange={(e)=>setFormData({...formData,allergy: e.target.value})}/>
-                  </div>
-                </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  data-bs-dismiss="modal">
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal">
+                  Save
+                </button>
               </div>
-              
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary btn-sm"
-                data-bs-dismiss="modal">
-                Cancel
-              </button>
-              <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal">
-                Save
-              </button>
-            </div>
             </form>
           </div>
         </div>

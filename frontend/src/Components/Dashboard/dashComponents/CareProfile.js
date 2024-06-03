@@ -44,7 +44,7 @@ const CareProfile = () => {
                   Edit Profile
                 </button>
               </div>
-              <div>
+              {/* <div>
                 <button
                   type="button"
                   class="btn"
@@ -53,7 +53,7 @@ const CareProfile = () => {
                   style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
                   Setting
                 </button>
-              </div>
+              </div> */}
               <div>
                 <button
                   type="button"
