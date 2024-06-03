@@ -37,7 +37,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(Constants.BASE_URL + '/api/reminders/get-reminders', {
-        method: "POST",
+        method: "GET",
         headers: {
           'Content-Type': "application/json",
           'Authorization': token
@@ -93,15 +93,17 @@ const Dashboard = () => {
 
   const getUserHabits = async () => {
     try {
+      
       const token = localStorage.getItem("token")
-      const response = await fetch(Constants.BASE_URL + '/api/habits', {
-        method: "GET",
+      // const body = role === "user" ? null : { seniorCitizenId: selectedUser }
+      const response = await fetch(Constants.BASE_URL + "/api/habits/get-habits", {
+        method: "POST",
         headers: {
-          'Content-Type': "application/json",
-          'Authorization': token
-        }
-      })
-
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        // body: JSON.stringify(body)
+      });
       if (response.status === 401) {
         navigate("/login");
         localStorage.clear()

@@ -122,7 +122,7 @@ const Target = () => {
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
@@ -183,8 +183,8 @@ const Target = () => {
   const getUserHabits = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(Constants.BASE_URL + "/api/habits", {
-        method: "GET",
+      const response = await fetch(Constants.BASE_URL + "/api/habits/get-habits", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,

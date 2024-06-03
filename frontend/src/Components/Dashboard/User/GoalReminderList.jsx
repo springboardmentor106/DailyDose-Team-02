@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import GoalReminder from './GoalReminder';
 import { toast } from 'react-toastify';
 import Constants from '../../../constants';
-const GoalReminderList = ({ goalsList, setRefresh }) => {
+const GoalReminderList = ({ goalsList, setRefresh, isCaretaker }) => {
   const [reminders, setReminders] = useState(goalsList);
   const handleCheckChange = async (changedReminder) => {
     try {
+      if (isCaretaker) {
+        return
+      }
       const url = Constants.BASE_URL + "/api/goals/update"
       const token = localStorage.getItem("token")
       const payload = {

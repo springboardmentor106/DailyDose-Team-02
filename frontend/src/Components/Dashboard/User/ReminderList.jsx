@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Reminder from '../User/Reminder';
 import { toast } from 'react-toastify';
 import Constants from '../../../constants';
-const ReminderList = ({ remindersList, setRefresh }) => {
+const ReminderList = ({ remindersList, setRefresh, isCaretaker }) => {
   const [reminders, setReminders] = useState(remindersList || null);
   const handleCheckChange = async (changedReminder) => {
     try {
+      if (isCaretaker) {
+        return
+      }
       const url = Constants.BASE_URL + "/api/reminders/update"
       const token = localStorage.getItem("token")
       const payload = {
@@ -18,7 +21,7 @@ const ReminderList = ({ remindersList, setRefresh }) => {
           "Authorization": token,
           'Content-Type': "application/json",
         },
-        body:JSON.stringify(payload)
+        body: JSON.stringify(payload)
       })
 
       const data = await response.json()

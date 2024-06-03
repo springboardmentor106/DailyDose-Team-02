@@ -98,7 +98,7 @@ const HomePage = () => {
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,

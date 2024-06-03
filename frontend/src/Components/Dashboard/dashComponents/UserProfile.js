@@ -92,7 +92,7 @@ const UserProfile = () => {
     if (token) {
       getUserDetail()
     }
-  })
+  },[])
   return (
     <div>
       <div

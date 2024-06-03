@@ -46,6 +46,7 @@ export const createHabit = async (req, res) => {
 
 export const getHabits = async (req, res) => {
     try {
+        console.log("get habits")
         const userId = req.userId;
         const role = req.role;
         const { seniorCitizenId } = req.body
@@ -58,7 +59,7 @@ export const getHabits = async (req, res) => {
         }
 
         const user = await User.findOne({ uuid: role === "user" ? userId : seniorCitizenId })
-    
+
         let habits = [];
         let habitLength = user.habits.length
 
@@ -66,6 +67,8 @@ export const getHabits = async (req, res) => {
             const habit = await HABIT.findOne({ uuid: user.habits[i] })
             habit ? habits.push(habit) : null
         }
+
+        console.log(habits)
         return res.json({ status: "success", habits });
     } catch (error) {
         return res.status(500).json({ message: error.message });

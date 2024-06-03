@@ -42,7 +42,7 @@ const UserHome = () => {
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
@@ -103,12 +103,16 @@ const UserHome = () => {
   const getUserHabits = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(Constants.BASE_URL + "/api/habits", {
-        method: "GET",
+      const caretakerid = localStorage.getItem("caretakerId");
+
+      // const body = role === "user" ? null : { seniorCitizenId: selectedUser }
+      const response = await fetch(Constants.BASE_URL + "/api/habits/get-habits", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
+        // body: JSON.stringify(body)
       });
 
       if (response.status === 401) {
@@ -204,7 +208,38 @@ const UserHome = () => {
           'Content-Type': "application/json",
           'Authorization': token
         },
-        body: JSON.stringify({ caretakerId: caretakerId ,year:2024})
+        body: JSON.stringify({ caretakerId: caretakerId, year: 2024 })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        console.log(data)
+        setChartData(data.monthsData)
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+  const getMonthlyReminderProgress = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const caretakerId = localStorage.getItem("caretakerId");
+      const response = await fetch(Constants.BASE_URL + '/api/reminders/monthly-stat', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify({ caretakerId: caretakerId, year: 2024 })
       });
 
       if (response.status === 401) {
@@ -226,7 +261,6 @@ const UserHome = () => {
     }
   };
 
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -239,6 +273,15 @@ const UserHome = () => {
       setRefresh(false);
     }
   }, [refresh === true]);
+
+  const handleDropdownChange = (value) => {
+    if (value !== "goal") {
+      getMonthlyReminderProgress()
+    }
+    else {
+      getMonthlyGoalProgress()
+    }
+  }
 
   useEffect(() => { }, [reminders, goals]);
   return (
@@ -382,13 +425,13 @@ const UserHome = () => {
           <div className="boxes" id="chart">
             <div className="chart-heading">
               <h5>
-                <strong>Goal Progress 2024</strong> 
+                <strong>Goal Progress 2024</strong>
               </h5>
               <div className="year-container">
-              <select class="form-select" aria-label="Default select example">
-                <option value="1">Goal</option>
-                <option value="2">Reminder</option>
-              </select>
+                <select class="form-select" aria-label="Default select example" onChange={(e) => handleDropdownChange(e.target.value)}>
+                  <option value="goal">Goal</option>
+                  <option value="reminder">Reminder</option>
+                </select>
               </div>
             </div>
             <div className="row-one-card-one-dashboard">

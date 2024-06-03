@@ -10,7 +10,7 @@ router.post('/', validation(createReminderSchema), checkUserAuth, createReminder
 router.get('/get-reminders', checkUserAuth, getReminders);
 router.patch('/update', validation(updateReminderSchema), checkUserAuth, updateReminder);
 router.delete('/delete', checkUserAuth, deleteReminder);
-router.get('/monthly-stat', checkUserAuth, getMonthlyReminderStat)
+router.post('/monthly-stat', checkUserAuth, getMonthlyReminderStat)
 router.get('/daily-stat', checkUserAuth, getDailyReminderProgress)
 
 export default router;

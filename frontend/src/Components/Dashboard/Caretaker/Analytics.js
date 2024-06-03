@@ -56,7 +56,7 @@ const Analytics = () => {
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
@@ -362,6 +362,7 @@ const Analytics = () => {
                       <ReminderList
                         remindersList={reminders}
                         setRefresh={setRefresh}
+                        isCaretaker={true}
                       />
                     ) : (
                       <div className="no-reminders-container">
@@ -386,6 +387,7 @@ const Analytics = () => {
                       <GoalReminderList
                         goalsList={goals}
                         setRefresh={setRefresh}
+                        isCaretaker={true}
                       />
                     ) : (
                       <div className="no-reminders-container">
@@ -432,10 +434,10 @@ const Analytics = () => {
                 <strong>Goal Progress 2024</strong>
               </h5>
               <div className="year-container">
-              <select class="form-select" aria-label="Default select example">
-                <option value="1">Goal</option>
-                <option value="2">Reminder</option>
-              </select>
+                <select class="form-select" aria-label="Default select example">
+                  <option value="1">Goal</option>
+                  <option value="2">Reminder</option>
+                </select>
               </div>
             </div>
             <div className="row-one-card-one-dashboard">
