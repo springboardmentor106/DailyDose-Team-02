@@ -491,40 +491,30 @@ const UserHome = () => {
               <h5>
                 <strong>About User</strong>
               </h5>
-              {user.details ? (
+              {userDetails && userDetails.allergies.length > 0 || userDetails && userDetails.diseases.length > 0 ? (
                 <div className="row-three-dtails-container">
-                  <div className="row-three-details-container-row-first">
-                    <div className="row-three-detail-first">
-                      <h7>
-                        <strong>Disease</strong>
-                      </h7>
-                      <p>Blood pressure</p>
-                      <p>Cholesterol</p> br
-                    </div>
-                    <div className="row-three-detail-second">
-                      <h7>
-                        <strong>Allergy</strong>
-                      </h7>
-                      <p>Dairy products</p>
-                      <p>Dust mites</p>
-                    </div>
+                  <div className="row-three-detail-first">
+                    <h7>
+                      <strong className="aboutUserTitle">Diseases</strong>
+                    </h7>
+                    {userDetails.diseases && userDetails.diseases.length > 0 ? userDetails.diseases.map((disease) => {
+                      return (
+                        <div className="detailAllergy">{disease}</div>
+                      )
+                    }) : <div>No diseases</div>}
+
                   </div>
-                  <div className="row-three-details-container-row-second">
-                    <div className="row-three-detail-first">
-                      <h7>
-                        <strong>Disease</strong>
-                      </h7>
-                      <p>Blood pressure</p>
-                      <p>Cholestrol</p>
-                    </div>
-                    <div className="row-three-detail-second">
-                      <h7>
-                        <strong>Allergy</strong>
-                      </h7>
-                      <p>Dairy products</p>
-                      <p>Dust mites</p>
-                    </div>
+                  <div className="row-three-detail-second">
+                    <h7>
+                      <strong className="aboutUserTitle">Allergies</strong>
+                    </h7>
+                    {userDetails?.allergies && userDetails.allergies.length > 0 ? userDetails.allergies.map((allergy) => {
+                      return (
+                        <div className="detailAllergy">{allergy}</div>
+                      )
+                    }) : <div>No allergies</div>}
                   </div>
+
                 </div>
               ) : (
                 <div className="no-progress">
@@ -535,7 +525,8 @@ const UserHome = () => {
                       className="no-progress-image"
                     />
                   </div>
-                  <button className="edit-profile-button">Edit profile</button>
+                  <div>Update your profile to see the diseases and allergies details</div>
+                  {/* <button className="edit-profile-button">Edit profile</button> */}
                 </div>
               )}
             </div>

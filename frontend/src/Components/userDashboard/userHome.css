@@ -54,6 +54,22 @@
   scrollbar-width: none;
 }
 
+.detailAllergy {
+  font-size: 16px;
+  /* margin: 10px; */
+}
+
+.aboutUserTitle{
+  font-size: 16px;
+}
+
+.row-three-dtails-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top:12px
+}
+
 #welcome {
   width: 58%;
   height: 100%;
