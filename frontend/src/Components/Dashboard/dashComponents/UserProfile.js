@@ -80,7 +80,7 @@ const UserProfile = () => {
         diseases: formData.disease != "" ? formData.disease.split(",") : [],
         allergies: formData.allergy != "" ? formData.allergy.split(",") : []
       }
-      console.log(formData, body )
+      console.log(formData, body)
       const response = await fetch(Constants.BASE_URL + "/api/user/update-profile", {
         method: 'PATCH',
         headers: {
@@ -215,7 +215,12 @@ const UserProfile = () => {
                       borderRadius: "100%",
                       background: "#9186d9",
                       marginTop: "-20%",
-                    }}></div>
+                      display:"flex",
+                      alignItems:"center",
+                      justifyContent:"center",
+                      fontSize: '40px',
+                      color:"white"
+                    }}>{userDetail?.firstname[0] ||""}</div>
                   {userDetail &&
                     <div>
                       <strong>{userDetail.firstname} {userDetail.lastname}</strong> <p>{userDetail.email}</p>

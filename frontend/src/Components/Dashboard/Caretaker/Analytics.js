@@ -56,7 +56,7 @@ const Analytics = () => {
       const response = await fetch(
         Constants.BASE_URL + "/api/reminders/get-reminders",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
