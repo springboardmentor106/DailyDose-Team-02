@@ -320,30 +320,27 @@ const Target = () => {
                   <div></div>
                 )}
                 <div className="details-container">
-                  {reminders && reminders.length ? (
-                    <div className="details">
-                      <div className="Progress-bar"></div>
-                      <div className="end-date">
-                        <strong>
-                          {moment().format("MMMM Do YYYY h:mm:ss a")}
-                        </strong>
+                  {reminders && reminders.length ? reminders.map((reminder) => {
+                    return (
+                      <div className="details">
+                        <div className="Progress-bar"></div>
+                        <div className="end-date">
+                          <strong>
+                            {moment().format("MMMM Do YYYY h:mm:ss a")}
+                          </strong>
+                        </div>
+                        <div className="dot">
+                          {/* <PiDotsThreeOutlineVerticalBold /> */}
+                        </div>
+                        <TargetCheckbox
+                          key={reminder.uuid}
+                          target={reminder}
+                          // onToggle={handleToggle}
+                          type="reminders"
+                        />
                       </div>
-                      <div className="dot">
-                        {/* <PiDotsThreeOutlineVerticalBold /> */}
-                      </div>
-                      {reminders &&
-                        reminders.map((reminder) => {
-                          return (
-                            <TargetCheckbox
-                              key={reminder.uuid}
-                              target={reminder}
-                              // onToggle={handleToggle}
-                              type="reminders"
-                            />
-                          );
-                        })}
-                    </div>
-                  ) : (
+                    )
+                  }) : (
                     <div className="no-reminders">No reminders yet</div>
                   )}
                 </div>
@@ -372,9 +369,10 @@ const Target = () => {
                   <div></div>
                 )}
                 <div className="details-container">
-                  {habits && habits.length ? (
-                    <div className="details">
-                      {/* <div className='Progress-bar'>
+                  {habits && habits.length ? habits.map((habit) => {
+                    return (
+                      <div className="details">
+                        {/* <div className='Progress-bar'>
                       </div>
                       <div className="end-date">
                         <strong>{moment().format('MMMM Do YYYY h:mm:ss a')}</strong>
@@ -382,19 +380,11 @@ const Target = () => {
                       <div className="dot">
                         <PiDotsThreeOutlineVerticalBold />
                       </div> */}
-                      {habits &&
-                        habits.map((habit) => {
-                          return (
-                            // <TargetCheckbox
-                            //   key={habit.uuid}
-                            //   target={habit}
-                            //   onToggle={handleToggle}
-                            // />
-                            <div className="habit">{habit.title}</div>
-                          );
-                        })}
-                    </div>
-                  ) : (
+                        <div className="habit">{habit.title}</div>
+
+                      </div>
+                    )
+                  }) : (
                     <div className="no-reminders">No habits yet</div>
                   )}
                 </div>
