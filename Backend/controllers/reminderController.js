@@ -227,7 +227,7 @@ export const getMonthlyReminderStat = async (req, res) => {
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            const senior = await User.findById(seniorId);
+            const senior = await User.findOne({ uuid: seniorId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
             }
@@ -314,7 +314,7 @@ export const getDailyReminderProgress = async (req, res) => {
             if (!caretaker) {
                 return res.status(404).json({ status: "failed", message: `Caretaker not found for ID: ${userId}` });
             }
-            const senior = await User.findById(seniorId);
+            const senior = await User.findOne({ uuid: seniorId });
             if (!senior) {
                 return res.status(404).json({ status: "failed", message: `Senior user not found for ID: ${seniorId}` });
             }

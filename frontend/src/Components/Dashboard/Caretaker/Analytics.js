@@ -104,7 +104,6 @@ const Analytics = () => {
       //   localStorage.clear();
       // }
       const data = await response.json();
-      console.log(data);
       if (data.status === "success") {
         data.goals ? setGoals(data.goals) : setGoals(null);
       } else {
@@ -270,7 +269,7 @@ const Analytics = () => {
       if (data.status === "success") {
         if (data.seniorArr) {
           setAssignedUsers(data.seniorArr)
-          setSelectedUser(data.seniorArr[0])
+          setSelectedUser(data.seniorArr[0].uuid)
         }
       } else {
         toast.error(data.message);
@@ -286,12 +285,52 @@ const Analytics = () => {
     setRefresh(true)
   }
 
+  const getMonthlyReminderProgress = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(Constants.BASE_URL + '/api/reminders/monthly-stat', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': token
+        },
+        body: JSON.stringify({ seniorCitizenId: selectedUser, year: 2024 })
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+        localStorage.clear();
+        return; // Added return to exit function early
+      }
+
+      const data = await response.json();
+      if (data.status === "success") {
+        setChartData(data.monthsData)
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.message); // changed to error.message to properly display the error
+    }
+  };
+  const handleDropdownChange = (value) => {
+    if (value !== "goal") {
+      getMonthlyReminderProgress()
+    }
+    else {
+      getChartData()
+    }
+  }
+
   useEffect(() => {
     // handleSelectCard(assignedUsers[0].uuid)
   }, [assignedUsers && assignedUsers.length])
+  useEffect(() => {
+    console.log(selectedUser)
+  }, [selectedUser])
 
   useEffect(() => {
-    console.log("Changed")
     getUserGoals();
     getAssignedUserDetails()
     if (selectedUser) {
@@ -434,9 +473,9 @@ const Analytics = () => {
                 <strong>Goal Progress 2024</strong>
               </h5>
               <div className="year-container">
-                <select class="form-select" aria-label="Default select example">
-                  <option value="1">Goal</option>
-                  <option value="2">Reminder</option>
+                <select class="form-select" aria-label="Default select example" onChange={(e) => handleDropdownChange(e.target.value)}>
+                  <option value="goal">Goal</option>
+                  <option value="reminder">Reminder</option>
                 </select>
               </div>
             </div>

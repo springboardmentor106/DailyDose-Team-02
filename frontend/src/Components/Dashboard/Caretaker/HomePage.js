@@ -223,11 +223,9 @@ const HomePage = () => {
           const assignedUserProgress = await getAssignedUserProgress(
             data.seniorArr
           );
-          console.log(assignedUserGoals)
           const finalArray = [];
           data.seniorArr.forEach((user) => {
             const userUuid = user.uuid;
-            console.log(user.uuid, typeof user.uuid)
             const { firstname, lastname, age, gender, email } = user;
 
             // Get user goals

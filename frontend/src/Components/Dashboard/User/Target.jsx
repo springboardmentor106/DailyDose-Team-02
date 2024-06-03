@@ -249,18 +249,25 @@ const Target = () => {
                   <div></div>
                 )}
                 <div className="details-container">
-                  {goals && goals.length ? (
-                    <div className="details">
-                      <div className="Progress-bar"></div>
-                      <div className="end-date">
-                        <strong>
-                          {moment().format("MMMM Do YYYY h:mm:ss a")}
-                        </strong>
-                      </div>
-                      <div className="dot">
-                        {/* <PiDotsThreeOutlineVerticalBold /> */}
-                      </div>
-                      {goals &&
+                  {goals && goals.length ? goals.map((goal) => {
+                    return (
+                      <div className="details">
+                        <div className="Progress-bar"></div>
+                        <div className="end-date">
+                          <strong>
+                            {moment().format("MMMM Do YYYY h:mm:ss a")}
+                          </strong>
+                        </div>
+                        <div className="dot">
+                          {/* <PiDotsThreeOutlineVerticalBold /> */}
+                        </div>
+                        <TargetCheckbox
+                          key={goal.uuid}
+                          target={goal}
+                          // onToggle={handleToggle}
+                          type="goals"
+                        />
+                        {/* {goals &&
                         goals.map((goal) => {
                           return (
                             <TargetCheckbox
@@ -270,9 +277,10 @@ const Target = () => {
                               type="goals"
                             />
                           );
-                        })}
-                    </div>
-                  ) : (
+                        })} */}
+                      </div>
+                    )
+                  }) : (
                     <div className="no-reminders">No goals yet</div>
                   )}
                 </div>

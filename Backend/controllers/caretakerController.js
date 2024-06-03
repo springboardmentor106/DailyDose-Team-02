@@ -134,13 +134,13 @@ export const createUserGoal = async (req, res) => {
         const { userId, title, description, targetDate, dayFrequency } = req.body;
 
         // Check if user exists
-        const user = await User.findById(userId);
+        const user = await User.findOne({ uuid: userId });
         if (!user) {
             return res.status(404).json({ status: "failed", message: "user not found" });
         }
 
         // Check if caretaker exists
-        const caretaker = await Caretaker.findById(caretakerId);
+        const caretaker = await Caretaker.findOne({ uuid: caretakerId });
         if (!caretaker) {
             return res.status(404).json({ status: "failed", message: "caretaker not found" });
         }
