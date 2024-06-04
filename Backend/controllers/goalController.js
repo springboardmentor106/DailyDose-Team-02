@@ -675,7 +675,7 @@ export const getDailyGoalProgress = async (req, res) => {
 
             }
             user.goalProgress = completePercent.toFixed(2)
-            user.save()
+            await user.save()
         }
 
         return res.status(200).json({

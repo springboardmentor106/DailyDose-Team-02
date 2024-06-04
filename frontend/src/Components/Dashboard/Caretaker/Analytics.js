@@ -268,6 +268,7 @@ const Analytics = () => {
       const data = await response.json();
       if (data.status === "success") {
         if (data.seniorArr) {
+          
           setAssignedUsers(data.seniorArr)
           setSelectedUser(data.seniorArr[0].uuid)
         }
