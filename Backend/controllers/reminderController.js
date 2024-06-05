@@ -35,14 +35,23 @@ export const createReminder = async (req, res) => {
         if (!savedUser) {
             return res.status(400).json({ status: "failed", message: "Error while updating the user reminder try again!" });
         }
+        let sendNotificationResult
+        if (role === "user") {
+            sendNotificationResult = await sendNotification({
+                title: `New Reminder Set! `,
+                description: "You will be notified to complete " + req.body.title,
+                userId: userId,
+                belongTo: "reminder"
+            })
+        } else {
+            sendNotificationResult = await sendNotification({
+                title: `New Reminder Set! by ${user.firstname} ${user.lastname}`,
+                description: "Remember to remind " + req.body.title + "on time",
+                userId: user.caretaker,
+                belongTo: "reminder"
+            })
+        }
 
-        // send notification to the user
-        const sendNotificationResult = await sendNotification({
-            title: `New Reminder Set! `,
-            description: "You will be notified to complete " + req.body.title,
-            userId: userId,
-            belongTo: "reminder"
-        })
 
         if (!sendNotificationResult) {
             console.log("notification not sent when created goal", sendNotificationResult)
@@ -93,27 +102,49 @@ export const getReminders = async (req, res) => {
                 reminders[i].save()
             }
 
-            if (!reminders[i].completedToday) {
+            if (!reminders[i].completedToday && !reminders[i].pushNotification) {
                 const date = new Date();
+
                 const lastNotificationSent = new Date(reminders[i].lastSentNotification)
+
                 date.setHours(reminders[i].startTime.split(":")[0]);
                 date.setMinutes(reminders[i].startTime.split(":")[1]);
                 date.setSeconds(0); // Optional: if you want to reset seconds to zero
+
                 if (lastNotificationSent.getFullYear() <= date.getFullYear() &&
                     lastNotificationSent.getMonth() <= date.getMonth() &&
-                    lastNotificationSent.getDate() <= date.getDate()) {
+                    lastNotificationSent.getDate() < date.getDate() &&
+                    date.getTime() <= new Date().getTime()
+                ) {
+                    if (role === "user") {
 
-                    // send notification to the user
-                    const sendNotificationResult = await sendNotification({
-                        title: `${reminders[i].title}`,
-                        description: `Don't Forget! You Have to ${reminders[i].title}`,
-                        userId: userId,
-                        belongTo: "reminder"
-                    })
+                        // send notification to the user
+                        const sendNotificationResult = await sendNotification({
+                            title: `${reminders[i].title}`,
+                            description: `Don't Forget! You Have to ${reminders[i].title}`,
+                            userId: userId,
+                            belongTo: "reminder"
+                        })
 
-                    if (!sendNotificationResult) {
-                        console.log("notification not sent when created goal", sendNotificationResult)
+                        if (!sendNotificationResult) {
+                            console.log("notification not sent when created goal", sendNotificationResult)
+                        }
+                    } else {
+                        // send notification to the user
+                        const sendNotificationResult2 = await sendNotification({
+                            title: `${reminders[i].title}`,
+                            description: `Don't Forget! ${user.firstname} ${user.lastname} Have to ${reminders[i].title}`,
+                            userId: user.caretaker,
+                            belongTo: "reminder"
+                        })
+
+                        if (!sendNotificationResult2) {
+                            console.log("notification not send when reminding the reminder", sendNotificationResult)
+                        }
                     }
+
+
+                    reminders[i].lastNotificationSent = new Date()
                     reminders[i].pushNotification = true
                     reminders[i].save()
                 }

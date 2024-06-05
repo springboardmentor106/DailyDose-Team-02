@@ -615,7 +615,7 @@ export const getDailyGoalProgress = async (req, res) => {
             return res.status(404).json({ status: "failed", message: "user not found" })
         }
         // send notification
-        if (todaysGoals.length > 0 && user.goalProgress != String(completePercent.toFixed(2))) {
+        if (todaysGoals.length > 0 && user.goalProgress != String(completePercent.toFixed(2)) && role === "user") {
             let title = null;
             let description = null;
             if (parseFloat(user.goalProgress < completePercent)) {
