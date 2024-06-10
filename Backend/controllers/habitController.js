@@ -46,7 +46,6 @@ export const createHabit = async (req, res) => {
 
 export const getHabits = async (req, res) => {
     try {
-        console.log("get habits")
         const userId = req.userId;
         const role = req.role;
         const { seniorCitizenId } = req.body

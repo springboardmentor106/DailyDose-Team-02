@@ -65,7 +65,8 @@ const reminderSchema = new mongoose.Schema({
         default: []
     },
     lastSentNotification: {
-        type: Date
+        type: Date,
+        default: new Date(new Date().getTime() - (24 * 60 * 60 * 1000))
     },
     createdAt: {
         type: Date,
