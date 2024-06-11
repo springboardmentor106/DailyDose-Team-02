@@ -81,27 +81,6 @@ Next, open localhost server:
 localhost:3000
 ```
 
-
-
-### Output:
-
-
-## SignUp :
-![Output Screen shot](images/signup.png)
-
-## SignIn :
-![Output Screen shot](images/signin.png)
-
-## Home :
-![Output Screen shot](images/home.png)
-
-## Admin Dashboard :
-![Output Screen shot](images/dashboard.png)
-
-## Blog Posts:
-![Output Screen shot](images/post.png)
-
-
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
 
