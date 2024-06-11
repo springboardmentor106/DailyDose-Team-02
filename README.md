@@ -82,7 +82,33 @@ Next, open localhost server:
 localhost:3000
 ```
 
+
+### Output:
+
+
+## Registration :
+![Output Screen shot](images/signup.png)
+
+## Login:
+![Output Screen shot](images/login.png)
+
+## User's Dashboard :
+![Output Screen shot](images/userdashboard.png)
+
+## Add Reminders :
+![Output Screen shot](images/reminder.png)
+
+## CareTaker's Dashboard:
+![Output Screen shot](images/caretakerdashboard.png)
+
+## Interface to Track User:
+![Output Screen shot](images/interface.png)
+
+
 <p align="right">(<a href="#top">Back to top</a>)</p>
+
+
+
 
 
 
