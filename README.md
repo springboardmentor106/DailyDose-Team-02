@@ -79,7 +79,7 @@ npm run dev
 Next, open localhost server:
 
 ```bash
-localhost:3000
+localhost:5000
 ```
 
 
