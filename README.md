@@ -18,12 +18,6 @@ The project will cover the following features:
   
 * Reminder and Notification System: Users and caretakers can receive reminders and notifications for goal reminders and habits
 
-### Technologyies:
-The project will be developed by using the following technologies:
-* 	Frontend: React, HTML, CSS, and JavaScript
-* 	Backend: Node.js, Express.js, and MongoDB
-* 	Other tools: Git, GitHub, and Visual Studio Code
-
 ### Proposed System:
 DailyDose will be a versatile web application accessible on various devices with web browsers.
 It will use APIs for enhanced functionality and incorporate features for seamless goal reminder and habit management.
