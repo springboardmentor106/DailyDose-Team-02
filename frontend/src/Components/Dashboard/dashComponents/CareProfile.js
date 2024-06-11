@@ -34,7 +34,7 @@ const CareProfile = () => {
                 flexDirection: "column",
                 justifyContent: "flex-evenly",
               }}>
-              <div>
+              {/* <div>
                 <button
                   type="button"
                   class="btn"
@@ -43,7 +43,7 @@ const CareProfile = () => {
                   style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
                   Edit Profile
                 </button>
-              </div>
+              </div> */}
               {/* <div>
                 <button
                   type="button"
@@ -60,7 +60,7 @@ const CareProfile = () => {
                   class="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop3"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%",marginBottom:"3px" }}>
+                  style={{ backgroundColor: "#e0dcf8", width: "100%", marginBottom: "3px" }}>
                   Notification
                 </button>
               </div>
@@ -68,7 +68,7 @@ const CareProfile = () => {
                 <button
                   type="button"
                   class="btn"
-                  style={{ backgroundColor: "#e0dcf8", width: "100%" , marginBottom:"3px"}}
+                  style={{ backgroundColor: "#e0dcf8", width: "100%", marginBottom: "3px" }}
                   onClick={() => handleLogout()}>
                   Logout
                 </button>
