@@ -226,7 +226,7 @@ const HomePage = () => {
           const finalArray = [];
           data.seniorArr.forEach((user) => {
             const userUuid = user.uuid;
-            const { firstname, lastname, age, gender, email } = user;
+            const { firstname, lastname, age, gender, email, allergies, diseases } = user;
 
             // Get user goals
             const userGoals = assignedUserGoals
@@ -251,6 +251,7 @@ const HomePage = () => {
               age,
               gender,
               email,
+              allergies, diseases,
               uuid: userUuid,
               goals: userGoals[0] || [],
               reminders: userReminders[0] || [],
@@ -304,7 +305,7 @@ const HomePage = () => {
 
           data.users.forEach((user) => {
             const userUuid = user.uuid;
-            const { firstname, lastname, age, gender, email } = user;
+            const { firstname, lastname, age, gender, email, allergies, diseases } = user;
 
             const userGoals =
               assignedUserGoals?.map((goal) =>
@@ -325,6 +326,7 @@ const HomePage = () => {
               age,
               gender,
               email,
+              allergies, diseases,
               uuid: userUuid,
               goals: userGoals[0] || [],
               reminders: userReminders[0] || [],
@@ -464,8 +466,8 @@ const HomePage = () => {
               <div id="ass-phno">
                 <strong>Contact</strong>
               </div>
-              <div className="dummy-div"></div>
-              <div className="dummy-div"></div>
+              <div className="dummy-div">Allergy</div>
+              <div className="dummy-div">Disease</div>
             </div>
             {/* <div id='ass-disease'><strong>Disease</strong></div> */}
             {/* <div id='ass-allergy'><strong>Allergy</strong></div> */}
