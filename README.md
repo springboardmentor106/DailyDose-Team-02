@@ -64,7 +64,12 @@ The following resources will be used as references for the project:
 
 ## Getting started
 
-To get started with this project, first install the npm dependencies:
+To get started with this project, 
+first install the npm dependencies for frontend and backend:
+
+```bash
+cd frontend
+```
 
 ```bash
 npm install
@@ -80,6 +85,21 @@ Next, open localhost server:
 ```bash
 localhost:5000
 ```
+
+open another terminal 
+
+```bash
+cd backend
+```
+```bash
+npm install
+```
+Next, run the development server:
+
+```bash
+npm run dev
+```
+
 
 
 ### Output:
