@@ -33,10 +33,9 @@ Features:
 The following are the key features of the AirTracker application:
 * User Authentication
 * Post Creation, Editing, and Deletion
-* Admin Panel for Content Management  Like, Dislike, and Comment Function
 
 ### Implementation Plan:
-The following is a high-level implementation plan for the AirTracker project:
+The following is a high-level implementation plan for the project:
 1. Design a robust database schema for user data, goal reminders, and habits
 2.  Develop a secure backend API handling user authentication, goal reminder and habit management, and caretaker management
 3.  Create an interactive frontend user interface for a seamless user experience
@@ -46,9 +45,9 @@ The following is a high-level implementation plan for the AirTracker project:
 
 ### Resources Required:
 The following resources are required for the project:
-* 	Frontend technologies: HTML, CSS, JavaScript, and React
+* 	Frontend technologies:React
 * 	Backend technologies: Node.js, Express.js, and MongoDB
-* 	Basic tools: Git, GitHub, and Visual Studio Code
+* 	Basic tools: Git, GitHub, postman, and Visual Studio Code
 
 ### References:
 The following resources will be used as references for the project:
@@ -65,7 +64,12 @@ The following resources will be used as references for the project:
 
 ## Getting started
 
-To get started with this project, first install the npm dependencies:
+To get started with this project, 
+first install the npm dependencies for frontend and backend:
+
+```bash
+cd frontend
+```
 
 ```bash
 npm install
@@ -81,6 +85,21 @@ Next, open localhost server:
 ```bash
 localhost:5000
 ```
+
+open another terminal 
+
+```bash
+cd backend
+```
+```bash
+npm install
+```
+Next, run the development server:
+
+```bash
+npm run dev
+```
+
 
 
 ### Output:
