@@ -5,7 +5,7 @@
 ### * Figma Design [Link](https://www.figma.com/design/CoSvGwviBa7rTsNv6IlKO7/homepage?node-id=0-1).
 ### * API Documentation Sheet [Link](https://docs.google.com/spreadsheets/d/1q_Adq-6TksKps731yWW_AFL8jbdpGxMQN4PFIzxe3Es/edit#gid=1434529666).
 ### * Defect Sheet [Link](https://docs.google.com/spreadsheets/d/1V0xGBUllnQPWy0sOCA8rVPRWxWkYSzQInf1OMiAjmL0/edit#gid=0).
-### * PPT [Link](https://www.canva.com/design/DAGGhe7lkIc/iDvyr-d2SzqKMUGnagGveg/edit).
+### * PPT [Link](https://www.canva.com/design/DAGGhe7lkIc/iDvyr-d2SzqKMUGnagGveg/edit?utm_content=DAGGhe7lkIc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
 
 ### Objective:
