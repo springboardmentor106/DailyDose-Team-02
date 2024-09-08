@@ -1,7 +1,7 @@
 const Constants = {
     EMAIL_REGEX: "",
     PASSWORD_REGEX: "",
-    BASE_URL: "http://localhost:5000",
+    BASE_URL: "https://dailydose-1.onrender.com",
 }
 
 export default Constants
