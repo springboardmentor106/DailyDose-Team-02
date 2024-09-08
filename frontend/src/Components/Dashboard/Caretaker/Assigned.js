@@ -8,7 +8,7 @@ import { AssignedUser } from "./StaticDataCare";
 
 const Assigned = ({ assignedUserDetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [buttonText,setButtonText]=useState('Show More')
+  const [buttonText, setButtonText] = useState('Show More')
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -38,22 +38,31 @@ const Assigned = ({ assignedUserDetails }) => {
                       <p>{assignedUser.email}</p>
                     </div>
                     <div>
-                      <p>{assignedUser.disease || "--"}</p>
+                      {assignedUser.allergy ? assignedUser.allergy.map((allergy) => {
+                        return (
+
+                          <p key={allergy}>{allergy || "--"}</p>
+                        )
+                      }) : <p>--</p>}
                     </div>
                     <div>
-                      <p>{assignedUser.allergy || "--"}</p>
+                      {assignedUser.diseases ? assignedUser.diseases.map((disease) => {
+                        return (
+
+                          <p key={disease}>{disease || "--"},</p>
+                        )
+                      }) : <p>--</p>}
                     </div>
                   </div>
                   <button className="btn btn-light">
-                    <p>{activeIndex===index ? "Show Less" : "Show More"}</p>
+                    <p>{activeIndex === index ? "Show Less" : "Show More"}</p>
                   </button>
                 </button>
               </h2>
               <div
                 id={`panelsStayOpen-collapse${index}`}
-                className={`accordion-collapse collapse ${
-                  activeIndex === index ? "show" : ""
-                }`}>
+                className={`accordion-collapse collapse ${activeIndex === index ? "show" : ""
+                  }`}>
                 <div className="accordion-body" id="home-content">
                   <div className="home-col-one">
                     <div className="home-row-one">
